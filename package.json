@@ -1,0 +1,44 @@
+{
+  "name": "ecso-web",
+  "version": "0.0.1",
+  "description": "Frontend for ECSO application",
+  "main": "index.js",
+  "author": "Dmitry",
+  "license": "MIT",
+  "scripts": {
+    "dev-server": "webpack-dev-server --mode development",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "node server/server.js"
+  },
+  "dependencies": {
+    "express": "4.16.4"
+  },
+  "devDependencies": {
+    "@babel/core": "7.1.2",
+    "@babel/plugin-proposal-class-properties": "7.1.0",
+    "@babel/preset-env": "7.1.0",
+    "@babel/preset-react": "7.0.0",
+    "apollo-boost": "0.1.16",
+    "babel-loader": "8.0.4",
+    "clean-webpack-plugin": "0.1.19",
+    "css-loader": "1.0.0",
+    "graphql": "14.0.2",
+    "graphql-tag": "2.10.0",
+    "html-webpack-plugin": "3.2.0",
+    "mini-css-extract-plugin": "0.4.4",
+    "node-sass": "4.9.3",
+    "react": "16.5.2",
+    "react-autosuggest": "9.4.2",
+    "react-dom": "16.5.2",
+    "react-redux": "5.0.7",
+    "react-router-dom": "4.3.1",
+    "redux": "4.0.1",
+    "redux-thunk": "2.3.0",
+    "sass-loader": "7.1.0",
+    "style-loader": "0.23.1",
+    "webpack": "4.20.2",
+    "webpack-cli": "3.1.2",
+    "webpack-dev-server": "3.1.9"
+  }
+}
