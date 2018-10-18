@@ -1,27 +1,24 @@
 import React from 'react';
-import { startSearchOrigin } from '../../actions/originInputActions';
+import { startSearchDestinations } from '../../actions/destinationInputActions';
 import { connect } from 'react-redux';
-import selectOriginSuggestions from '../../selectors/originInputSelector';
+import selectDestinationSuggestions from '../../selectors/destinationInputSelector';
 import Autosuggest from 'react-autosuggest';
 
-const getSuggestionValue = (origin) => origin.name_en;
+const getSuggestionValue = (destination) => destination.name_en;
 
-
-const renderSuggestion = (origins) => (
+const renderSuggestion = (destinations) => (
     <span>
-        {origins.name_en}, {origins.country_en}
+        {destinations.name_en}, {destinations.country_en}
     </span>
 );
 
-class OriginInput extends React.Component {
+class DestinationInput extends React.Component {
     state = {
         enteredText: '',
-        suggestOrigins: []
+        suggestDestinations: []
     };
 
     onChange = (event, { newValue }) => {
-        console.log("onChange", newValue);
-        console.log("isFetching", this.props.isFetching);
 
         // First, save previous enteredValue and update state with the new actual
         const prevValue = this.state.enteredText;
@@ -30,26 +27,24 @@ class OriginInput extends React.Component {
         });
 
         // Second, check if it's the first letter in input and then fetch data from api
-        if ((prevValue === '')) {
-            this.props.startSearchOrigin(newValue).then(() => {
-                console.log("From promise ", this.props.origins);
+        if (this.state.enteredText === '') {
+            this.props.startSearchDestinations(newValue).then(() => {
                 this.setState({
-                    //enteredText: newValue,
-                    suggestOrigins: selectOriginSuggestions(this.props.origins, this.state.enteredText)
+                    suggestDestinations: selectDestinationSuggestions(this.props.destinations, this.state.enteredText)
                 });
             });
-         };
+        };
     };
 
     onSuggestionsFetchRequested = ({ value }) => {
         this.setState({
-            suggestOrigins: selectOriginSuggestions(this.props.origins, value)
+            suggestDestinations: selectDestinationSuggestions(this.props.destinations, value)
         });
     };
 
     onSuggestionsClearRequested = () => {
         this.setState({
-            suggestOrigins: []
+            suggestDestinations: []
         });
     };
 
@@ -57,10 +52,8 @@ class OriginInput extends React.Component {
         console.log("From onSuggestionSelected: ", obj);
     };
 
-
-
     render() {
-        const { enteredText, suggestOrigins } = this.state;
+        const { enteredText, suggestDestinations } = this.state;
 
         const inputProps = {
             value: enteredText,
@@ -69,7 +62,7 @@ class OriginInput extends React.Component {
 
         return <div>
             <Autosuggest
-                suggestions={suggestOrigins}
+                suggestions={suggestDestinations}
                 onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
                 onSuggestionsClearRequested={this.onSuggestionsClearRequested}
                 getSuggestionValue={getSuggestionValue}
@@ -84,12 +77,12 @@ class OriginInput extends React.Component {
 };
 
 const mapStateToProps = (state) => ({
-    origins: state.originInput.origins,
-    isFetching: state.originInput.isFetching
+    destinations: state.destinationInput.destinations,
+    isFetching: state.destinationInput.isFetching
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    startSearchOrigin: (text) => dispatch(startSearchOrigin(text))
+    startSearchDestinations: (text) => dispatch(startSearchDestinations(text))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(OriginInput);
+export default connect(mapStateToProps, mapDispatchToProps)(DestinationInput);

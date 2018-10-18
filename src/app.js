@@ -5,6 +5,9 @@ import Router from './router/AppRouter';
 import configureStore from './store/ReduxStore';
 import { Provider } from 'react-redux';
 
+import { TEST_CONNECTION_QUERY } from './queries/queries';
+import { client } from './clientGraphQL/client';
+
 const store = configureStore();
 
 const jsx = (
@@ -15,3 +18,11 @@ const jsx = (
 
 
 ReactDOM.render(jsx, document.getElementById('app'));
+
+
+// client.query({
+//     query: TEST_CONNECTION_QUERY,
+//     variables: { _id: 0 }
+// }).then((result) => {
+//     console.log(result);
+// });

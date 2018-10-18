@@ -20,7 +20,6 @@ export const startSearchOrigin = (searchSymbol) => {
             query: ORIGIN_INPUT_SEARCH,
             variables: { name: searchSymbol }
         }).then((result) => {
-            console.log(result);
             dispatch(setOrigins(result.data.originStartsWith));
         }
         );

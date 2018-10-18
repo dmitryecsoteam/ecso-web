@@ -1,10 +1,11 @@
 import React from 'react';
-import OriginInput from './OriginInput';
+import SearchPanel from './SearchPanel';
+
 
 
 export default () => (
     <div>
         Main page
-        <OriginInput />
+        <SearchPanel />
     </div>
 );

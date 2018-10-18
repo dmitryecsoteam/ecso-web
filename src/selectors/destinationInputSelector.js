@@ -1,11 +1,11 @@
-export default (origins, value) => {
+export default (destinations, value) => {
 
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
 
-    return inputLength === 0 ? [] : origins.filter((origin) =>
+    return inputLength === 0 ? [] : destinations.filter((destination) =>
         (
-            origin.name.some((name) => (
+            destination.name.some((name) => (
                 name.toLowerCase().slice(0, inputLength) === inputValue
             ))
         )
