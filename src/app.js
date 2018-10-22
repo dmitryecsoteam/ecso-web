@@ -5,6 +5,10 @@ import Router from './router/AppRouter';
 import configureStore from './store/ReduxStore';
 import { Provider } from 'react-redux';
 
+// Imports for react-dates: https://github.com/airbnb/react-dates
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+
 import { TEST_CONNECTION_QUERY } from './queries/queries';
 import { client } from './clientGraphQL/client';
 

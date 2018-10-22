@@ -12,7 +12,7 @@ export const startFetchingOrigins = () => ({
 
 
 
-export const startSearchOrigin = (searchSymbol) => {
+export const startSearchOrigins = (searchSymbol) => {
     return (dispatch) => {
         dispatch(startFetchingOrigins());
 
