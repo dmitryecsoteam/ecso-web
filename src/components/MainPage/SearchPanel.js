@@ -36,6 +36,50 @@ const renderSuggestion = (suggestion) => (
 let originSelected, destinationSelected = false;
 
 
+
+// The array of parameters - order is important for render and parametersValue array in state
+const parametersArray = [{
+    id: 0,
+    name: 'Beach'
+}, {
+    id: 1,
+    name: 'Food'
+}, {
+    id: 2,
+    name: 'Historical'
+}, {
+    id: 3,
+    name: 'Mountains'
+}, {
+    id: 4,
+    name: 'Museums'
+}, {
+    id: 5,
+    name: 'Nature'
+}, {
+    id: 6,
+    name: 'Shopping'
+}, {
+    id: 7,
+    name: 'Wellness & spa'
+}, {
+    id: 8,
+    name: 'Zoo & aqua'
+}];
+
+// Minimum and maximum number of parameters user must select
+const parametersMin = 3;
+const parametersMax = 5;
+
+const numberOfNonZeroParams = (array) => {
+    let count = 0;
+    array.forEach(element => {
+        if (element) { count++ };
+    });
+    return count;
+};
+
+
 class SearchPanel extends React.Component {
     state = {
         originInputValue: '',
@@ -48,9 +92,15 @@ class SearchPanel extends React.Component {
         calendarFocused: false,
         errorOriginInput: false,
         errorDestinationInput: false,
+        errorParameters: false,
         parametersPanel: false,
-        parameterValue: 0
+        parametersValue: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        parametersEntered: 0
     };
+
+
+
+    /*************** Functions for Autosuggest inputs ***************/
 
     onOriginInputChange = (event, { newValue }) => {
 
@@ -66,9 +116,9 @@ class SearchPanel extends React.Component {
         // Check if it's the first letter in input and then fetch data from api
         if ((prevValue === '')) {
             this.props.startSearchOrigins(newValue).then(() => {
-                this.setState({
+                this.setState(() => ({
                     suggestOrigins: selectOriginSuggestions(this.props.origins, this.state.originInputValue)
-                });
+                }));
             });
         };
     };
@@ -87,9 +137,9 @@ class SearchPanel extends React.Component {
         // Check if it's the first letter in input and then fetch data from api
         if ((prevValue === '')) {
             this.props.startSearchDestinations(newValue).then(() => {
-                this.setState({
+                this.setState(() => ({
                     suggestDestinations: selectDestinationSuggestions(this.props.destinations, this.state.destinationInputValue)
-                });
+                }));
             });
         };
     };
@@ -99,14 +149,19 @@ class SearchPanel extends React.Component {
         if (!originSelected) {
 
             if (this.state.suggestOrigins.length !== 0) {
-                this.setState({
-                    originInputValue: this.state.suggestOrigins[0].name_en
-                });
+                this.setState(() => ({
+                    originInputValue: this.state.suggestOrigins[0].name_en,
+                    errorOriginInput: false
+                }));
             } else {
-                this.setState({
+                this.setState(() => ({
                     originInputValue: ''
-                });
+                }));
             };
+        } else {
+            this.setState(() => ({
+                errorOriginInput: false
+            }));
         };
     };
 
@@ -115,14 +170,19 @@ class SearchPanel extends React.Component {
         if (!destinationSelected) {
 
             if (this.state.suggestDestinations.length !== 0) {
-                this.setState({
-                    destinationInputValue: this.state.suggestDestinations[0].name_en
-                });
+                this.setState(() => ({
+                    destinationInputValue: this.state.suggestDestinations[0].name_en,
+                    errorDestinationInput: false
+                }));
             } else {
                 this.setState(() => ({
                     destinationInputValue: ''
                 }));
             };
+        } else {
+            this.setState(() => ({
+                errorDestinationInput: false
+            }));
         };
     };
 
@@ -135,33 +195,37 @@ class SearchPanel extends React.Component {
     };
 
     onOriginSuggestionsFetchRequested = ({ value }) => {
-        this.setState({
+        this.setState(() => ({
             suggestOrigins: selectOriginSuggestions(this.props.origins, value)
-        });
+        }));
     };
 
     onDestinationSuggestionsFetchRequested = ({ value }) => {
-        this.setState({
+        this.setState(() => ({
             suggestDestinations: selectDestinationSuggestions(this.props.destinations, value)
-        });
+        }));
     };
 
     onOriginSuggestionsClearRequested = () => {
-        this.setState({
+        this.setState(() => ({
             suggestOrigins: []
-        });
+        }));
     };
 
     onDestinationSuggestionsClearRequested = () => {
-        this.setState({
+        this.setState(() => ({
             suggestDestinations: []
-        });
+        }));
     };
 
+
+
+    /*************** Functions for react-dates calendar ***************/
+
     onDateChange = (date) => {
-        this.setState({
+        this.setState(() => ({
             date
-        });
+        }));
     };
 
     onCalendarFocusChange = ({ focused }) => {
@@ -170,8 +234,68 @@ class SearchPanel extends React.Component {
         }));
     };
 
+
+
+    /*************** Functions for Parameters inputs ***************/
+
+    parametersOnClick = () => {
+        this.setState((state) => ({
+            parametersPanel: !state.parametersPanel,
+            errorDestinationInput: false,
+            errorParameters: false
+        }));
+    };
+
+    onParameterChange = (value, id) => {
+        this.setState((prevState) => {
+
+            prevState.parametersValue[id] = value;
+
+            return ({
+                parametersValue: prevState.parametersValue,
+                parametersEntered: numberOfNonZeroParams(prevState.parametersValue)
+            });
+        });
+    };
+
+
+
+    /*************** Form Submit ***************/
+
     onFormSubmit = (e) => {
         e.preventDefault();
+
+        // Check that inputs are correct
+        let errorOriginInput = false;
+        let errorDestinationInput = false;
+        let errorParameters = false;
+
+        if (this.state.originInputValue === '') {
+            errorOriginInput = true;
+        };
+
+        if (this.state.destinationInputValue === '' && !this.state.parametersPanel) {
+            errorDestinationInput = true;
+        };
+
+        if (this.state.parametersPanel && this.state.parametersEntered < parametersMin) {
+            errorParameters = true;
+        } else {
+            errorParameters = false;
+        };
+
+        this.setState(() => ({
+            errorOriginInput,
+            errorDestinationInput,
+            errorParameters
+        }));
+
+        if (!(errorOriginInput || errorDestinationInput || errorParameters)) {
+            console.log('Start fetching from db');
+        }
+
+
+
 
         if (this.state.originInputValue === '') {
             this.setState(() => ({
@@ -179,28 +303,26 @@ class SearchPanel extends React.Component {
             }));
         };
 
-        if (this.state.destinationInputValue === '') {
+        if (this.state.destinationInputValue === '' && !this.state.parametersPanel) {
             this.setState(() => ({
                 errorDestinationInput: true
             }));
         };
+
+        if (this.state.parametersPanel && this.state.parametersEntered < parametersMin) {
+            this.setState(() => ({
+                errorParameters: true
+            }));
+        } else {
+            this.setState(() => ({
+                errorParameters: false
+            }));
+        };
     };
 
-    parametersOnClick = () => {
-        this.setState((state) => ({
-            parametersPanel: !state.parametersPanel
-        }));
-    }
-
-    onParameterChange = (parameterValue) => {
-        this.setState(() => ({
-            parameterValue
-        }));
-    }
 
 
-
-
+    /*************** Render ***************/
 
     render() {
         const { originInputValue, destinationInputValue, suggestOrigins, suggestDestinations } = this.state;
@@ -258,16 +380,24 @@ class SearchPanel extends React.Component {
                 </div>
                 <button>Find</button>
                 <div>
-                    {this.state.parametersPanel && <div>parameters</div>}
+                    {this.state.parametersPanel && <div>
+                        {this.state.errorParameters && <span>Please enter minimum three parameters</span>}
+                        {parametersArray.map((parameter) => (
+                            <Parameter
+                                key={parameter.id}
+                                id={parameter.id}
+                                parameter={parameter.name}
+                                value={this.state.parametersValue[parameter.id]}
+                                onChange={this.onParameterChange}
+                                disabled={(this.state.parametersEntered >= parametersMax) && (!this.state.parametersValue[parameter.id])}
+                            />
+                        ))}
+                    </div>}
                     <div onClick={this.parametersOnClick}>
                         <span>{(this.state.parametersPanel && 'Press to hide parameters') || (!this.state.parametersPanel && 'Press to show parameters')}</span>
                     </div>
                 </div>
-                <Parameter
-                    parameter="Test parameter name"
-                    value={this.state.parameterValue}
-                    onChange={this.onParameterChange}
-                />
+
             </form>
         </div>)
 

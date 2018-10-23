@@ -9,7 +9,8 @@ export default (props) => {
                 maxValue={5}
                 minValue={0}
                 value={props.value}
-                onChange={props.onChange}
+                onChange={(e) => props.onChange(e, props.id)}
+                disabled={props.disabled}
             />
         </div>
 )};
