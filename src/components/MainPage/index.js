@@ -3,6 +3,7 @@ import SearchPanel from './SearchPanel';
 
 
 
+
 export default () => (
     <div>
         Main page

@@ -2,22 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
 import moment from 'moment';
-import { SingleDatePicker } from 'react-dates';
+
 
 import { startSearchOrigins } from '../../actions/originInputActions';
 import { startSearchDestinations } from '../../actions/destinationInputActions';
 import selectOriginSuggestions from '../../selectors/originInputSelector';
 import selectDestinationSuggestions from '../../selectors/destinationInputSelector';
+
 import Parameter from './Parameter';
+import InputAutosuggest from './InputTextAutosuggest';
+import InputDate from './InputDate';
+import ParametersPanel from './ParametersPanel';
 
 
-const getSuggestionValue = (suggestion) => (suggestion.name_en);
-
-const renderSuggestion = (suggestion) => (
-    <span>
-        {suggestion.name_en}, {suggestion.country_en}
-    </span>
-);
 
 
 
@@ -325,7 +322,20 @@ class SearchPanel extends React.Component {
     /*************** Render ***************/
 
     render() {
-        const { originInputValue, destinationInputValue, suggestOrigins, suggestDestinations } = this.state;
+        const {
+            originInputValue,
+            destinationInputValue,
+            suggestOrigins,
+            suggestDestinations,
+            errorDestinationInput,
+            errorOriginInput,
+            date,
+            calendarFocused,
+            parametersPanel,
+            errorParameters,
+            parametersValue,
+            parametersEntered
+        } = this.state;
         const originInputProps = {
             value: originInputValue,
             onChange: this.onOriginInputChange,
@@ -335,67 +345,59 @@ class SearchPanel extends React.Component {
             value: destinationInputValue,
             onChange: this.onDestinationInputChange,
             onBlur: this.onDestinationInputBlur,
-            disabled: this.state.parametersPanel
+            disabled: parametersPanel
         };
 
         return (<div>
             <form onSubmit={this.onFormSubmit}>
                 <div>
-                    <label>FROM</label>
-                    <Autosuggest
+                    <InputAutosuggest
+                        label="From"
                         suggestions={suggestOrigins}
                         onSuggestionsFetchRequested={this.onOriginSuggestionsFetchRequested}
                         onSuggestionsClearRequested={this.onOriginSuggestionsClearRequested}
-                        getSuggestionValue={getSuggestionValue}
-                        renderSuggestion={renderSuggestion}
                         inputProps={originInputProps}
                         focusInputOnSuggestionClick={false}
                         onSuggestionSelected={this.onOriginSuggestionSelected}
+                        error={errorOriginInput}
+                        errorText="Please enter origin"
                     />
-                    {this.state.errorOriginInput && <span>Please enter origin</span>}
                 </div>
                 <div>
-                    <label>TO</label>
-                    <Autosuggest
+                    <InputAutosuggest
+                        label="To"
                         suggestions={suggestDestinations}
                         onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
                         onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
-                        getSuggestionValue={getSuggestionValue}
-                        renderSuggestion={renderSuggestion}
                         inputProps={destinationInputProps}
                         focusInputOnSuggestionClick={false}
                         onSuggestionSelected={this.onDestinationSuggestionSelected}
+                        error={errorDestinationInput}
+                        errorText="Please enter destination"
                     />
-                    {this.state.errorDestinationInput && <span>Please enter destination</span>}
                 </div>
                 <div>
-                    <label>DATE</label>
-                    <SingleDatePicker
-                        date={this.state.date}
+                    <InputDate
+                        label="Date"
+                        date={date}
                         onDateChange={this.onDateChange}
-                        focused={this.state.calendarFocused}
+                        focused={calendarFocused}
                         onFocusChange={this.onCalendarFocusChange}
                         id="date_calendar_id"
                     />
                 </div>
                 <button>Find</button>
                 <div>
-                    {this.state.parametersPanel && <div>
-                        {this.state.errorParameters && <span>Please enter minimum three parameters</span>}
-                        {parametersArray.map((parameter) => (
-                            <Parameter
-                                key={parameter.id}
-                                id={parameter.id}
-                                parameter={parameter.name}
-                                value={this.state.parametersValue[parameter.id]}
-                                onChange={this.onParameterChange}
-                                disabled={(this.state.parametersEntered >= parametersMax) && (!this.state.parametersValue[parameter.id])}
-                            />
-                        ))}
-                    </div>}
-                    <div onClick={this.parametersOnClick}>
-                        <span>{(this.state.parametersPanel && 'Press to hide parameters') || (!this.state.parametersPanel && 'Press to show parameters')}</span>
-                    </div>
+                    <ParametersPanel
+                        parametersPanel={parametersPanel}
+                        errorParameters={errorParameters}
+                        parametersArray={parametersArray}
+                        parametersEntered={parametersEntered}
+                        parametersMax={parametersMax}
+                        parametersValue={parametersValue}
+                        onChange={this.onParameterChange}
+                        parametersOnClick={this.parametersOnClick}
+                    />
                 </div>
 
             </form>
