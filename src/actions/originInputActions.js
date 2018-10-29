@@ -7,7 +7,7 @@ export const setOrigins = (origins) => ({
 });
 
 export const startFetchingOrigins = () => ({
-    type: 'START_FETCH'
+    type: 'START_FETCH_ORIGINS'
 });
 
 

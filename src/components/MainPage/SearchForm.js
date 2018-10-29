@@ -1,20 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Autosuggest from 'react-autosuggest';
 import moment from 'moment';
 
 
 import { startSearchOrigins } from '../../actions/originInputActions';
 import { startSearchDestinations } from '../../actions/destinationInputActions';
+import { startSearchTravelsByParameters, startSearchTravelsByDestination } from '../../actions/travelsActions';
 import selectOriginSuggestions from '../../selectors/originInputSelector';
 import selectDestinationSuggestions from '../../selectors/destinationInputSelector';
 
-import Parameter from './Parameter';
 import InputAutosuggest from './InputTextAutosuggest';
 import InputDate from './InputDate';
 import ParametersPanel from './ParametersPanel';
 
-
+import parametersArray from '../../parameters/parameters';
 
 
 
@@ -34,35 +33,7 @@ let originSelected, destinationSelected = false;
 
 
 
-// The array of parameters - order is important for render and parametersValue array in state
-const parametersArray = [{
-    id: 0,
-    name: 'Beach'
-}, {
-    id: 1,
-    name: 'Food'
-}, {
-    id: 2,
-    name: 'Historical'
-}, {
-    id: 3,
-    name: 'Mountains'
-}, {
-    id: 4,
-    name: 'Museums'
-}, {
-    id: 5,
-    name: 'Nature'
-}, {
-    id: 6,
-    name: 'Shopping'
-}, {
-    id: 7,
-    name: 'Wellness & spa'
-}, {
-    id: 8,
-    name: 'Zoo & aqua'
-}];
+
 
 // Minimum and maximum number of parameters user must select
 const parametersMin = 3;
@@ -80,9 +51,9 @@ const numberOfNonZeroParams = (array) => {
 class SearchPanel extends React.Component {
     state = {
         originInputValue: '',
-        originSelected: false,
+        originsSelectedId: 0,
         destinationInputValue: '',
-        destinationSelected: false,
+        destinationSelectedId: 0,
         suggestOrigins: [],
         suggestDestinations: [],
         date: moment(),
@@ -105,13 +76,13 @@ class SearchPanel extends React.Component {
         originSelected = false;
 
         // Save previous enteredValue and update state with the new actual
-        const prevValue = this.state.originInputValue;
         this.setState(() => ({
-            originInputValue: newValue
+            originInputValue: newValue,
+            originsSelectedId: 0
         }));
 
         // Check if it's the first letter in input and then fetch data from api
-        if ((prevValue === '')) {
+        if ((newValue.length === 1)) {
             this.props.startSearchOrigins(newValue).then(() => {
                 this.setState(() => ({
                     suggestOrigins: selectOriginSuggestions(this.props.origins, this.state.originInputValue)
@@ -125,14 +96,13 @@ class SearchPanel extends React.Component {
         // Set destinationSelected to false
         destinationSelected = false;
 
-        // Save previous enteredValue and update state with the new actual
-        const prevValue = this.state.destinationInputValue;
         this.setState(() => ({
-            destinationInputValue: newValue
+            destinationInputValue: newValue,
+            destinationSelectedId: 0
         }));
 
         // Check if it's the first letter in input and then fetch data from api
-        if ((prevValue === '')) {
+        if ((newValue.length === 1)) {
             this.props.startSearchDestinations(newValue).then(() => {
                 this.setState(() => ({
                     suggestDestinations: selectDestinationSuggestions(this.props.destinations, this.state.destinationInputValue)
@@ -148,11 +118,13 @@ class SearchPanel extends React.Component {
             if (this.state.suggestOrigins.length !== 0) {
                 this.setState(() => ({
                     originInputValue: this.state.suggestOrigins[0].name_en,
+                    originsSelectedId: this.state.suggestOrigins[0]._id,
                     errorOriginInput: false
                 }));
             } else {
                 this.setState(() => ({
-                    originInputValue: ''
+                    originInputValue: '',
+                    originsSelectedId: 0
                 }));
             };
         } else {
@@ -169,11 +141,13 @@ class SearchPanel extends React.Component {
             if (this.state.suggestDestinations.length !== 0) {
                 this.setState(() => ({
                     destinationInputValue: this.state.suggestDestinations[0].name_en,
+                    destinationSelectedId: this.state.suggestDestinations[0]._id,
                     errorDestinationInput: false
                 }));
             } else {
                 this.setState(() => ({
-                    destinationInputValue: ''
+                    destinationInputValue: '',
+                    destinationSelectedId: 0
                 }));
             };
         } else {
@@ -183,12 +157,18 @@ class SearchPanel extends React.Component {
         };
     };
 
-    onOriginSuggestionSelected = () => {
+    onOriginSuggestionSelected = (event, { suggestion }) => {
         originSelected = true;
+        this.setState(() => ({
+            originsSelectedId: suggestion._id
+        }));
     };
 
-    onDestinationSuggestionSelected = () => {
+    onDestinationSuggestionSelected = (event, { suggestion }) => {
         destinationSelected = true;
+        this.setState(() => ({
+            destinationSelectedId: suggestion._id
+        }));
     };
 
     onOriginSuggestionsFetchRequested = ({ value }) => {
@@ -288,32 +268,13 @@ class SearchPanel extends React.Component {
         }));
 
         if (!(errorOriginInput || errorDestinationInput || errorParameters)) {
-            console.log('Start fetching from db');
-        }
 
-
-
-
-        if (this.state.originInputValue === '') {
-            this.setState(() => ({
-                errorOriginInput: true
-            }));
-        };
-
-        if (this.state.destinationInputValue === '' && !this.state.parametersPanel) {
-            this.setState(() => ({
-                errorDestinationInput: true
-            }));
-        };
-
-        if (this.state.parametersPanel && this.state.parametersEntered < parametersMin) {
-            this.setState(() => ({
-                errorParameters: true
-            }));
-        } else {
-            this.setState(() => ({
-                errorParameters: false
-            }));
+            // Find travels based on parameters
+            if (this.state.parametersPanel) {
+                this.props.startSearchTravelsByParameters(this.state.originsSelectedId, this.state.parametersValue, this.state.date.format('YYYY-MM-DD'));
+            } else {
+                this.props.startSearchTravelsByDestination(this.state.originsSelectedId, this.state.destinationSelectedId, this.state.date.format('YYYY-MM-DD'));
+            };
         };
     };
 
@@ -416,7 +377,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     startSearchOrigins: (text) => dispatch(startSearchOrigins(text)),
-    startSearchDestinations: (text) => dispatch(startSearchDestinations(text))
+    startSearchDestinations: (text) => dispatch(startSearchDestinations(text)),
+    startSearchTravelsByParameters: (originId, parametersValue, date) => dispatch(startSearchTravelsByParameters(originId, parametersValue, date)),
+    startSearchTravelsByDestination: (originId, destinationId, date) => dispatch(startSearchTravelsByDestination(originId, destinationId, date))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPanel);

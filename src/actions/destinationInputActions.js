@@ -7,7 +7,7 @@ export const setDestinations = (destinations) => ({
 });
 
 export const startFetchingDestinations = () => ({
-    type: 'START_FETCH'
+    type: 'START_FETCH_DESTINATIONS'
 });
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchPanel from './SearchPanel';
+import SearchForm from './SearchForm';
 
 
 
@@ -7,6 +7,6 @@ import SearchPanel from './SearchPanel';
 export default () => (
     <div>
         Main page
-        <SearchPanel />
+        <SearchForm />
     </div>
 );

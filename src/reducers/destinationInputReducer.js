@@ -5,7 +5,7 @@ export default (state = {}, action) => {
                 isFetching: false,
                 destinations: action.destinations
             };
-        case 'START_FETCH':
+        case 'START_FETCH_DESTINATIONS':
             return { 
                 ...state,
                 isFetching: true 

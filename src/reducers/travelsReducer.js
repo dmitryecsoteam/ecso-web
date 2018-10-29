@@ -1,14 +1,14 @@
 export default (state = {}, action) => {
     switch (action.type) {
-        case 'SET_ORIGINS':
+        case 'SET_TRAVELS':
             return {
-                isFetching: false,
-                origins: action.origins
+                result: action.travels,
+                isFetching: false
             };
-        case 'START_FETCH_ORIGINS':
-            return { 
+        case 'START_FETCH_TRAVELS':
+            return {
                 ...state,
-                isFetching: true 
+                isFetching: true
             };
         default:
             return state;
