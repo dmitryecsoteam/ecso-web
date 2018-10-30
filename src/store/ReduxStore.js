@@ -3,6 +3,8 @@ import thunk from 'redux-thunk';
 import originInputReducer from '../reducers/originInputReducer';
 import destinationInputReducer from '../reducers/destinationInputReducer';
 import travelsReducer from '../reducers/travelsReducer';
+import searchFormReducer from '../reducers/searchFormReducer';
+import moment from 'moment';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -18,6 +20,15 @@ const defaultState = {
     travels: {
         result: [],
         isFetching: false
+    },
+    searchForm: {
+        originInputValue: '',
+        originsSelectedId: 0,
+        destinationInputValue: '',
+        destinationSelectedId: 0,
+        date: moment(),
+        parametersPanel: false,
+        parametersValue: [0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
 };
 
@@ -26,7 +37,8 @@ export default () => (
         combineReducers({
             originInput: originInputReducer,
             destinationInput: destinationInputReducer,
-            travels: travelsReducer
+            travels: travelsReducer,
+            searchForm: searchFormReducer
         }),
         defaultState,
         composeEnhancers(applyMiddleware(thunk))

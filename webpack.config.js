@@ -46,6 +46,7 @@ module.exports = (env, argv) => {
       }),
       new webpack.HotModuleReplacementPlugin()
     ],
+    devtool: devMode ? 'cheap-module-source-map' : 'cheap-source-map',
     devServer: {
       contentBase: path.join(__dirname, 'public'),
       //publicPath: '/dist/',

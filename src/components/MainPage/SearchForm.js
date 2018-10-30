@@ -6,6 +6,7 @@ import moment from 'moment';
 import { startSearchOrigins } from '../../actions/originInputActions';
 import { startSearchDestinations } from '../../actions/destinationInputActions';
 import { startSearchTravelsByParameters, startSearchTravelsByDestination } from '../../actions/travelsActions';
+import { setSearchForm } from '../../actions/searchFormActions';
 import selectOriginSuggestions from '../../selectors/originInputSelector';
 import selectDestinationSuggestions from '../../selectors/destinationInputSelector';
 
@@ -50,20 +51,19 @@ const numberOfNonZeroParams = (array) => {
 
 class SearchPanel extends React.Component {
     state = {
-        originInputValue: '',
-        originsSelectedId: 0,
-        destinationInputValue: '',
-        destinationSelectedId: 0,
+        originInputValue: this.props.searchForm.originInputValue,
+        originsSelectedId: this.props.searchForm.originsSelectedId,
+        destinationInputValue: this.props.searchForm.destinationInputValue,
+        destinationSelectedId: this.props.searchForm.destinationSelectedId,
         suggestOrigins: [],
         suggestDestinations: [],
-        date: moment(),
+        date: this.props.searchForm.date,
         calendarFocused: false,
         errorOriginInput: false,
         errorDestinationInput: false,
         errorParameters: false,
-        parametersPanel: false,
-        parametersValue: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        parametersEntered: 0
+        parametersPanel: this.props.searchForm.parametersPanel,
+        parametersValue: this.props.searchForm.parametersValue
     };
 
 
@@ -120,12 +120,12 @@ class SearchPanel extends React.Component {
                     originInputValue: this.state.suggestOrigins[0].name_en,
                     originsSelectedId: this.state.suggestOrigins[0]._id,
                     errorOriginInput: false
-                }));
+                }), () => this.props.setSearchForm(this.state));
             } else {
                 this.setState(() => ({
                     originInputValue: '',
                     originsSelectedId: 0
-                }));
+                }), () => this.props.setSearchForm(this.state));
             };
         } else {
             this.setState(() => ({
@@ -143,12 +143,12 @@ class SearchPanel extends React.Component {
                     destinationInputValue: this.state.suggestDestinations[0].name_en,
                     destinationSelectedId: this.state.suggestDestinations[0]._id,
                     errorDestinationInput: false
-                }));
+                }), () => this.props.setSearchForm(this.state));
             } else {
                 this.setState(() => ({
                     destinationInputValue: '',
                     destinationSelectedId: 0
-                }));
+                }), () => this.props.setSearchForm(this.state));
             };
         } else {
             this.setState(() => ({
@@ -161,14 +161,14 @@ class SearchPanel extends React.Component {
         originSelected = true;
         this.setState(() => ({
             originsSelectedId: suggestion._id
-        }));
+        }), () => this.props.setSearchForm(this.state));
     };
 
     onDestinationSuggestionSelected = (event, { suggestion }) => {
         destinationSelected = true;
         this.setState(() => ({
             destinationSelectedId: suggestion._id
-        }));
+        }), () => this.props.setSearchForm(this.state));
     };
 
     onOriginSuggestionsFetchRequested = ({ value }) => {
@@ -202,7 +202,7 @@ class SearchPanel extends React.Component {
     onDateChange = (date) => {
         this.setState(() => ({
             date
-        }));
+        }), () => this.props.setSearchForm(this.state));
     };
 
     onCalendarFocusChange = ({ focused }) => {
@@ -220,7 +220,7 @@ class SearchPanel extends React.Component {
             parametersPanel: !state.parametersPanel,
             errorDestinationInput: false,
             errorParameters: false
-        }));
+        }), () => this.props.setSearchForm(this.state));
     };
 
     onParameterChange = (value, id) => {
@@ -229,10 +229,9 @@ class SearchPanel extends React.Component {
             prevState.parametersValue[id] = value;
 
             return ({
-                parametersValue: prevState.parametersValue,
-                parametersEntered: numberOfNonZeroParams(prevState.parametersValue)
+                parametersValue: prevState.parametersValue
             });
-        });
+        }, () => this.props.setSearchForm(this.state));
     };
 
 
@@ -255,7 +254,7 @@ class SearchPanel extends React.Component {
             errorDestinationInput = true;
         };
 
-        if (this.state.parametersPanel && this.state.parametersEntered < parametersMin) {
+        if (this.state.parametersPanel && numberOfNonZeroParams(this.state.parametersValue) < parametersMin) {
             errorParameters = true;
         } else {
             errorParameters = false;
@@ -294,8 +293,7 @@ class SearchPanel extends React.Component {
             calendarFocused,
             parametersPanel,
             errorParameters,
-            parametersValue,
-            parametersEntered
+            parametersValue
         } = this.state;
         const originInputProps = {
             value: originInputValue,
@@ -353,7 +351,7 @@ class SearchPanel extends React.Component {
                         parametersPanel={parametersPanel}
                         errorParameters={errorParameters}
                         parametersArray={parametersArray}
-                        parametersEntered={parametersEntered}
+                        parametersEntered={numberOfNonZeroParams(this.state.parametersValue)}
                         parametersMax={parametersMax}
                         parametersValue={parametersValue}
                         onChange={this.onParameterChange}
@@ -372,14 +370,16 @@ const mapStateToProps = (state) => ({
     origins: state.originInput.origins,
     isFetchingOrigins: state.originInput.isFetching,
     destinations: state.destinationInput.destinations,
-    isFetchingDestinations: state.destinationInput.isFetching
+    isFetchingDestinations: state.destinationInput.isFetching,
+    searchForm: state.searchForm
 });
 
 const mapDispatchToProps = (dispatch) => ({
     startSearchOrigins: (text) => dispatch(startSearchOrigins(text)),
     startSearchDestinations: (text) => dispatch(startSearchDestinations(text)),
     startSearchTravelsByParameters: (originId, parametersValue, date) => dispatch(startSearchTravelsByParameters(originId, parametersValue, date)),
-    startSearchTravelsByDestination: (originId, destinationId, date) => dispatch(startSearchTravelsByDestination(originId, destinationId, date))
+    startSearchTravelsByDestination: (originId, destinationId, date) => dispatch(startSearchTravelsByDestination(originId, destinationId, date)),
+    setSearchForm: (state) => dispatch(setSearchForm(state))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPanel);
