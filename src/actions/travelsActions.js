@@ -45,7 +45,7 @@ export const startSearchTravelsByParameters = (origin, parametersValue, date) =>
             Promise.all(promises).then((response) => {
                 let travels = [];
                 response.forEach(({ data }) => {
-                    travels.push(data);
+                    travels.push(data.travel);
                 });
                 dispatch(setTravels(travels));
             });

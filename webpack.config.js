@@ -52,7 +52,8 @@ module.exports = (env, argv) => {
       //publicPath: '/dist/',
       open: true,
       hot: true,
-      historyApiFallback: true
+      historyApiFallback: true,
+      port: 8888
     }
   });
 }

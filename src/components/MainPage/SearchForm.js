@@ -309,6 +309,7 @@ class SearchPanel extends React.Component {
 
         return (<div>
             <form onSubmit={this.onFormSubmit}>
+                
                 <div>
                     <InputAutosuggest
                         label="From"

@@ -2,8 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/styles.scss';
 import Router from './router/AppRouter';
+//import history from './router/history';
 import configureStore from './store/ReduxStore';
 import { Provider } from 'react-redux';
+
+
 
 // Imports for react-dates: https://github.com/airbnb/react-dates
 import 'react-dates/initialize';

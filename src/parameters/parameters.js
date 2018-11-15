@@ -2,29 +2,47 @@
 // and for quering Graphql API in travelsActions.js
 export default [{
     id: 0,
-    name: 'Beach'
+    name: 'Beach',
+    rating: 'beachRating',
+    description: 'beachDescription'
 }, {
     id: 1,
-    name: 'Food'
+    name: 'Food',
+    rating: 'foodRating',
+    description: 'foodDescription'
 }, {
     id: 2,
-    name: 'Historical'
+    name: 'Historical',
+    rating: 'historicalRating',
+    description: 'historicalDescription'
 }, {
     id: 3,
-    name: 'Mountains'
+    name: 'Mountains',
+    rating: 'mountainsRating',
+    description: 'mountainsDescription'
 }, {
     id: 4,
-    name: 'Museums'
+    name: 'Museums',
+    rating: 'museumRating',
+    description: 'museumDescription'
 }, {
     id: 5,
-    name: 'Nature'
+    name: 'Nature',
+    rating: 'natureRating',
+    description: 'natureDescription'
 }, {
     id: 6,
-    name: 'Shopping'
+    name: 'Shopping',
+    rating: 'shoppingRating',
+    description: 'shoppingDescription'
 }, {
     id: 7,
-    name: 'Wellness & spa'
+    name: 'Wellness & spa',
+    rating: 'wellnessSpaRating',
+    description: 'wellnessSpaDescription'
 }, {
     id: 8,
-    name: 'Zoo & aqua'
+    name: 'Zoo & aqua',
+    rating: 'zooAquaRating',
+    description: 'zooAquaDescription'
 }];
