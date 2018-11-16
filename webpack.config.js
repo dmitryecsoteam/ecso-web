@@ -12,7 +12,8 @@ module.exports = (env, argv) => {
     entry: { main: './src/app.js' },
     output: {
       path: path.resolve(__dirname, 'public'),
-      filename: 'bundle.js'
+      filename: 'bundle.js',
+      publicPath: '/'
     },
     module: {
       rules: [
@@ -49,7 +50,7 @@ module.exports = (env, argv) => {
     devtool: devMode ? 'cheap-module-source-map' : 'cheap-source-map',
     devServer: {
       contentBase: path.join(__dirname, 'public'),
-      //publicPath: '/dist/',
+      publicPath: '/',
       open: true,
       hot: true,
       historyApiFallback: true,
