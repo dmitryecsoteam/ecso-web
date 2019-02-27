@@ -8,8 +8,6 @@ import TravelPage from '../components/TravelPage';
 import NotFoundPage from '../components/NotFoundPage';
 import history from './history';
 
-import { BrowserRouter } from 'react-router-dom';
-
 export default () => (
     <Router history={history}>
 

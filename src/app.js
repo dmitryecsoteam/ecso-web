@@ -5,6 +5,7 @@ import Router from './router/AppRouter';
 //import history from './router/history';
 import configureStore from './store/ReduxStore';
 import { Provider } from 'react-redux';
+import { ApolloProvider } from "react-apollo";
 
 
 
@@ -21,9 +22,11 @@ import { client } from './clientGraphQL/client';
 const store = configureStore();
 
 const jsx = (
-    <Provider store={store}>
-        <Router />
-    </Provider>
+    <ApolloProvider client={client} >
+        <Provider store={store} >
+            <Router />
+        </Provider>
+    </ApolloProvider>
 );
 
 

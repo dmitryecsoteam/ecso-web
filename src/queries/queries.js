@@ -98,3 +98,40 @@ query travel(
     }
 }
 `;
+
+export const TRAVELS_SEARCH_FULL = gql`
+query travelFull(
+    $_id: String
+) {
+    travelFull (
+        _id: $_id
+    ) {
+        _id
+        date
+        priceAirplane
+        destination {
+            _id
+            name_en
+            country_en
+            museumRating
+            zooAquaRating
+            wellnessSpaRating
+            mountainsRating
+            beachRating
+            foodRating
+            shoppingRating
+            historicalRating
+            natureRating
+            museumDescription
+            zooAquaDescription
+            wellnessSpaDescription
+            mountainsDescription
+            beachDescription
+            foodDescription
+            shoppingDescription
+            historicalDescription
+            natureDescription
+        }
+    }
+}
+`;

@@ -29,7 +29,7 @@ import parametersArray from '../../parameters/parameters';
 // and when onBlur event is fired the state won't be actual.
 // We need some SYNC logic:
 // onSuggestionSelected change originSelected/destinationSelected to 'true', so the onBlur function will know, that user 
-// selected suggestion. onInputChange will make these fariables 'false' again.
+// selected suggestion. onInputChange will make these variables 'false' again.
 let originSelected, destinationSelected = false;
 
 
@@ -37,8 +37,8 @@ let originSelected, destinationSelected = false;
 
 
 // Minimum and maximum number of parameters user must select
-const parametersMin = 3;
-const parametersMax = 5;
+const PARAMETERS_MIN = 3;
+const PARAMETERS_MAX = 5;
 
 const numberOfNonZeroParams = (array) => {
     let count = 0;
@@ -254,7 +254,7 @@ class SearchPanel extends React.Component {
             errorDestinationInput = true;
         };
 
-        if (this.state.parametersPanel && numberOfNonZeroParams(this.state.parametersValue) < parametersMin) {
+        if (this.state.parametersPanel && numberOfNonZeroParams(this.state.parametersValue) < PARAMETERS_MIN) {
             errorParameters = true;
         } else {
             errorParameters = false;
@@ -353,7 +353,7 @@ class SearchPanel extends React.Component {
                         errorParameters={errorParameters}
                         parametersArray={parametersArray}
                         parametersEntered={numberOfNonZeroParams(this.state.parametersValue)}
-                        parametersMax={parametersMax}
+                        parametersMax={PARAMETERS_MAX}
                         parametersValue={parametersValue}
                         onChange={this.onParameterChange}
                         parametersOnClick={this.parametersOnClick}
