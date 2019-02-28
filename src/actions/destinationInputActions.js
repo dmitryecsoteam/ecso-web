@@ -17,7 +17,7 @@ export const startSearchDestinations = (searchSymbol) => {
 
         return client.query({
             query: DESTINATION_INPUT_SEARCH,
-            variables: { name: searchSymbol }
+            variables: { startsWith: searchSymbol }
         }).then((result) => {
             dispatch(setDestinations(result.data.destinationStartsWith));
         }

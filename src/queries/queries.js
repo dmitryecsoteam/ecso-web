@@ -9,23 +9,23 @@ query destination($_id: Int){
 `;
 
 export const ORIGIN_INPUT_SEARCH = gql`
-query originStartsWith($name: String){
-    originStartsWith (name: $name) {
+query originStartsWith($startsWith: String){
+    originStartsWith (name: $startsWith) {
         _id,
         name,
-        name_en,
-        country_en
+        nameEn,
+        countryEn
     }
 }
 `;
 
 export const DESTINATION_INPUT_SEARCH = gql`
-query destinationStartsWith($name: String){
-    destinationStartsWith (name: $name) {
+query destinationStartsWith($startsWith: String){
+    destinationStartsWith (name: $startsWith) {
         _id,
         name,
-        name_en,
-        country_en
+        nameEn,
+        countryEn
     }
 }
 `;

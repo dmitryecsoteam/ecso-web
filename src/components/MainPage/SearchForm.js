@@ -117,7 +117,7 @@ class SearchPanel extends React.Component {
 
             if (this.state.suggestOrigins.length !== 0) {
                 this.setState(() => ({
-                    originInputValue: this.state.suggestOrigins[0].name_en,
+                    originInputValue: this.state.suggestOrigins[0].nameEn,
                     originsSelectedId: this.state.suggestOrigins[0]._id,
                     errorOriginInput: false
                 }), () => this.props.setSearchForm(this.state));
@@ -140,7 +140,7 @@ class SearchPanel extends React.Component {
 
             if (this.state.suggestDestinations.length !== 0) {
                 this.setState(() => ({
-                    destinationInputValue: this.state.suggestDestinations[0].name_en,
+                    destinationInputValue: this.state.suggestDestinations[0].nameEn,
                     destinationSelectedId: this.state.suggestDestinations[0]._id,
                     errorDestinationInput: false
                 }), () => this.props.setSearchForm(this.state));

@@ -1,11 +1,11 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 
-const getSuggestionValue = (suggestion) => (suggestion.name_en);
+const getSuggestionValue = (suggestion) => (suggestion.nameEn);
 
 const renderSuggestion = (suggestion) => (
     <span>
-        {suggestion.name_en}, {suggestion.country_en}
+        {suggestion.nameEn}, {suggestion.countryEn}
     </span>
 );
 

@@ -18,7 +18,7 @@ export const startSearchOrigins = (searchSymbol) => {
 
         return client.query({
             query: ORIGIN_INPUT_SEARCH,
-            variables: { name: searchSymbol }
+            variables: { startsWith: searchSymbol }
         }).then((result) => {
             dispatch(setOrigins(result.data.originStartsWith));
         }

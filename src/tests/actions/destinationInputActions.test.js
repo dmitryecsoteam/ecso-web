@@ -38,7 +38,7 @@ test('should setup start search destinations action object',  async () => {
 
     expect(client.query).toHaveBeenCalledWith({
         query: DESTINATION_INPUT_SEARCH,
-        variables: { name: 'Q' }
+        variables: { startsWith: 'Q' }
     });
 
 
