@@ -26,19 +26,19 @@ test('should setup start fetching destinations action object', () => {
     });
 });
 
-test('should setup start search destinations action object',  async () => {
+test('should setup start search destinations action',  async () => {
 
     const store = createMockStore({});
 
-    await store.dispatch(startSearchDestinations('Q'));
+    await store.dispatch(startSearchDestinations('O'));
     const actions = store.getActions();
     
     expect(actions[0]).toEqual({ type: 'START_FETCH_DESTINATIONS' });
-    expect(actions[1]).toEqual({ type: 'SET_DESTINATIONS', destinations: [ 'X' ] });
+    expect(actions[1]).toEqual({ type: 'SET_DESTINATIONS', destinations: [ 'Osaka' ] });
 
     expect(client.query).toHaveBeenCalledWith({
         query: DESTINATION_INPUT_SEARCH,
-        variables: { startsWith: 'Q' }
+        variables: { startsWith: 'O' }
     });
 
 
