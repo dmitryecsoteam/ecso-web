@@ -32,26 +32,20 @@ query destinationStartsWith($startsWith: String){
 
 export const DESTINATION_SEARCH_BY_PARAMETERS = gql`
 query destinationRating(
-    $museumRating: Int,
-    $zooAquaRating: Int,
-    $wellnessSpaRating: Int,
-    $mountainsRating: Int,
     $beachRating: Int,
     $foodRating: Int,
+    $museumRating: Int,
+    $natureRating: Int,
     $shoppingRating: Int,
-    $historicalRating: Int,
-    $natureRating: Int
+    $nightlifeRating: Int
 ) {
     destinationRating (
-        museumRating: $museumRating,
-        zooAquaRating: $zooAquaRating,
-        wellnessSpaRating: $wellnessSpaRating,
-        mountainsRating: $mountainsRating,
         beachRating: $beachRating,
         foodRating: $foodRating,
+        museumRating: $museumRating,
+        natureRating: $natureRating,
         shoppingRating: $shoppingRating,
-        historicalRating: $historicalRating,
-        natureRating: $natureRating
+        nightlifeRating: $nightlifeRating
     ) {
         _id
     }
@@ -74,26 +68,20 @@ query travel(
         priceAirplane
         destination {
             _id
-            name_en
-            country_en
+            nameEn
+            countryEn
             museumRating
-            zooAquaRating
-            wellnessSpaRating
-            mountainsRating
             beachRating
             foodRating
             shoppingRating
-            historicalRating
             natureRating
+            nightlifeRating
             museumDescription
-            zooAquaDescription
-            wellnessSpaDescription
-            mountainsDescription
             beachDescription
             foodDescription
             shoppingDescription
-            historicalDescription
             natureDescription
+            nightlifeDescription
         }
     }
 }

@@ -9,7 +9,7 @@ export default (props) => {
                 maxValue={5}
                 minValue={0}
                 value={props.value}
-                onChange={(e) => props.onChange(e, props.id)}
+                onChange={(e) => props.onChange(e, props.parameter)}
                 disabled={props.disabled}
             />
         </div>

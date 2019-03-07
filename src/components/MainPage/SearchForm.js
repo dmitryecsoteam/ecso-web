@@ -24,27 +24,27 @@ import parametersArray from '../../parameters/parameters';
 // If user selected suggestion, then this suggestion would be set as input value and the input 
 // would be focused out (Autosuggest's prop focusInputOnSuggestionClick={false}).
 //
-// This variables (originSelected, destinationSelected) will let onBlur event know, if user selected suggestion or not.
+// This variables (originSelectedByUser, destinationSelectedByUser) will let onBlur event know, if user selected suggestion or not.
 // We can't make this variables part of the component's state, because setState function is ASYNC
 // and when onBlur event is fired the state won't be actual.
 // We need some SYNC logic:
-// onSuggestionSelected change originSelected/destinationSelected to 'true', so the onBlur function will know, that user 
+// onSuggestionSelected change originSelectedByUser/destinationSelectedByUser to 'true', so the onBlur function will know, that user 
 // selected suggestion. onInputChange will make these variables 'false' again.
-let originSelected, destinationSelected = false;
+let originSelectedByUser, destinationSelectedByUser = false;
 
 
 
 
 
 // Minimum and maximum number of parameters user must select
-const PARAMETERS_MIN = 3;
-const PARAMETERS_MAX = 5;
+const PARAMETERS_MIN = 1;
+const PARAMETERS_MAX = 6;
 
-const numberOfNonZeroParams = (array) => {
+const numberOfNonZeroParams = (parameters) => {
     let count = 0;
-    array.forEach(element => {
-        if (element) { count++ };
-    });
+    for (let parameter in parameters) {
+        if (parameters[parameter]) count++;
+    }
     return count;
 };
 
@@ -73,7 +73,7 @@ class SearchPanel extends React.Component {
     onOriginInputChange = (event, { newValue }) => {
 
         // Set originSelected to false
-        originSelected = false;
+        originSelectedByUser = false;
 
         // Save previous enteredValue and update state with the new actual
         this.setState(() => ({
@@ -94,7 +94,7 @@ class SearchPanel extends React.Component {
     onDestinationInputChange = (event, { newValue }) => {
 
         // Set destinationSelected to false
-        destinationSelected = false;
+        destinationSelectedByUser = false;
 
         this.setState(() => ({
             destinationInputValue: newValue,
@@ -113,7 +113,7 @@ class SearchPanel extends React.Component {
 
     onOriginInputBlur = () => {
 
-        if (!originSelected) {
+        if (!originSelectedByUser) {
 
             if (this.state.suggestOrigins.length !== 0) {
                 this.setState(() => ({
@@ -136,7 +136,7 @@ class SearchPanel extends React.Component {
 
     onDestinationInputBlur = () => {
 
-        if (!destinationSelected) {
+        if (!destinationSelectedByUser) {
 
             if (this.state.suggestDestinations.length !== 0) {
                 this.setState(() => ({
@@ -158,14 +158,14 @@ class SearchPanel extends React.Component {
     };
 
     onOriginSuggestionSelected = (event, { suggestion }) => {
-        originSelected = true;
+        originSelectedByUser = true;
         this.setState(() => ({
             originsSelectedId: suggestion._id
         }), () => this.props.setSearchForm(this.state));
     };
 
     onDestinationSuggestionSelected = (event, { suggestion }) => {
-        destinationSelected = true;
+        destinationSelectedByUser = true;
         this.setState(() => ({
             destinationSelectedId: suggestion._id
         }), () => this.props.setSearchForm(this.state));
@@ -220,18 +220,26 @@ class SearchPanel extends React.Component {
             parametersPanel: !state.parametersPanel,
             errorDestinationInput: false,
             errorParameters: false
-        }), () => this.props.setSearchForm(this.state));
+        }),
+        // Callback function after setState completion. Update search form state in redux store 
+        () => this.props.setSearchForm(this.state));
     };
 
-    onParameterChange = (value, id) => {
+    onParameterChange = (value, parameterName) => {
         this.setState((prevState) => {
 
-            prevState.parametersValue[id] = value;
+            //prevState.parametersValue[id] = value;
+            const parametersValue = {
+                ...prevState.parametersValue,
+            };
+            parametersValue[parameterName] = value;
 
             return ({
-                parametersValue: prevState.parametersValue
+                parametersValue
             });
-        }, () => this.props.setSearchForm(this.state));
+        }, 
+        // Callback function after setState completion. Update search form state in redux store
+        () => this.props.setSearchForm(this.state));
     };
 
 
@@ -351,7 +359,6 @@ class SearchPanel extends React.Component {
                     <ParametersPanel
                         parametersPanel={parametersPanel}
                         errorParameters={errorParameters}
-                        parametersArray={parametersArray}
                         parametersEntered={numberOfNonZeroParams(this.state.parametersValue)}
                         parametersMax={PARAMETERS_MAX}
                         parametersValue={parametersValue}

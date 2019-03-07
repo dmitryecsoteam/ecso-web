@@ -22,27 +22,18 @@ class ResultsPanel extends React.Component {
 
     render() {
 
-        const parametersIds = parametersIdsList(this.props.parametersValue);
+        console.log(this.props.travels)
 
         return <div>
             <span>Results</span>
             <div>
                 {this.props.travels.map((travel) => {
-                    const ratingList = [];
-                    parametersIds.forEach((id) => {
-                        ratingList.push({
-                            name: parameters[id].name,
-                            rating: travel.destination[parameters[id].rating],
-                            description: travel.destination[parameters[id].description]
-                        })
-                    });
-
+                    
                     return <Travel
                         key={travel._id}
                         _id={travel._id}
-                        name={travel.destination.name_en}
-                        country={travel.destination.country_en}
-                        ratingList={ratingList}
+                        name={travel.destination.nameEn}
+                        country={travel.destination.countryEn}
                         priceAirplane={travel.priceAirplane}
 
                     />

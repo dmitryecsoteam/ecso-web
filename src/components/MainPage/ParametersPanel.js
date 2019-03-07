@@ -5,15 +5,14 @@ export default (props) => {
 
     return <div>
         {props.parametersPanel && <div>
-            <span>Please enter minimum <b>three</b> and maximum <b>five</b> parameters</span>
-            {props.parametersArray.map((parameter) => (
+        {/*   <span>Please enter minimum <b>three</b> and maximum <b>five</b> parameters</span> */}
+            {Object.keys(props.parametersValue).map((parameter, id) => (
                 <Parameter
-                    key={parameter.id}
-                    id={parameter.id}
-                    parameter={parameter.name}
-                    value={props.parametersValue[parameter.id]}
+                    key={id}
+                    parameter={parameter}
+                    value={props.parametersValue[parameter]}
                     onChange={props.onChange}
-                    disabled={(props.parametersEntered >= props.parametersMax) && (!props.parametersValue[parameter.id])}
+                    disabled={(props.parametersEntered >= props.parametersMax) && (!props.parametersValue[parameter])}
                 />
             ))}
         </div>}

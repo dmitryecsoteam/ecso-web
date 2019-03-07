@@ -7,7 +7,6 @@ export default (props) => {
         _id,
         name,
         country,
-        ratingList,
         priceAirplane
     } = props;
 

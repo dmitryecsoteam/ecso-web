@@ -28,7 +28,15 @@ const defaultState = {
         destinationSelectedId: 0,
         date: moment(),
         parametersPanel: false,
-        parametersValue: [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        parametersValue: {
+            Beach: 0,
+            Food: 0,
+            Museums: 0,
+            Shopping: 0,
+            Nature: 0,
+            Shopping: 0,
+            Nightlife: 0
+        }
     }
 };
 
