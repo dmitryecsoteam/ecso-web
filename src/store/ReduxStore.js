@@ -19,7 +19,8 @@ const defaultState = {
     },
     travels: {
         result: [],
-        isFetching: false
+        isFetching: false,
+        isInitEmptyResult: true
     },
     searchForm: {
         originInputValue: '',
@@ -32,7 +33,6 @@ const defaultState = {
             Beach: 0,
             Food: 0,
             Museums: 0,
-            Shopping: 0,
             Nature: 0,
             Shopping: 0,
             Nightlife: 0

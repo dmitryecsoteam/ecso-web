@@ -22,21 +22,25 @@ class ResultsPanel extends React.Component {
 
     render() {
 
+        let travelsList = this.props.travels.map((travel) => (
+            <Travel
+                key={travel._id}
+                _id={travel._id}
+                name={travel.destination.nameEn}
+                country={travel.destination.countryEn}
+                priceAirplane={travel.priceAirplane}
+
+            />)
+        );
+
+        if (!this.props.isInitEmptyResult && this.props.travels.length === 0) {
+            travelsList = <h3>Nothing was found</h3>;
+        }
+
         return <div>
             <span>Results</span>
             <div>
-                {this.props.travels.map((travel) => {
-                    
-                    return <Travel
-                        key={travel._id}
-                        _id={travel._id}
-                        name={travel.destination.nameEn}
-                        country={travel.destination.countryEn}
-                        priceAirplane={travel.priceAirplane}
-
-                    />
-                })
-                }
+                {travelsList}
             </div>
         </div>
     };
@@ -44,7 +48,8 @@ class ResultsPanel extends React.Component {
 
 const mapStatetoProps = (state) => ({
     travels: state.travels.result,
-    parametersValue: state.searchForm.parametersValue
+    parametersValue: state.searchForm.parametersValue,
+    isInitEmptyResult: state.travels.isInitEmptyResult
 });
 
 export default connect(mapStatetoProps)(ResultsPanel);

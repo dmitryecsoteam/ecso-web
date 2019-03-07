@@ -3,7 +3,8 @@ export default (state = {}, action) => {
         case 'SET_TRAVELS':
             return {
                 result: action.travels,
-                isFetching: false
+                isFetching: false,
+                isInitEmptyResult: false
             };
         case 'START_FETCH_TRAVELS':
             return {
