@@ -23,7 +23,7 @@ export const startSearchTravelsByParameters = (origin, parametersValue, date) =>
             nightlifeRating: parametersValue['Nightlife']
         };
 
-        client.query({
+        return client.query({
             query: DESTINATION_SEARCH_BY_PARAMETERS,
             variables
         }).then((response) => {
@@ -46,11 +46,12 @@ export const startSearchTravelsByParameters = (origin, parametersValue, date) =>
                 }
             });
 
-            Promise.all(promises).then((response) => {
-                console.log(response)
+            return Promise.all(promises).then((response) => {
                 let travels = [];
                 response.forEach(({ data }) => {
-                    travels.push(data.travel);
+                    
+                    // If data.travel is not null (not found in DB)
+                    if (data.travel) travels.push(data.travel);
                 });
                 dispatch(setTravels(travels));
             });
@@ -62,15 +63,21 @@ export const startSearchTravelsByDestination = (origin, destination, date) => {
     return (dispatch) => {
         dispatch(startFetchingTravels());
 
-        client.query({
+        return client.query({
             query: TRAVELS_SEARCH,
             variables: {
                 origin,
                 destination,
                 date
             }
-        }).then((response) => {
-            dispatch(setTravels([response.data.travel]));
+        }).then(({ data }) => {
+
+            const travels = [];
+            
+            // If travel is not null (not found in DB)
+            if (data.travel) travels.push(data.travel);
+            
+            dispatch(setTravels(travels));
         });
     };
 };

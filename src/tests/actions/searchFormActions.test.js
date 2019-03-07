@@ -11,7 +11,10 @@ test('should setup search form action object', () => {
         parametersPanel: false,
         parametersValue: [0, 0, 0, 0]
     }
-    const action = setSearchForm(form);
+    const action = setSearchForm({
+        ...form,
+        wrongProperty: true
+    });
 
     expect(action).toEqual({
         type: 'SET_SEARCH_FORM',

@@ -9,6 +9,7 @@ jest.mock('../../clientGraphQL/client.js');
 const createMockStore = configureMockStore([thunk]);
 
 test('should setup set destinations action object', () => {
+
     const destinations = ['Tokyo', 'Toyama'];
     const action = setDestinations(destinations);
 
@@ -19,6 +20,7 @@ test('should setup set destinations action object', () => {
 });
 
 test('should setup start fetching destinations action object', () => {
+    
     const action = startFetchingDestinations();
 
     expect(action).toEqual({
@@ -40,7 +42,4 @@ test('should setup start search destinations action',  async () => {
         query: DESTINATION_INPUT_SEARCH,
         variables: { startsWith: 'O' }
     });
-
-
-
 });

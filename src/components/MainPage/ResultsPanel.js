@@ -22,8 +22,6 @@ class ResultsPanel extends React.Component {
 
     render() {
 
-        console.log(this.props.travels)
-
         return <div>
             <span>Results</span>
             <div>

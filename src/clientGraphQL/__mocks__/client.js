@@ -1,14 +1,46 @@
-import { ORIGIN_INPUT_SEARCH, DESTINATION_INPUT_SEARCH } from '../../queries/queries';
+import { ORIGIN_INPUT_SEARCH, DESTINATION_INPUT_SEARCH, DESTINATION_SEARCH_BY_PARAMETERS, TRAVELS_SEARCH } from '../../queries/queries';
+import travel from '../../tests/fixtures/travel';
 
 export const client = {
-    query: jest.fn(({ query }) => {
+    query: jest.fn(({ query, variables }) => {
+
         switch (query) {
+
             case (DESTINATION_INPUT_SEARCH): return Promise.resolve({ data: {
                 destinationStartsWith: ['Osaka']
             }});
+
             case (ORIGIN_INPUT_SEARCH): return Promise.resolve({ data: {
                 originStartsWith: ['Tokyo']
             }});
+
+            case (DESTINATION_SEARCH_BY_PARAMETERS): {
+
+                switch (variables.beachRating) {
+                    case 1: return Promise.resolve({ data: {
+                        destinationRating: []
+                    }});
+                    case 2: return Promise.resolve({ data: {
+                        destinationRating: [{ _id: 2 }]
+                    }});
+                    case 3: return Promise.resolve({ data: {
+                        destinationRating: [{ _id: 1 }, { _id: 3 }]
+                    }});
+                }
+
+            };
+
+            case (TRAVELS_SEARCH): {
+
+                switch (variables.destination) {
+                    case 2: return Promise.resolve({ data: {
+                        travel: null
+                    }});
+                    case 3: return Promise.resolve({ data: {
+                        travel
+                    }});
+                }
+            }
         }
         })
 }
