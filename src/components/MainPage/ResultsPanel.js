@@ -4,17 +4,6 @@ import { connect } from 'react-redux';
 import Travel from './Travel';
 import parameters from '../../parameters/parameters';
 
-const parametersIdsList = (parametersValue) => {
-    let result = [];
-    parametersValue.forEach((value, index) => {
-        if (value) {
-            result.push(index);
-        };
-    });
-
-    return result;
-};
-
 class ResultsPanel extends React.Component {
     state = {
 
@@ -48,7 +37,7 @@ class ResultsPanel extends React.Component {
 
 const mapStatetoProps = (state) => ({
     travels: state.travels.result,
-    parametersValue: state.searchForm.parametersValue,
+    isFetching: state.travels.isFetching,
     isInitEmptyResult: state.travels.isInitEmptyResult
 });
 
