@@ -75,41 +75,64 @@ class SearchPanel extends React.Component {
         // Set originSelected to false
         originSelectedByUser = false;
 
-        // Save previous enteredValue and update state with the new actual
+        // First, update state with entered value
         this.setState(() => ({
             originInputValue: newValue,
             originsSelectedId: 0
         }));
 
-        // Check if it's the first letter in input and then fetch data from api
-        if ((newValue.length === 1)) {
-            this.props.startSearchOrigins(newValue).then(() => {
-                this.setState(() => ({
-                    suggestOrigins: selectOriginSuggestions(this.props.origins, this.state.originInputValue)
-                }));
-            });
-        };
-    };
+        // Second, check that user entered new City (typed or copied),
+        // that starts from different letter. This means we must fetch data from API 
+        // for the first letter.
+        // Additionally check that newValue is not '' (user deleted data from the input).
+        if ((this.state.originInputValue[0] !== newValue[0]) && (newValue)) {
+
+            // Check that newValue doesn't start from special character
+            if (!/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(newValue[0])) {
+
+                // Fetch list of cities starting with first entered in input character in lower case.
+                // Data will be cached.
+                // And then update state to load autosuggest information.
+                this.props.startSearchOrigins(newValue[0].toLowerCase()).then(() => {
+                    this.setState(() => ({
+                        suggestOrigins: selectOriginSuggestions(this.props.origins, this.state.originInputValue)
+                    }));
+                });
+            }
+        }
+    }
 
     onDestinationInputChange = (event, { newValue }) => {
 
         // Set destinationSelected to false
         destinationSelectedByUser = false;
 
+        // First, update state with entered value
         this.setState(() => ({
             destinationInputValue: newValue,
             destinationSelectedId: 0
         }));
 
-        // Check if it's the first letter in input and then fetch data from api
-        if ((newValue.length === 1)) {
-            this.props.startSearchDestinations(newValue).then(() => {
-                this.setState(() => ({
-                    suggestDestinations: selectDestinationSuggestions(this.props.destinations, this.state.destinationInputValue)
-                }));
-            });
-        };
-    };
+        // Second, check that user entered new City (typed or copied),
+        // that starts from different letter. This means we must fetch data from API 
+        // for the first letter.
+        // Additionally check that newValue is not '' (user deleted data from the input).
+        if ((this.state.destinationInputValue[0] !== newValue[0]) && (newValue)) {
+
+            // Check that newValue doesn't start from special character
+            if (!/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(newValue[0])) {
+                
+                // Fetch list of cities starting with first entered in input character in lower case.
+                // Data will be cached.
+                // And then update state to load autosuggest information.
+                this.props.startSearchDestinations(newValue[0].toLowerCase()).then(() => {
+                    this.setState(() => ({
+                        suggestDestinations: selectDestinationSuggestions(this.props.destinations, newValue)
+                    }));
+                });
+            }
+        }
+    }
 
     onOriginInputBlur = () => {
 
@@ -221,8 +244,8 @@ class SearchPanel extends React.Component {
             errorDestinationInput: false,
             errorParameters: false
         }),
-        // Callback function after setState completion. Update search form state in redux store 
-        () => this.props.setSearchForm(this.state));
+            // Callback function after setState completion. Update search form state in redux store 
+            () => this.props.setSearchForm(this.state));
     };
 
     onParameterChange = (value, parameterName) => {
@@ -237,9 +260,9 @@ class SearchPanel extends React.Component {
             return ({
                 parametersValue
             });
-        }, 
-        // Callback function after setState completion. Update search form state in redux store
-        () => this.props.setSearchForm(this.state));
+        },
+            // Callback function after setState completion. Update search form state in redux store
+            () => this.props.setSearchForm(this.state));
     };
 
 
@@ -317,7 +340,7 @@ class SearchPanel extends React.Component {
 
         return (<div>
             <form onSubmit={this.onFormSubmit}>
-                
+
                 <div>
                     <InputAutosuggest
                         label="From"

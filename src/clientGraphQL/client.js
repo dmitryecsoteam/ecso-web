@@ -7,5 +7,6 @@ export const client = new ApolloClient({
       if (networkError) {
         history.push("/error");
       }
-    }
+    },
+    //request: (e) => {console.log(e)}
   });
