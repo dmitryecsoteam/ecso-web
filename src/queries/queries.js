@@ -8,7 +8,7 @@ query destination($_id: Int){
 }
 `;
 
-export const ORIGIN_INPUT_SEARCH = gql`
+export const ORIGIN_INPUT_SEARCH_EN = gql`
 query originStartsWith($startsWith: String){
     originStartsWith (name: $startsWith) {
         _id,
@@ -19,7 +19,7 @@ query originStartsWith($startsWith: String){
 }
 `;
 
-export const DESTINATION_INPUT_SEARCH = gql`
+export const DESTINATION_INPUT_SEARCH_EN = gql`
 query destinationStartsWith($startsWith: String){
     destinationStartsWith (name: $startsWith) {
         _id,
@@ -52,7 +52,7 @@ query destinationRating(
 }
 `;
 
-export const TRAVELS_SEARCH = gql`
+export const TRAVELS_SEARCH_EN = gql`
 query travel(
     $origin: Int
     $destination: Int
@@ -66,6 +66,7 @@ query travel(
         _id
         date
         priceAirplane
+        priceHotel
         destination {
             _id
             nameEn

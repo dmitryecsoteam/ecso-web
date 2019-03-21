@@ -1,5 +1,5 @@
 import { client } from '../clientGraphQL/client';
-import { DESTINATION_INPUT_SEARCH } from '../queries/queries';
+import { DESTINATION_INPUT_SEARCH_EN } from '../queries/queries';
 
 export const setDestinations = (destinations) => ({
     type: 'SET_DESTINATIONS',
@@ -16,7 +16,7 @@ export const startSearchDestinations = (searchSymbol) => {
         dispatch(startFetchingDestinations());
 
         return client.query({
-            query: DESTINATION_INPUT_SEARCH,
+            query: DESTINATION_INPUT_SEARCH_EN,
             variables: { startsWith: searchSymbol }
         }).then((result) => {
             dispatch(setDestinations(result.data.destinationStartsWith));

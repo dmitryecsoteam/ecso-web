@@ -12,7 +12,7 @@ module.exports = (env, argv) => {
     entry: { main: './src/app.js' },
     output: {
       path: path.resolve(__dirname, 'public'),
-      filename: 'bundle.js',
+      filename: 'bundle.[hash].js',
       publicPath: '/'
     },
     module: {
@@ -27,8 +27,8 @@ module.exports = (env, argv) => {
         {
           test: /\.s?css$/,
           use: [
-            //devMode ? 'style-loader': MiniCssExtractPlugin.loader,
-            MiniCssExtractPlugin.loader,
+            devMode ? 'style-loader': MiniCssExtractPlugin.loader,
+            //MiniCssExtractPlugin.loader,
             'css-loader',
             'sass-loader'
           ]
@@ -38,7 +38,7 @@ module.exports = (env, argv) => {
     plugins: [
       new CleanWebpackPlugin('public', {} ),
       new MiniCssExtractPlugin({
-        filename: "styles.css"
+        filename: "styles.[hash].css"
       }),
       new HtmlWebpackPlugin({
         template: './src/index.html',

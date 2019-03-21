@@ -1,5 +1,5 @@
 import { client } from '../clientGraphQL/client';
-import { DESTINATION_SEARCH_BY_PARAMETERS, TRAVELS_SEARCH } from '../queries/queries';
+import { DESTINATION_SEARCH_BY_PARAMETERS, TRAVELS_SEARCH_EN } from '../queries/queries';
 
 export const setTravels = (travels) => ({
     type: 'SET_TRAVELS',
@@ -36,7 +36,7 @@ export const startSearchTravelsByParameters = (origin, parametersValue, date) =>
                 if (destination._id !== origin) {
                     promises.push(
                         client.query({
-                            query: TRAVELS_SEARCH,
+                            query: TRAVELS_SEARCH_EN,
                             variables: {
                                 origin,
                                 destination: destination._id,
@@ -64,7 +64,7 @@ export const startSearchTravelsByDestination = (origin, destination, date) => {
         dispatch(startFetchingTravels());
 
         return client.query({
-            query: TRAVELS_SEARCH,
+            query: TRAVELS_SEARCH_EN,
             variables: {
                 origin,
                 destination,
