@@ -32,6 +32,12 @@ module.exports = (env, argv) => {
             'css-loader',
             'sass-loader'
           ]
+        },
+        {
+          test: /\.png/,
+          use: {
+            loader: 'url-loader'
+          }
         }
       ]
     },
