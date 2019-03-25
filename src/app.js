@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/styles.scss';
 import Router from './router/AppRouter';
 //import history from './router/history';
 import configureStore from './store/ReduxStore';
 import { Provider } from 'react-redux';
 import { ApolloProvider } from "react-apollo";
+
+// Import styles
+import './styles/styles.scss';
+import 'normalize.css';
 
 
 
