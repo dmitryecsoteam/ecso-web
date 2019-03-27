@@ -7,7 +7,7 @@ export default () => (
     <header className="header">
         <div className="header__logo-container">
             <Link to="/">
-                <img className="header__image" src={logo} alt={"logo"} />
+                <img className="header__logo" src={logo} alt={"logo"} />
             </Link>
         </div>
 

@@ -26,7 +26,7 @@ class ResultsPanel extends React.Component {
             travelsList = <h3>Nothing was found</h3>;
         }
 
-        return <div>
+        return <div className="results">
             <span>Results</span>
             <div>
                 {travelsList}

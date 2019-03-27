@@ -1,0 +1,33 @@
+.search-form {
+    display: flex;
+    justify-content: center;
+}
+
+.search-form__input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-form__autoinput {
+    border: 1px solid $light-grey;
+    border-radius: $xs-size;
+    display: flex;
+    align-items: center;
+    margin-bottom: $m-size;
+    padding: $s-size $m-size;
+    height: $xl-size;
+}
+
+.search-form__autoinput-label {
+    color: $light-black;
+    font-size: $xm-size;
+    font-weight: 700;
+    margin-right: $s-size;
+    min-width: $xl-size;
+}
+
+.search-form__form {
+    max-width: 55rem;
+    width: 100%;
+    margin: $xm-size;
+}

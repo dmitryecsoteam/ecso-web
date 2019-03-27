@@ -1,0 +1,47 @@
+.main-header {
+  position: relative;
+  height: 35vh;
+}
+
+.main-header__background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0; 
+  z-index: -1;
+  overflow: hidden;
+}
+
+.main-header__background-image {
+  height: auto;
+  width: auto;
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 42.5%;
+  transform: translate(-50%, -42.5%);
+
+  animation: fadein 1s ease-in-out;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (min-width: $desktop-breakpoint) {
+  * {
+    color: red;
+  }
+
+  .main-header__background {
+    height: 100vh;
+    min-height: 600px;
+  }
+}

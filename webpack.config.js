@@ -34,7 +34,7 @@ module.exports = (env, argv) => {
           ]
         },
         {
-          test: /\.png/,
+          test: /\.(png|jpg)/,
           use: {
             loader: 'url-loader'
           }

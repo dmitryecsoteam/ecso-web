@@ -10,7 +10,7 @@
     width: 7.5rem;
 }
 
-.header__image {
+.header__logo {
     width: 70%;
     height: auto;
 }
@@ -25,20 +25,21 @@
 }
 
 .header__menu-item {
-    border-bottom: 0.2rem solid transparent;
+    border-bottom: 0.3rem solid transparent;
     margin: 0 $m-size;
     height: 100%;
 }
 
 .header__menu-item:hover {
-    border-bottom: 0.2rem solid green;
+    border-bottom: 0.3rem solid $dark-grey;
 }
 
 .header__menu-link {
     display: flex;
     align-items: center;
     height: 100%;
-    font-size: $m-size; 
+    font-size: $m-size;
+    font-weight: 700;
     text-decoration: none;
-    color: grey;
+    color: $dark-grey;
 }

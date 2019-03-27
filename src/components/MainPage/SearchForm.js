@@ -329,21 +329,26 @@ class SearchPanel extends React.Component {
         const originInputProps = {
             value: originInputValue,
             onChange: this.onOriginInputChange,
-            onBlur: this.onOriginInputBlur
+            onBlur: this.onOriginInputBlur,
+            placeholder: 'City, airport'
         };
         const destinationInputProps = {
             value: destinationInputValue,
             onChange: this.onDestinationInputChange,
             onBlur: this.onDestinationInputBlur,
-            disabled: parametersPanel
+            disabled: parametersPanel,
+            placeholder: 'City, airport'
         };
 
-        return (<div>
-            <form onSubmit={this.onFormSubmit}>
+        return (<div className="search-form">
+            <form 
+                className="search-form__form"
+                onSubmit={this.onFormSubmit}
+            >
 
-                <div>
+                <div className="search-form__input-group">
                     <InputAutosuggest
-                        label="From"
+                        label="From:"
                         suggestions={suggestOrigins}
                         onSuggestionsFetchRequested={this.onOriginSuggestionsFetchRequested}
                         onSuggestionsClearRequested={this.onOriginSuggestionsClearRequested}
@@ -353,10 +358,8 @@ class SearchPanel extends React.Component {
                         error={errorOriginInput}
                         errorText="Please enter origin"
                     />
-                </div>
-                <div>
                     <InputAutosuggest
-                        label="To"
+                        label="To:"
                         suggestions={suggestDestinations}
                         onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
                         onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
