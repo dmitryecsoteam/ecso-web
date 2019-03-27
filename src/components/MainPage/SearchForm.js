@@ -94,8 +94,8 @@ class SearchPanel extends React.Component {
                 // Data will be cached.
                 // And then update state to load autosuggest information.
                 this.props.startSearchOrigins(newValue[0].toLowerCase()).then(() => {
-                    this.setState(() => ({
-                        suggestOrigins: selectOriginSuggestions(this.props.origins, this.state.originInputValue)
+                    this.setState((state) => ({
+                        suggestOrigins: selectOriginSuggestions(this.props.origins, state.originInputValue)
                     }));
                 });
             }
@@ -126,8 +126,8 @@ class SearchPanel extends React.Component {
                 // Data will be cached.
                 // And then update state to load autosuggest information.
                 this.props.startSearchDestinations(newValue[0].toLowerCase()).then(() => {
-                    this.setState(() => ({
-                        suggestDestinations: selectDestinationSuggestions(this.props.destinations, newValue)
+                    this.setState((state) => ({
+                        suggestDestinations: selectDestinationSuggestions(this.props.destinations, state.destinationInputValue)
                     }));
                 });
             }
@@ -345,7 +345,6 @@ class SearchPanel extends React.Component {
                 className="search-form__form"
                 onSubmit={this.onFormSubmit}
             >
-
                 <div className="search-form__input-group">
                     <InputAutosuggest
                         label="From:"
