@@ -6,10 +6,11 @@ export default ({
     ...dateProps
 }) => {
 
-    return <div>
-        <label>{label}</label>
+    return <div className="search-form__label-input">
+        <label className="search-form__label">{label}</label>
         <SingleDatePicker
             {...dateProps}
+            numberOfMonths={1}
         />
     </div>
 };

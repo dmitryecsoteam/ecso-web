@@ -330,14 +330,14 @@ class SearchPanel extends React.Component {
             value: originInputValue,
             onChange: this.onOriginInputChange,
             onBlur: this.onOriginInputBlur,
-            placeholder: 'City, airport'
+            placeholder: 'City, airport code'
         };
         const destinationInputProps = {
             value: destinationInputValue,
             onChange: this.onDestinationInputChange,
             onBlur: this.onDestinationInputBlur,
             disabled: parametersPanel,
-            placeholder: 'City, airport'
+            placeholder: 'City, airport code'
         };
 
         return (<div className="search-form">
@@ -345,7 +345,7 @@ class SearchPanel extends React.Component {
                 className="search-form__form"
                 onSubmit={this.onFormSubmit}
             >
-                <div className="search-form__input-group">
+                <div className="search-form__autoinput-group">
                     <InputAutosuggest
                         label="From:"
                         suggestions={suggestOrigins}
@@ -355,7 +355,7 @@ class SearchPanel extends React.Component {
                         focusInputOnSuggestionClick={false}
                         onSuggestionSelected={this.onOriginSuggestionSelected}
                         error={errorOriginInput}
-                        errorText="Please enter origin"
+                        errorText="Enter origin"
                     />
                     <InputAutosuggest
                         label="To:"
@@ -366,19 +366,17 @@ class SearchPanel extends React.Component {
                         focusInputOnSuggestionClick={false}
                         onSuggestionSelected={this.onDestinationSuggestionSelected}
                         error={errorDestinationInput}
-                        errorText="Please enter destination"
+                        errorText="Enter destination"
                     />
                 </div>
-                <div>
                     <InputDate
-                        label="Date"
+                        label="Date:"
                         date={date}
                         onDateChange={this.onDateChange}
                         focused={calendarFocused}
                         onFocusChange={this.onCalendarFocusChange}
                         id="date_calendar_id"
                     />
-                </div>
                 <button>Find</button>
                 <div>
                     <ParametersPanel

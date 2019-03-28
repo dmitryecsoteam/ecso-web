@@ -1,33 +1,86 @@
 .search-form {
-    display: flex;
-    justify-content: center;
-}
-
-.search-form__input-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.search-form__autoinput {
-    border: 1px solid $light-grey;
-    border-radius: $xs-size;
-    display: flex;
-    align-items: center;
-    margin-bottom: $m-size;
-    padding: $s-size $m-size;
-    height: $xl-size;
-}
-
-.search-form__autoinput-label {
-    color: $light-black;
-    font-size: $xm-size;
-    font-weight: 700;
-    margin-right: $s-size;
-    min-width: $xl-size;
+  display: flex;
+  justify-content: center;
 }
 
 .search-form__form {
-    max-width: 55rem;
-    width: 100%;
-    margin: $xm-size;
+  max-width: 55rem;
+  width: 100%;
+  margin: 0 $xm-size;
+}
+
+.search-form__autoinput-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-form__input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-form__label-input {
+  border: 0.1rem solid $light-grey;
+  border-radius: $xs-size;
+  display: flex;
+  align-items: center;
+  margin-top: $m-size;
+  padding: $s-size $m-size;
+  height: $xl-size;
+  width: 100%;
+}
+
+.search-form__label-input--error {
+  border: 0.1rem solid $red-error;
+}
+
+.search-form__label {
+  color: $light-black;
+  font-size: $xm-size;
+  font-weight: 700;
+  margin-right: $s-size;
+  min-width: $xl-size;
+}
+
+.search-form__date-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-form__error {
+  display: flex;
+  align-items: center;
+  max-height: 0;
+  max-width: 25rem;
+  overflow: hidden;
+  transition: 0.35s ease-in-out;
+  position: relative;
+}
+
+.search-form__error--open {
+  max-height: calc(#{$xm-size} + #{$xl-size});
+  padding-top: $s-size;
+  box-shadow: 0 $xs-size $l-size -$m-size rgba($red-error, 0.3);
+}
+
+.search-form__error-text {
+  border-radius: $xs-size;
+  color: white;
+  height: 100%;
+  background-color: $red-error;
+  padding: $s-size $xm-size;
+  font-weight: 500;
+}
+
+.search-form__error-text::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: calc(50% - #{$xs-size});
+
+  /*  margin-left: -$xs-size; */
+  border-width: $xs-size;
+  border-style: solid;
+  border-color: transparent transparent $red-error transparent;
 }
