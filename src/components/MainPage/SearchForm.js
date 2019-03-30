@@ -423,6 +423,12 @@ class SearchPanel extends React.Component {
                             numberOfMonths={1}
                             isOutsideRange={this.isOutsideRange}
                             placeholder=""
+                            noBorder
+                            hideKeyboardShortcutsPanel
+                            withPortal
+                            firstDayOfWeek={1}
+                            daySize={38}
+        
                         />
                     </InputWithErrorTooltip>
                     <button>Find</button>

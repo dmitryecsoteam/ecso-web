@@ -1,3 +1,4 @@
+/*
 .SingleDatePickerInput {
     background-color: transparent;
 }
@@ -6,12 +7,24 @@
     border: none;
 }
 
-.DateInput {
-
-}
 
 .DateInput_input {
     color: #666;
     font-size: $xm-size;
     padding: 11px 11px 9px 0;
 }
+
+.DateInput_input__focused {
+    border-bottom: 2px solid transparent;
+}
+
+.SingleDatePicker_picker {
+    top: 145% !important;
+    left: -60% !important;
+}
+
+.DayPicker {
+    max-width: 275px;
+    width: 100% !important;
+}
+*/
