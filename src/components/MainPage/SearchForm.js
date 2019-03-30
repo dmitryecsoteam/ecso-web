@@ -10,8 +10,6 @@ import { setSearchForm } from '../../actions/searchFormActions';
 import selectOriginSuggestions from '../../selectors/originInputSelector';
 import selectDestinationSuggestions from '../../selectors/destinationInputSelector';
 
-import InputAutosuggest from './InputTextAutosuggest';
-import InputDate from './InputDate';
 import ParametersPanel from './ParametersPanel';
 import InputWithErrorTooltip from './InputWithErrorTooltip';
 import Autosuggest from 'react-autosuggest';
@@ -19,8 +17,6 @@ import city from '../../images/icons/city.png';
 import { SingleDatePicker } from 'react-dates';
 import isInclusivelyAfterDay from 'react-dates/src/utils/isInclusivelyAfterDay';
 import isBeforeDay from 'react-dates/src/utils/isBeforeDay';
-
-import parametersArray from '../../parameters/parameters';
 
 
 
