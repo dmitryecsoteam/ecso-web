@@ -61,6 +61,7 @@ class SearchPanel extends React.Component {
         calendarFocused: false,
         errorOriginInput: false,
         errorDestinationInput: false,
+        errorDateInput: false,
         errorParameters: false,
         parametersPanel: this.props.searchForm.parametersPanel,
         parametersValue: this.props.searchForm.parametersValue

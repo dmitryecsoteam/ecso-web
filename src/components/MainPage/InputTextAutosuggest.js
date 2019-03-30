@@ -21,7 +21,6 @@ export default ({ label, error, errorText, ...props }) => {
         'search-form__label-input',
         { 'search-form__label-input--error': error }
     );
-//{error && <span className="search-form__error">{errorText}</span>}
 
     const errorClassName = classNames(
         'search-form__error',
