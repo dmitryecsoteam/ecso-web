@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import MediaQuery from 'react-responsive';
 
 
 import { startSearchOrigins } from '../../actions/originInputActions';
@@ -413,23 +414,43 @@ class SearchPanel extends React.Component {
                         error={errorDateInput}
                         errorText="Enter correct date"
                     >
-                        <SingleDatePicker
-                            date={date}
-                            onDateChange={this.onDateChange}
-                            focused={calendarFocused}
-                            onFocusChange={this.onCalendarFocusChange}
-                            id="date_calendar_id"
-                            displayFormat={() => "DD/MM/YYYY"}
-                            numberOfMonths={1}
-                            isOutsideRange={this.isOutsideRange}
-                            placeholder=""
-                            noBorder
-                            hideKeyboardShortcutsPanel
-                            withPortal
-                            firstDayOfWeek={1}
-                            daySize={38}
-        
-                        />
+                        <MediaQuery query="(max-width: 415px)">
+                            <SingleDatePicker
+                                date={date}
+                                onDateChange={this.onDateChange}
+                                focused={calendarFocused}
+                                onFocusChange={this.onCalendarFocusChange}
+                                id="date_calendar_id"
+                                displayFormat={() => "DD/MM/YYYY"}
+                                numberOfMonths={1}
+                                isOutsideRange={this.isOutsideRange}
+                                placeholder=""
+                                noBorder
+                                hideKeyboardShortcutsPanel
+                                withPortal
+                                firstDayOfWeek={1}
+                                daySize={38}
+
+                            />
+                        </MediaQuery>
+                        <MediaQuery query="(min-width: 416px)">
+                            <SingleDatePicker
+                                date={date}
+                                onDateChange={this.onDateChange}
+                                focused={calendarFocused}
+                                onFocusChange={this.onCalendarFocusChange}
+                                id="date_calendar_id"
+                                displayFormat={() => "DD/MM/YYYY"}
+                                numberOfMonths={1}
+                                isOutsideRange={this.isOutsideRange}
+                                placeholder=""
+                                noBorder
+                                hideKeyboardShortcutsPanel                              
+                                firstDayOfWeek={1}
+                                daySize={40}
+
+                            />
+                        </MediaQuery>
                     </InputWithErrorTooltip>
                     <button>Find</button>
                     <div>
@@ -445,6 +466,7 @@ class SearchPanel extends React.Component {
                     </div>
 
                 </form>
+
             </div>);
     };
 };
