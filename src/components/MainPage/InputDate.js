@@ -13,7 +13,7 @@ export default ({
     const today = moment();
     const nextYear = moment().add(1, 'years');
 
-    const isOutsideRange  = day => !(isInclusivelyAfterDay(day, today) && isBeforeDay(day, nextYear));
+    const isOutsideRange  = day => !(isInclusivelyAfterDay(day, moment()) && isBeforeDay(day, moment().add(1, 'years')));
 
     return <div className="search-form__label-input">
         <label className="search-form__label">{label}</label>

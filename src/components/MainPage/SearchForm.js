@@ -13,8 +13,15 @@ import selectDestinationSuggestions from '../../selectors/destinationInputSelect
 import InputAutosuggest from './InputTextAutosuggest';
 import InputDate from './InputDate';
 import ParametersPanel from './ParametersPanel';
+import InputWithErrorTooltip from './InputWithErrorTooltip';
+import Autosuggest from 'react-autosuggest';
+import city from '../../images/icons/city.png';
+import { SingleDatePicker } from 'react-dates';
+import isInclusivelyAfterDay from 'react-dates/src/utils/isInclusivelyAfterDay';
+import isBeforeDay from 'react-dates/src/utils/isBeforeDay';
 
 import parametersArray from '../../parameters/parameters';
+
 
 
 
@@ -122,7 +129,7 @@ class SearchPanel extends React.Component {
 
             // Check that newValue doesn't start from special character
             if (!/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(newValue[0])) {
-                
+
                 // Fetch list of cities starting with first entered in input character in lower case.
                 // Data will be cached.
                 // And then update state to load autosuggest information.
@@ -219,6 +226,19 @@ class SearchPanel extends React.Component {
         }));
     };
 
+    getSuggestionValue = (suggestion) => (suggestion.nameEn);
+
+    renderSuggestion = (suggestion) => (
+        <div className="react-autosuggest__suggestion-content">
+            <div className="react-autosuggest__suggestion-icon-container">
+                <img className="react-autosuggest__suggestion-icon" src={city} />
+            </div>
+            <span>
+                {suggestion.nameEn}, {suggestion.countryEn}
+            </span>
+        </div>
+    );
+
 
 
     /*************** Functions for react-dates calendar ***************/
@@ -234,6 +254,8 @@ class SearchPanel extends React.Component {
             calendarFocused: focused
         }));
     };
+
+    isOutsideRange = day => !(isInclusivelyAfterDay(day, moment()) && isBeforeDay(day, moment().add(1, 'years')));
 
 
 
@@ -276,6 +298,7 @@ class SearchPanel extends React.Component {
         // Check that inputs are correct
         let errorOriginInput = false;
         let errorDestinationInput = false;
+        let errorDateInput = false;
         let errorParameters = false;
 
         if (this.state.originInputValue === '') {
@@ -286,6 +309,11 @@ class SearchPanel extends React.Component {
             errorDestinationInput = true;
         };
 
+        if (!this.state.date) {
+            errorDateInput = true;
+
+        }
+
         if (this.state.parametersPanel && numberOfNonZeroParams(this.state.parametersValue) < PARAMETERS_MIN) {
             errorParameters = true;
         } else {
@@ -295,10 +323,11 @@ class SearchPanel extends React.Component {
         this.setState(() => ({
             errorOriginInput,
             errorDestinationInput,
+            errorDateInput,
             errorParameters
         }));
 
-        if (!(errorOriginInput || errorDestinationInput || errorParameters)) {
+        if (!(errorOriginInput || errorDestinationInput || errorDateInput || errorParameters)) {
 
             // Find travels based on parameters
             if (this.state.parametersPanel) {
@@ -321,6 +350,7 @@ class SearchPanel extends React.Component {
             suggestDestinations,
             errorDestinationInput,
             errorOriginInput,
+            errorDateInput,
             date,
             calendarFocused,
             parametersPanel,
@@ -341,60 +371,79 @@ class SearchPanel extends React.Component {
             placeholder: 'City, airport code'
         };
 
-        return (<div className="search-form">
-            <form 
-                className="search-form__form"
-                onSubmit={this.onFormSubmit}
-            >
-                <div className="search-form__autoinput-group">
-                    <InputAutosuggest
-                        label="From:"
-                        suggestions={suggestOrigins}
-                        onSuggestionsFetchRequested={this.onOriginSuggestionsFetchRequested}
-                        onSuggestionsClearRequested={this.onOriginSuggestionsClearRequested}
-                        inputProps={originInputProps}
-                        focusInputOnSuggestionClick={false}
-                        onSuggestionSelected={this.onOriginSuggestionSelected}
-                        error={errorOriginInput}
-                        errorText="Enter origin"
-                    />
-                    <InputAutosuggest
-                        label="To:"
-                        suggestions={suggestDestinations}
-                        onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
-                        onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
-                        inputProps={destinationInputProps}
-                        focusInputOnSuggestionClick={false}
-                        onSuggestionSelected={this.onDestinationSuggestionSelected}
-                        error={errorDestinationInput}
-                        errorText="Enter destination"
-                    />
-                </div>
-                    <InputDate
+        return (
+            <div className="search-form">
+                <form
+                    className="search-form__form"
+                    onSubmit={this.onFormSubmit}
+                >
+                    <div className="search-form__autoinput-group">
+                        <InputWithErrorTooltip
+                            label="From:"
+                            error={errorOriginInput}
+                            errorText="Enter origin"
+                        >
+                            <Autosuggest
+                                suggestions={suggestOrigins}
+                                onSuggestionsFetchRequested={this.onOriginSuggestionsFetchRequested}
+                                onSuggestionsClearRequested={this.onOriginSuggestionsClearRequested}
+                                inputProps={originInputProps}
+                                focusInputOnSuggestionClick={false}
+                                onSuggestionSelected={this.onOriginSuggestionSelected}
+                                getSuggestionValue={this.getSuggestionValue}
+                                renderSuggestion={this.renderSuggestion}
+                            />
+                        </InputWithErrorTooltip>
+
+                        <InputWithErrorTooltip
+                            label="To:"
+                            error={errorDestinationInput}
+                            errorText="Enter destination"
+                        >
+                            <Autosuggest
+                                suggestions={suggestDestinations}
+                                onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
+                                onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
+                                inputProps={destinationInputProps}
+                                focusInputOnSuggestionClick={false}
+                                onSuggestionSelected={this.onDestinationSuggestionSelected}
+                                getSuggestionValue={this.getSuggestionValue}
+                                renderSuggestion={this.renderSuggestion}
+                            />
+                        </InputWithErrorTooltip>
+                    </div>
+                    <InputWithErrorTooltip
                         label="Date:"
-                        date={date}
-                        onDateChange={this.onDateChange}
-                        focused={calendarFocused}
-                        onFocusChange={this.onCalendarFocusChange}
-                        id="date_calendar_id"
-                    />
-                <button>Find</button>
-                <div>
-                    <ParametersPanel
-                        parametersPanel={parametersPanel}
-                        errorParameters={errorParameters}
-                        parametersEntered={numberOfNonZeroParams(this.state.parametersValue)}
-                        parametersMax={PARAMETERS_MAX}
-                        parametersValue={parametersValue}
-                        onChange={this.onParameterChange}
-                        parametersOnClick={this.parametersOnClick}
-                    />
-                </div>
+                        error={errorDateInput}
+                        errorText="Enter correct date"
+                    >
+                        <SingleDatePicker
+                            date={date}
+                            onDateChange={this.onDateChange}
+                            focused={calendarFocused}
+                            onFocusChange={this.onCalendarFocusChange}
+                            id="date_calendar_id"
+                            displayFormat={() => "DD/MM/YYYY"}
+                            numberOfMonths={1}
+                            isOutsideRange={this.isOutsideRange}
+                            placeholder=""
+                        />
+                    </InputWithErrorTooltip>
+                    <button>Find</button>
+                    <div>
+                        <ParametersPanel
+                            parametersPanel={parametersPanel}
+                            errorParameters={errorParameters}
+                            parametersEntered={numberOfNonZeroParams(this.state.parametersValue)}
+                            parametersMax={PARAMETERS_MAX}
+                            parametersValue={parametersValue}
+                            onChange={this.onParameterChange}
+                            parametersOnClick={this.parametersOnClick}
+                        />
+                    </div>
 
-            </form>
-        </div>)
-
-
+                </form>
+            </div>);
     };
 };
 
