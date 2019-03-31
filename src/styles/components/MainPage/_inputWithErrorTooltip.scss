@@ -19,6 +19,10 @@
   border: 0.1rem solid $red-error;
 }
 
+.search-form__label-input--disabled {
+    background-color: rgb(235, 235, 228);
+}
+
 .search-form__label {
     color: $light-black;
     font-size: $xm-size;

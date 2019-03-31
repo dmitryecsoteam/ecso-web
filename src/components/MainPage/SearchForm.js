@@ -396,6 +396,7 @@ class SearchPanel extends React.Component {
                             label="To:"
                             error={errorDestinationInput}
                             errorText="Enter destination"
+                            disabled={parametersPanel}
                         >
                             <Autosuggest
                                 suggestions={suggestDestinations}
