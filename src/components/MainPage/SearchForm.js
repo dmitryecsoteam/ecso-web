@@ -254,6 +254,8 @@ class SearchPanel extends React.Component {
 
     isOutsideRange = day => !(isInclusivelyAfterDay(day, moment()) && isBeforeDay(day, moment().add(1, 'years')));
 
+    renderCalendarInfo = () => (<span className="Calendar__info--bottom">Date range: one year</span>);
+
 
 
     /*************** Functions for Parameters inputs ***************/
@@ -415,6 +417,7 @@ class SearchPanel extends React.Component {
                         error={errorDateInput}
                         errorText="Enter correct date"
                     >
+                        {/* Calendar for small devices as modal */}
                         <MediaQuery query="(max-width: 415px)">
                             <SingleDatePicker
                                 date={date}
@@ -431,9 +434,13 @@ class SearchPanel extends React.Component {
                                 withPortal
                                 firstDayOfWeek={1}
                                 daySize={38}
+                                calendarInfoPosition="bottom"
+                                renderCalendarInfo={this.renderCalendarInfo}
 
                             />
                         </MediaQuery>
+
+                        {/* Calendar for big devices */}
                         <MediaQuery query="(min-width: 416px)">
                             <SingleDatePicker
                                 date={date}
@@ -448,12 +455,18 @@ class SearchPanel extends React.Component {
                                 noBorder
                                 hideKeyboardShortcutsPanel                              
                                 firstDayOfWeek={1}
-                                daySize={40}
+                                daySize={45}
+                                verticalSpacing={0}
+                                calendarInfoPosition="bottom"
+                                renderCalendarInfo={this.renderCalendarInfo}
 
                             />
                         </MediaQuery>
                     </InputWithErrorTooltip>
-                    <button>Find</button>
+                    <div className="search-form__submit-btn-container">
+                        <button className="search-form__submit-btn">Find</button>
+                    </div>
+                    
                     <div>
                         <ParametersPanel
                             parametersPanel={parametersPanel}

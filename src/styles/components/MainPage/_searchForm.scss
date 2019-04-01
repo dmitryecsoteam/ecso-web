@@ -14,3 +14,26 @@
   flex-direction: column;
 }
 
+.search-form__submit-btn-container {
+  width: 100%;
+}
+
+.search-form__submit-btn {
+  background: $submit-btn;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: $xs-size;
+  font-size: $xm-size;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: $m-size;
+  height: $xl-size;
+  width: 100%;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.search-form__submit-btn:hover {
+  background: darken($submit-btn, 5%);
+}
