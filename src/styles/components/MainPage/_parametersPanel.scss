@@ -1,8 +1,11 @@
 .parameters-panel__container {
-  /*  border: 0.1rem solid $light-grey; */
-  border: 0.1rem solid blue;
+  border: 0.1rem solid $light-grey; 
   border-radius: $xs-size;
   margin-top: $m-size;
+}
+
+.parameters-panel__container--error {
+  border: 0.1rem solid $red-error;
 }
 
 .parameters-panel__parameters {
@@ -12,21 +15,31 @@
 }
 
 .parameters-panel__parameters--open {
-  max-height: 170px;
+  max-height: 570px;
 }
 
 .parameters-panel__open-close-btn {
-  border: 1px solid red;
+/*  border: 1px solid red; */
   text-align: center;
+  height: 100%;
   min-height: 6.8rem;
   cursor: pointer;
   padding-top: $xs-size;
+}
+
+.parameters-panel__open-close-btn--open {
+/*  min-height: 4rem;
+  padding-top: 0; */
 }
 
 .parameters-panel__open-close-text {
   font-size: $xm-size;
   font-weight: 500;
   color: $light-black;
+}
+
+.parameters-panel__open-close-text--error {
+  color: $red-error;
 }
 
 .parameters-panel__arrow-container {

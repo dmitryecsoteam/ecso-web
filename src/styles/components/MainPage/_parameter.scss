@@ -1,0 +1,11 @@
+.parameter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 $s-size;
+    border-bottom: 1px solid $light-grey;
+}
+
+.parameter__label {
+    min-width: 8rem;
+}

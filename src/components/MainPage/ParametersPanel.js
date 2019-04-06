@@ -27,6 +27,11 @@ export default class ParametersPanel extends PureComponent {
             parametersOnClick
         } = this.props;
 
+        const containerClassNames = classNames(
+            'parameters-panel__container',
+            { 'parameters-panel__container--error': errorParameters }
+        );
+
         const paramsClassNames = classNames(
             'parameters-panel__parameters',
             { 'parameters-panel__parameters--open': parametersPanel }
@@ -41,11 +46,18 @@ export default class ParametersPanel extends PureComponent {
             'parameters-panel__arrow--second',
             { 'parameters-panel__arrow--rotate': parametersPanel }
         );
+        const btnClassNames = classNames(
+            'parameters-panel__open-close-btn',
+            { 'parameters-panel__open-close-btn--open': parametersPanel }
+        );
+        const textClassNames = classNames(
+            'parameters-panel__open-close-text',
+            { 'parameters-panel__open-close-text--error': errorParameters }
+        );
 
-        return <div className="parameters-panel__container">
+        return <div className={containerClassNames}>
 
             <div className={paramsClassNames}>
-                <div>{errorParameters && <span>Please enter at least one parameter</span>}</div>
 
                     {Object.keys(parametersValue).map((parameter, id) => (
                     <Parameter
@@ -58,8 +70,8 @@ export default class ParametersPanel extends PureComponent {
                     ))}
             </div>
 
-            <div onClick={parametersOnClick} className="parameters-panel__open-close-btn">
-                <span className="parameters-panel__open-close-text">{(parametersPanel && 'Hide parameters') || (!parametersPanel && 'Show parameters')}</span>
+            <div onClick={parametersOnClick} className={btnClassNames}>
+                <span className={textClassNames}>{!parametersPanel ? 'Show parameters' : 'Select at least one option'}</span>
                <div className="parameters-panel__arrow-container">
 
                     <svg ref={this.firstArrow} className={firstArrowClassNames} version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
