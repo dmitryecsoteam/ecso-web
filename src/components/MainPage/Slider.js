@@ -1,30 +1,21 @@
 import React from 'react';
 
-export default class Slider extends React.PureComponent {
+export default class Slider extends React.Component {
 
-    // state = {
-    //         value: this.props.value
-    //     }
-
-    onChange = (event) => {
-        this.props.onChange(event.target.value);
+    shouldComponentUpdate(nextProps) {
+        if (nextProps.value !== this.props.value) return true;
+        return false;
     }
-
-    onLabelClick = (event) => {
-        this.props.onChange(event.target.innerHTML);
-
-    }
-
-
-
-
+    
     render() {
 
         const {
             min,
             max,
             steps,
-            value
+            value,
+            disabled,
+            onChange
         } = this.props;
 
         const percents = (100 / ((max - min) / steps)) * value;
@@ -57,7 +48,7 @@ export default class Slider extends React.PureComponent {
                 <div
                     key={i}
                     className={className}
-                    onClick={this.onLabelClick}
+                    onClick={(e) => onChange(+e.target.innerHTML)}
                 >
                     {i}
                 </div>
@@ -81,7 +72,8 @@ export default class Slider extends React.PureComponent {
                     max={max}
                     steps={steps}
                     value={value}
-                    onChange={this.onChange}
+                    onChange={ (e) => onChange(+e.target.value) }
+                    disabled={disabled}
                 />
             </div>
 

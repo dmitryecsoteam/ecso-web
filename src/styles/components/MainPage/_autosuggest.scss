@@ -18,6 +18,10 @@
   outline: none;
 }
 
+.react-autosuggest__input:disabled {
+  background-color: $disabled;
+}
+
 .react-autosuggest__suggestions-container {
   display: none;
 }

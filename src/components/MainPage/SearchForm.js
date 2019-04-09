@@ -412,61 +412,63 @@ class SearchPanel extends React.Component {
                             />
                         </InputWithErrorTooltip>
                     </div>
-                    <InputWithErrorTooltip
-                        label="Date:"
-                        error={errorDateInput}
-                        errorText="Enter correct date"
-                    >
-                        {/* Calendar for small devices as modal */}
-                        <MediaQuery query="(max-width: 415px)">
-                            <SingleDatePicker
-                                date={date}
-                                onDateChange={this.onDateChange}
-                                focused={calendarFocused}
-                                onFocusChange={this.onCalendarFocusChange}
-                                id="date_calendar_id"
-                                displayFormat={() => "DD/MM/YYYY"}
-                                numberOfMonths={1}
-                                isOutsideRange={this.isOutsideRange}
-                                placeholder=""
-                                noBorder
-                                hideKeyboardShortcutsPanel
-                                withPortal
-                                firstDayOfWeek={1}
-                                daySize={38}
-                                calendarInfoPosition="bottom"
-                                renderCalendarInfo={this.renderCalendarInfo}
+                    <div className="search-form__autoinput-group">
+                        <InputWithErrorTooltip
+                            label="Date:"
+                            error={errorDateInput}
+                            errorText="Enter correct date"
+                        >
+                            {/* Calendar for small devices as modal */}
+                            <MediaQuery query="(max-width: 415px)">
+                                <SingleDatePicker
+                                    date={date}
+                                    onDateChange={this.onDateChange}
+                                    focused={calendarFocused}
+                                    onFocusChange={this.onCalendarFocusChange}
+                                    id="date_calendar_id"
+                                    displayFormat={() => "DD/MM/YYYY"}
+                                    numberOfMonths={1}
+                                    isOutsideRange={this.isOutsideRange}
+                                    placeholder=""
+                                    noBorder
+                                    hideKeyboardShortcutsPanel
+                                    withPortal
+                                    firstDayOfWeek={1}
+                                    daySize={38}
+                                    calendarInfoPosition="bottom"
+                                    renderCalendarInfo={this.renderCalendarInfo}
 
-                            />
-                        </MediaQuery>
+                                />
+                            </MediaQuery>
 
-                        {/* Calendar for big devices */}
-                        <MediaQuery query="(min-width: 416px)">
-                            <SingleDatePicker
-                                date={date}
-                                onDateChange={this.onDateChange}
-                                focused={calendarFocused}
-                                onFocusChange={this.onCalendarFocusChange}
-                                id="date_calendar_id"
-                                displayFormat={() => "DD/MM/YYYY"}
-                                numberOfMonths={1}
-                                isOutsideRange={this.isOutsideRange}
-                                placeholder=""
-                                noBorder
-                                hideKeyboardShortcutsPanel                              
-                                firstDayOfWeek={1}
-                                daySize={45}
-                                verticalSpacing={0}
-                                calendarInfoPosition="bottom"
-                                renderCalendarInfo={this.renderCalendarInfo}
+                            {/* Calendar for big devices */}
+                            <MediaQuery query="(min-width: 416px)">
+                                <SingleDatePicker
+                                    date={date}
+                                    onDateChange={this.onDateChange}
+                                    focused={calendarFocused}
+                                    onFocusChange={this.onCalendarFocusChange}
+                                    id="date_calendar_id"
+                                    displayFormat={() => "DD/MM/YYYY"}
+                                    numberOfMonths={1}
+                                    isOutsideRange={this.isOutsideRange}
+                                    placeholder=""
+                                    noBorder
+                                    hideKeyboardShortcutsPanel
+                                    firstDayOfWeek={1}
+                                    daySize={34}
+                                    verticalSpacing={0}
+                                    calendarInfoPosition="bottom"
+                                    renderCalendarInfo={this.renderCalendarInfo}
 
-                            />
-                        </MediaQuery>
-                    </InputWithErrorTooltip>
-                    <div className="search-form__submit-btn-container">
-                        <button className="search-form__submit-btn">Find</button>
+                                />
+                            </MediaQuery>
+                        </InputWithErrorTooltip>
+                        <div className="search-form__submit-btn-container">
+                            <button className="search-form__submit-btn">Find</button>
+                        </div>
                     </div>
-                    
+
                     <div>
                         <ParametersPanel
                             parametersPanel={parametersPanel}

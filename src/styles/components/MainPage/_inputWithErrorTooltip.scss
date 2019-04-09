@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
 }
 
 .search-form__label-input {
@@ -9,7 +10,7 @@
   border-radius: $xs-size;
   display: flex;
   align-items: center;
-  margin-top: $m-size;
+  margin-top: $s-size;
   padding: $s-size $m-size;
   height: $xl-size;
   width: 100%;
@@ -20,7 +21,7 @@
 }
 
 .search-form__label-input--disabled {
-    background-color: rgb(235, 235, 228);
+    background-color: $disabled;
 }
 
 .search-form__label {
@@ -66,4 +67,10 @@
   border-width: $xs-size;
   border-style: solid;
   border-color: transparent transparent $red-error transparent;
+}
+
+@media (min-width: $desktop-breakpoint) {
+  .search-form__input-container {
+    margin-left: $s-size;
+  }
 }

@@ -36,12 +36,13 @@
 }
 
 @media (min-width: $desktop-breakpoint) {
-  * {
-    color: red;
-  }
-
   .main-header__background {
     height: 100vh;
     min-height: 600px;
+  }
+
+  .results {
+    position: absolute;
+    top: 101vh;
   }
 }

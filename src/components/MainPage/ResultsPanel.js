@@ -11,6 +11,8 @@ class ResultsPanel extends React.Component {
 
     render() {
 
+        //console.log(process.env.PUBLIC_URL)
+
         let travelsList = this.props.travels.map((travel) => (
             <Travel
                 key={travel._id}
@@ -27,7 +29,7 @@ class ResultsPanel extends React.Component {
         }
 
         return <div className="results">
-            <span>Results</span>
+
             <div>
                 {travelsList}
             </div>
