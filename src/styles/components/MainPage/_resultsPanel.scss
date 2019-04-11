@@ -1,7 +1,14 @@
-/*
 .results {
-    position: absolute;
-    float: left;
-    top: 102vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 $s-size;
 }
-*/
+
+@media (min-width: $desktop-breakpoint) {
+  .results {
+    position: absolute;
+    top: 101vh;
+  }
+}

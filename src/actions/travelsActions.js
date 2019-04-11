@@ -17,7 +17,7 @@ export const startSearchTravelsByParameters = (origin, parametersValue, date) =>
         const variables = {
             beachRating: parametersValue['Beach'],
             foodRating: parametersValue['Food'],
-            museumRating: parametersValue['Museums'],
+            museumRating: parametersValue['Museum'],
             natureRating: parametersValue['Nature'],
             shoppingRating: parametersValue['Shopping'],
             nightlifeRating: parametersValue['Nightlife']

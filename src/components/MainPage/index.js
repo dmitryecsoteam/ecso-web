@@ -5,8 +5,6 @@ import ResultsPanel from './ResultsPanel';
 
 import background from '../../images/background/background4.jpg';
 
-// <img className="main__background-image" src={background} alt="Background image Mount Fuji"/>
-
 export default () => (
     <div>
         <div className="main-header">
