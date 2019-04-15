@@ -52,15 +52,16 @@ export default class ImageSlider extends React.Component {
     }
 
     slideTo = (index) => {
+
+        // remove animation
+        this.divRef.current.classList.remove('image-slider__animation');
+
         this.setState({
             index
         });
     }
 
     slideRight = () => {
-
-        // remove animation
-        this.divRef.current.classList.remove('image-slider__animation');
 
         // rerender with next background image from images array
         // if current background image is the last in array of images, than move to the start
@@ -70,9 +71,6 @@ export default class ImageSlider extends React.Component {
     }
 
     slideLeft = () => {
-
-        // remove animation
-        this.divRef.current.classList.remove('image-slider__animation');
 
         // rerender with previous background image from images array
         // if curresnt background image is the first one, than move to the last one

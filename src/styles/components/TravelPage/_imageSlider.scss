@@ -43,7 +43,7 @@
 }
 
 .image-slider__button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.65);
 }
 
 .image-slider__button--left {
@@ -56,17 +56,16 @@
 .image-slider__dots-container {
   text-align: center;
   position: relative;
-  top: 32vh;
+  top: 27vh;
 }
 
 .image-slider__dot {
   cursor: pointer;
-  height: 16px;
-  width: 16px;
-  margin: 0 2px;
-  //background-color: #bbb;
+  height: $m-size;
+  width: $m-size;
+  margin: 0 0.4rem;
   background-color: rgba(0, 0, 0, 0);
-  border: 1px solid #fff;
+  border: 0.1rem solid #fff;
   border-radius: 16px;
   display: inline-block;
   transition: background-color 0.6s ease;
@@ -74,4 +73,13 @@
 
 .image-slider__dot--active {
   background-color: white;
+}
+
+@media (min-width: $desktop-breakpoint) {
+  .image-slider__container {
+    height: 45vh;
+  }
+  .image-slider__dots-container {
+    top: 42vh;
+  }
 }
