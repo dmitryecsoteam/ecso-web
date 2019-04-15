@@ -66,7 +66,7 @@ query travel(
         _id
         date
         priceAirplane
-        priceHotel
+        carDistance
         destination {
             _id
             nameEn
@@ -77,12 +77,6 @@ query travel(
             shoppingRating
             natureRating
             nightlifeRating
-            museumDescription
-            beachDescription
-            foodDescription
-            shoppingDescription
-            natureDescription
-            nightlifeDescription
         }
     }
 }
@@ -100,26 +94,20 @@ query travelFull(
         priceAirplane
         destination {
             _id
-            name_en
-            country_en
+            nameEn
+            countryEn
             museumRating
-            zooAquaRating
-            wellnessSpaRating
-            mountainsRating
             beachRating
             foodRating
             shoppingRating
-            historicalRating
             natureRating
+            nightlifeRating
             museumDescription
-            zooAquaDescription
-            wellnessSpaDescription
-            mountainsDescription
             beachDescription
             foodDescription
             shoppingDescription
-            historicalDescription
             natureDescription
+            nightlifeDescription
         }
     }
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import { TRAVELS_SEARCH_FULL } from '../../queries/queries';
+import Header from '../Header';
+import ImageSlider from './ImageSlider';
 
 import { client } from '../../clientGraphQL/client';
 
@@ -14,13 +16,24 @@ export default ({ match }) => {
     {({ loading, error, data }) => {
         if (loading) return <p>Loading</p>;
 
-        console.log(data);
+        console.log(data)
+        console.log(error)
 
         const { travelFull } = data;
         const { destination } = travelFull;
 
+        const images = [];
+        for (let i = 1; i <= 3; i++) {
+            images.push(`/images/${destination.nameEn}-${destination.countryEn}/slide${i}.jpg`);
+        }
+
         return <div>
-            <h1>{`${destination.name_en}, ${destination.country_en}`}</h1>
+        <Header />
+        <ImageSlider 
+            interval={5000}
+            images={images}
+        />
+            <h1>{`${destination.nameEn}, ${destination.countryEn}`}</h1>
         </div>
     }}
     </Query>
