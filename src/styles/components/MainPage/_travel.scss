@@ -5,6 +5,12 @@
   max-width: 120rem;
   overflow: hidden;
   text-decoration: none;
+  margin-top: $s-size;
+  transition: all .3s ease-in-out;
+}
+
+.travel-card:hover {
+  transform: scale(1.02);
 }
 
 .travel-card__image {
@@ -79,14 +85,14 @@
   }
 
   .travel-card__image::before {
-    height: 50%;
-    top: 50%;
+    height: 40%;
+    top: 60%;
     opacity: 0.5;
   }
 
   .travel-card__info {
-    height: 50%;
-    top: 50%;
+    height: 40%;
+    top: 60%;
   }
 
   .travel-card__text--h2 {

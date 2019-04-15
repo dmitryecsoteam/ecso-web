@@ -55,7 +55,7 @@ class ResultsPanel extends React.Component {
         }
 
         return (
-            <div className="results">
+            <div className="results__list">
                 {travelsList}
             </div>
         )

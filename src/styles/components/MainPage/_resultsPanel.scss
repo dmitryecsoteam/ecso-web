@@ -1,4 +1,4 @@
-.results {
+.results__list {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
 }
 
 @media (min-width: $desktop-breakpoint) {
-  .results {
+  .results__list {
     position: absolute;
     top: 101vh;
   }
