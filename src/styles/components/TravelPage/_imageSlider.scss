@@ -1,83 +1,77 @@
 .image-slider__container {
-    position: relative;
-    height: 35vh;
-    width: 100%;
+  position: relative;
+  height: 30vh;
+  width: 100%;
+}
+
+.image-slider__current-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.image-slider__animation {
+  animation: fadein 1s ease-in-out;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
   }
-  
-  .image-slider__current-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    z-index: -1;
-  
-    
+  to {
+    opacity: 1;
   }
-  
-  .image-slider__animation {
-    animation: fadein 1s ease-in-out;
-  }
-  
-  @keyframes fadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  .image-slider__button {
-    position: absolute;
-    cursor: pointer;
-    top: 50%;
-    margin-top: -30px;
-    padding: 18px;
-    width: auto;
-    color: white;
-    font-size: 32px;
-    font-weight: bold;
-    transition: .3s ease-in-out;
-  }
-  
-  .image-slider__button:hover {
-    background-color: rgba(0,0,0,0.8);
-  }
-  
-  .image-slider__button--left {
-  
-  }
-  
-  .image-slider__button--right {
-    right: 0;
-  }
-  
-  .image-slider__dots-container {
-    text-align: center;
-    position: relative;
-    top: 32vh;
-  }
-  
-  .image-slider__dot {
-    cursor: pointer;
-    height: 16px;
-    width: 16px;
-    margin: 0 2px;
-    //background-color: #bbb;
-    background-color: rgba(0,0,0,0);
-    border: 1px solid #fff;
-    border-radius: 16px;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-  }
-  
-  
-  
-  .image-slider__dot--active {
-    background-color: white;
-  }
-  
+}
+
+.image-slider__button {
+  position: absolute;
+  cursor: pointer;
+  top: 50%;
+  margin-top: -30px;
+  padding: 18px;
+  width: auto;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+}
+
+.image-slider__button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.image-slider__button--left {
+}
+
+.image-slider__button--right {
+  right: 0;
+}
+
+.image-slider__dots-container {
+  text-align: center;
+  position: relative;
+  top: 32vh;
+}
+
+.image-slider__dot {
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  margin: 0 2px;
+  //background-color: #bbb;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid #fff;
+  border-radius: 16px;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.image-slider__dot--active {
+  background-color: white;
+}

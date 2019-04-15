@@ -28,7 +28,7 @@ export default ({ match }) => {
         }
 
         return <div>
-        <Header />
+        <Header title={`${destination.nameEn}, ${destination.countryEn}`}/>
         <ImageSlider 
             interval={5000}
             images={images}
