@@ -2,7 +2,7 @@ import { setOrigins, startFetchingOrigins, startSearchOrigins } from '../../acti
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { client } from '../../clientGraphQL/client';
-import { ORIGIN_INPUT_SEARCH } from '../../queries/queries';
+import { ORIGIN_INPUT_SEARCH_EN } from '../../queries/queries';
 
 jest.mock('../../clientGraphQL/client.js');
 
@@ -39,7 +39,7 @@ test('should setup start search origins action', async () => {
     expect(actions[1]).toEqual({ type: 'SET_ORIGINS', origins: [ 'Tokyo' ] });
 
     expect(client.query).toHaveBeenCalledWith({
-        query: ORIGIN_INPUT_SEARCH,
+        query: ORIGIN_INPUT_SEARCH_EN,
         variables: { startsWith: 'T' }
     });
 });

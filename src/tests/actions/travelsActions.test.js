@@ -2,7 +2,7 @@ import { setTravels, startFetchingTravels, startSearchTravelsByParameters, start
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { client } from '../../clientGraphQL/client';
-import { DESTINATION_SEARCH_BY_PARAMETERS, TRAVELS_SEARCH } from '../../queries/queries';
+import { DESTINATION_SEARCH_BY_PARAMETERS, TRAVELS_SEARCH_EN } from '../../queries/queries';
 import travel from '../fixtures/travel';
 
 jest.mock('../../clientGraphQL/client.js');
@@ -37,7 +37,7 @@ test('should setup search travels by parameters action. Case 1: no destinations 
     const parametersValue = {
         Beach: 1,
         Food: 2,
-        Museums: 3,
+        Museum: 3,
         Nature: 4,
         Shopping: 5,
         Nightlife: 0
@@ -79,7 +79,7 @@ test('should setup search travels by parameters action. Case 2: no travels found
     const parametersValue = {
         Beach: 2,
         Food: 2,
-        Museums: 3,
+        Museum: 3,
         Nature: 4,
         Shopping: 5,
         Nightlife: 0
@@ -109,7 +109,7 @@ test('should setup search travels by parameters action. Case 2: no travels found
         }
     });
     expect(client.query).toHaveBeenCalledWith({
-        query: TRAVELS_SEARCH,
+        query: TRAVELS_SEARCH_EN,
         variables: {
             origin,
             destination: 2,
@@ -129,7 +129,7 @@ test('should setup search travels by parameters action. Case 3: travels and dest
     const parametersValue = {
         Beach: 3,
         Food: 2,
-        Museums: 3,
+        Museum: 3,
         Nature: 4,
         Shopping: 5,
         Nightlife: 0
@@ -159,7 +159,7 @@ test('should setup search travels by parameters action. Case 3: travels and dest
         }
     });
     expect(client.query).toHaveBeenCalledWith({
-        query: TRAVELS_SEARCH,
+        query: TRAVELS_SEARCH_EN,
         variables: {
             origin,
             destination: 3,
@@ -192,7 +192,7 @@ test('should setup start search travels by destination action. Case 1: no travel
     });
 
     expect(client.query).toHaveBeenCalledWith({
-        query: TRAVELS_SEARCH,
+        query: TRAVELS_SEARCH_EN,
         variables: {
             origin,
             destination: 2,
@@ -224,7 +224,7 @@ test('should setup start search travels by destination action. Case 2: travel fo
     });
 
     expect(client.query).toHaveBeenCalledWith({
-        query: TRAVELS_SEARCH,
+        query: TRAVELS_SEARCH_EN,
         variables: {
             origin,
             destination: 3,

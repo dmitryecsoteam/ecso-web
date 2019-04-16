@@ -1,4 +1,4 @@
-import { ORIGIN_INPUT_SEARCH, DESTINATION_INPUT_SEARCH, DESTINATION_SEARCH_BY_PARAMETERS, TRAVELS_SEARCH } from '../../queries/queries';
+import { ORIGIN_INPUT_SEARCH_EN, DESTINATION_INPUT_SEARCH_EN, DESTINATION_SEARCH_BY_PARAMETERS, TRAVELS_SEARCH_EN } from '../../queries/queries';
 import travel from '../../tests/fixtures/travel';
 
 export const client = {
@@ -6,11 +6,11 @@ export const client = {
 
         switch (query) {
 
-            case (DESTINATION_INPUT_SEARCH): return Promise.resolve({ data: {
+            case (DESTINATION_INPUT_SEARCH_EN): return Promise.resolve({ data: {
                 destinationStartsWith: ['Osaka']
             }});
 
-            case (ORIGIN_INPUT_SEARCH): return Promise.resolve({ data: {
+            case (ORIGIN_INPUT_SEARCH_EN): return Promise.resolve({ data: {
                 originStartsWith: ['Tokyo']
             }});
 
@@ -30,7 +30,7 @@ export const client = {
 
             };
 
-            case (TRAVELS_SEARCH): {
+            case (TRAVELS_SEARCH_EN): {
 
                 switch (variables.destination) {
                     case 2: return Promise.resolve({ data: {

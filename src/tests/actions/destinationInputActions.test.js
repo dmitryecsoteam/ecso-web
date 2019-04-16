@@ -2,7 +2,7 @@ import { setDestinations, startFetchingDestinations, startSearchDestinations } f
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { client } from '../../clientGraphQL/client';
-import { DESTINATION_INPUT_SEARCH } from '../../queries/queries';
+import { DESTINATION_INPUT_SEARCH_EN } from '../../queries/queries';
 
 jest.mock('../../clientGraphQL/client.js');
 
@@ -39,7 +39,7 @@ test('should setup start search destinations action',  async () => {
     expect(actions[1]).toEqual({ type: 'SET_DESTINATIONS', destinations: [ 'Osaka' ] });
 
     expect(client.query).toHaveBeenCalledWith({
-        query: DESTINATION_INPUT_SEARCH,
+        query: DESTINATION_INPUT_SEARCH_EN,
         variables: { startsWith: 'O' }
     });
 });
