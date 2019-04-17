@@ -10,4 +10,4 @@ test('should render Header without title prop', () => {
 test('should render Header with title prop', () => {
     const wrapper = shallow(<Header title="Moscow, Russia" />);
     expect(wrapper).toMatchSnapshot();
-})
+});
