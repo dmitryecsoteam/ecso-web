@@ -1,15 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 
-// <div className="travel-card__image-container">
-//                         <img
-//                             className="travel-card__image"
-//                             src={`/images/${nameEn}-${countryEn}/small.jpg`}
-//                         />
-//                     </div>
-
-
-export default class Travel extends PureComponent {
+export default class TravelCard extends PureComponent {
 
     render() {
         const {

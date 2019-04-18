@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Travel from './Travel';
+import TravelCard from './TravelCard';
 
 class ResultsPanel extends React.Component {
 
@@ -35,7 +35,7 @@ class ResultsPanel extends React.Component {
             }
 
             return (
-                <Travel
+                <TravelCard
                 key={travel._id}
                 _id={travel._id}
                 name={travel.destination.nameEn}
