@@ -25,6 +25,8 @@ class ResultsPanel extends React.Component {
 
         let travelsList = travels.map((travel) => {
 
+            // Object with parameters (name: value) to render in TravelCard
+            // parameters panel must be opened and value > 0
             const parameters = {};
             if (parametersPanel) {
                 for (let param in parametersValue) {
@@ -41,6 +43,7 @@ class ResultsPanel extends React.Component {
                 name={travel.destination.nameEn}
                 country={travel.destination.countryEn}
                 priceAirplane={travel.priceAirplane}
+                carDistance={travel.carDistance}
                 nameEn={travel.destination.nameEn}
                 countryEn={travel.destination.countryEn}
                 parameters={parameters}
