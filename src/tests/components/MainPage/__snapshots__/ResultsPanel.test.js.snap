@@ -1,0 +1,207 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render emplty div on INIT 1`] = `
+<div
+  className="results__list"
+/>
+`;
+
+exports[`should render list of travels 1`] = `
+<div
+  className="results__list"
+>
+  <p
+    className="results__filter"
+    onClick={[Function]}
+  >
+    sort by: 
+    <span
+      className="results__filter-name--active"
+    >
+      relevance
+    </span>
+    <span
+      className="results__filter-arrow results__filter-arrow--active"
+      id="relevanceDesc"
+    >
+      ▼
+    </span>
+    <span
+      className="results__filter-arrow"
+      id="relevanceAsc"
+    >
+      ▲
+    </span>
+      
+    <span
+      className=""
+    >
+      price
+    </span>
+    <span
+      className="results__filter-arrow"
+      id="priceDesc"
+    >
+      ▼
+    </span>
+    <span
+      className="results__filter-arrow"
+      id="priceAsc"
+    >
+      ▲
+    </span>
+  </p>
+  <TravelCard
+    _id="5c6c7e42e3b7e1edb974a39q"
+    carDistance={150}
+    country="Japan"
+    countryEn="Japan"
+    key="5c6c7e42e3b7e1edb974a39q"
+    name="Nara"
+    nameEn="Nara"
+    parameters={
+      Object {
+        "Food": 4,
+        "Museum": 5,
+      }
+    }
+    priceAirplane={100}
+  />
+  <TravelCard
+    _id="5c6c7e42e3b7e1edb974a39f"
+    carDistance={512}
+    country="Japan"
+    countryEn="Japan"
+    key="5c6c7e42e3b7e1edb974a39f"
+    name="Osaka"
+    nameEn="Osaka"
+    parameters={
+      Object {
+        "Food": 5,
+        "Museum": 4,
+      }
+    }
+    priceAirplane={115}
+  />
+</div>
+`;
+
+exports[`should render list of travels with price descending filter 1`] = `
+<div
+  className="results__list"
+>
+  <p
+    className="results__filter"
+    onClick={[Function]}
+  >
+    sort by: 
+    <span
+      className=""
+    >
+      relevance
+    </span>
+    <span
+      className="results__filter-arrow"
+      id="relevanceDesc"
+    >
+      ▼
+    </span>
+    <span
+      className="results__filter-arrow"
+      id="relevanceAsc"
+    >
+      ▲
+    </span>
+      
+    <span
+      className="results__filter-name--active"
+    >
+      price
+    </span>
+    <span
+      className="results__filter-arrow results__filter-arrow--active"
+      id="priceDesc"
+    >
+      ▼
+    </span>
+    <span
+      className="results__filter-arrow"
+      id="priceAsc"
+    >
+      ▲
+    </span>
+  </p>
+  <TravelCard
+    _id="5c6c7e42e3b7e1edb974a39f"
+    carDistance={512}
+    country="Japan"
+    countryEn="Japan"
+    key="5c6c7e42e3b7e1edb974a39f"
+    name="Osaka"
+    nameEn="Osaka"
+    parameters={
+      Object {
+        "Food": 5,
+        "Museum": 4,
+      }
+    }
+    priceAirplane={115}
+  />
+  <TravelCard
+    _id="5c6c7e42e3b7e1edb974a39q"
+    carDistance={150}
+    country="Japan"
+    countryEn="Japan"
+    key="5c6c7e42e3b7e1edb974a39q"
+    name="Nara"
+    nameEn="Nara"
+    parameters={
+      Object {
+        "Food": 4,
+        "Museum": 5,
+      }
+    }
+    priceAirplane={100}
+  />
+</div>
+`;
+
+exports[`should render single TravelCard without filter 1`] = `
+<div
+  className="results__list"
+>
+  <TravelCard
+    _id="5c6c7e42e3b7e1edb974a39f"
+    carDistance={512}
+    country="Japan"
+    countryEn="Japan"
+    key="5c6c7e42e3b7e1edb974a39f"
+    name="Osaka"
+    nameEn="Osaka"
+    parameters={Object {}}
+    priceAirplane={115}
+  />
+</div>
+`;
+
+exports[`should render spinner 1`] = `
+<div
+  className="results__list"
+>
+  <div
+    className="results__spinner"
+  >
+    <PulseLoader
+      color="#c1c1c1"
+      loading={true}
+      margin="2px"
+      size="15px"
+    />
+    <p
+      className="results__text results__text--medium"
+    >
+      Searching
+    </p>
+  </div>
+</div>
+`;

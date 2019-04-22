@@ -6,6 +6,56 @@
   padding: 0 $s-size;
 }
 
+.results__filter {
+  max-width: 120rem;
+  width: 100%;
+  text-align: end;
+  color: $light-black;
+}
+
+.results__filter-arrow {
+  font-size: $s-size;
+  color: $light-grey;
+  cursor: pointer;
+}
+
+.results__filter-arrow--active {
+  color: $light-black;
+}
+
+.results__filter-name--active {
+  font-weight: bold;
+}
+
+.results__spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 15rem;
+  width: 100%;
+  max-width: 120rem;
+  overflow: hidden;
+  margin-top: $s-size;
+  
+}
+
+.results__text {
+  color: $light-black;
+}
+.results__text--medium {
+  font-size: $xm-size;
+}
+
+.results__text--big {
+  font-size: $l-size;
+}
+
+.results__text--bold {
+  font-weight: bold;
+}
+
 @media (min-width: $desktop-breakpoint) {
   .results__list {
     position: absolute;
