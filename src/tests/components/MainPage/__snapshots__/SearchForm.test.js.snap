@@ -1,0 +1,707 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render SearchForm with default props 1`] = `
+<div
+  className="search-form"
+>
+  <form
+    className="search-form__form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="search-form__autoinput-group"
+    >
+      <_default
+        error={false}
+        errorText="Enter origin"
+        label="From:"
+      >
+        <Autosuggest
+          alwaysRenderSuggestions={false}
+          focusInputOnSuggestionClick={false}
+          getSuggestionValue={[Function]}
+          highlightFirstSuggestion={false}
+          id="1"
+          inputProps={
+            Object {
+              "onBlur": [Function],
+              "onChange": [Function],
+              "placeholder": "City, airport code",
+              "value": "",
+            }
+          }
+          multiSection={false}
+          onSuggestionSelected={[Function]}
+          onSuggestionsClearRequested={[Function]}
+          onSuggestionsFetchRequested={[Function]}
+          renderSuggestion={[Function]}
+          renderSuggestionsContainer={[Function]}
+          shouldRenderSuggestions={[Function]}
+          suggestions={Array []}
+          theme={
+            Object {
+              "container": "react-autosuggest__container",
+              "containerOpen": "react-autosuggest__container--open",
+              "input": "react-autosuggest__input",
+              "inputFocused": "react-autosuggest__input--focused",
+              "inputOpen": "react-autosuggest__input--open",
+              "sectionContainer": "react-autosuggest__section-container",
+              "sectionContainerFirst": "react-autosuggest__section-container--first",
+              "sectionTitle": "react-autosuggest__section-title",
+              "suggestion": "react-autosuggest__suggestion",
+              "suggestionFirst": "react-autosuggest__suggestion--first",
+              "suggestionHighlighted": "react-autosuggest__suggestion--highlighted",
+              "suggestionsContainer": "react-autosuggest__suggestions-container",
+              "suggestionsContainerOpen": "react-autosuggest__suggestions-container--open",
+              "suggestionsList": "react-autosuggest__suggestions-list",
+            }
+          }
+        />
+      </_default>
+      <_default
+        disabled={false}
+        error={false}
+        errorText="Enter destination"
+        label="To:"
+      >
+        <Autosuggest
+          alwaysRenderSuggestions={false}
+          focusInputOnSuggestionClick={false}
+          getSuggestionValue={[Function]}
+          highlightFirstSuggestion={false}
+          id="1"
+          inputProps={
+            Object {
+              "disabled": false,
+              "onBlur": [Function],
+              "onChange": [Function],
+              "placeholder": "City, airport code",
+              "value": "",
+            }
+          }
+          multiSection={false}
+          onSuggestionSelected={[Function]}
+          onSuggestionsClearRequested={[Function]}
+          onSuggestionsFetchRequested={[Function]}
+          renderSuggestion={[Function]}
+          renderSuggestionsContainer={[Function]}
+          shouldRenderSuggestions={[Function]}
+          suggestions={Array []}
+          theme={
+            Object {
+              "container": "react-autosuggest__container",
+              "containerOpen": "react-autosuggest__container--open",
+              "input": "react-autosuggest__input",
+              "inputFocused": "react-autosuggest__input--focused",
+              "inputOpen": "react-autosuggest__input--open",
+              "sectionContainer": "react-autosuggest__section-container",
+              "sectionContainerFirst": "react-autosuggest__section-container--first",
+              "sectionTitle": "react-autosuggest__section-title",
+              "suggestion": "react-autosuggest__suggestion",
+              "suggestionFirst": "react-autosuggest__suggestion--first",
+              "suggestionHighlighted": "react-autosuggest__suggestion--highlighted",
+              "suggestionsContainer": "react-autosuggest__suggestions-container",
+              "suggestionsContainerOpen": "react-autosuggest__suggestions-container--open",
+              "suggestionsList": "react-autosuggest__suggestions-list",
+            }
+          }
+        />
+      </_default>
+    </div>
+    <div
+      className="search-form__autoinput-group"
+    >
+      <_default
+        error={false}
+        errorText="Enter correct date"
+        label="Date:"
+      >
+        <MediaQuery
+          query="(max-width: 415px)"
+          values={Object {}}
+        >
+          <withStyles(SingleDatePicker)
+            anchorDirection="left"
+            appendToBody={false}
+            block={false}
+            calendarInfoPosition="bottom"
+            customCloseIcon={null}
+            customInputIcon={null}
+            date={"1970-01-01T00:00:00.000Z"}
+            daySize={38}
+            disableScroll={false}
+            disabled={false}
+            displayFormat={[Function]}
+            enableOutsideDays={false}
+            firstDayOfWeek={1}
+            focused={false}
+            hideKeyboardShortcutsPanel={true}
+            horizontalMargin={0}
+            horizontalMonthPadding={13}
+            id="date_calendar_id"
+            initialVisibleMonth={null}
+            inputIconPosition="before"
+            isDayBlocked={[Function]}
+            isDayHighlighted={[Function]}
+            isOutsideRange={[Function]}
+            isRTL={false}
+            keepFocusOnInput={false}
+            keepOpenOnDateSelect={false}
+            monthFormat="MMMM YYYY"
+            navNext={null}
+            navPrev={null}
+            noBorder={true}
+            numberOfMonths={1}
+            onClose={[Function]}
+            onDateChange={[Function]}
+            onFocusChange={[Function]}
+            onNextMonthClick={[Function]}
+            onPrevMonthClick={[Function]}
+            openDirection="down"
+            orientation="horizontal"
+            phrases={
+              Object {
+                "calendarLabel": "Calendar",
+                "chooseAvailableDate": [Function],
+                "clearDate": "Clear Date",
+                "closeDatePicker": "Close",
+                "dateIsSelected": [Function],
+                "dateIsUnavailable": [Function],
+                "enterKey": "Enter key",
+                "escape": "Escape key",
+                "hideKeyboardShortcutsPanel": "Close the shortcuts panel.",
+                "homeEnd": "Home and end keys",
+                "jumpToNextMonth": "Move forward to switch to the next month.",
+                "jumpToPrevMonth": "Move backward to switch to the previous month.",
+                "keyboardNavigationInstructions": "Press the down arrow key to interact with the calendar and
+  select a date. Press the question mark key to get the keyboard shortcuts for changing dates.",
+                "keyboardShortcuts": "Keyboard Shortcuts",
+                "leftArrowRightArrow": "Right and left arrow keys",
+                "moveFocusByOneDay": "Move backward (left) and forward (right) by one day.",
+                "moveFocusByOneMonth": "Switch months.",
+                "moveFocusByOneWeek": "Move backward (up) and forward (down) by one week.",
+                "moveFocustoStartAndEndOfWeek": "Go to the first or last day of a week.",
+                "openThisPanel": "Open this panel.",
+                "pageUpPageDown": "page up and page down keys",
+                "questionMark": "Question mark",
+                "returnFocusToInput": "Return to the date input field.",
+                "selectFocusedDate": "Select the date in focus.",
+                "showKeyboardShortcutsPanel": "Open the keyboard shortcuts panel.",
+                "upArrowDownArrow": "up and down arrow keys",
+              }
+            }
+            placeholder=""
+            readOnly={false}
+            regular={false}
+            renderCalendarInfo={[Function]}
+            renderDayContents={null}
+            renderMonthElement={null}
+            renderMonthText={null}
+            reopenPickerOnClearDate={false}
+            required={false}
+            screenReaderInputMessage=""
+            showClearDate={false}
+            showDefaultInputIcon={false}
+            small={false}
+            verticalHeight={null}
+            verticalSpacing={22}
+            weekDayFormat="dd"
+            withFullScreenPortal={false}
+            withPortal={true}
+          />
+        </MediaQuery>
+        <MediaQuery
+          query="(min-width: 415px)"
+          values={Object {}}
+        >
+          <withStyles(SingleDatePicker)
+            anchorDirection="left"
+            appendToBody={false}
+            block={false}
+            calendarInfoPosition="bottom"
+            customCloseIcon={null}
+            customInputIcon={null}
+            date={"1970-01-01T00:00:00.000Z"}
+            daySize={34}
+            disableScroll={false}
+            disabled={false}
+            displayFormat={[Function]}
+            enableOutsideDays={false}
+            firstDayOfWeek={1}
+            focused={false}
+            hideKeyboardShortcutsPanel={true}
+            horizontalMargin={0}
+            horizontalMonthPadding={13}
+            id="date_calendar_id"
+            initialVisibleMonth={null}
+            inputIconPosition="before"
+            isDayBlocked={[Function]}
+            isDayHighlighted={[Function]}
+            isOutsideRange={[Function]}
+            isRTL={false}
+            keepFocusOnInput={false}
+            keepOpenOnDateSelect={false}
+            monthFormat="MMMM YYYY"
+            navNext={null}
+            navPrev={null}
+            noBorder={true}
+            numberOfMonths={1}
+            onClose={[Function]}
+            onDateChange={[Function]}
+            onFocusChange={[Function]}
+            onNextMonthClick={[Function]}
+            onPrevMonthClick={[Function]}
+            openDirection="down"
+            orientation="horizontal"
+            phrases={
+              Object {
+                "calendarLabel": "Calendar",
+                "chooseAvailableDate": [Function],
+                "clearDate": "Clear Date",
+                "closeDatePicker": "Close",
+                "dateIsSelected": [Function],
+                "dateIsUnavailable": [Function],
+                "enterKey": "Enter key",
+                "escape": "Escape key",
+                "hideKeyboardShortcutsPanel": "Close the shortcuts panel.",
+                "homeEnd": "Home and end keys",
+                "jumpToNextMonth": "Move forward to switch to the next month.",
+                "jumpToPrevMonth": "Move backward to switch to the previous month.",
+                "keyboardNavigationInstructions": "Press the down arrow key to interact with the calendar and
+  select a date. Press the question mark key to get the keyboard shortcuts for changing dates.",
+                "keyboardShortcuts": "Keyboard Shortcuts",
+                "leftArrowRightArrow": "Right and left arrow keys",
+                "moveFocusByOneDay": "Move backward (left) and forward (right) by one day.",
+                "moveFocusByOneMonth": "Switch months.",
+                "moveFocusByOneWeek": "Move backward (up) and forward (down) by one week.",
+                "moveFocustoStartAndEndOfWeek": "Go to the first or last day of a week.",
+                "openThisPanel": "Open this panel.",
+                "pageUpPageDown": "page up and page down keys",
+                "questionMark": "Question mark",
+                "returnFocusToInput": "Return to the date input field.",
+                "selectFocusedDate": "Select the date in focus.",
+                "showKeyboardShortcutsPanel": "Open the keyboard shortcuts panel.",
+                "upArrowDownArrow": "up and down arrow keys",
+              }
+            }
+            placeholder=""
+            readOnly={false}
+            regular={false}
+            renderCalendarInfo={[Function]}
+            renderDayContents={null}
+            renderMonthElement={null}
+            renderMonthText={null}
+            reopenPickerOnClearDate={false}
+            required={false}
+            screenReaderInputMessage=""
+            showClearDate={false}
+            showDefaultInputIcon={false}
+            small={false}
+            verticalHeight={null}
+            verticalSpacing={0}
+            weekDayFormat="dd"
+            withFullScreenPortal={false}
+            withPortal={false}
+          />
+        </MediaQuery>
+      </_default>
+      <div
+        className="search-form__submit-btn-container"
+      >
+        <button
+          className="search-form__submit-btn"
+        >
+          Find
+        </button>
+      </div>
+    </div>
+    <div>
+      <ParametersPanel
+        errorParameters={false}
+        onChange={[Function]}
+        parametersEntered={0}
+        parametersMax={6}
+        parametersOnClick={[Function]}
+        parametersPanel={false}
+        parametersValue={
+          Object {
+            "Beach": 0,
+            "Food": 0,
+            "Museum": 0,
+            "Nature": 0,
+            "Nightlife": 0,
+            "Shopping": 0,
+          }
+        }
+      />
+    </div>
+  </form>
+</div>
+`;
+
+exports[`should render autosuggest list 1`] = `
+<Autosuggest
+  alwaysRenderSuggestions={false}
+  focusInputOnSuggestionClick={false}
+  getSuggestionValue={[Function]}
+  highlightFirstSuggestion={false}
+  id="1"
+  inputProps={
+    Object {
+      "onBlur": [Function],
+      "onChange": [Function],
+      "placeholder": "City, airport code",
+      "value": "T",
+    }
+  }
+  multiSection={false}
+  onSuggestionSelected={[Function]}
+  onSuggestionsClearRequested={[Function]}
+  onSuggestionsFetchRequested={[Function]}
+  renderSuggestion={[Function]}
+  renderSuggestionsContainer={[Function]}
+  shouldRenderSuggestions={[Function]}
+  suggestions={
+    Array [
+      Object {
+        "_id": 1,
+        "countryEn": "Japan",
+        "name": Array [
+          "Tokyo",
+          "東京",
+          "Токио",
+          "TYO",
+          "NRT",
+          "HND",
+        ],
+        "nameEn": "Tokyo",
+      },
+      Object {
+        "_id": 3,
+        "countryEn": "Japan",
+        "name": Array [
+          "Tottori",
+          "Тоттори",
+          "鳥取市",
+          "TTJ",
+        ],
+        "nameEn": "Tottori",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "container": "react-autosuggest__container",
+      "containerOpen": "react-autosuggest__container--open",
+      "input": "react-autosuggest__input",
+      "inputFocused": "react-autosuggest__input--focused",
+      "inputOpen": "react-autosuggest__input--open",
+      "sectionContainer": "react-autosuggest__section-container",
+      "sectionContainerFirst": "react-autosuggest__section-container--first",
+      "sectionTitle": "react-autosuggest__section-title",
+      "suggestion": "react-autosuggest__suggestion",
+      "suggestionFirst": "react-autosuggest__suggestion--first",
+      "suggestionHighlighted": "react-autosuggest__suggestion--highlighted",
+      "suggestionsContainer": "react-autosuggest__suggestions-container",
+      "suggestionsContainerOpen": "react-autosuggest__suggestions-container--open",
+      "suggestionsList": "react-autosuggest__suggestions-list",
+    }
+  }
+>
+  <Autowhatever
+    getSectionItems={[Function]}
+    highlightedItemIndex={null}
+    highlightedSectionIndex={null}
+    id="1"
+    inputProps={
+      Object {
+        "onBlur": [Function],
+        "onChange": [Function],
+        "onFocus": [Function],
+        "onKeyDown": [Function],
+        "placeholder": "City, airport code",
+        "value": "T",
+      }
+    }
+    itemProps={[Function]}
+    items={
+      Array [
+        Object {
+          "_id": 1,
+          "countryEn": "Japan",
+          "name": Array [
+            "Tokyo",
+            "東京",
+            "Токио",
+            "TYO",
+            "NRT",
+            "HND",
+          ],
+          "nameEn": "Tokyo",
+        },
+        Object {
+          "_id": 3,
+          "countryEn": "Japan",
+          "name": Array [
+            "Tottori",
+            "Тоттори",
+            "鳥取市",
+            "TTJ",
+          ],
+          "nameEn": "Tottori",
+        },
+      ]
+    }
+    multiSection={false}
+    renderInputComponent={[Function]}
+    renderItem={[Function]}
+    renderItemData={
+      Object {
+        "query": "T",
+      }
+    }
+    renderItemsContainer={[Function]}
+    renderSectionTitle={[Function]}
+    theme={
+      Object {
+        "container": "react-autosuggest__container",
+        "containerOpen": "react-autosuggest__container--open",
+        "input": "react-autosuggest__input",
+        "inputFocused": "react-autosuggest__input--focused",
+        "inputOpen": "react-autosuggest__input--open",
+        "item": "react-autosuggest__suggestion",
+        "itemFirst": "react-autosuggest__suggestion--first",
+        "itemHighlighted": "react-autosuggest__suggestion--highlighted",
+        "itemsContainer": "react-autosuggest__suggestions-container",
+        "itemsContainerOpen": "react-autosuggest__suggestions-container--open",
+        "itemsList": "react-autosuggest__suggestions-list",
+        "sectionContainer": "react-autosuggest__section-container",
+        "sectionContainerFirst": "react-autosuggest__section-container--first",
+        "sectionTitle": "react-autosuggest__section-title",
+      }
+    }
+  >
+    <div
+      aria-expanded={true}
+      aria-haspopup="listbox"
+      aria-owns="react-autowhatever-1"
+      className="react-autosuggest__container react-autosuggest__container--open"
+      key="react-autowhatever-1-container"
+      role="combobox"
+    >
+      <input
+        aria-activedescendant={null}
+        aria-autocomplete="list"
+        aria-controls="react-autowhatever-1"
+        autoComplete="off"
+        className="react-autosuggest__input react-autosuggest__input--open react-autosuggest__input--focused"
+        key="react-autowhatever-1-input"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        placeholder="City, airport code"
+        type="text"
+        value="T"
+      />
+      <div
+        className="react-autosuggest__suggestions-container react-autosuggest__suggestions-container--open"
+        id="react-autowhatever-1"
+        key="react-autowhatever-1-items-container"
+        role="listbox"
+      >
+        <ItemsList
+          getItemId={[Function]}
+          highlightedItemIndex={null}
+          itemProps={[Function]}
+          items={
+            Array [
+              Object {
+                "_id": 1,
+                "countryEn": "Japan",
+                "name": Array [
+                  "Tokyo",
+                  "東京",
+                  "Токио",
+                  "TYO",
+                  "NRT",
+                  "HND",
+                ],
+                "nameEn": "Tokyo",
+              },
+              Object {
+                "_id": 3,
+                "countryEn": "Japan",
+                "name": Array [
+                  "Tottori",
+                  "Тоттори",
+                  "鳥取市",
+                  "TTJ",
+                ],
+                "nameEn": "Tottori",
+              },
+            ]
+          }
+          keyPrefix="react-autowhatever-1-"
+          onHighlightedItemChange={[Function]}
+          renderItem={[Function]}
+          renderItemData={
+            Object {
+              "query": "T",
+            }
+          }
+          sectionIndex={null}
+          theme={[Function]}
+        >
+          <ul
+            className="react-autosuggest__suggestions-list"
+            key="react-autowhatever-1-items-list"
+            role="listbox"
+          >
+            <Item
+              aria-selected={false}
+              className="react-autosuggest__suggestion react-autosuggest__suggestion--first"
+              data-section-index={null}
+              data-suggestion-index={0}
+              id="react-autowhatever-1--item-0"
+              isHighlighted={false}
+              item={
+                Object {
+                  "_id": 1,
+                  "countryEn": "Japan",
+                  "name": Array [
+                    "Tokyo",
+                    "東京",
+                    "Токио",
+                    "TYO",
+                    "NRT",
+                    "HND",
+                  ],
+                  "nameEn": "Tokyo",
+                }
+              }
+              itemIndex={0}
+              key="react-autowhatever-1-item-0"
+              onClick={[Function]}
+              onMouseDown={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              renderItem={[Function]}
+              renderItemData={
+                Object {
+                  "query": "T",
+                }
+              }
+              sectionIndex={null}
+            >
+              <li
+                aria-selected={false}
+                className="react-autosuggest__suggestion react-autosuggest__suggestion--first"
+                data-section-index={null}
+                data-suggestion-index={0}
+                id="react-autowhatever-1--item-0"
+                onClick={[Function]}
+                onMouseDown={[Function]}
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="option"
+              >
+                <div
+                  className="react-autosuggest__suggestion-content"
+                >
+                  <div
+                    className="react-autosuggest__suggestion-icon-container"
+                  >
+                    <img
+                      className="react-autosuggest__suggestion-icon"
+                      src="test-file-stub"
+                    />
+                  </div>
+                  <span>
+                    Tokyo
+                    , 
+                    Japan
+                  </span>
+                </div>
+              </li>
+            </Item>
+            <Item
+              aria-selected={false}
+              className="react-autosuggest__suggestion"
+              data-section-index={null}
+              data-suggestion-index={1}
+              id="react-autowhatever-1--item-1"
+              isHighlighted={false}
+              item={
+                Object {
+                  "_id": 3,
+                  "countryEn": "Japan",
+                  "name": Array [
+                    "Tottori",
+                    "Тоттори",
+                    "鳥取市",
+                    "TTJ",
+                  ],
+                  "nameEn": "Tottori",
+                }
+              }
+              itemIndex={1}
+              key="react-autowhatever-1-item-1"
+              onClick={[Function]}
+              onMouseDown={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              renderItem={[Function]}
+              renderItemData={
+                Object {
+                  "query": "T",
+                }
+              }
+              sectionIndex={null}
+            >
+              <li
+                aria-selected={false}
+                className="react-autosuggest__suggestion"
+                data-section-index={null}
+                data-suggestion-index={1}
+                id="react-autowhatever-1--item-1"
+                onClick={[Function]}
+                onMouseDown={[Function]}
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="option"
+              >
+                <div
+                  className="react-autosuggest__suggestion-content"
+                >
+                  <div
+                    className="react-autosuggest__suggestion-icon-container"
+                  >
+                    <img
+                      className="react-autosuggest__suggestion-icon"
+                      src="test-file-stub"
+                    />
+                  </div>
+                  <span>
+                    Tottori
+                    , 
+                    Japan
+                  </span>
+                </div>
+              </li>
+            </Item>
+          </ul>
+        </ItemsList>
+      </div>
+    </div>
+  </Autowhatever>
+</Autosuggest>
+`;

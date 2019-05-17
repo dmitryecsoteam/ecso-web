@@ -16,28 +16,8 @@ import InputWithErrorTooltip from './InputWithErrorTooltip';
 import Autosuggest from 'react-autosuggest';
 import city from '../../images/icons/city.png';
 import { SingleDatePicker } from 'react-dates';
-import isInclusivelyAfterDay from 'react-dates/src/utils/isInclusivelyAfterDay';
-import isBeforeDay from 'react-dates/src/utils/isBeforeDay';
-
-
-
-
-
-// If user focused out from the input and didn't choose any suggestion, then the first item of the suggestions array
-// would be picked up and set as input value; if suggestions array is empty - empty string ('') will be set as input value.
-// If user selected suggestion, then this suggestion would be set as input value and the input 
-// would be focused out (Autosuggest's prop focusInputOnSuggestionClick={false}).
-//
-// This variables (originSelectedByUser, destinationSelectedByUser) will let onBlur event know, if user selected suggestion or not.
-// We can't make this variables part of the component's state, because setState function is ASYNC
-// and when onBlur event is fired the state won't be actual.
-// We need some SYNC logic:
-// onSuggestionSelected change originSelectedByUser/destinationSelectedByUser to 'true', so the onBlur function will know, that user 
-// selected suggestion. onInputChange will make these variables 'false' again.
-let originSelectedByUser, destinationSelectedByUser = false;
-
-
-
+//import isInclusivelyAfterDay from 'react-dates/src/utils/isInclusivelyAfterDay';
+//import isBeforeDay from 'react-dates/src/utils/isBeforeDay';
 
 
 // Minimum and maximum number of parameters user must select
@@ -52,8 +32,57 @@ const numberOfNonZeroParams = (parameters) => {
     return count;
 };
 
+const isBeforeDay = (a, b) => {
+    if (!moment.isMoment(a) || !moment.isMoment(b)) return false;
 
-class SearchPanel extends React.Component {
+    const aYear = a.year();
+    const aMonth = a.month();
+  
+    const bYear = b.year();
+    const bMonth = b.month();
+  
+    const isSameYear = aYear === bYear;
+    const isSameMonth = aMonth === bMonth;
+  
+    if (isSameYear && isSameMonth) return a.date() < b.date();
+    if (isSameYear) return aMonth < bMonth;
+    return aYear < bYear;
+}
+
+const isInclusivelyAfterDay = (a, b) => {
+    if (!moment.isMoment(a) || !moment.isMoment(b)) return false;
+    return !isBeforeDay(a, b);
+}
+
+
+export class SearchForm extends React.Component {
+
+    /* 
+     *   originInputValue: displayed name of origin, selected by user. Defaults to ''
+     *   originsSelectedId: ID of selected origin in database. Defaults to 0
+     *   destinationInputValue: displayed name of destination, selected by user. Defaults to ''
+     *   destinationSelectedId: ID of selected destination in database. Defaults to 0
+     *   suggestOrigins: array of suggested origins from DB, based on user's typed characters
+     *   suggestDestinations: array of suggested destinations from DB, based on user's typed characters
+     * 
+     *   date: defaults to current date
+     *   calendarFocused: react-dates prop
+     * 
+     *   errorOriginInput: indicates incorrect origin input
+     *   errorDestinationInput: indicates incorrect destination input
+     *   errorDateInput: indicates incorrect date input
+     *   errorParameters: indicates incorrect parameters input
+     * 
+     *   parametersPanel: show or hide parameters panel. Defaults to false
+     *   parametersValue: object of parameters with values entered by user. Defaults to {
+     *       Beach: 0,
+     *       Food: 0,
+     *       Museum: 0,
+     *       Nature: 0,
+     *       Shopping: 0,
+     *       Nightlife: 0
+     *   }
+     */
     state = {
         originInputValue: this.props.searchForm.originInputValue,
         originsSelectedId: this.props.searchForm.originsSelectedId,
@@ -71,6 +100,21 @@ class SearchPanel extends React.Component {
         parametersValue: this.props.searchForm.parametersValue
     };
 
+    /*
+     *   If user focused out from the input and didn't choose any suggestion, then the first item of the suggestions array
+     *   would be picked up and set as input value; if suggestions array is empty - empty string ('') will be set as input value.
+     *   If user selected suggestion, then this suggestion would be set as input value and the input 
+     *   would be focused out (Autosuggest's prop focusInputOnSuggestionClick={false}).
+     *
+     *   This variables (originSelectedByUser, destinationSelectedByUser) will let onBlur event know, if user selected suggestion or not.
+     *   We can't make this variables part of the component's state, because setState function is ASYNC
+     *   and when onBlur event is fired the state won't be actual.
+     *   We need some SYNC logic:
+     *   onSuggestionSelected change originSelectedByUser/destinationSelectedByUser to 'true', so the onBlur function will know, that user 
+     *   selected suggestion. onInputChange will make these variables 'false' again.
+     */
+    originSelectedByUser = false;
+    destinationSelectedByUser = false;
 
 
     /*************** Functions for Autosuggest inputs ***************/
@@ -78,7 +122,7 @@ class SearchPanel extends React.Component {
     onOriginInputChange = (event, { newValue }) => {
 
         // Set originSelected to false
-        originSelectedByUser = false;
+        this.originSelectedByUser = false;
 
         // First, update state with entered value
         this.setState(() => ({
@@ -110,7 +154,7 @@ class SearchPanel extends React.Component {
     onDestinationInputChange = (event, { newValue }) => {
 
         // Set destinationSelected to false
-        destinationSelectedByUser = false;
+        this.destinationSelectedByUser = false;
 
         // First, update state with entered value
         this.setState(() => ({
@@ -141,7 +185,7 @@ class SearchPanel extends React.Component {
 
     onOriginInputBlur = () => {
 
-        if (!originSelectedByUser) {
+        if (!this.originSelectedByUser) {
 
             if (this.state.suggestOrigins.length !== 0) {
                 this.setState(() => ({
@@ -164,7 +208,7 @@ class SearchPanel extends React.Component {
 
     onDestinationInputBlur = () => {
 
-        if (!destinationSelectedByUser) {
+        if (!this.destinationSelectedByUser) {
 
             if (this.state.suggestDestinations.length !== 0) {
                 this.setState(() => ({
@@ -186,14 +230,14 @@ class SearchPanel extends React.Component {
     };
 
     onOriginSuggestionSelected = (event, { suggestion }) => {
-        originSelectedByUser = true;
+        this.originSelectedByUser = true;
         this.setState(() => ({
             originsSelectedId: suggestion._id
         }), () => this.props.setSearchForm(this.state));
     };
 
     onDestinationSuggestionSelected = (event, { suggestion }) => {
-        destinationSelectedByUser = true;
+        this.destinationSelectedByUser = true;
         this.setState(() => ({
             destinationSelectedId: suggestion._id
         }), () => this.props.setSearchForm(this.state));
@@ -252,6 +296,7 @@ class SearchPanel extends React.Component {
         }));
     };
 
+    // If day is out of range it will be set to null in state
     isOutsideRange = day => !(isInclusivelyAfterDay(day, moment()) && isBeforeDay(day, moment().add(1, 'years')));
 
     renderCalendarInfo = () => (<span className="Calendar__info--bottom">Date range: one year</span>);
@@ -418,8 +463,14 @@ class SearchPanel extends React.Component {
                             error={errorDateInput}
                             errorText="Enter correct date"
                         >
-                            {/* Calendar for small devices as modal */}
-                            <MediaQuery query="(max-width: 415px)">
+                            {/* 
+                              *   Calendar for small devices as modal.
+                              *   
+                              *   window.testMediaQueryValues allows to set device width in testing environment.
+                              *   In browser it will be undefined and "values" will fall back to actual device width.
+                              *
+                              */}
+                            <MediaQuery query="(max-width: 415px)" values={window.testMediaQueryValues}>
                                 <SingleDatePicker
                                     date={date}
                                     onDateChange={this.onDateChange}
@@ -442,7 +493,7 @@ class SearchPanel extends React.Component {
                             </MediaQuery>
 
                             {/* Calendar for big devices */}
-                            <MediaQuery query="(min-width: 416px)">
+                            <MediaQuery query="(min-width: 415px)" values={window.testMediaQueryValues}>
                                 <SingleDatePicker
                                     date={date}
                                     onDateChange={this.onDateChange}
@@ -503,4 +554,4 @@ const mapDispatchToProps = (dispatch) => ({
     setSearchForm: (state) => dispatch(setSearchForm(state))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchForm);
