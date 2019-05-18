@@ -1,4 +1,4 @@
-import moment from 'moment';
+const moment = jest.requireActual('moment');
 
 export const isBeforeDay = (a, b) => {
     if (!moment.isMoment(a) || !moment.isMoment(b)) return false;

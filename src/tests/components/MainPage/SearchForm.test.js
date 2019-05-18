@@ -71,249 +71,254 @@ test('should render SearchForm with default props', () => {
 
 /*************************   Origin   *************************/
 
-test('should set suggestOrigins to array of suggestions on user input', async () => {
-  const value = 'T';
-  const wrapper = mount(<SearchForm {...props} />);
+describe('origin autoinput', () => {
+  test('should set suggestOrigins to array of suggestions on user input', async () => {
+    const value = 'T';
+    const wrapper = mount(<SearchForm {...props} />);
 
-  wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    origins
+    wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      origins
+    });
+
+    expect(startSearchOrigins).toHaveBeenCalledWith(value[0].toLowerCase());
+    expect(wrapper.state('suggestOrigins')).toEqual([origins[0], origins[2]]);
   });
 
-  expect(startSearchOrigins).toHaveBeenCalledWith(value[0].toLowerCase());
-  expect(wrapper.state('suggestOrigins')).toEqual([origins[0], origins[2]]);
-});
+  test('should set suggestOrigins to empty array on user input', async () => {
+    const value = 'Tk';
+    const wrapper = mount(<SearchForm {...props} />);
 
-test('should set suggestOrigins to empty array on user input', async () => {
-  const value = 'Tk';
-  const wrapper = mount(<SearchForm {...props} />);
+    wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      origins
+    });
 
-  wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    origins
+    expect(startSearchOrigins).toHaveBeenCalledWith(value[0].toLowerCase());
+    expect(wrapper.state('suggestOrigins')).toEqual([]);
   });
 
-  expect(startSearchOrigins).toHaveBeenCalledWith(value[0].toLowerCase());
-  expect(wrapper.state('suggestOrigins')).toEqual([]);
-});
+  test('should not start search origins when user input starts from special symbol', async () => {
+    const value = '%Tk';
+    const wrapper = mount(<SearchForm {...props} />);
 
-test('should not start search origins when user input starts from special symbol', async () => {
-  const value = '%Tk';
-  const wrapper = mount(<SearchForm {...props} />);
+    wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      origins
+    });
 
-  wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    origins
+    expect(startSearchOrigins).toHaveBeenCalledTimes(0);
+    expect(wrapper.state('suggestOrigins')).toEqual([]);
   });
 
-  expect(startSearchOrigins).toHaveBeenCalledTimes(0);
-  expect(wrapper.state('suggestOrigins')).toEqual([]);
-});
+  test('should start search origins only on first letter while user continue typing', async () => {
+    const wrapper = mount(<SearchForm {...props} />);
+    let value = 'T';
 
-test('should start search origins only on first letter while user continue typing', async () => {
-  const wrapper = mount(<SearchForm {...props} />);
-  let value = 'T';
-  
-  wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    origins
+    wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      origins
+    });
+
+    value = 'To';
+    wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
+
+    expect(startSearchOrigins).toHaveBeenCalledTimes(1);
+    expect(startSearchOrigins).toHaveBeenCalledWith(value[0].toLowerCase())
   });
 
-  value = 'To';
-  wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
+  test('should render origins autosuggest list', async () => {
+    const value = 'T';
+    const wrapper = mount(<SearchForm {...props} />);
 
-  expect(startSearchOrigins).toHaveBeenCalledTimes(1);
-  expect(startSearchOrigins).toHaveBeenCalledWith(value[0].toLowerCase())
-});
+    wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      origins
+    });
+    wrapper.find('Autosuggest').at(0).find('input').simulate('focus');
 
-test('should render origins autosuggest list', async () => {
-  const value = 'T';
-  const wrapper = mount(<SearchForm {...props} />);
-
-  wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    origins
+    expect(wrapper.find('Autosuggest').at(0)).toMatchSnapshot();
   });
-  wrapper.find('Autosuggest').at(0).find('input').simulate('focus');
 
-  expect(wrapper.find('Autosuggest').at(0)).toMatchSnapshot();
-});
+  test('should set originInputValue when user selects suggestion', async () => {
+    const value = 'T';
+    const wrapper = mount(<SearchForm {...props} />);
 
-test('should set originInputValue when user selects suggestion', async () => {
-  const value = 'T';
-  const wrapper = mount(<SearchForm {...props} />);
+    wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      origins
+    });
+    wrapper.find('Autosuggest').at(0).find('input').simulate('focus');
+    wrapper.find('Autosuggest').at(0).find('li').at(1).simulate('click');
 
-  wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    origins
+    expect(wrapper.state('originInputValue')).toEqual(origins[2].nameEn);
+    expect(wrapper.state('originSelectedId')).toEqual(origins[2]._id);
   });
-  wrapper.find('Autosuggest').at(0).find('input').simulate('focus');
-  wrapper.find('Autosuggest').at(0).find('li').at(1).simulate('click');
 
-  expect(wrapper.state('originInputValue')).toEqual(origins[2].nameEn);
-  expect(wrapper.state('originSelectedId')).toEqual(origins[2]._id);
-});
+  test('should set originInputValue to first item of origins array when user blur out input', async () => {
+    const value = 'T';
+    const wrapper = mount(<SearchForm {...props} />);
 
-test('should set originInputValue to first item of origins array when user blur out input', async () => {
-  const value = 'T';
-  const wrapper = mount(<SearchForm {...props} />);
+    wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      origins
+    });
+    wrapper.find('Autosuggest').at(0).find('input').simulate('focus');
+    wrapper.find('Autosuggest').at(0).find('input').simulate('blur');
 
-  wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    origins
+    expect(wrapper.state('originInputValue')).toEqual(origins[0].nameEn);
+    expect(wrapper.state('originSelectedId')).toEqual(origins[0]._id);
   });
-  wrapper.find('Autosuggest').at(0).find('input').simulate('focus');
-  wrapper.find('Autosuggest').at(0).find('input').simulate('blur');
 
-  expect(wrapper.state('originInputValue')).toEqual(origins[0].nameEn);
-  expect(wrapper.state('originSelectedId')).toEqual(origins[0]._id);
-});
+  test('should clear origin input when user blur out and suggestions array is empty', async () => {
+    const value = 'Tk';
+    const wrapper = mount(<SearchForm {...props} />);
 
-test('should clear origin input when user blur out and suggestions array is empty', async () => {
-  const value = 'Tk';
-  const wrapper = mount(<SearchForm {...props} />);
+    wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      origins
+    });
+    wrapper.find('Autosuggest').at(0).find('input').simulate('focus');
+    wrapper.find('Autosuggest').at(0).find('input').simulate('blur');
 
-  wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    origins
+    expect(wrapper.state('originInputValue')).toEqual('');
+    expect(wrapper.state('originSelectedId')).toEqual(0);
   });
-  wrapper.find('Autosuggest').at(0).find('input').simulate('focus');
-  wrapper.find('Autosuggest').at(0).find('input').simulate('blur');
 
-  expect(wrapper.state('originInputValue')).toEqual('');
-  expect(wrapper.state('originSelectedId')).toEqual(0);
-});
+  test('should give an error on form submit with empty origin', () => {
+    const wrapper = shallow(<SearchForm {...props} />);
+    wrapper.find('form').simulate('submit', { preventDefault: () => { } });
 
-test('should give an error on form submit with empty origin', () => {
-  const wrapper = shallow(<SearchForm {...props} />);
-  wrapper.find('form').simulate('submit', { preventDefault: () => {} });
+    expect(wrapper.state('errorOriginInput')).toBeTruthy();
+  });
+})
 
-  expect(wrapper.state('errorOriginInput')).toBeTruthy();
-});
 
 
 
 
 /*************************   Destination   *************************/
 
-test('should set suggestDestinations to array of suggestions on user input', async () => {
-  const value = 'T';
-  const wrapper = mount(<SearchForm {...props} />);
+describe('destination autoinput', () => {
+  test('should set suggestDestinations to array of suggestions on user input', async () => {
+    const value = 'T';
+    const wrapper = mount(<SearchForm {...props} />);
 
-  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    destinations
+    wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      destinations
+    });
+
+    expect(startSearchDestinations).toHaveBeenCalledWith(value[0].toLowerCase());
+    expect(wrapper.state('suggestDestinations')).toEqual([destinations[0], destinations[2]]);
   });
 
-  expect(startSearchDestinations).toHaveBeenCalledWith(value[0].toLowerCase());
-  expect(wrapper.state('suggestDestinations')).toEqual([destinations[0], destinations[2]]);
-});
+  test('should set suggestDestinations to empty array on user input', async () => {
+    const value = 'Tk';
+    const wrapper = mount(<SearchForm {...props} />);
 
-test('should set suggestDestinations to empty array on user input', async () => {
-  const value = 'Tk';
-  const wrapper = mount(<SearchForm {...props} />);
+    wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      destinations
+    });
 
-  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    destinations
+    expect(startSearchDestinations).toHaveBeenCalledWith(value[0].toLowerCase());
+    expect(wrapper.state('suggestDestinations')).toEqual([]);
   });
 
-  expect(startSearchDestinations).toHaveBeenCalledWith(value[0].toLowerCase());
-  expect(wrapper.state('suggestDestinations')).toEqual([]);
-});
+  test('should not start search destinations when user input starts from special symbol', async () => {
+    const value = '%Tk';
+    const wrapper = mount(<SearchForm {...props} />);
 
-test('should not start search destinations when user input starts from special symbol', async () => {
-  const value = '%Tk';
-  const wrapper = mount(<SearchForm {...props} />);
+    wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      destinations
+    });
 
-  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    destinations
+    expect(startSearchDestinations).toHaveBeenCalledTimes(0);
+    expect(wrapper.state('suggestDestinations')).toEqual([]);
   });
 
-  expect(startSearchDestinations).toHaveBeenCalledTimes(0);
-  expect(wrapper.state('suggestDestinations')).toEqual([]);
-});
+  test('should start search destinations only on first letter while user continue typing', async () => {
+    const wrapper = mount(<SearchForm {...props} />);
+    let value = 'T';
 
-test('should start search destinations only on first letter while user continue typing', async () => {
-  const wrapper = mount(<SearchForm {...props} />);
-  let value = 'T';
-  
-  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    destinations
+    wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      destinations
+    });
+
+    value = 'To';
+    wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+
+    expect(startSearchDestinations).toHaveBeenCalledTimes(1);
+    expect(startSearchDestinations).toHaveBeenCalledWith(value[0].toLowerCase())
   });
 
-  value = 'To';
-  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+  test('should render destinations autosuggest list', async () => {
+    const value = 'T';
+    const wrapper = mount(<SearchForm {...props} />);
 
-  expect(startSearchDestinations).toHaveBeenCalledTimes(1);
-  expect(startSearchDestinations).toHaveBeenCalledWith(value[0].toLowerCase())
-});
+    wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      destinations
+    });
+    wrapper.find('Autosuggest').at(1).find('input').simulate('focus');
 
-test('should render destinations autosuggest list', async () => {
-  const value = 'T';
-  const wrapper = mount(<SearchForm {...props} />);
-
-  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    destinations
+    expect(wrapper.find('Autosuggest').at(1)).toMatchSnapshot();
   });
-  wrapper.find('Autosuggest').at(1).find('input').simulate('focus');
 
-  expect(wrapper.find('Autosuggest').at(1)).toMatchSnapshot();
-});
+  test('should set destinationInputValue when user selects suggestion', async () => {
+    const value = 'T';
+    const wrapper = mount(<SearchForm {...props} />);
 
-test('should set destinationInputValue when user selects suggestion', async () => {
-  const value = 'T';
-  const wrapper = mount(<SearchForm {...props} />);
+    wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      destinations
+    });
+    wrapper.find('Autosuggest').at(1).find('input').simulate('focus');
+    wrapper.find('Autosuggest').at(1).find('li').at(1).simulate('click');
 
-  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    destinations
+    expect(wrapper.state('destinationInputValue')).toEqual(destinations[2].nameEn);
+    expect(wrapper.state('destinationSelectedId')).toEqual(destinations[2]._id);
   });
-  wrapper.find('Autosuggest').at(1).find('input').simulate('focus');
-  wrapper.find('Autosuggest').at(1).find('li').at(1).simulate('click');
 
-  expect(wrapper.state('destinationInputValue')).toEqual(destinations[2].nameEn);
-  expect(wrapper.state('destinationSelectedId')).toEqual(destinations[2]._id);
-});
+  test('should set destinationInputValue to first item of destinations array when user blur out input', async () => {
+    const value = 'T';
+    const wrapper = mount(<SearchForm {...props} />);
 
-test('should set destinationInputValue to first item of destinations array when user blur out input', async () => {
-  const value = 'T';
-  const wrapper = mount(<SearchForm {...props} />);
+    wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      destinations
+    });
+    wrapper.find('Autosuggest').at(1).find('input').simulate('focus');
+    wrapper.find('Autosuggest').at(1).find('input').simulate('blur');
 
-  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    destinations
+    expect(wrapper.state('destinationInputValue')).toEqual(destinations[0].nameEn);
+    expect(wrapper.state('destinationSelectedId')).toEqual(destinations[0]._id);
   });
-  wrapper.find('Autosuggest').at(1).find('input').simulate('focus');
-  wrapper.find('Autosuggest').at(1).find('input').simulate('blur');
 
-  expect(wrapper.state('destinationInputValue')).toEqual(destinations[0].nameEn);
-  expect(wrapper.state('destinationSelectedId')).toEqual(destinations[0]._id);
-});
+  test('should clear destination input when user blur out and suggestions array is empty', async () => {
+    const value = 'Tk';
+    const wrapper = mount(<SearchForm {...props} />);
 
-test('should clear destination input when user blur out and suggestions array is empty', async () => {
-  const value = 'Tk';
-  const wrapper = mount(<SearchForm {...props} />);
+    wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+    await wrapper.setProps({
+      destinations
+    });
+    wrapper.find('Autosuggest').at(1).find('input').simulate('focus');
+    wrapper.find('Autosuggest').at(1).find('input').simulate('blur');
 
-  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
-  await wrapper.setProps({
-    destinations
+    expect(wrapper.state('destinationInputValue')).toEqual('');
+    expect(wrapper.state('destinationSelectedId')).toEqual(0);
   });
-  wrapper.find('Autosuggest').at(1).find('input').simulate('focus');
-  wrapper.find('Autosuggest').at(1).find('input').simulate('blur');
 
-  expect(wrapper.state('destinationInputValue')).toEqual('');
-  expect(wrapper.state('destinationSelectedId')).toEqual(0);
-});
+  test('should give an error on form submit with empty destination', () => {
+    const wrapper = shallow(<SearchForm {...props} />);
+    wrapper.find('form').simulate('submit', { preventDefault: () => { } });
 
-test('should give an error on form submit with empty destination', () => {
-  const wrapper = shallow(<SearchForm {...props} />);
-  wrapper.find('form').simulate('submit', { preventDefault: () => {} });
-
-  expect(wrapper.state('errorDestinationInput')).toBeTruthy();
+    expect(wrapper.state('errorDestinationInput')).toBeTruthy();
+  });
 });
 
 
@@ -321,147 +326,149 @@ test('should give an error on form submit with empty destination', () => {
 
 /*************************   Date   *************************/
 
-test('should submit correct date (small devices)', () => {
+describe('date input', () => {
+  test('should submit correct date (small devices)', () => {
 
-  // Set device width to small
-  window.testMediaQueryValues = { width: 300 };
+    // Set device width to small
+    window.testMediaQueryValues = { width: 300 };
 
-  const wrapper = mount(<SearchForm {...props} />);
-  wrapper.find('MediaQuery').at(0).find('input').simulate('change', { target: { value: '1970-05-22' } });
-  expect(wrapper.state('date').format('YYYY-MM-DD')).toEqual(moment('1970-05-22').format('YYYY-MM-DD'));
-  wrapper.find('form').simulate('submit');
-  expect(wrapper.state('errorDateInput')).toBeFalsy();
-});
-
-test('should submit correct date after incorrect (small devices)', () => {
-
-  // Set device width to small
-  window.testMediaQueryValues = { width: 300 };
-
-  const wrapper = mount(<SearchForm {...props} />);
-  wrapper.setState({
-    date: null,
-    errorDateInput: true
+    const wrapper = mount(<SearchForm {...props} />);
+    wrapper.find('MediaQuery').at(0).find('input').simulate('change', { target: { value: '1970-05-22' } });
+    expect(wrapper.state('date').format('YYYY-MM-DD')).toEqual(moment('1970-05-22').format('YYYY-MM-DD'));
+    wrapper.find('form').simulate('submit');
+    expect(wrapper.state('errorDateInput')).toBeFalsy();
   });
-  wrapper.find('MediaQuery').at(0).find('input').simulate('change', { target: { value: '1970-05-22' } });
-  expect(wrapper.state('date').format('YYYY-MM-DD')).toEqual(moment('1970-05-22').format('YYYY-MM-DD'));
-  wrapper.find('form').simulate('submit');
-  expect(wrapper.state('errorDateInput')).toBeFalsy();
-});
 
-test('should not submit out of range date (small devices)', () => {
+  test('should submit correct date after incorrect (small devices)', () => {
 
-  // Set device width to small
-  window.testMediaQueryValues = { width: 300 };
+    // Set device width to small
+    window.testMediaQueryValues = { width: 300 };
 
-  const wrapper = mount(<SearchForm {...props} />);
-
-  // Enter date out of range (1 year)
-  wrapper.find('MediaQuery').at(0).find('input').simulate('change', { target: { value: '1971-01-01' } });
-  expect(wrapper.state('date')).toBeNull();
-  wrapper.find('form').simulate('submit');
-  expect(wrapper.state('errorDateInput')).toBeTruthy();
-
-  // Enter past date
-  wrapper.find('MediaQuery').at(0).find('input').simulate('change', { target: { value: '1969-12-31' } });
-  expect(wrapper.state('date')).toBeNull();
-  wrapper.find('form').simulate('submit');
-  expect(wrapper.state('errorDateInput')).toBeTruthy();
-});
-
-test('should not submit nonexistent date (small devices)', () => {
-
-  // Set device width to small
-  window.testMediaQueryValues = { width: 300 };
-
-  const wrapper = mount(<SearchForm {...props} />);
-
-  wrapper.find('MediaQuery').at(0).find('input').simulate('change', { target: { value: '1970-01-35' } });
-  expect(wrapper.state('date')).toBeNull();
-  wrapper.find('form').simulate('submit');
-  expect(wrapper.state('errorDateInput')).toBeTruthy();
-});
-
-
-test('should submit correct date (big devices)', () => {
-
-  // Set device width to big
-  window.testMediaQueryValues = { width: 1200 };
-
-  const wrapper = mount(<SearchForm {...props} />);
-  wrapper.find('MediaQuery').at(1).find('input').simulate('change', { target: { value: '1970-05-22' } });
-  expect(wrapper.state('date').format('YYYY-MM-DD')).toEqual(moment('1970-05-22').format('YYYY-MM-DD'));
-  wrapper.find('form').simulate('submit');
-  expect(wrapper.state('errorDateInput')).toBeFalsy();
-});
-
-test('should submit correct date after incorrect (big devices)', () => {
-
-  // Set device width to small
-  window.testMediaQueryValues = { width: 1200 };
-
-  const wrapper = mount(<SearchForm {...props} />);
-  wrapper.setState({
-    date: null,
-    errorDateInput: true
+    const wrapper = mount(<SearchForm {...props} />);
+    wrapper.setState({
+      date: null,
+      errorDateInput: true
+    });
+    wrapper.find('MediaQuery').at(0).find('input').simulate('change', { target: { value: '1970-05-22' } });
+    expect(wrapper.state('date').format('YYYY-MM-DD')).toEqual(moment('1970-05-22').format('YYYY-MM-DD'));
+    wrapper.find('form').simulate('submit');
+    expect(wrapper.state('errorDateInput')).toBeFalsy();
   });
-  wrapper.find('MediaQuery').at(1).find('input').simulate('change', { target: { value: '1970-05-22' } });
-  expect(wrapper.state('date').format('YYYY-MM-DD')).toEqual(moment('1970-05-22').format('YYYY-MM-DD'));
-  wrapper.find('form').simulate('submit');
-  expect(wrapper.state('errorDateInput')).toBeFalsy();
-});
 
-test('should not submit out of range date (big devices)', () => {
+  test('should not submit out of range date (small devices)', () => {
 
-  // Set device width to big
-  window.testMediaQueryValues = { width: 1200 };
+    // Set device width to small
+    window.testMediaQueryValues = { width: 300 };
 
-  const wrapper = mount(<SearchForm {...props} />);
+    const wrapper = mount(<SearchForm {...props} />);
 
-  // Enter date out of range (1 year)
-  wrapper.find('MediaQuery').at(1).find('input').simulate('change', { target: { value: '1971-01-01' } });
-  expect(wrapper.state('date')).toBeNull();
-  wrapper.find('form').simulate('submit');
-  expect(wrapper.state('errorDateInput')).toBeTruthy();
+    // Enter date out of range (1 year)
+    wrapper.find('MediaQuery').at(0).find('input').simulate('change', { target: { value: '1971-01-01' } });
+    expect(wrapper.state('date')).toBeNull();
+    wrapper.find('form').simulate('submit');
+    expect(wrapper.state('errorDateInput')).toBeTruthy();
 
-  // Enter past date
-  wrapper.find('MediaQuery').at(1).find('input').simulate('change', { target: { value: '1969-12-31' } });
-  expect(wrapper.state('date')).toBeNull();
-  wrapper.find('form').simulate('submit');
-  expect(wrapper.state('errorDateInput')).toBeTruthy();
-});
+    // Enter past date
+    wrapper.find('MediaQuery').at(0).find('input').simulate('change', { target: { value: '1969-12-31' } });
+    expect(wrapper.state('date')).toBeNull();
+    wrapper.find('form').simulate('submit');
+    expect(wrapper.state('errorDateInput')).toBeTruthy();
+  });
 
-test('should not submit nonexistent date (big devices)', () => {
+  test('should not submit nonexistent date (small devices)', () => {
 
-  // Set device width to big
-  window.testMediaQueryValues = { width: 1200 };
+    // Set device width to small
+    window.testMediaQueryValues = { width: 300 };
 
-  const wrapper = mount(<SearchForm {...props} />);
+    const wrapper = mount(<SearchForm {...props} />);
 
-  wrapper.find('MediaQuery').at(1).find('input').simulate('change', { target: { value: '1970-01-35' } });
-  expect(wrapper.state('date')).toBeNull();
-  wrapper.find('form').simulate('submit');
-  expect(wrapper.state('errorDateInput')).toBeTruthy();
-});
+    wrapper.find('MediaQuery').at(0).find('input').simulate('change', { target: { value: '1970-01-35' } });
+    expect(wrapper.state('date')).toBeNull();
+    wrapper.find('form').simulate('submit');
+    expect(wrapper.state('errorDateInput')).toBeTruthy();
+  });
 
-test('should set calendar focus on change (small devices)', () => {
 
-  window.testMediaQueryValues = { width: 300 };
+  test('should submit correct date (big devices)', () => {
 
-  const wrapper = shallow(<SearchForm {...props} />);
-  //console.log(wrapper.find('MediaQuery').at(0).debug())
-  wrapper.find('MediaQuery').at(0).find('withStyles(SingleDatePicker)').prop('onFocusChange')({ focused: true });
-  expect(wrapper.state('calendarFocused')).toBeTruthy();
-});
+    // Set device width to big
+    window.testMediaQueryValues = { width: 1200 };
 
-test('should set calendar focus on change (big devices)', () => {
+    const wrapper = mount(<SearchForm {...props} />);
+    wrapper.find('MediaQuery').at(1).find('input').simulate('change', { target: { value: '1970-05-22' } });
+    expect(wrapper.state('date').format('YYYY-MM-DD')).toEqual(moment('1970-05-22').format('YYYY-MM-DD'));
+    wrapper.find('form').simulate('submit');
+    expect(wrapper.state('errorDateInput')).toBeFalsy();
+  });
 
-  window.testMediaQueryValues = { width: 1200 };
+  test('should submit correct date after incorrect (big devices)', () => {
 
-  const wrapper = shallow(<SearchForm {...props} />);
-  //console.log(wrapper.find('MediaQuery').at(0).debug())
-  wrapper.find('MediaQuery').at(1).find('withStyles(SingleDatePicker)').prop('onFocusChange')({ focused: true });
-  expect(wrapper.state('calendarFocused')).toBeTruthy();
+    // Set device width to small
+    window.testMediaQueryValues = { width: 1200 };
+
+    const wrapper = mount(<SearchForm {...props} />);
+    wrapper.setState({
+      date: null,
+      errorDateInput: true
+    });
+    wrapper.find('MediaQuery').at(1).find('input').simulate('change', { target: { value: '1970-05-22' } });
+    expect(wrapper.state('date').format('YYYY-MM-DD')).toEqual(moment('1970-05-22').format('YYYY-MM-DD'));
+    wrapper.find('form').simulate('submit');
+    expect(wrapper.state('errorDateInput')).toBeFalsy();
+  });
+
+  test('should not submit out of range date (big devices)', () => {
+
+    // Set device width to big
+    window.testMediaQueryValues = { width: 1200 };
+
+    const wrapper = mount(<SearchForm {...props} />);
+
+    // Enter date out of range (1 year)
+    wrapper.find('MediaQuery').at(1).find('input').simulate('change', { target: { value: '1971-01-01' } });
+    expect(wrapper.state('date')).toBeNull();
+    wrapper.find('form').simulate('submit');
+    expect(wrapper.state('errorDateInput')).toBeTruthy();
+
+    // Enter past date
+    wrapper.find('MediaQuery').at(1).find('input').simulate('change', { target: { value: '1969-12-31' } });
+    expect(wrapper.state('date')).toBeNull();
+    wrapper.find('form').simulate('submit');
+    expect(wrapper.state('errorDateInput')).toBeTruthy();
+  });
+
+  test('should not submit nonexistent date (big devices)', () => {
+
+    // Set device width to big
+    window.testMediaQueryValues = { width: 1200 };
+
+    const wrapper = mount(<SearchForm {...props} />);
+
+    wrapper.find('MediaQuery').at(1).find('input').simulate('change', { target: { value: '1970-01-35' } });
+    expect(wrapper.state('date')).toBeNull();
+    wrapper.find('form').simulate('submit');
+    expect(wrapper.state('errorDateInput')).toBeTruthy();
+  });
+
+  test('should set calendar focus on change (small devices)', () => {
+
+    window.testMediaQueryValues = { width: 300 };
+
+    const wrapper = shallow(<SearchForm {...props} />);
+    //console.log(wrapper.find('MediaQuery').at(0).debug())
+    wrapper.find('MediaQuery').at(0).find('withStyles(SingleDatePicker)').prop('onFocusChange')({ focused: true });
+    expect(wrapper.state('calendarFocused')).toBeTruthy();
+  });
+
+  test('should set calendar focus on change (big devices)', () => {
+
+    window.testMediaQueryValues = { width: 1200 };
+
+    const wrapper = shallow(<SearchForm {...props} />);
+    //console.log(wrapper.find('MediaQuery').at(0).debug())
+    wrapper.find('MediaQuery').at(1).find('withStyles(SingleDatePicker)').prop('onFocusChange')({ focused: true });
+    expect(wrapper.state('calendarFocused')).toBeTruthy();
+  });
 });
 
 
