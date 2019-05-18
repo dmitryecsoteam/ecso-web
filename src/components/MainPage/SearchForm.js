@@ -16,50 +16,19 @@ import InputWithErrorTooltip from './InputWithErrorTooltip';
 import Autosuggest from 'react-autosuggest';
 import city from '../../images/icons/city.png';
 import { SingleDatePicker } from 'react-dates';
-//import isInclusivelyAfterDay from 'react-dates/src/utils/isInclusivelyAfterDay';
-//import isBeforeDay from 'react-dates/src/utils/isBeforeDay';
-
+import { isBeforeDay, isInclusivelyAfterDay } from '../../utils/dates';
+import { numberOfNonZeroParams } from '../../utils/parameters';
 
 // Minimum and maximum number of parameters user must select
 const PARAMETERS_MIN = 1;
 const PARAMETERS_MAX = 6;
-
-const numberOfNonZeroParams = (parameters) => {
-    let count = 0;
-    for (let parameter in parameters) {
-        if (parameters[parameter]) count++;
-    }
-    return count;
-};
-
-const isBeforeDay = (a, b) => {
-    if (!moment.isMoment(a) || !moment.isMoment(b)) return false;
-
-    const aYear = a.year();
-    const aMonth = a.month();
-  
-    const bYear = b.year();
-    const bMonth = b.month();
-  
-    const isSameYear = aYear === bYear;
-    const isSameMonth = aMonth === bMonth;
-  
-    if (isSameYear && isSameMonth) return a.date() < b.date();
-    if (isSameYear) return aMonth < bMonth;
-    return aYear < bYear;
-}
-
-const isInclusivelyAfterDay = (a, b) => {
-    if (!moment.isMoment(a) || !moment.isMoment(b)) return false;
-    return !isBeforeDay(a, b);
-}
 
 
 export class SearchForm extends React.Component {
 
     /* 
      *   originInputValue: displayed name of origin, selected by user. Defaults to ''
-     *   originsSelectedId: ID of selected origin in database. Defaults to 0
+     *   originSelectedId: ID of selected origin in database. Defaults to 0
      *   destinationInputValue: displayed name of destination, selected by user. Defaults to ''
      *   destinationSelectedId: ID of selected destination in database. Defaults to 0
      *   suggestOrigins: array of suggested origins from DB, based on user's typed characters
@@ -85,7 +54,7 @@ export class SearchForm extends React.Component {
      */
     state = {
         originInputValue: this.props.searchForm.originInputValue,
-        originsSelectedId: this.props.searchForm.originsSelectedId,
+        originSelectedId: this.props.searchForm.originSelectedId,
         destinationInputValue: this.props.searchForm.destinationInputValue,
         destinationSelectedId: this.props.searchForm.destinationSelectedId,
         suggestOrigins: [],
@@ -127,7 +96,7 @@ export class SearchForm extends React.Component {
         // First, update state with entered value
         this.setState(() => ({
             originInputValue: newValue,
-            originsSelectedId: 0
+            originSelectedId: 0
         }));
 
         // Second, check that user entered new City (typed or copied),
@@ -190,13 +159,13 @@ export class SearchForm extends React.Component {
             if (this.state.suggestOrigins.length !== 0) {
                 this.setState(() => ({
                     originInputValue: this.state.suggestOrigins[0].nameEn,
-                    originsSelectedId: this.state.suggestOrigins[0]._id,
+                    originSelectedId: this.state.suggestOrigins[0]._id,
                     errorOriginInput: false
                 }), () => this.props.setSearchForm(this.state));
             } else {
                 this.setState(() => ({
                     originInputValue: '',
-                    originsSelectedId: 0
+                    originSelectedId: 0
                 }), () => this.props.setSearchForm(this.state));
             };
         } else {
@@ -232,7 +201,7 @@ export class SearchForm extends React.Component {
     onOriginSuggestionSelected = (event, { suggestion }) => {
         this.originSelectedByUser = true;
         this.setState(() => ({
-            originsSelectedId: suggestion._id
+            originSelectedId: suggestion._id
         }), () => this.props.setSearchForm(this.state));
     };
 
@@ -375,9 +344,9 @@ export class SearchForm extends React.Component {
 
             // Find travels based on parameters
             if (this.state.parametersPanel) {
-                this.props.startSearchTravelsByParameters(this.state.originsSelectedId, this.state.parametersValue, this.state.date.format('YYYY-MM-DD'));
+                this.props.startSearchTravelsByParameters(this.state.originSelectedId, this.state.parametersValue, this.state.date.format('YYYY-MM-DD'));
             } else {
-                this.props.startSearchTravelsByDestination(this.state.originsSelectedId, this.state.destinationSelectedId, this.state.date.format('YYYY-MM-DD'));
+                this.props.startSearchTravelsByDestination(this.state.originSelectedId, this.state.destinationSelectedId, this.state.date.format('YYYY-MM-DD'));
             };
         };
     };

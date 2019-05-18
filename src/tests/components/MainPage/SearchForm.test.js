@@ -6,6 +6,7 @@ import { client } from '../../../clientGraphQL/client';
 import 'react-dates/initialize';
 
 import origins from '../../fixtures/origins';
+import destinations from '../../fixtures/destinations'
 
 
 jest.mock('../../../clientGraphQL/client.js');
@@ -27,7 +28,7 @@ window.matchMedia = (query) => {
 };
 
 const startSearchOrigins = jest.fn(() => Promise.resolve());
-const startSearchDestinations = jest.fn();
+const startSearchDestinations = jest.fn(() => Promise.resolve());
 const startSearchTravelsByParameters = jest.fn();
 const startSearchTravelsByDestination = jest.fn();
 const setSearchForm = jest.fn();
@@ -39,7 +40,7 @@ const props = {
   isFetchingDestinations: false,
   searchForm: {
     originInputValue: '',
-    originsSelectedId: 0,
+    originSelectedId: 0,
     destinationInputValue: '',
     destinationSelectedId: 0,
     date: moment(),
@@ -109,7 +110,23 @@ test('should not start search origins when user input starts from special symbol
   expect(wrapper.state('suggestOrigins')).toEqual([]);
 });
 
-test('should render autosuggest list', async () => {
+test('should start search origins only on first letter while user continue typing', async () => {
+  const wrapper = mount(<SearchForm {...props} />);
+  let value = 'T';
+  
+  wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
+  await wrapper.setProps({
+    origins
+  });
+
+  value = 'To';
+  wrapper.find('Autosuggest').at(0).find('input').simulate('change', { target: { value } });
+
+  expect(startSearchOrigins).toHaveBeenCalledTimes(1);
+  expect(startSearchOrigins).toHaveBeenCalledWith(value[0].toLowerCase())
+});
+
+test('should render origins autosuggest list', async () => {
   const value = 'T';
   const wrapper = mount(<SearchForm {...props} />);
 
@@ -134,7 +151,7 @@ test('should set originInputValue when user selects suggestion', async () => {
   wrapper.find('Autosuggest').at(0).find('li').at(1).simulate('click');
 
   expect(wrapper.state('originInputValue')).toEqual(origins[2].nameEn);
-  expect(wrapper.state('originsSelectedId')).toEqual(origins[2]._id);
+  expect(wrapper.state('originSelectedId')).toEqual(origins[2]._id);
 });
 
 test('should set originInputValue to first item of origins array when user blur out input', async () => {
@@ -149,10 +166,10 @@ test('should set originInputValue to first item of origins array when user blur 
   wrapper.find('Autosuggest').at(0).find('input').simulate('blur');
 
   expect(wrapper.state('originInputValue')).toEqual(origins[0].nameEn);
-  expect(wrapper.state('originsSelectedId')).toEqual(origins[0]._id);
+  expect(wrapper.state('originSelectedId')).toEqual(origins[0]._id);
 });
 
-test('should clear input when user blur out and suggestions array is empty', async () => {
+test('should clear origin input when user blur out and suggestions array is empty', async () => {
   const value = 'Tk';
   const wrapper = mount(<SearchForm {...props} />);
 
@@ -164,15 +181,141 @@ test('should clear input when user blur out and suggestions array is empty', asy
   wrapper.find('Autosuggest').at(0).find('input').simulate('blur');
 
   expect(wrapper.state('originInputValue')).toEqual('');
-  expect(wrapper.state('originsSelectedId')).toEqual(0);
+  expect(wrapper.state('originSelectedId')).toEqual(0);
 });
 
-test('should give an error on form submition with empty origin', () => {
+test('should give an error on form submit with empty origin', () => {
   const wrapper = shallow(<SearchForm {...props} />);
   wrapper.find('form').simulate('submit', { preventDefault: () => {} });
 
   expect(wrapper.state('errorOriginInput')).toBeTruthy();
 });
+
+
+
+
+/*************************   Destination   *************************/
+
+test('should set suggestDestinations to array of suggestions on user input', async () => {
+  const value = 'T';
+  const wrapper = mount(<SearchForm {...props} />);
+
+  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+  await wrapper.setProps({
+    destinations
+  });
+
+  expect(startSearchDestinations).toHaveBeenCalledWith(value[0].toLowerCase());
+  expect(wrapper.state('suggestDestinations')).toEqual([destinations[0], destinations[2]]);
+});
+
+test('should set suggestDestinations to empty array on user input', async () => {
+  const value = 'Tk';
+  const wrapper = mount(<SearchForm {...props} />);
+
+  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+  await wrapper.setProps({
+    destinations
+  });
+
+  expect(startSearchDestinations).toHaveBeenCalledWith(value[0].toLowerCase());
+  expect(wrapper.state('suggestDestinations')).toEqual([]);
+});
+
+test('should not start search destinations when user input starts from special symbol', async () => {
+  const value = '%Tk';
+  const wrapper = mount(<SearchForm {...props} />);
+
+  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+  await wrapper.setProps({
+    destinations
+  });
+
+  expect(startSearchDestinations).toHaveBeenCalledTimes(0);
+  expect(wrapper.state('suggestDestinations')).toEqual([]);
+});
+
+test('should start search destinations only on first letter while user continue typing', async () => {
+  const wrapper = mount(<SearchForm {...props} />);
+  let value = 'T';
+  
+  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+  await wrapper.setProps({
+    destinations
+  });
+
+  value = 'To';
+  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+
+  expect(startSearchDestinations).toHaveBeenCalledTimes(1);
+  expect(startSearchDestinations).toHaveBeenCalledWith(value[0].toLowerCase())
+});
+
+test('should render destinations autosuggest list', async () => {
+  const value = 'T';
+  const wrapper = mount(<SearchForm {...props} />);
+
+  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+  await wrapper.setProps({
+    destinations
+  });
+  wrapper.find('Autosuggest').at(1).find('input').simulate('focus');
+
+  expect(wrapper.find('Autosuggest').at(1)).toMatchSnapshot();
+});
+
+test('should set destinationInputValue when user selects suggestion', async () => {
+  const value = 'T';
+  const wrapper = mount(<SearchForm {...props} />);
+
+  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+  await wrapper.setProps({
+    destinations
+  });
+  wrapper.find('Autosuggest').at(1).find('input').simulate('focus');
+  wrapper.find('Autosuggest').at(1).find('li').at(1).simulate('click');
+
+  expect(wrapper.state('destinationInputValue')).toEqual(destinations[2].nameEn);
+  expect(wrapper.state('destinationSelectedId')).toEqual(destinations[2]._id);
+});
+
+test('should set destinationInputValue to first item of destinations array when user blur out input', async () => {
+  const value = 'T';
+  const wrapper = mount(<SearchForm {...props} />);
+
+  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+  await wrapper.setProps({
+    destinations
+  });
+  wrapper.find('Autosuggest').at(1).find('input').simulate('focus');
+  wrapper.find('Autosuggest').at(1).find('input').simulate('blur');
+
+  expect(wrapper.state('destinationInputValue')).toEqual(destinations[0].nameEn);
+  expect(wrapper.state('destinationSelectedId')).toEqual(destinations[0]._id);
+});
+
+test('should clear destination input when user blur out and suggestions array is empty', async () => {
+  const value = 'Tk';
+  const wrapper = mount(<SearchForm {...props} />);
+
+  wrapper.find('Autosuggest').at(1).find('input').simulate('change', { target: { value } });
+  await wrapper.setProps({
+    destinations
+  });
+  wrapper.find('Autosuggest').at(1).find('input').simulate('focus');
+  wrapper.find('Autosuggest').at(1).find('input').simulate('blur');
+
+  expect(wrapper.state('destinationInputValue')).toEqual('');
+  expect(wrapper.state('destinationSelectedId')).toEqual(0);
+});
+
+test('should give an error on form submit with empty destination', () => {
+  const wrapper = shallow(<SearchForm {...props} />);
+  wrapper.find('form').simulate('submit', { preventDefault: () => {} });
+
+  expect(wrapper.state('errorDestinationInput')).toBeTruthy();
+});
+
 
 
 

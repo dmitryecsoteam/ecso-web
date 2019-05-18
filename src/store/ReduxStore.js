@@ -25,7 +25,7 @@ const defaultState = {
     },
     searchForm: {
         originInputValue: '',
-        originsSelectedId: 0,
+        originSelectedId: 0,
         destinationInputValue: '',
         destinationSelectedId: 0,
         date: moment(),
