@@ -1,4 +1,6 @@
-const moment = jest.requireActual('moment');
+let moment;
+if (process.env.NODE_ENV === 'test') moment = jest.requireActual('moment');
+else moment = require('moment');
 
 export const isBeforeDay = (a, b) => {
     if (!moment.isMoment(a) || !moment.isMoment(b)) return false;

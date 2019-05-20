@@ -324,7 +324,6 @@ export class SearchForm extends React.Component {
 
         if (!this.state.date) {
             errorDateInput = true;
-
         }
 
         if (this.state.parametersPanel && numberOfNonZeroParams(this.state.parametersValue) < PARAMETERS_MIN) {

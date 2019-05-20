@@ -1,5 +1,5 @@
-import moment from 'moment';
 import { isBeforeDay, isInclusivelyAfterDay } from '../../utils/dates';
+const moment = jest.requireActual('moment');
 
 const today = moment();
 const tomorrow = moment().add(1, 'days');
