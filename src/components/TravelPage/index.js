@@ -22,16 +22,12 @@ export default ({ match }) => {
         const { travelFull } = data;
         const { destination } = travelFull;
 
-        const images = [];
-        for (let i = 1; i <= 3; i++) {
-            images.push(`/images/${destination.nameEn}-${destination.countryEn}/slide${i}.jpg`);
-        }
-
         return <div>
         <Header title={`${destination.nameEn}, ${destination.countryEn}`}/>
         <ImageSlider 
             interval={5000}
-            images={images}
+            name={destination.nameEn}
+            country={destination.countryEn}
         />
             <h1>{`${destination.nameEn}, ${destination.countryEn}`}</h1>
         </div>

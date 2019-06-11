@@ -92,6 +92,11 @@ query travelFull(
         _id
         date
         priceAirplane
+        priceHotel
+        carDuration
+        carDistance
+        weatherTempStatMin
+        weatherTempStatMax
         destination {
             _id
             nameEn
@@ -108,6 +113,8 @@ query travelFull(
             shoppingDescription
             natureDescription
             nightlifeDescription
+            cityDescription
+            population
         }
     }
 }

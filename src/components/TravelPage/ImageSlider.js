@@ -1,35 +1,59 @@
-import React from 'react'
+import React from 'react';
+import loadImage from '../../utils/loadImage';
+import '@babel/polyfill';
+import classNames from 'classnames';
 
 export default class ImageSlider extends React.Component {
 
     state = {
+        images: [],
         index: 0
     }
 
+    // ref to ImageSlider div container. To control css classes and animation
     divRef = React.createRef();
+
+    // Interval property for setInterval and clearInterval
     autoSlide = 0;
 
-    componentDidMount() {
+    async componentDidMount() {
+
+        const images = [];
+        let i = 1;
+        let loadNextImage = true;
+        while (loadNextImage) {
+
+            // load next image
+            loadNextImage = await loadImage(`/images/${this.props.name}-${this.props.country}/slide${i}.jpg`);
+
+            // TRUE - image exists and loaded in cache, add this URL to images array and increment counter
+            // FALSE - image doesn't exist, leave while loop
+            if (loadNextImage) {
+                images.push(`/images/${this.props.name}-${this.props.country}/slide${i}.jpg`);
+                i++;
+            }
+        }
+
+        // update state to rerender component
+        this.setState({
+            images
+        });
+
         // add animation
         this.divRef.current.classList.add('image-slider__animation');
 
-        // preload images
-        this.props.images.forEach((image) => {
-            const img = new Image();
-            img.src = image.fileName;
-            img.onload = () => {
-                console.log(image)
-            };
-        });
-
         // Set interval to auto-slide
-        this.autoSlide = setInterval(() => {
-            this.slideRight();
-        }, this.props.interval);
+        this.autoSlide = setInterval(this.slideRight, this.props.interval);
     }
 
     componentDidUpdate() {
-        void this.divRef.current.offsetWidth;
+
+        // HTMLElement's property reference triggers DOM reflow
+        // without this animation wouldn't work
+        // https://css-tricks.com/restart-css-animation/#article-header-id-0
+        this.divRef.current.offsetWidth;
+
+        // rerun animation on new image
         this.divRef.current.classList.add('image-slider__animation');
     }
 
@@ -46,9 +70,7 @@ export default class ImageSlider extends React.Component {
         slide(id);
 
         // set new auto-slide interval
-        this.autoSlide = setInterval(() => {
-            this.slideRight();
-        }, this.props.interval);
+        this.autoSlide = setInterval(this.slideRight, this.props.interval);
     }
 
     slideTo = (index) => {
@@ -65,7 +87,7 @@ export default class ImageSlider extends React.Component {
 
         // rerender with next background image from images array
         // if current background image is the last in array of images, than move to the start
-        if (this.state.index === this.props.images.length - 1) this.slideTo(0);
+        if (this.state.index === this.state.images.length - 1) this.slideTo(0);
         else this.slideTo(this.state.index + 1);
 
     }
@@ -73,8 +95,8 @@ export default class ImageSlider extends React.Component {
     slideLeft = () => {
 
         // rerender with previous background image from images array
-        // if curresnt background image is the first one, than move to the last one
-        if (this.state.index === 0) this.slideTo(this.props.images.length - 1);
+        // if current background image is the first one, than move to the last one
+        if (this.state.index === 0) this.slideTo(this.state.images.length - 1);
         else this.slideTo(this.state.index - 1);
 
     }
@@ -104,7 +126,7 @@ export default class ImageSlider extends React.Component {
 
         const { index } = this.state;
 
-        const { images } = this.props;
+        const { images } = this.state;
 
         const dots = [];
         for (let i = 0; i < images.length; i++) {
@@ -115,8 +137,14 @@ export default class ImageSlider extends React.Component {
             dots.push(<span key={i} data-id={i} className={className} onClick={this.onDotClick}></span>)
         }
 
+        const containerClassNames = classNames('image-slider__container',
+            {
+                'image-slider__container--empty': images.length === 0
+            }
+        );
+
         return (
-            <div className="image-slider__container">
+            <div className={containerClassNames}>
                 <div
                     ref={this.divRef}
                     className="image-slider__current-slide"

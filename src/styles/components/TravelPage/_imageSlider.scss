@@ -4,6 +4,10 @@
   width: 100%;
 }
 
+.image-slider__container--empty {
+  height: 0;
+}
+
 .image-slider__current-slide {
   position: absolute;
   top: 0;
@@ -79,6 +83,11 @@
   .image-slider__container {
     height: 45vh;
   }
+
+  .image-slider__container--empty {
+    height: 0;
+  }
+  
   .image-slider__dots-container {
     top: 42vh;
   }
