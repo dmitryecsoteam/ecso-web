@@ -6,50 +6,52 @@ exports[`should render ImageSlider with three images 1`] = `
   interval={5000}
   name="Name"
 >
-  <div
-    className="image-slider__container"
-  >
+  <div>
     <div
-      className="image-slider__current-slide"
-      style={
-        Object {
-          "backgroundImage": "url(/images/Name-Country/slide1.jpg)",
+      className="image-slider__container"
+    >
+      <div
+        className="image-slider__current-slide"
+        style={
+          Object {
+            "backgroundImage": "url(/images/Name-Country/slide1.jpg)",
+          }
         }
-      }
-    />
-    <div
-      className="image-slider__button image-slider__button--left"
-      onClick={[Function]}
-    >
-      ❮
-    </div>
-    <div
-      className="image-slider__button image-slider__button--right"
-      onClick={[Function]}
-    >
-      ❯
-    </div>
-    <div
-      className="image-slider__dots-container"
-    >
-      <span
-        className="image-slider__dot image-slider__dot--active"
-        data-id={0}
-        key="0"
-        onClick={[Function]}
       />
-      <span
-        className="image-slider__dot"
-        data-id={1}
-        key="1"
+      <div
+        className="image-slider__button image-slider__button--left"
         onClick={[Function]}
-      />
-      <span
-        className="image-slider__dot"
-        data-id={2}
-        key="2"
+      >
+        ❮
+      </div>
+      <div
+        className="image-slider__button image-slider__button--right"
         onClick={[Function]}
-      />
+      >
+        ❯
+      </div>
+      <div
+        className="image-slider__dots-container"
+      >
+        <span
+          className="image-slider__dot image-slider__dot--active"
+          data-id={0}
+          key="0"
+          onClick={[Function]}
+        />
+        <span
+          className="image-slider__dot"
+          data-id={1}
+          key="1"
+          onClick={[Function]}
+        />
+        <span
+          className="image-slider__dot"
+          data-id={2}
+          key="2"
+          onClick={[Function]}
+        />
+      </div>
     </div>
   </div>
 </ImageSlider>
@@ -61,32 +63,6 @@ exports[`should render empty ImageSlider 1`] = `
   interval={5000}
   name="No"
 >
-  <div
-    className="image-slider__container image-slider__container--empty"
-  >
-    <div
-      className="image-slider__current-slide"
-      style={
-        Object {
-          "backgroundImage": "url(undefined)",
-        }
-      }
-    />
-    <div
-      className="image-slider__button image-slider__button--left"
-      onClick={[Function]}
-    >
-      ❮
-    </div>
-    <div
-      className="image-slider__button image-slider__button--right"
-      onClick={[Function]}
-    >
-      ❯
-    </div>
-    <div
-      className="image-slider__dots-container"
-    />
-  </div>
+  <div />
 </ImageSlider>
 `;

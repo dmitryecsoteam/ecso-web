@@ -29,7 +29,7 @@ export default ({ match }) => {
             name={destination.nameEn}
             country={destination.countryEn}
         />
-            <h1>{`${destination.nameEn}, ${destination.countryEn}`}</h1>
+
         </div>
     }}
     </Query>

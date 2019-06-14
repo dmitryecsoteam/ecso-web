@@ -1,0 +1,20 @@
+.parameters__container {
+    border: 1px solid red;
+}
+
+.parameters__label {
+
+}
+
+.parameters__dot {
+    background-color: grey;
+    border-radius: 50%;
+    display: inline-block;
+    height: $m-size;
+    width: $m-size;
+    margin-right: $s-size;
+}
+
+.parameters__dot--active {
+    background-color: red;
+}

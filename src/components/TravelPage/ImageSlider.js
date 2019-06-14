@@ -39,22 +39,30 @@ export default class ImageSlider extends React.Component {
             images
         });
 
-        // add animation
-        this.divRef.current.classList.add('image-slider__animation');
+        if (images.length > 0) {
 
-        // Set interval to auto-slide
-        this.autoSlide = setInterval(this.slideRight, this.props.interval);
+            // add animation
+            this.divRef.current.classList.add('image-slider__animation');
+
+            // Set interval to auto-slide
+            this.autoSlide = setInterval(this.slideRight, this.props.interval);
+
+        }
     }
 
     componentDidUpdate() {
 
-        // HTMLElement's property reference triggers DOM reflow
-        // without this animation wouldn't work
-        // https://css-tricks.com/restart-css-animation/#article-header-id-0
-        this.divRef.current.offsetWidth;
+        if (this.divRef.current) {
 
-        // rerun animation on new image
-        this.divRef.current.classList.add('image-slider__animation');
+            // HTMLElement's property reference triggers DOM reflow
+            // without this animation wouldn't work
+            // https://css-tricks.com/restart-css-animation/#article-header-id-0
+            this.divRef.current.offsetWidth;
+
+            // rerun animation on new image
+            this.divRef.current.classList.add('image-slider__animation');
+
+        }
     }
 
     componentWillUnmount() {
@@ -137,23 +145,25 @@ export default class ImageSlider extends React.Component {
             dots.push(<span key={i} data-id={i} className={className} onClick={this.onDotClick}></span>)
         }
 
-        const containerClassNames = classNames('image-slider__container',
-            {
-                'image-slider__container--empty': images.length === 0
-            }
-        );
+        // const containerClassNames = classNames('image-slider__container',
+        //     {
+        //         'image-slider__container--empty': images.length === 0
+        //     }
+        // );
 
         return (
-            <div className={containerClassNames}>
-                <div
-                    ref={this.divRef}
-                    className="image-slider__current-slide"
-                    style={{ backgroundImage: `url(${images[index]})` }}
-                >
-                </div>
-                <div className="image-slider__button image-slider__button--left" onClick={this.onLeftClick}>&#10094;</div>
-                <div className="image-slider__button image-slider__button--right" onClick={this.onRightClick}>&#10095;</div>
-                <div className="image-slider__dots-container">{dots}</div>
+            <div>
+                {images.length !== 0 && <div className="image-slider__container">
+                    <div
+                        ref={this.divRef}
+                        className="image-slider__current-slide"
+                        style={{ backgroundImage: `url(${images[index]})` }}
+                    >
+                    </div>
+                    <div className="image-slider__button image-slider__button--left" onClick={this.onLeftClick}>&#10094;</div>
+                    <div className="image-slider__button image-slider__button--right" onClick={this.onRightClick}>&#10095;</div>
+                    <div className="image-slider__dots-container">{dots}</div>
+                </div>}
             </div>
         );
     }

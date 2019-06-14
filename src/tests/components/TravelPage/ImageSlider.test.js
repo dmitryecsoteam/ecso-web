@@ -8,6 +8,9 @@ jest.mock('../../../utils/loadImage.js')
 // when this function is called, it waits untill async componentDidMount completes
 const waitForAsync = () => new Promise(resolve => setImmediate(resolve));
 
+// use jest timers for testing setInterval
+jest.useFakeTimers();
+
 let wrapper;
 beforeEach(async () => {
 
@@ -127,27 +130,30 @@ test('should change image on dot click', async () => {
     expect(wrapper.find('.image-slider__current-slide').prop('style')).toEqual({ backgroundImage: 'url(/images/Name-Country/slide3.jpg)' });
 });
 
-test('should set correct interval', async () => {
+test('should set correct interval', () => {
 
-    jest.useFakeTimers();
+    // should call setInterval on component mount
+    expect(setInterval).toHaveBeenCalledWith(expect.any(Function), 5000);
 
-    const interval = 15000;
+    // change image
+    wrapper.update();
+    wrapper.find('.image-slider__button--right').simulate('click');
+    // should reset interval
+    expect(setInterval).toHaveBeenCalledTimes(2);
+    expect(setInterval).toHaveBeenLastCalledWith(expect.any(Function), 5000);
+});
 
+test('should not set interval when images are absent', async () => {
+
+    setInterval.mockClear();
+    
     const wrapper = mount(<ImageSlider
-        interval={interval}
+        interval={5000}
         name='No'
         country='Images'
     />);
 
     await waitForAsync();
 
-    // should call setInterval on component mount
-    expect(setInterval).toHaveBeenCalledWith(expect.any(Function), interval);
-
-    
-    // change image
-    wrapper.find('.image-slider__button--right').simulate('click');
-    // should reset interval
-    expect(setInterval).toHaveBeenCalledTimes(2);
-    expect(setInterval).toHaveBeenLastCalledWith(expect.any(Function), interval);
+    expect(setInterval).toHaveBeenCalledTimes(0);
 });

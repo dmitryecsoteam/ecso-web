@@ -9,7 +9,7 @@ import moment from 'moment';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const defaultState = {
+export const defaultState = {
     originInput: {
         origins: [],
         isFetching: false
