@@ -1,0 +1,206 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render ParametersList component 1`] = `
+<div
+  className="parameters-list__container"
+>
+  <div
+    className="parameters-list__parameter"
+    data-description="One of popular Japan beaches 'Otaru dream beach' can be reached within 30 minutes from Sapporo. "
+    key="Beach"
+  >
+    <span
+      className="parameters-list__label"
+    >
+      BEACH
+    </span>
+    <div>
+      <span
+        className="parameters-list__dot parameters-list__dot--active"
+        key="1"
+      />
+      <span
+        className="parameters-list__dot parameters-list__dot--active"
+        key="2"
+      />
+      <span
+        className="parameters-list__dot"
+        key="3"
+      />
+      <span
+        className="parameters-list__dot"
+        key="4"
+      />
+      <span
+        className="parameters-list__dot"
+        key="5"
+      />
+    </div>
+  </div>
+  <div
+    className="parameters-list__parameter"
+    data-description="Many restaraunts having more that 2000 reviews  (according to 'Tripadvisor')"
+    key="Food"
+  >
+    <span
+      className="parameters-list__label"
+    >
+      FOOD
+    </span>
+    <div>
+      <span
+        className="parameters-list__dot parameters-list__dot--active"
+        key="1"
+      />
+      <span
+        className="parameters-list__dot parameters-list__dot--active"
+        key="2"
+      />
+      <span
+        className="parameters-list__dot parameters-list__dot--active"
+        key="3"
+      />
+      <span
+        className="parameters-list__dot"
+        key="4"
+      />
+      <span
+        className="parameters-list__dot"
+        key="5"
+      />
+    </div>
+  </div>
+  <div
+    className="parameters-list__parameter"
+    data-description="No museums from the TOP-100 and no UNESCO World Heritage objects"
+    key="Museum"
+  >
+    <span
+      className="parameters-list__label"
+    >
+      MUSEUM
+    </span>
+    <div>
+      <span
+        className="parameters-list__dot parameters-list__dot--active"
+        key="1"
+      />
+      <span
+        className="parameters-list__dot"
+        key="2"
+      />
+      <span
+        className="parameters-list__dot"
+        key="3"
+      />
+      <span
+        className="parameters-list__dot"
+        key="4"
+      />
+      <span
+        className="parameters-list__dot"
+        key="5"
+      />
+    </div>
+  </div>
+  <div
+    className="parameters-list__parameter"
+    data-description="Many parks"
+    key="Nature"
+  >
+    <span
+      className="parameters-list__label"
+    >
+      NATURE
+    </span>
+    <div>
+      <span
+        className="parameters-list__dot parameters-list__dot--active"
+        key="1"
+      />
+      <span
+        className="parameters-list__dot parameters-list__dot--active"
+        key="2"
+      />
+      <span
+        className="parameters-list__dot parameters-list__dot--active"
+        key="3"
+      />
+      <span
+        className="parameters-list__dot"
+        key="4"
+      />
+      <span
+        className="parameters-list__dot"
+        key="5"
+      />
+    </div>
+  </div>
+  <div
+    className="parameters-list__parameter"
+    data-description="Large city but not known as a shopping destination"
+    key="Shopping"
+  >
+    <span
+      className="parameters-list__label"
+    >
+      SHOPPING
+    </span>
+    <div>
+      <span
+        className="parameters-list__dot parameters-list__dot--active"
+        key="1"
+      />
+      <span
+        className="parameters-list__dot parameters-list__dot--active"
+        key="2"
+      />
+      <span
+        className="parameters-list__dot parameters-list__dot--active"
+        key="3"
+      />
+      <span
+        className="parameters-list__dot"
+        key="4"
+      />
+      <span
+        className="parameters-list__dot"
+        key="5"
+      />
+    </div>
+  </div>
+  <div
+    className="parameters-list__parameter"
+    data-description="Big city with various places for nightlife"
+    key="Nightlife"
+  >
+    <span
+      className="parameters-list__label"
+    >
+      NIGHTLIFE
+    </span>
+    <div>
+      <span
+        className="parameters-list__dot parameters-list__dot--active"
+        key="1"
+      />
+      <span
+        className="parameters-list__dot parameters-list__dot--active"
+        key="2"
+      />
+      <span
+        className="parameters-list__dot parameters-list__dot--active"
+        key="3"
+      />
+      <span
+        className="parameters-list__dot"
+        key="4"
+      />
+      <span
+        className="parameters-list__dot"
+        key="5"
+      />
+    </div>
+  </div>
+</div>
+`;

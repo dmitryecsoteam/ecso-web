@@ -3,6 +3,7 @@ import { Query } from 'react-apollo';
 import { TRAVELS_SEARCH_FULL } from '../../queries/queries';
 import Header from '../Header';
 import ImageSlider from './ImageSlider';
+import ParametersList from './ParametersList';
 
 import { client } from '../../clientGraphQL/client';
 
@@ -13,24 +14,28 @@ export default ({ match }) => {
         query={TRAVELS_SEARCH_FULL}
         variables={{ _id }}
     >
-    {({ loading, error, data }) => {
-        if (loading) return <p>Loading</p>;
+        {({ loading, error, data }) => {
+            if (loading) return <p>Loading</p>;
 
-        console.log(data)
-        console.log(error)
+            console.log(data)
+            console.log(error)
 
-        const { travelFull } = data;
-        const { destination } = travelFull;
+            const { travelFull } = data;
+            const { destination } = travelFull;
 
-        return <div>
-        <Header title={`${destination.nameEn}, ${destination.countryEn}`}/>
-        <ImageSlider 
-            interval={5000}
-            name={destination.nameEn}
-            country={destination.countryEn}
-        />
+            
 
-        </div>
-    }}
+            return <div>
+                <Header title={`${destination.nameEn}, ${destination.countryEn}`} />
+                <ImageSlider
+                    interval={5000}
+                    name={destination.nameEn}
+                    country={destination.countryEn}
+                />
+                <div><ParametersList destination={data.travelFull.destination} /></div>
+                
+
+            </div>
+        }}
     </Query>
 };

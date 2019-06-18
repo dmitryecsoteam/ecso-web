@@ -1,0 +1,50 @@
+.parameters-list__container {
+    border: 0.1rem solid $light-grey;
+    border-radius: $xs-size;
+    max-width: 20rem;
+    padding-bottom: $s-size;
+}
+
+.parameters-list__parameter {
+    height: 2.6rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-right: $xs-size;
+    
+}
+
+.parameters-list__parameter:hover::after {
+    content: attr(data-description);
+    position: absolute;
+    left: 8rem;
+    
+    z-index: 1;
+    background: rgba(255,255,230,0.9);
+    font-size: $s-size; 
+    padding: $xs-size $s-size; 
+    border: 1px solid #333; 
+    max-width: 40rem;
+    margin-right: 1rem;
+}
+
+.parameters-list__label {
+    color: $dark-grey;
+    font-size: $s-size;
+    margin-left: $s-size;
+}
+
+.parameters-list__dot {
+    background-color: lighten($light-grey, 10%);
+    border-radius: 50%;
+   /* display: inline-block; */
+    height: $s-size;
+    width: $s-size;
+    margin-right: $xs-size;
+    float: left;
+    
+}
+
+.parameters-list__dot--active {
+    background-color: red;
+}
