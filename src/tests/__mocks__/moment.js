@@ -6,4 +6,6 @@ const momentMock = (time = 0) => {
 
 momentMock.isMoment = () => true;
 
+//momentMock.locale = () => {};
+
 export default momentMock;
