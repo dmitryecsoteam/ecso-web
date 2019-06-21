@@ -6,11 +6,14 @@ import ImageSlider from './ImageSlider';
 import ParametersList from './ParametersList';
 import WeatherCard from './WeatherCard';
 
+import cloud from '../../images/icons/cloud.svg';
+import sun from '../../images/icons/sun.svg';
+import sunCloud from '../../images/icons/sun-cloud.svg';
+import rain from '../../images/icons/rain.svg';
+
 import { client } from '../../clientGraphQL/client';
 
 
-// Stub for random picking weather condition
-const conditions = ['cloud', 'sun', 'sun-cloud', 'rain'];
 
 export default ({ match }) => {
     const { _id } = match.params;
@@ -26,12 +29,16 @@ export default ({ match }) => {
             console.log(error)
 
             // Stub for random picking weather condition
-            const condition = conditions[Math.floor(Math.random() * conditions.length)];
-            console.log(condition)
+            const conditions = [cloud, sun, sunCloud, rain];
+            const conditionTexts = ['Mostly cloudy', 'Mostly sunny', 'Sun with clouds', 'Mostly rainy'];
+            const condition = Math.floor(Math.random() * conditions.length);
+            const conditionText = conditionTexts[condition];
+            const conditionImage = conditions[condition];
+
 
             const { travelFull } = data;
             const { destination } = travelFull;
-            
+
 
             return <div>
                 <Header title={`${destination.nameEn}, ${destination.countryEn}`} />
@@ -42,8 +49,14 @@ export default ({ match }) => {
                 />
                 <div><ParametersList destination={destination} /></div>
 
-                <WeatherCard tempMin={travelFull.weatherTempStatMin} tempMax={travelFull.weatherTempStatMax} condition={condition} date={travelFull.date} />
-                
+                <WeatherCard
+                    tempMin={travelFull.weatherTempStatMin}
+                    tempMax={travelFull.weatherTempStatMax}
+                    conditionText={conditionText}
+                    conditionImage={conditionImage}
+                    date={travelFull.date}
+                />
+
 
             </div>
         }}
