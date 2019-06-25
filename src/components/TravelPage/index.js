@@ -5,11 +5,14 @@ import Header from '../Header';
 import ImageSlider from './ImageSlider';
 import ParametersList from './ParametersList';
 import WeatherCard from './WeatherCard';
+import Banner from './Banner';
 
 import cloud from '../../images/icons/cloud.svg';
 import sun from '../../images/icons/sun.svg';
 import sunCloud from '../../images/icons/sun-cloud.svg';
 import rain from '../../images/icons/rain.svg';
+import airplane from '../../images/banners/airplane.jpg';
+import apartments from '../../images/banners/apartments.jpg';
 
 import { client } from '../../clientGraphQL/client';
 
@@ -37,11 +40,19 @@ export default ({ match }) => {
 
 
             const { travelFull } = data;
-            const { destination } = travelFull;
+            const { destination, origin } = travelFull;
+
+
+            const airplaneTextSecondary = travelFull.priceAirplane ? `Prices from ${travelFull.priceAirplane} $` : '';
+            const airplaneTextButton = travelFull.priceAirplane ? 'Buy tickets' : 'Get prices';
+
+            const apartmentsTextSecondary = travelFull.priceHotel ? `Prices from ${travelFull.priceHotel} $` : '';
+            const apartmentsTextButton = travelFull.priceHotel ? 'Book apartments' : 'Get prices';
 
 
             return <div>
                 <Header title={`${destination.nameEn}, ${destination.countryEn}`} />
+
                 <ImageSlider
                     interval={5000}
                     name={destination.nameEn}
@@ -57,6 +68,21 @@ export default ({ match }) => {
                     date={travelFull.date}
                 />
 
+                <Banner
+                    linkTo="#"
+                    backgroundImage={airplane}
+                    textMain={`Airplane from ${origin.nameEn}`}
+                    textSecondary={airplaneTextSecondary}
+                    textButton={airplaneTextButton}
+                />
+
+                <Banner
+                    linkTo="#"
+                    backgroundImage={apartments}
+                    textMain="Apartments and hotels"
+                    textSecondary={apartmentsTextSecondary}
+                    textButton={apartmentsTextButton}
+                />
 
             </div>
         }}

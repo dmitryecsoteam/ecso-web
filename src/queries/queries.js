@@ -116,6 +116,11 @@ query travelFull(
             cityDescription
             population
         }
+        origin {
+            _id
+            nameEn
+            countryEn
+        }
     }
 }
 `;
