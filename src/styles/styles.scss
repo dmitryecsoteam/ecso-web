@@ -1,2 +1,17 @@
 @import './base/settings';
 @import './base/base';
+@import './components/header';
+@import './components/MainPage/mainPage';
+@import './components/MainPage/resultsPanel';
+@import './components/MainPage/searchForm';
+@import './components/MainPage/autosuggest';
+@import './components/MainPage/singleDatePicker';
+@import './components/MainPage/inputWithErrorTooltip';
+@import './components/MainPage/parametersPanel';
+@import './components/MainPage/parameter';
+@import './components/MainPage/travelCard';
+@import './components/TravelPage/imageSlider';
+@import './components/TravelPage/travelPage';
+@import './components/TravelPage/parametersList';
+@import './components/TravelPage/weatherCard';
+@import './components/TravelPage/banner';

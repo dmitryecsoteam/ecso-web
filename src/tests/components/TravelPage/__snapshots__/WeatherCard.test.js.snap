@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render WeatherCard 1`] = `
+<div
+  className="weather-card__container"
+>
+  <div
+    className="weather-card__icon"
+  >
+    <img
+      src="cloud"
+    />
+  </div>
+  <div
+    className="weather-card__text-container"
+  >
+    <span
+      className="weather-card__title"
+    >
+      Average weather on 
+      <b>
+        01 June 2019
+      </b>
+    </span>
+    <div>
+      <div
+        className="weather-card__temperature"
+      >
+        15
+        °...
+        23
+        °
+      </div>
+      <div
+        className="weather-card__condition"
+      >
+        Mostly cloudy
+      </div>
+    </div>
+  </div>
+</div>
+`;

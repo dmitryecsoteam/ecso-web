@@ -1,0 +1,81 @@
+.banner__container {
+    position: relative;
+    //border: 0.1rem solid $light-grey;
+    border-radius: $xs-size;
+    max-width: 80rem;
+    height: 20rem;
+    overflow: hidden;
+    text-align: center;
+}
+
+.banner__link {
+    text-decoration: none;
+}
+
+.banner__image {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: no-repeat center;
+    z-index: -1;
+}
+
+.banner__image::before {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.5;
+  }
+
+.banner__text-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.banner__text {
+    color: white;
+    display: block;
+}
+
+.banner__text--main {
+   margin-top: 3.4rem;
+   font-size: $l-size;
+   font-weight: 500;
+}
+
+.banner__text--secondary {
+    margin-top: $m-size;
+}
+
+.banner__button {
+    background-color: white;
+    color: $light-black;
+    border-radius: $xs-size;
+    padding: $m-size $s-size;
+    margin-top: $s-size;
+    display: inline-block;
+    font-size: 1.6rem;
+}
+
+.banner__button:hover {
+    background-color: lighten($light-grey, 15%);
+}
+
+@media (max-width: $desktop-breakpoint) {
+    .banner__container {
+        height: 15.4rem;
+    }
+
+    .banner__text--main {
+        margin-top: $m-size;
+        font-size: 2.8rem;
+    }
+
+    .banner__button {
+        padding: $s-size;
+    }
+}

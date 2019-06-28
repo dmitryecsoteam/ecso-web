@@ -1,9 +1,18 @@
 // Colors
-
+$light-black: #333333;
+$dark-grey: #484848;
+$mid-grey: #666;
+$light-grey: #c1c1c1;
+$red-error: #ef5d5d;
+$submit-btn: #00d775;
+$option-choose: #00a699; /* 37adbf */
+$disabled: rgb(235, 235, 228);
 
 // Spacing
+$xs-size: 0.6rem;
 $s-size: 1.2rem;
 $m-size: 1.6rem;
+$xm-size: 1.8rem;
 $l-size: 3.2rem;
 $xl-size: 4.8rem;
-$desktop-breakpoint: 45rem;
+$desktop-breakpoint: 650px;

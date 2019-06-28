@@ -1,0 +1,245 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should sort by price asc 1`] = `
+Array [
+  Object {
+    "avgRating": 4.5,
+    "priceAirplane": 100,
+  },
+  Object {
+    "_id": "5c6c7e42e3b7e1edb974a39q",
+    "avgRating": 4,
+    "carDistance": 150,
+    "date": "2019-04-22",
+    "destination": Object {
+      "_id": 3,
+      "beachRating": 1,
+      "countryEn": "Japan",
+      "foodRating": 4,
+      "museumRating": 5,
+      "nameEn": "Nara",
+      "natureRating": 3,
+      "nightlifeRating": 2,
+      "shoppingRating": 5,
+    },
+    "priceAirplane": 100,
+  },
+  Object {
+    "avgRating": 4,
+    "priceAirplane": 115,
+  },
+  Object {
+    "_id": "5c6c7e42e3b7e1edb974a39f",
+    "avgRating": 3.5,
+    "carDistance": 512,
+    "date": "2019-04-22",
+    "destination": Object {
+      "_id": 2,
+      "beachRating": 1,
+      "countryEn": "Japan",
+      "foodRating": 5,
+      "museumRating": 4,
+      "nameEn": "Osaka",
+      "natureRating": 4,
+      "nightlifeRating": 5,
+      "shoppingRating": 4,
+    },
+    "priceAirplane": 115,
+  },
+  Object {
+    "avgRating": 5,
+    "priceAirplane": 150,
+  },
+  Object {
+    "avgRating": 4,
+    "priceAirplane": null,
+  },
+  Object {
+    "avgRating": 1,
+    "priceAirplane": null,
+  },
+]
+`;
+
+exports[`should sort by price desc 1`] = `
+Array [
+  Object {
+    "avgRating": 5,
+    "priceAirplane": 150,
+  },
+  Object {
+    "avgRating": 4,
+    "priceAirplane": 115,
+  },
+  Object {
+    "_id": "5c6c7e42e3b7e1edb974a39f",
+    "avgRating": 3.5,
+    "carDistance": 512,
+    "date": "2019-04-22",
+    "destination": Object {
+      "_id": 2,
+      "beachRating": 1,
+      "countryEn": "Japan",
+      "foodRating": 5,
+      "museumRating": 4,
+      "nameEn": "Osaka",
+      "natureRating": 4,
+      "nightlifeRating": 5,
+      "shoppingRating": 4,
+    },
+    "priceAirplane": 115,
+  },
+  Object {
+    "avgRating": 4.5,
+    "priceAirplane": 100,
+  },
+  Object {
+    "_id": "5c6c7e42e3b7e1edb974a39q",
+    "avgRating": 4,
+    "carDistance": 150,
+    "date": "2019-04-22",
+    "destination": Object {
+      "_id": 3,
+      "beachRating": 1,
+      "countryEn": "Japan",
+      "foodRating": 4,
+      "museumRating": 5,
+      "nameEn": "Nara",
+      "natureRating": 3,
+      "nightlifeRating": 2,
+      "shoppingRating": 5,
+    },
+    "priceAirplane": 100,
+  },
+  Object {
+    "avgRating": 4,
+    "priceAirplane": null,
+  },
+  Object {
+    "avgRating": 1,
+    "priceAirplane": null,
+  },
+]
+`;
+
+exports[`should sort by relevance asc 1`] = `
+Array [
+  Object {
+    "avgRating": 1,
+    "priceAirplane": null,
+  },
+  Object {
+    "_id": "5c6c7e42e3b7e1edb974a39f",
+    "avgRating": 3.5,
+    "carDistance": 512,
+    "date": "2019-04-22",
+    "destination": Object {
+      "_id": 2,
+      "beachRating": 1,
+      "countryEn": "Japan",
+      "foodRating": 5,
+      "museumRating": 4,
+      "nameEn": "Osaka",
+      "natureRating": 4,
+      "nightlifeRating": 5,
+      "shoppingRating": 4,
+    },
+    "priceAirplane": 115,
+  },
+  Object {
+    "_id": "5c6c7e42e3b7e1edb974a39q",
+    "avgRating": 4,
+    "carDistance": 150,
+    "date": "2019-04-22",
+    "destination": Object {
+      "_id": 3,
+      "beachRating": 1,
+      "countryEn": "Japan",
+      "foodRating": 4,
+      "museumRating": 5,
+      "nameEn": "Nara",
+      "natureRating": 3,
+      "nightlifeRating": 2,
+      "shoppingRating": 5,
+    },
+    "priceAirplane": 100,
+  },
+  Object {
+    "avgRating": 4,
+    "priceAirplane": 115,
+  },
+  Object {
+    "avgRating": 4,
+    "priceAirplane": null,
+  },
+  Object {
+    "avgRating": 4.5,
+    "priceAirplane": 100,
+  },
+  Object {
+    "avgRating": 5,
+    "priceAirplane": 150,
+  },
+]
+`;
+
+exports[`should sort by relevance desc 1`] = `
+Array [
+  Object {
+    "avgRating": 5,
+    "priceAirplane": 150,
+  },
+  Object {
+    "avgRating": 4.5,
+    "priceAirplane": 100,
+  },
+  Object {
+    "_id": "5c6c7e42e3b7e1edb974a39q",
+    "avgRating": 4,
+    "carDistance": 150,
+    "date": "2019-04-22",
+    "destination": Object {
+      "_id": 3,
+      "beachRating": 1,
+      "countryEn": "Japan",
+      "foodRating": 4,
+      "museumRating": 5,
+      "nameEn": "Nara",
+      "natureRating": 3,
+      "nightlifeRating": 2,
+      "shoppingRating": 5,
+    },
+    "priceAirplane": 100,
+  },
+  Object {
+    "avgRating": 4,
+    "priceAirplane": 115,
+  },
+  Object {
+    "avgRating": 4,
+    "priceAirplane": null,
+  },
+  Object {
+    "_id": "5c6c7e42e3b7e1edb974a39f",
+    "avgRating": 3.5,
+    "carDistance": 512,
+    "date": "2019-04-22",
+    "destination": Object {
+      "_id": 2,
+      "beachRating": 1,
+      "countryEn": "Japan",
+      "foodRating": 5,
+      "museumRating": 4,
+      "nameEn": "Osaka",
+      "natureRating": 4,
+      "nightlifeRating": 5,
+      "shoppingRating": 4,
+    },
+    "priceAirplane": 115,
+  },
+  Object {
+    "avgRating": 1,
+    "priceAirplane": null,
+  },
+]
+`;

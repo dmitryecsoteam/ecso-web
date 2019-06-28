@@ -1,0 +1,118 @@
+.travel-card {
+  position: relative;
+  height: 15rem;
+  width: 100%;
+  max-width: 120rem;
+  overflow: hidden;
+  text-decoration: none;
+  margin-top: $s-size;
+  transition: all .3s ease-in-out;
+}
+
+.travel-card:hover {
+  transform: scale(1.02);
+}
+
+.travel-card__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.travel-card__image::before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.25;
+}
+
+.travel-card__info {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: white;
+  padding: $s-size;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.travel-card__parameters {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.travel-card__text--h2 {
+  font-size: 2.4rem;
+}
+
+.travel-card__text--big {
+  font-size: 2rem;
+}
+
+.travel-card__text--medium {
+  font-size: 1.6rem;
+}
+
+.travel-card__text--small {
+  font-size: 1.2rem;
+}
+
+.travel-card__text--padding-right {
+  padding-right: $s-size;
+}
+
+.travel-card__price {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+}
+
+@media (min-width: $desktop-breakpoint) { 
+  .travel-card {
+    height: 30rem;
+  }
+
+  .travel-card__image::before {
+    height: 40%;
+    top: 60%;
+    opacity: 0.5;
+  }
+
+  .travel-card__info {
+    height: 40%;
+    top: 60%;
+  }
+
+  .travel-card__text--h2 {
+    font-size: 2.8rem;
+  }
+
+  .travel-card__text--big {
+    font-size: 2.2rem;
+  }
+  
+  .travel-card__text--medium {
+    font-size: 1.8rem;
+  }
+  
+  .travel-card__text--small {
+    font-size: 1.2rem;
+  }
+  
+  .travel-card__text--padding-right {
+    padding-right: 1.4rem;
+  }
+
+}

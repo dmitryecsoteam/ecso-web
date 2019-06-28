@@ -1,0 +1,1 @@
+export const setFilter = (sortBy, desc) => ({ type: 'SET_FILTER', sortBy, desc });

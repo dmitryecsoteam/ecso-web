@@ -8,57 +8,51 @@ query destination($_id: Int){
 }
 `;
 
-export const ORIGIN_INPUT_SEARCH = gql`
-query originStartsWith($name: String){
-    originStartsWith (name: $name) {
+export const ORIGIN_INPUT_SEARCH_EN = gql`
+query originStartsWith($startsWith: String){
+    originStartsWith (name: $startsWith) {
         _id,
         name,
-        name_en,
-        country_en
+        nameEn,
+        countryEn
     }
 }
 `;
 
-export const DESTINATION_INPUT_SEARCH = gql`
-query destinationStartsWith($name: String){
-    destinationStartsWith (name: $name) {
+export const DESTINATION_INPUT_SEARCH_EN = gql`
+query destinationStartsWith($startsWith: String){
+    destinationStartsWith (name: $startsWith) {
         _id,
         name,
-        name_en,
-        country_en
+        nameEn,
+        countryEn
     }
 }
 `;
 
 export const DESTINATION_SEARCH_BY_PARAMETERS = gql`
 query destinationRating(
-    $museumRating: Int,
-    $zooAquaRating: Int,
-    $wellnessSpaRating: Int,
-    $mountainsRating: Int,
     $beachRating: Int,
     $foodRating: Int,
+    $museumRating: Int,
+    $natureRating: Int,
     $shoppingRating: Int,
-    $historicalRating: Int,
-    $natureRating: Int
+    $nightlifeRating: Int
 ) {
     destinationRating (
-        museumRating: $museumRating,
-        zooAquaRating: $zooAquaRating,
-        wellnessSpaRating: $wellnessSpaRating,
-        mountainsRating: $mountainsRating,
         beachRating: $beachRating,
         foodRating: $foodRating,
+        museumRating: $museumRating,
+        natureRating: $natureRating,
         shoppingRating: $shoppingRating,
-        historicalRating: $historicalRating,
-        natureRating: $natureRating
+        nightlifeRating: $nightlifeRating
     ) {
         _id
     }
 }
 `;
 
-export const TRAVELS_SEARCH = gql`
+export const TRAVELS_SEARCH_EN = gql`
 query travel(
     $origin: Int
     $destination: Int
@@ -72,28 +66,17 @@ query travel(
         _id
         date
         priceAirplane
+        carDistance
         destination {
             _id
-            name_en
-            country_en
+            nameEn
+            countryEn
             museumRating
-            zooAquaRating
-            wellnessSpaRating
-            mountainsRating
             beachRating
             foodRating
             shoppingRating
-            historicalRating
             natureRating
-            museumDescription
-            zooAquaDescription
-            wellnessSpaDescription
-            mountainsDescription
-            beachDescription
-            foodDescription
-            shoppingDescription
-            historicalDescription
-            natureDescription
+            nightlifeRating
         }
     }
 }
@@ -109,28 +92,34 @@ query travelFull(
         _id
         date
         priceAirplane
+        priceHotel
+        carDuration
+        carDistance
+        weatherTempStatMin
+        weatherTempStatMax
         destination {
             _id
-            name_en
-            country_en
+            nameEn
+            countryEn
             museumRating
-            zooAquaRating
-            wellnessSpaRating
-            mountainsRating
             beachRating
             foodRating
             shoppingRating
-            historicalRating
             natureRating
+            nightlifeRating
             museumDescription
-            zooAquaDescription
-            wellnessSpaDescription
-            mountainsDescription
             beachDescription
             foodDescription
             shoppingDescription
-            historicalDescription
             natureDescription
+            nightlifeDescription
+            cityDescription
+            population
+        }
+        origin {
+            _id
+            nameEn
+            countryEn
         }
     }
 }

@@ -1,0 +1,159 @@
+.parameters-panel__container {
+  border: 0.1rem solid $light-grey;
+  border-radius: $xs-size;
+  margin: $s-size 0;
+}
+
+.parameters-panel__container--error {
+  border: 0.1rem solid $red-error;
+}
+
+.parameters-panel__parameters {
+  max-height: 0px;
+  transition: 0.5s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.parameters-panel__parameters--open {
+  max-height: 570px;
+}
+
+.parameters-panel__open-close-btn {
+  text-align: center;
+  height: 100%;
+  min-height: 6.8rem;
+  cursor: pointer;
+  padding-top: $xs-size;
+}
+
+.parameters-panel__open-close-btn--open {
+  /*  min-height: 4rem;
+  padding-top: 0; */
+}
+
+.parameters-panel__open-close-text {
+  font-size: $xm-size;
+  font-weight: 500;
+  color: $light-black;
+}
+
+.parameters-panel__open-close-text--error {
+  color: $red-error;
+}
+
+.parameters-panel__arrow-container {
+  margin-top: $xs-size;
+}
+
+.parameters-panel__arrow {
+  position: absolute;
+  left: 48.5%;
+  height: 1.8rem;
+  width: 1.8rem;
+}
+
+.parameters-panel__arrow--first {
+  animation-name: arrowRotateBack, arrowDown;
+  animation-duration: 1s, 3s;
+  animation-delay: 0s, 3.2s;
+  animation-iteration-count: 1, infinite;
+  animation-timing-function: linear;
+}
+
+.parameters-panel__arrow--second {
+  margin-top: 0.8rem;
+  animation-name: arrowRotateBack, arrowDown;
+  animation-duration: 1s, 3s;
+  animation-delay: 0s, 3s;
+  animation-iteration-count: 1, infinite;
+  animation-timing-function: linear;
+}
+
+.parameters-panel__arrow--rotate {
+  animation-name: arrowRotate;
+  animation-duration: 0.5s;
+  animation-delay: 0.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.parameters-panel__arrow--first-init {
+  animation-name: arrowDown;
+  animation-duration: 3s;
+  animation-delay: 0.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.parameters-panel__arrow--second-init {
+  margin-top: 0.8rem;
+  animation-name: arrowDown;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.parameters-panel__arrow-path {
+  fill: $light-black;
+}
+
+@keyframes arrowDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0rem) scale(1);
+  }
+  15% {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.9);
+  }
+  16% {
+    opacity: 0;
+    transform: translateY(-1rem) scale(0.9);
+  }
+  35% {
+    opacity: 1;
+    transform: translateY(0rem) scale(1);
+  }
+}
+
+@keyframes arrowRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes arrowRotateBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  1% {
+    transform: rotate(180deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@media (min-width: $desktop-breakpoint) {
+  .parameters-panel__parameters {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .parameter-container {
+    width: 50%;
+  }
+
+  .parameter-container:nth-of-type(even) {
+    border-left: .1rem solid $light-grey;
+  }
+}

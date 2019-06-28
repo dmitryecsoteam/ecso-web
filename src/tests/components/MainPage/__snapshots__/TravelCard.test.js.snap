@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render TravelCard with car distance 1`] = `
+<Link
+  className="travel-card"
+  replace={false}
+  to="/travel/5c6c7e42e3b7e1edb974a39b"
+>
+  <div
+    className="travel-card__image"
+    style={
+      Object {
+        "backgroundImage": "url(/images/Osaka-Japan/banner.jpg)",
+      }
+    }
+  />
+  <div
+    className="travel-card__info"
+  >
+    <h2>
+      Osaka, Japan
+    </h2>
+    <div
+      className="travel-card__parameters"
+    />
+    <div
+      className="travel-card__price"
+    >
+      <span
+        className="travel-card__text--small"
+      >
+        by car
+      </span>
+      <span
+        className="travel-card__text--big"
+      >
+        approx. 189 km
+      </span>
+    </div>
+  </div>
+</Link>
+`;
+
+exports[`should render TravelCard with empty parameters 1`] = `
+<Link
+  className="travel-card"
+  replace={false}
+  to="/travel/5c6c7e42e3b7e1edb974a39b"
+>
+  <div
+    className="travel-card__image"
+    style={
+      Object {
+        "backgroundImage": "url(/images/Osaka-Japan/banner.jpg)",
+      }
+    }
+  />
+  <div
+    className="travel-card__info"
+  >
+    <h2>
+      Osaka, Japan
+    </h2>
+    <div
+      className="travel-card__parameters"
+    />
+    <div
+      className="travel-card__price"
+    >
+      <span
+        className="travel-card__text--small"
+      >
+        airplane
+      </span>
+      <span
+        className="travel-card__text--big"
+      >
+        from 123 $
+      </span>
+    </div>
+  </div>
+</Link>
+`;
+
+exports[`should render TravelCard with find airplane prices 1`] = `
+<Link
+  className="travel-card"
+  replace={false}
+  to="/travel/5c6c7e42e3b7e1edb974a39b"
+>
+  <div
+    className="travel-card__image"
+    style={
+      Object {
+        "backgroundImage": "url(/images/Osaka-Japan/banner.jpg)",
+      }
+    }
+  />
+  <div
+    className="travel-card__info"
+  >
+    <h2>
+      Osaka, Japan
+    </h2>
+    <div
+      className="travel-card__parameters"
+    />
+    <div
+      className="travel-card__price"
+    >
+      <span
+        className="travel-card__text--small"
+      >
+        airplane
+      </span>
+      <span
+        className="travel-card__text--big"
+      >
+        find prices
+      </span>
+    </div>
+  </div>
+</Link>
+`;
+
+exports[`should render TravelCard with parameters 1`] = `
+<Link
+  className="travel-card"
+  replace={false}
+  to="/travel/5c6c7e42e3b7e1edb974a39b"
+>
+  <div
+    className="travel-card__image"
+    style={
+      Object {
+        "backgroundImage": "url(/images/Osaka-Japan/banner.jpg)",
+      }
+    }
+  />
+  <div
+    className="travel-card__info"
+  >
+    <h2>
+      Osaka, Japan
+    </h2>
+    <div
+      className="travel-card__parameters"
+    >
+      <span
+        className="travel-card__text--medium travel-card__text--padding-right"
+        key="0"
+      >
+        Beach: 4
+      </span>
+      <span
+        className="travel-card__text--medium travel-card__text--padding-right"
+        key="1"
+      >
+        Food: 5
+      </span>
+      <span
+        className="travel-card__text--medium travel-card__text--padding-right"
+        key="2"
+      >
+        Museum: 4
+      </span>
+    </div>
+    <div
+      className="travel-card__price"
+    >
+      <span
+        className="travel-card__text--small"
+      >
+        airplane
+      </span>
+      <span
+        className="travel-card__text--big"
+      >
+        from 123 $
+      </span>
+    </div>
+  </div>
+</Link>
+`;

@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Header with title prop 1`] = `
+<header
+  className="header"
+>
+  <div
+    className="header__logo-container"
+  >
+    <Link
+      replace={false}
+      to="/"
+    >
+      <img
+        alt="logo"
+        className="header__logo"
+        src="test-file-stub"
+      />
+    </Link>
+  </div>
+  <h1
+    className="header__title"
+  >
+    Moscow, Russia
+  </h1>
+  <nav>
+    <ul
+      className="header__menu-container"
+    >
+      <li
+        className="header__menu-item"
+      >
+        <Link
+          className="header__menu-link"
+          replace={false}
+          to="/help"
+        >
+          Help
+        </Link>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <Link
+          className="header__menu-link"
+          replace={false}
+          to="/signin"
+        >
+          Signin
+        </Link>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <Link
+          className="header__menu-link"
+          replace={false}
+          to="/signup"
+        >
+          Signup
+        </Link>
+      </li>
+    </ul>
+  </nav>
+</header>
+`;
+
+exports[`should render Header without title prop 1`] = `
+<header
+  className="header"
+>
+  <div
+    className="header__logo-container"
+  >
+    <Link
+      replace={false}
+      to="/"
+    >
+      <img
+        alt="logo"
+        className="header__logo"
+        src="test-file-stub"
+      />
+    </Link>
+  </div>
+  <nav>
+    <ul
+      className="header__menu-container"
+    >
+      <li
+        className="header__menu-item"
+      >
+        <Link
+          className="header__menu-link"
+          replace={false}
+          to="/help"
+        >
+          Help
+        </Link>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <Link
+          className="header__menu-link"
+          replace={false}
+          to="/signin"
+        >
+          Signin
+        </Link>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <Link
+          className="header__menu-link"
+          replace={false}
+          to="/signup"
+        >
+          Signup
+        </Link>
+      </li>
+    </ul>
+  </nav>
+</header>
+`;

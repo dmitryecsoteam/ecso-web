@@ -1,5 +1,5 @@
 import { client } from '../clientGraphQL/client';
-import { ORIGIN_INPUT_SEARCH } from '../queries/queries';
+import { ORIGIN_INPUT_SEARCH_EN } from '../queries/queries';
 
 export const setOrigins = (origins) => ({
     type: 'SET_ORIGINS',
@@ -17,8 +17,8 @@ export const startSearchOrigins = (searchSymbol) => {
         dispatch(startFetchingOrigins());
 
         return client.query({
-            query: ORIGIN_INPUT_SEARCH,
-            variables: { name: searchSymbol }
+            query: ORIGIN_INPUT_SEARCH_EN,
+            variables: { startsWith: searchSymbol }
         }).then((result) => {
             dispatch(setOrigins(result.data.originStartsWith));
         }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import MediaQuery from 'react-responsive';
 
 
 import { startSearchOrigins } from '../../actions/originInputActions';
@@ -10,49 +11,50 @@ import { setSearchForm } from '../../actions/searchFormActions';
 import selectOriginSuggestions from '../../selectors/originInputSelector';
 import selectDestinationSuggestions from '../../selectors/destinationInputSelector';
 
-import InputAutosuggest from './InputTextAutosuggest';
-import InputDate from './InputDate';
 import ParametersPanel from './ParametersPanel';
-
-import parametersArray from '../../parameters/parameters';
-
-
-
-
-// If user focused out from the input and didn't choose any suggestion, then the first item of the suggestions array
-// would be picked up and set as input value; if suggestions array is empty - empty string ('') will be set as input value.
-// If user selected suggestion, then this suggestion would be set as input value and the input 
-// would be focused out (Autosuggest's prop focusInputOnSuggestionClick={false}).
-//
-// This variables (originSelected, destinationSelected) will let onBlur event know, if user selected suggestion or not.
-// We can't make this variables part of the component's state, because setState function is ASYNC
-// and when onBlur event is fired the state won't be actual.
-// We need some SYNC logic:
-// onSuggestionSelected change originSelected/destinationSelected to 'true', so the onBlur function will know, that user 
-// selected suggestion. onInputChange will make these variables 'false' again.
-let originSelected, destinationSelected = false;
-
-
-
-
+import InputWithErrorTooltip from './InputWithErrorTooltip';
+import Autosuggest from 'react-autosuggest';
+import city from '../../images/icons/city.png';
+import { SingleDatePicker } from 'react-dates';
+import { isBeforeDay, isInclusivelyAfterDay } from '../../utils/dates';
+import { numberOfNonZeroParams } from '../../utils/parameters';
 
 // Minimum and maximum number of parameters user must select
-const PARAMETERS_MIN = 3;
-const PARAMETERS_MAX = 5;
-
-const numberOfNonZeroParams = (array) => {
-    let count = 0;
-    array.forEach(element => {
-        if (element) { count++ };
-    });
-    return count;
-};
+const PARAMETERS_MIN = 1;
+const PARAMETERS_MAX = 6;
 
 
-class SearchPanel extends React.Component {
+export class SearchForm extends React.Component {
+
+    /* 
+     *   originInputValue: displayed name of origin, selected by user. Defaults to ''
+     *   originSelectedId: ID of selected origin in database. Defaults to 0
+     *   destinationInputValue: displayed name of destination, selected by user. Defaults to ''
+     *   destinationSelectedId: ID of selected destination in database. Defaults to 0
+     *   suggestOrigins: array of suggested origins from DB, based on user's typed characters
+     *   suggestDestinations: array of suggested destinations from DB, based on user's typed characters
+     * 
+     *   date: defaults to current date
+     *   calendarFocused: react-dates prop
+     * 
+     *   errorOriginInput: indicates incorrect origin input
+     *   errorDestinationInput: indicates incorrect destination input
+     *   errorDateInput: indicates incorrect date input
+     *   errorParameters: indicates incorrect parameters input
+     * 
+     *   parametersPanel: show or hide parameters panel. Defaults to false
+     *   parametersValue: object of parameters with values entered by user. Defaults to {
+     *       Beach: 0,
+     *       Food: 0,
+     *       Museum: 0,
+     *       Nature: 0,
+     *       Shopping: 0,
+     *       Nightlife: 0
+     *   }
+     */
     state = {
         originInputValue: this.props.searchForm.originInputValue,
-        originsSelectedId: this.props.searchForm.originsSelectedId,
+        originSelectedId: this.props.searchForm.originSelectedId,
         destinationInputValue: this.props.searchForm.destinationInputValue,
         destinationSelectedId: this.props.searchForm.destinationSelectedId,
         suggestOrigins: [],
@@ -61,11 +63,27 @@ class SearchPanel extends React.Component {
         calendarFocused: false,
         errorOriginInput: false,
         errorDestinationInput: false,
+        errorDateInput: false,
         errorParameters: false,
         parametersPanel: this.props.searchForm.parametersPanel,
         parametersValue: this.props.searchForm.parametersValue
     };
 
+    /*
+     *   If user focused out from the input and didn't choose any suggestion, then the first item of the suggestions array
+     *   would be picked up and set as input value; if suggestions array is empty - empty string ('') will be set as input value.
+     *   If user selected suggestion, then this suggestion would be set as input value and the input 
+     *   would be focused out (Autosuggest's prop focusInputOnSuggestionClick={false}).
+     *
+     *   This variables (originSelectedByUser, destinationSelectedByUser) will let onBlur event know, if user selected suggestion or not.
+     *   We can't make this variables part of the component's state, because setState function is ASYNC
+     *   and when onBlur event is fired the state won't be actual.
+     *   We need some SYNC logic:
+     *   onSuggestionSelected change originSelectedByUser/destinationSelectedByUser to 'true', so the onBlur function will know, that user 
+     *   selected suggestion. onInputChange will make these variables 'false' again.
+     */
+    originSelectedByUser = false;
+    destinationSelectedByUser = false;
 
 
     /*************** Functions for Autosuggest inputs ***************/
@@ -73,58 +91,81 @@ class SearchPanel extends React.Component {
     onOriginInputChange = (event, { newValue }) => {
 
         // Set originSelected to false
-        originSelected = false;
+        this.originSelectedByUser = false;
 
-        // Save previous enteredValue and update state with the new actual
+        // First, update state with entered value
         this.setState(() => ({
             originInputValue: newValue,
-            originsSelectedId: 0
+            originSelectedId: 0
         }));
 
-        // Check if it's the first letter in input and then fetch data from api
-        if ((newValue.length === 1)) {
-            this.props.startSearchOrigins(newValue).then(() => {
-                this.setState(() => ({
-                    suggestOrigins: selectOriginSuggestions(this.props.origins, this.state.originInputValue)
-                }));
-            });
-        };
-    };
+        // Second, check that user entered new City (typed or copied),
+        // that starts from different letter. This means we must fetch data from API 
+        // for the first letter.
+        // Additionally check that newValue is not '' (user deleted data from the input).
+        if ((this.state.originInputValue[0] !== newValue[0]) && (newValue)) {
+
+            // Check that newValue doesn't start from special character
+            if (!/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(newValue[0])) {
+
+                // Fetch list of cities starting with first entered in input character in lower case.
+                // Data will be cached.
+                // And then update state to load autosuggest information.
+                this.props.startSearchOrigins(newValue[0].toLowerCase()).then(() => {
+                    this.setState((state) => ({
+                        suggestOrigins: selectOriginSuggestions(this.props.origins, state.originInputValue)
+                    }));
+                });
+            }
+        }
+    }
 
     onDestinationInputChange = (event, { newValue }) => {
 
         // Set destinationSelected to false
-        destinationSelected = false;
+        this.destinationSelectedByUser = false;
 
+        // First, update state with entered value
         this.setState(() => ({
             destinationInputValue: newValue,
             destinationSelectedId: 0
         }));
 
-        // Check if it's the first letter in input and then fetch data from api
-        if ((newValue.length === 1)) {
-            this.props.startSearchDestinations(newValue).then(() => {
-                this.setState(() => ({
-                    suggestDestinations: selectDestinationSuggestions(this.props.destinations, this.state.destinationInputValue)
-                }));
-            });
-        };
-    };
+        // Second, check that user entered new City (typed or copied),
+        // that starts from different letter. This means we must fetch data from API 
+        // for the first letter.
+        // Additionally check that newValue is not '' (user deleted data from the input).
+        if ((this.state.destinationInputValue[0] !== newValue[0]) && (newValue)) {
+
+            // Check that newValue doesn't start from special character
+            if (!/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(newValue[0])) {
+
+                // Fetch list of cities starting with first entered in input character in lower case.
+                // Data will be cached.
+                // And then update state to load autosuggest information.
+                this.props.startSearchDestinations(newValue[0].toLowerCase()).then(() => {
+                    this.setState((state) => ({
+                        suggestDestinations: selectDestinationSuggestions(this.props.destinations, state.destinationInputValue)
+                    }));
+                });
+            }
+        }
+    }
 
     onOriginInputBlur = () => {
 
-        if (!originSelected) {
+        if (!this.originSelectedByUser) {
 
             if (this.state.suggestOrigins.length !== 0) {
                 this.setState(() => ({
-                    originInputValue: this.state.suggestOrigins[0].name_en,
-                    originsSelectedId: this.state.suggestOrigins[0]._id,
+                    originInputValue: this.state.suggestOrigins[0].nameEn,
+                    originSelectedId: this.state.suggestOrigins[0]._id,
                     errorOriginInput: false
                 }), () => this.props.setSearchForm(this.state));
             } else {
                 this.setState(() => ({
                     originInputValue: '',
-                    originsSelectedId: 0
+                    originSelectedId: 0
                 }), () => this.props.setSearchForm(this.state));
             };
         } else {
@@ -136,11 +177,11 @@ class SearchPanel extends React.Component {
 
     onDestinationInputBlur = () => {
 
-        if (!destinationSelected) {
+        if (!this.destinationSelectedByUser) {
 
             if (this.state.suggestDestinations.length !== 0) {
                 this.setState(() => ({
-                    destinationInputValue: this.state.suggestDestinations[0].name_en,
+                    destinationInputValue: this.state.suggestDestinations[0].nameEn,
                     destinationSelectedId: this.state.suggestDestinations[0]._id,
                     errorDestinationInput: false
                 }), () => this.props.setSearchForm(this.state));
@@ -158,14 +199,14 @@ class SearchPanel extends React.Component {
     };
 
     onOriginSuggestionSelected = (event, { suggestion }) => {
-        originSelected = true;
+        this.originSelectedByUser = true;
         this.setState(() => ({
-            originsSelectedId: suggestion._id
+            originSelectedId: suggestion._id
         }), () => this.props.setSearchForm(this.state));
     };
 
     onDestinationSuggestionSelected = (event, { suggestion }) => {
-        destinationSelected = true;
+        this.destinationSelectedByUser = true;
         this.setState(() => ({
             destinationSelectedId: suggestion._id
         }), () => this.props.setSearchForm(this.state));
@@ -195,6 +236,19 @@ class SearchPanel extends React.Component {
         }));
     };
 
+    getSuggestionValue = (suggestion) => (suggestion.nameEn);
+
+    renderSuggestion = (suggestion) => (
+        <div className="react-autosuggest__suggestion-content">
+            <div className="react-autosuggest__suggestion-icon-container">
+                <img className="react-autosuggest__suggestion-icon" src={city} />
+            </div>
+            <span>
+                {suggestion.nameEn}, {suggestion.countryEn}
+            </span>
+        </div>
+    );
+
 
 
     /*************** Functions for react-dates calendar ***************/
@@ -211,6 +265,11 @@ class SearchPanel extends React.Component {
         }));
     };
 
+    // If day is out of range it will be set to null in state
+    isOutsideRange = day => !(isInclusivelyAfterDay(day, moment()) && isBeforeDay(day, moment().add(1, 'years')));
+
+    renderCalendarInfo = () => (<span className="Calendar__info--bottom">Date range: one year</span>);
+
 
 
     /*************** Functions for Parameters inputs ***************/
@@ -220,18 +279,26 @@ class SearchPanel extends React.Component {
             parametersPanel: !state.parametersPanel,
             errorDestinationInput: false,
             errorParameters: false
-        }), () => this.props.setSearchForm(this.state));
+        }),
+            // Callback function after setState completion. Update search form state in redux store 
+            () => this.props.setSearchForm(this.state));
     };
 
-    onParameterChange = (value, id) => {
+    onParameterChange = (value, parameterName) => {
         this.setState((prevState) => {
 
-            prevState.parametersValue[id] = value;
+            //prevState.parametersValue[id] = value;
+            const parametersValue = {
+                ...prevState.parametersValue,
+            };
+            parametersValue[parameterName] = value;
 
             return ({
-                parametersValue: prevState.parametersValue
+                parametersValue
             });
-        }, () => this.props.setSearchForm(this.state));
+        },
+            // Callback function after setState completion. Update search form state in redux store
+            () => this.props.setSearchForm(this.state));
     };
 
 
@@ -244,6 +311,7 @@ class SearchPanel extends React.Component {
         // Check that inputs are correct
         let errorOriginInput = false;
         let errorDestinationInput = false;
+        let errorDateInput = false;
         let errorParameters = false;
 
         if (this.state.originInputValue === '') {
@@ -254,6 +322,10 @@ class SearchPanel extends React.Component {
             errorDestinationInput = true;
         };
 
+        if (!this.state.date) {
+            errorDateInput = true;
+        }
+
         if (this.state.parametersPanel && numberOfNonZeroParams(this.state.parametersValue) < PARAMETERS_MIN) {
             errorParameters = true;
         } else {
@@ -263,16 +335,17 @@ class SearchPanel extends React.Component {
         this.setState(() => ({
             errorOriginInput,
             errorDestinationInput,
+            errorDateInput,
             errorParameters
         }));
 
-        if (!(errorOriginInput || errorDestinationInput || errorParameters)) {
+        if (!(errorOriginInput || errorDestinationInput || errorDateInput || errorParameters)) {
 
             // Find travels based on parameters
             if (this.state.parametersPanel) {
-                this.props.startSearchTravelsByParameters(this.state.originsSelectedId, this.state.parametersValue, this.state.date.format('YYYY-MM-DD'));
+                this.props.startSearchTravelsByParameters(this.state.originSelectedId, this.state.parametersValue, this.state.date.format('YYYY-MM-DD'));
             } else {
-                this.props.startSearchTravelsByDestination(this.state.originsSelectedId, this.state.destinationSelectedId, this.state.date.format('YYYY-MM-DD'));
+                this.props.startSearchTravelsByDestination(this.state.originSelectedId, this.state.destinationSelectedId, this.state.date.format('YYYY-MM-DD'));
             };
         };
     };
@@ -289,6 +362,7 @@ class SearchPanel extends React.Component {
             suggestDestinations,
             errorDestinationInput,
             errorOriginInput,
+            errorDateInput,
             date,
             calendarFocused,
             parametersPanel,
@@ -298,72 +372,137 @@ class SearchPanel extends React.Component {
         const originInputProps = {
             value: originInputValue,
             onChange: this.onOriginInputChange,
-            onBlur: this.onOriginInputBlur
+            onBlur: this.onOriginInputBlur,
+            placeholder: 'City, airport code'
         };
         const destinationInputProps = {
             value: destinationInputValue,
             onChange: this.onDestinationInputChange,
             onBlur: this.onDestinationInputBlur,
-            disabled: parametersPanel
+            disabled: parametersPanel,
+            placeholder: 'City, airport code'
         };
 
-        return (<div>
-            <form onSubmit={this.onFormSubmit}>
-                
-                <div>
-                    <InputAutosuggest
-                        label="From"
-                        suggestions={suggestOrigins}
-                        onSuggestionsFetchRequested={this.onOriginSuggestionsFetchRequested}
-                        onSuggestionsClearRequested={this.onOriginSuggestionsClearRequested}
-                        inputProps={originInputProps}
-                        focusInputOnSuggestionClick={false}
-                        onSuggestionSelected={this.onOriginSuggestionSelected}
-                        error={errorOriginInput}
-                        errorText="Please enter origin"
-                    />
-                </div>
-                <div>
-                    <InputAutosuggest
-                        label="To"
-                        suggestions={suggestDestinations}
-                        onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
-                        onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
-                        inputProps={destinationInputProps}
-                        focusInputOnSuggestionClick={false}
-                        onSuggestionSelected={this.onDestinationSuggestionSelected}
-                        error={errorDestinationInput}
-                        errorText="Please enter destination"
-                    />
-                </div>
-                <div>
-                    <InputDate
-                        label="Date"
-                        date={date}
-                        onDateChange={this.onDateChange}
-                        focused={calendarFocused}
-                        onFocusChange={this.onCalendarFocusChange}
-                        id="date_calendar_id"
-                    />
-                </div>
-                <button>Find</button>
-                <div>
-                    <ParametersPanel
-                        parametersPanel={parametersPanel}
-                        errorParameters={errorParameters}
-                        parametersArray={parametersArray}
-                        parametersEntered={numberOfNonZeroParams(this.state.parametersValue)}
-                        parametersMax={PARAMETERS_MAX}
-                        parametersValue={parametersValue}
-                        onChange={this.onParameterChange}
-                        parametersOnClick={this.parametersOnClick}
-                    />
-                </div>
+        return (
+            <div className="search-form">
+                <form
+                    className="search-form__form"
+                    onSubmit={this.onFormSubmit}
+                >
+                    <div className="search-form__autoinput-group">
+                        <InputWithErrorTooltip
+                            label="From:"
+                            error={errorOriginInput}
+                            errorText="Enter origin"
+                        >
+                            <Autosuggest
+                                suggestions={suggestOrigins}
+                                onSuggestionsFetchRequested={this.onOriginSuggestionsFetchRequested}
+                                onSuggestionsClearRequested={this.onOriginSuggestionsClearRequested}
+                                inputProps={originInputProps}
+                                focusInputOnSuggestionClick={false}
+                                onSuggestionSelected={this.onOriginSuggestionSelected}
+                                getSuggestionValue={this.getSuggestionValue}
+                                renderSuggestion={this.renderSuggestion}
+                            />
+                        </InputWithErrorTooltip>
 
-            </form>
-        </div>)
+                        <InputWithErrorTooltip
+                            label="To:"
+                            error={errorDestinationInput}
+                            errorText="Enter destination"
+                            disabled={parametersPanel}
+                        >
+                            <Autosuggest
+                                suggestions={suggestDestinations}
+                                onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
+                                onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
+                                inputProps={destinationInputProps}
+                                focusInputOnSuggestionClick={false}
+                                onSuggestionSelected={this.onDestinationSuggestionSelected}
+                                getSuggestionValue={this.getSuggestionValue}
+                                renderSuggestion={this.renderSuggestion}
+                            />
+                        </InputWithErrorTooltip>
+                    </div>
+                    <div className="search-form__autoinput-group">
+                        <InputWithErrorTooltip
+                            label="Date:"
+                            error={errorDateInput}
+                            errorText="Enter correct date"
+                        >
+                            {/* 
+                              *   Calendar for small devices as modal.
+                              *   
+                              *   window.testMediaQueryValues allows to set device width in testing environment.
+                              *   In browser it will be undefined and "values" will fall back to actual device width.
+                              *
+                              */}
+                            <MediaQuery query="(max-width: 415px)" values={window.testMediaQueryValues}>
+                                <SingleDatePicker
+                                    date={date}
+                                    onDateChange={this.onDateChange}
+                                    focused={calendarFocused}
+                                    onFocusChange={this.onCalendarFocusChange}
+                                    id="date_calendar_id"
+                                    displayFormat={() => "DD/MM/YYYY"}
+                                    numberOfMonths={1}
+                                    isOutsideRange={this.isOutsideRange}
+                                    placeholder=""
+                                    noBorder
+                                    hideKeyboardShortcutsPanel
+                                    withPortal
+                                    firstDayOfWeek={1}
+                                    daySize={38}
+                                    calendarInfoPosition="bottom"
+                                    renderCalendarInfo={this.renderCalendarInfo}
 
+                                />
+                            </MediaQuery>
 
+                            {/* Calendar for big devices */}
+                            <MediaQuery query="(min-width: 415px)" values={window.testMediaQueryValues}>
+                                <SingleDatePicker
+                                    date={date}
+                                    onDateChange={this.onDateChange}
+                                    focused={calendarFocused}
+                                    onFocusChange={this.onCalendarFocusChange}
+                                    id="date_calendar_id"
+                                    displayFormat={() => "DD/MM/YYYY"}
+                                    numberOfMonths={1}
+                                    isOutsideRange={this.isOutsideRange}
+                                    placeholder=""
+                                    noBorder
+                                    hideKeyboardShortcutsPanel
+                                    firstDayOfWeek={1}
+                                    daySize={34}
+                                    verticalSpacing={0}
+                                    calendarInfoPosition="bottom"
+                                    renderCalendarInfo={this.renderCalendarInfo}
+
+                                />
+                            </MediaQuery>
+                        </InputWithErrorTooltip>
+                        <div className="search-form__submit-btn-container">
+                            <button className="search-form__submit-btn">Find</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <ParametersPanel
+                            parametersPanel={parametersPanel}
+                            errorParameters={errorParameters}
+                            parametersEntered={numberOfNonZeroParams(this.state.parametersValue)}
+                            parametersMax={PARAMETERS_MAX}
+                            parametersValue={parametersValue}
+                            onChange={this.onParameterChange}
+                            parametersOnClick={this.parametersOnClick}
+                        />
+                    </div>
+
+                </form>
+
+            </div>);
     };
 };
 
@@ -383,4 +522,4 @@ const mapDispatchToProps = (dispatch) => ({
     setSearchForm: (state) => dispatch(setSearchForm(state))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchForm);

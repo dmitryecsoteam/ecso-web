@@ -1,0 +1,80 @@
+.react-autosuggest__container {
+  position: relative;
+  width: 100%;
+}
+
+.react-autosuggest__input {
+  color: $mid-grey;
+  border: none;
+  font-size: $xm-size;
+  width: 100%;
+}
+
+.react-autosuggest__input::placeholder {
+  color: $light-grey;
+}
+
+.react-autosuggest__input--focused {
+  outline: none;
+}
+
+.react-autosuggest__input:disabled {
+  background-color: $disabled;
+}
+
+.react-autosuggest__suggestions-container {
+  display: none;
+}
+
+.react-autosuggest__suggestions-container--open {
+  display: block;
+  position: absolute;
+
+  /* autoinput height ($xl-size) - padding-top ($s-size) - 2 borders */
+  top: calc(#{$xl-size} - #{$s-size} - 0.2rem);
+
+  /* move to the left (minus): autoinput padding-left ($m-size) + label min-width ($xl-size) + label margin-right ($s-size) + 1 border */
+  left: calc(-#{$m-size} - #{$xl-size} - #{$s-size} - 0.1rem);
+
+  /* 100% of input width + autoinput padding-left ($m-size) + label min-width ($xl-size) + label margin-right ($s-size) + autoinput padding-right ($m-size) + 2 borders */
+  width: calc(100% + #{$m-size} + #{$xl-size} + #{$s-size} + #{$m-size} + 0.2rem);
+  
+
+  border: 0.1rem solid $light-grey;
+  background-color: white;
+  border-radius: $xs-size;
+  box-shadow: 0 $m-size $l-size -$s-size rgba(26, 26, 26, 0.3);
+  color: $dark-grey;
+  font-weight: 300;
+  font-size: $m-size;
+  z-index: 2;
+}
+
+.react-autosuggest__suggestions-list {
+  list-style-type: none;
+}
+
+.react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: $s-size $xm-size;
+}
+
+.react-autosuggest__suggestion--highlighted {
+  background-color: lighten($light-grey,15%);
+}
+
+.react-autosuggest__suggestion-content {
+  display: flex;
+  align-items: center;
+}
+
+.react-autosuggest__suggestion-icon-container {
+  height: $xm-size;
+  width: $xm-size;
+  margin-right: $xm-size;
+}
+
+.react-autosuggest__suggestion-icon {
+  width: 100%;
+  height: auto;
+}
