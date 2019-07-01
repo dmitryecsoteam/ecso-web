@@ -1,7 +1,7 @@
 .weather-card__container {
     border: 0.1rem solid $light-grey;
     border-radius: $xs-size;
-    width: 40rem;
+    max-width: 40rem;
     height: 20rem;
     position: relative;
     // display: flex;

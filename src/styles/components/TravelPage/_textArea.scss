@@ -1,0 +1,19 @@
+.textarea__container {
+    border: 0.1rem solid $light-grey;
+    border-radius: $xs-size;
+    max-width: 40rem;
+    height: 20rem;
+    padding: $s-size $m-size;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: $light-black;
+}
+
+.textarea__description {
+    font-size: $xm-size;
+}
+
+.textarea__date {
+    margin-top: $xs-size;
+}

@@ -6,6 +6,7 @@ import ImageSlider from './ImageSlider';
 import ParametersList from './ParametersList';
 import WeatherCard from './WeatherCard';
 import Banner from './Banner';
+import TextArea from './TextArea';
 
 import cloud from '../../images/icons/cloud.svg';
 import sun from '../../images/icons/sun.svg';
@@ -67,6 +68,8 @@ export default ({ match }) => {
                     conditionImage={conditionImage}
                     date={travelFull.date}
                 />
+
+                <TextArea description={destination.cityDescription} population={destination.population} />
 
                 <Banner
                     linkTo="#"
