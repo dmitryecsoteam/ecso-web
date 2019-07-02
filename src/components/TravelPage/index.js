@@ -59,33 +59,39 @@ export default ({ match }) => {
                     name={destination.nameEn}
                     country={destination.countryEn}
                 />
-                <div><ParametersList destination={destination} /></div>
+                <div className="travel__container">
 
-                <WeatherCard
-                    tempMin={travelFull.weatherTempStatMin}
-                    tempMax={travelFull.weatherTempStatMax}
-                    conditionText={conditionText}
-                    conditionImage={conditionImage}
-                    date={travelFull.date}
-                />
+                    <div className="travel__leadtext-container">
+                        <p className="travel__leadtext-item">{destination.cityDescription}</p>
+                        <p className="travel__leadtext-population">Average population: {destination.population}</p>
+                        <p className="travel__leadtext-date">Founding date: </p>
+                        <WeatherCard
+                            tempMin={travelFull.weatherTempStatMin}
+                            tempMax={travelFull.weatherTempStatMax}
+                            conditionText={conditionText}
+                            conditionImage={conditionImage}
+                            date={travelFull.date}
+                        />
+                    </div>
 
-                <TextArea description={destination.cityDescription} population={destination.population} />
+                    <ParametersList destination={destination} />
 
-                <Banner
-                    linkTo="#"
-                    backgroundImage={airplane}
-                    textMain={`Airplane from ${origin.nameEn}`}
-                    textSecondary={airplaneTextSecondary}
-                    textButton={airplaneTextButton}
-                />
+                    <Banner
+                        linkTo="#"
+                        backgroundImage={airplane}
+                        textMain={`Airplane from ${origin.nameEn}`}
+                        textSecondary={airplaneTextSecondary}
+                        textButton={airplaneTextButton}
+                    />
 
-                <Banner
-                    linkTo="#"
-                    backgroundImage={apartments}
-                    textMain="Apartments and hotels"
-                    textSecondary={apartmentsTextSecondary}
-                    textButton={apartmentsTextButton}
-                />
+                    <Banner
+                        linkTo="#"
+                        backgroundImage={apartments}
+                        textMain="Apartments and hotels"
+                        textSecondary={apartmentsTextSecondary}
+                        textButton={apartmentsTextButton}
+                    />
+                </div>
 
             </div>
         }}

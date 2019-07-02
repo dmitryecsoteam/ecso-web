@@ -1,50 +1,100 @@
 .parameters-list__container {
-    border: 0.1rem solid $light-grey;
-    border-radius: $xs-size;
-    max-width: 20rem;
-    padding-bottom: $s-size;
+  border: 0.1rem solid $light-grey;
+  border-radius: $xs-size;
+  max-width: 80rem;
+  width: 100%;
+  padding-bottom: $s-size;
+  overflow: hidden;
 }
 
-.parameters-list__parameter {
-    height: 2.6rem;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    padding-right: $xs-size;
-    
+.parameters-list__item-header {
+  position: relative;
+  height: $l-size;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-right: $xs-size;
+  margin-top: $m-size;
+  margin-right: $m-size;
+  //background-color: lighten($light-grey, 15%);
 }
 
-.parameters-list__parameter:hover::after {
-    content: attr(data-description);
-    position: absolute;
-    left: 8rem;
-    
-    z-index: 1;
-    background: rgba(255,255,230,0.9);
-    font-size: $s-size; 
-    padding: $xs-size $s-size; 
-    border: 1px solid #333; 
-    max-width: 40rem;
-    margin-right: 1rem;
+.parameters-list__item-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80rem;
+  height: $l-size;
+  width: 100%;
+  background-color: lighten($light-grey, 15%);
+  z-index: -1;
+  animation: slide1 1s ease-in-out forwards;
 }
+
+@keyframes slide1 {
+  100% { left: 0; }
+}
+
+.parameters-list__item-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 78.8rem;
+  //border-right: 12px solid transparent;
+  border-top: $m-size solid transparent;
+  border-bottom: $m-size solid transparent;
+  border-left: $s-size solid lighten($light-grey, 15%);
+  animation: slide2 1s ease-in-out forwards;
+}
+
+@keyframes slide2 {
+  100% { right: -$s-size; }
+}
+
+// .parameters-list__parameter:hover::after {
+//     content: attr(data-description);
+//     position: absolute;
+//     left: 8rem;
+
+//     z-index: 1;
+//     background: rgba(255,255,230,0.9);
+//     font-size: $s-size;
+//     padding: $xs-size $s-size;
+//     border: 1px solid #333;
+//     max-width: 40rem;
+//     margin-right: 1rem;
+// }
 
 .parameters-list__label {
-    color: $dark-grey;
-    font-size: $s-size;
-    margin-left: $s-size;
+  color: black;
+  font-size: 2rem;
+  margin-left: $s-size;
+}
+
+.parameters-list__dots-container {
+  //display: inline-block;
+  position: absolute;
+  left: 12rem;
 }
 
 .parameters-list__dot {
-    background-color: lighten($light-grey, 10%);
-    border-radius: 50%;
-   /* display: inline-block; */
-    height: $s-size;
-    width: $s-size;
-    margin-right: $xs-size;
-    float: left;
-    
+  //background-color: lighten($light-grey, 10%);
+  background-color: $light-grey;
+  border-radius: 50%;
+  /* display: inline-block; */
+  height: $m-size;
+  width: $m-size;
+  margin-right: $xs-size;
+  float: left;
 }
 
 .parameters-list__dot--active {
-    background-color: red;
+  background-color: #416f6f;
+}
+
+.parameters-list__description {
+    color: $light-black;
+    margin-left: $s-size;
+    margin-right: $s-size;
+    margin-top: 0.3rem;
 }

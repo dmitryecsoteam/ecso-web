@@ -16,9 +16,15 @@ export default ({ destination }) => {
             dots.push(<span key={i} className={className}></span>);
         }
 
-        parameters.push(<div key={parameter} className="parameters-list__parameter" data-description={destination[parameter.toLowerCase() + 'Description']}>
-            <span className="parameters-list__label">{parameter.toUpperCase()}</span>
-            <div>{dots}</div>
+        parameters.push(<div key={parameter} className="parameters-list__item" >
+
+            <div className="parameters-list__item-header" >
+                <span className="parameters-list__label">{parameter}</span>
+                <div className="parameters-list__dots-container">{dots}</div>
+            </div>
+
+            <div className="parameters-list__description">{destination[parameter.toLowerCase() + 'Description']}</div>
+
         </div>);
     }
 
