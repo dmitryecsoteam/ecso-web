@@ -28,6 +28,9 @@
   width: 100%;
   background-color: lighten($light-grey, 15%);
   z-index: -1;
+}
+
+.parameters-list__item-header--animation::before {
   animation: slide1 1s ease-in-out forwards;
 }
 
@@ -44,6 +47,9 @@
   border-top: $m-size solid transparent;
   border-bottom: $m-size solid transparent;
   border-left: $s-size solid lighten($light-grey, 15%);
+}
+
+.parameters-list__item-header--animation::after {
   animation: slide2 1s ease-in-out forwards;
 }
 

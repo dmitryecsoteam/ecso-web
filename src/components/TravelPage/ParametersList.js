@@ -18,7 +18,7 @@ export default ({ destination }) => {
 
         parameters.push(<div key={parameter} className="parameters-list__item" >
 
-            <div className="parameters-list__item-header" >
+            <div className="parameters-list__item-header parameters-list__item-header--animation" >
                 <span className="parameters-list__label">{parameter}</span>
                 <div className="parameters-list__dots-container">{dots}</div>
             </div>
