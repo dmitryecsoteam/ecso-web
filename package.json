@@ -1,6 +1,6 @@
 {
   "name": "ecso-web",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Frontend for ECSO application",
   "main": "index.js",
   "author": "Dmitry",
@@ -8,9 +8,10 @@
   "scripts": {
     "dev-server": "webpack-dev-server --mode development",
     "dev": "webpack --mode development",
-    "build": "webpack --mode production",
+    "build": "webpack -p --mode production",
     "start": "node server/server.js",
-    "test": "jest"
+    "test": "jest",
+    "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
     "express": "4.16.4"
