@@ -1,12 +1,13 @@
 import React from 'react';
 import loadImage from '../../utils/loadImage';
 import '@babel/polyfill';
-import classNames from 'classnames';
 
 export default class ImageSlider extends React.Component {
 
+    // Put first slide in initial state, so it could be displayed as soon as it would be loaded
+    // Then load all next slides in componentDidMount
     state = {
-        images: [],
+        images: [`/images/${this.props.name}-${this.props.country}/slide1.jpg`],
         index: 0
     }
 
@@ -18,8 +19,11 @@ export default class ImageSlider extends React.Component {
 
     async componentDidMount() {
 
-        const images = [];
-        let i = 1;
+        // add animation
+        this.divRef.current.classList.add('image-slider__animation');
+
+        const images = this.state.images.slice();
+        let i = 2;
         let loadNextImage = true;
         while (loadNextImage) {
 
@@ -39,14 +43,9 @@ export default class ImageSlider extends React.Component {
             images
         });
 
-        if (images.length > 0) {
-
-            // add animation
-            this.divRef.current.classList.add('image-slider__animation');
-
-            // Set interval to auto-slide
+        if (images.length > 1) {
+            // Set interval to auto-slide when there are more than one image
             this.autoSlide = setInterval(this.slideRight, this.props.interval);
-
         }
     }
 

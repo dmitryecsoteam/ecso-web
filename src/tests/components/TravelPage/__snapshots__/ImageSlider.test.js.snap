@@ -57,12 +57,47 @@ exports[`should render ImageSlider with three images 1`] = `
 </ImageSlider>
 `;
 
-exports[`should render empty ImageSlider 1`] = `
+exports[`should render empty ImageSlider with one nonexistent slide1 1`] = `
 <ImageSlider
   country="Images"
   interval={5000}
   name="No"
 >
-  <div />
+  <div>
+    <div
+      className="image-slider__container"
+    >
+      <div
+        className="image-slider__current-slide"
+        style={
+          Object {
+            "backgroundImage": "url(/images/No-Images/slide1.jpg)",
+          }
+        }
+      />
+      <div
+        className="image-slider__button image-slider__button--left"
+        onClick={[Function]}
+      >
+        ❮
+      </div>
+      <div
+        className="image-slider__button image-slider__button--right"
+        onClick={[Function]}
+      >
+        ❯
+      </div>
+      <div
+        className="image-slider__dots-container"
+      >
+        <span
+          className="image-slider__dot image-slider__dot--active"
+          data-id={0}
+          key="0"
+          onClick={[Function]}
+        />
+      </div>
+    </div>
+  </div>
 </ImageSlider>
 `;
