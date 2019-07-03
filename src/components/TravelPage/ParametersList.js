@@ -1,6 +1,12 @@
 import React from 'react';
 import { defaultState } from '../../store/ReduxStore';
 import classNames from 'classnames';
+import TrackVisibility from 'react-on-screen';
+
+// <div className="parameters-list__item-header parameters-list__item-header--animation" >
+// <span className="parameters-list__label">{parameter}</span>
+// <div className="parameters-list__dots-container">{dots}</div>
+// </div>
 
 export default ({ destination }) => {
 
@@ -16,12 +22,20 @@ export default ({ destination }) => {
             dots.push(<span key={i} className={className}></span>);
         }
 
-        parameters.push(<div key={parameter} className="parameters-list__item" >
-
-            <div className="parameters-list__item-header parameters-list__item-header--animation" >
+        const ParameterHeader = ({ isVisible }) => {
+            const className = classNames('parameters-list__item-header', { 'parameters-list__item-header--animation': isVisible });
+            return <div className={className} >
                 <span className="parameters-list__label">{parameter}</span>
                 <div className="parameters-list__dots-container">{dots}</div>
             </div>
+        };
+
+        parameters.push(<div key={parameter} className="parameters-list__item" >
+
+            <TrackVisibility once>
+                <ParameterHeader />
+            </TrackVisibility>
+
 
             <div className="parameters-list__description">{destination[parameter.toLowerCase() + 'Description']}</div>
 
