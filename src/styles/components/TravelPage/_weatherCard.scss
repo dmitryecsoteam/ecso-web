@@ -1,8 +1,8 @@
 .weather-card__container {
-    border: 0.1rem solid $light-grey;
-    border-radius: $xs-size;
-    width: 40rem;
-    height: 20rem;
+    //border: 0.1rem solid $light-grey;
+    //border-radius: $xs-size;
+    max-width: 40rem;
+    height: 16rem;
     position: relative;
     // display: flex;
     // justify-content: space-around;
@@ -10,9 +10,9 @@
 
 .weather-card__icon {
     position: absolute;
-    right: 0;
-    height: 12rem;
-    width: 12rem;
+    right: 8rem;
+    height: 11rem;
+    width: 11rem;
     background-repeat: no-repeat;
     margin-right: $m-size;
     margin-top: 6rem;
@@ -22,11 +22,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: $light-black;
+    //color: $light-black;
     height: 100%;
-    padding-top: $s-size;
-    padding-bottom: $s-size;
-    padding-left: $m-size;
+    padding-top: 3.2rem;
 }
 
 .weather-card__title {
@@ -43,7 +41,6 @@
     color: #999;
     font-size: $xm-size;
     margin-top: $xs-size;
-    margin-bottom: $l-size;
 }
 
 @media (max-width: $desktop-breakpoint) {

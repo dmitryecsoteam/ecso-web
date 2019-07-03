@@ -26,7 +26,7 @@ beforeEach(async () => {
     wrapper.update();
 });
 
-test('should render empty ImageSlider', async () => {
+test('should render empty ImageSlider with one nonexistent slide1', async () => {
     const wrapper = mount(<ImageSlider
         interval={5000}
         name='No'
@@ -39,7 +39,7 @@ test('should render empty ImageSlider', async () => {
     wrapper.update();
 
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.state('images')).toEqual([]);
+    expect(wrapper.state('images')).toEqual(["/images/No-Images/slide1.jpg"]);
 });
 
 test('should render ImageSlider with three images', () => {
@@ -143,7 +143,7 @@ test('should set correct interval', () => {
     expect(setInterval).toHaveBeenLastCalledWith(expect.any(Function), 5000);
 });
 
-test('should not set interval when images are absent', async () => {
+test('should not set interval when number of images is less or equal one', async () => {
 
     setInterval.mockClear();
     

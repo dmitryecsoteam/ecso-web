@@ -27,7 +27,7 @@
 
 .header__menu-item {
   border-bottom: 0.3rem solid transparent;
-  margin: 0 $m-size;
+  margin: 0 $s-size;
   height: 100%;
 }
 
@@ -46,15 +46,28 @@
 }
 
 .header__title {
-  padding-left: $s-size;
+  font-size: 3vh;
   color: white;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 22vh);
 }
 
 @media (min-width: $desktop-breakpoint) {
   .header__title {
     position: relative;
     color: $dark-grey;
+    font-size: $l-size;
+    top: 0;
+  }
+
+  .header__menu-item {
+    margin: 0 $m-size;
+  }
+}
+
+@media (max-width: $desktop-breakpoint) {
+  .header__title {
+    left: 50%;
+    transform: translate(-50%, 0);
   }
 }

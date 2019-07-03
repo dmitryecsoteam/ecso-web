@@ -15,8 +15,6 @@ export default ({ tempMin, tempMax, conditionText, conditionImage, date }) => {
                     <div className="weather-card__condition">{conditionText}</div>
                 </div>
             </div>
-
-
         </div>
     )
 }

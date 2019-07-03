@@ -6,6 +6,7 @@ import ImageSlider from './ImageSlider';
 import ParametersList from './ParametersList';
 import WeatherCard from './WeatherCard';
 import Banner from './Banner';
+import TextArea from './TextArea';
 
 import cloud from '../../images/icons/cloud.svg';
 import sun from '../../images/icons/sun.svg';
@@ -58,31 +59,39 @@ export default ({ match }) => {
                     name={destination.nameEn}
                     country={destination.countryEn}
                 />
-                <div><ParametersList destination={destination} /></div>
+                <div className="travel__container">
 
-                <WeatherCard
-                    tempMin={travelFull.weatherTempStatMin}
-                    tempMax={travelFull.weatherTempStatMax}
-                    conditionText={conditionText}
-                    conditionImage={conditionImage}
-                    date={travelFull.date}
-                />
+                    <div className="travel__leadtext-container">
+                        <p className="travel__leadtext-item">{destination.cityDescription}</p>
+                        <p className="travel__leadtext-population">Average population: {destination.population}</p>
+                        <p className="travel__leadtext-date">Founding date: </p>
+                        <WeatherCard
+                            tempMin={travelFull.weatherTempStatMin}
+                            tempMax={travelFull.weatherTempStatMax}
+                            conditionText={conditionText}
+                            conditionImage={conditionImage}
+                            date={travelFull.date}
+                        />
+                    </div>
 
-                <Banner
-                    linkTo="#"
-                    backgroundImage={airplane}
-                    textMain={`Airplane from ${origin.nameEn}`}
-                    textSecondary={airplaneTextSecondary}
-                    textButton={airplaneTextButton}
-                />
+                    <ParametersList destination={destination} />
 
-                <Banner
-                    linkTo="#"
-                    backgroundImage={apartments}
-                    textMain="Apartments and hotels"
-                    textSecondary={apartmentsTextSecondary}
-                    textButton={apartmentsTextButton}
-                />
+                    <Banner
+                        linkTo="#"
+                        backgroundImage={airplane}
+                        textMain={`Airplane from ${origin.nameEn}`}
+                        textSecondary={airplaneTextSecondary}
+                        textButton={airplaneTextButton}
+                    />
+
+                    <Banner
+                        linkTo="#"
+                        backgroundImage={apartments}
+                        textMain="Apartments and hotels"
+                        textSecondary={apartmentsTextSecondary}
+                        textButton={apartmentsTextButton}
+                    />
+                </div>
 
             </div>
         }}
