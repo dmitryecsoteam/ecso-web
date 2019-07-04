@@ -59,20 +59,19 @@ export default ({ match }) => {
                     name={destination.nameEn}
                     country={destination.countryEn}
                 />
+
                 <div className="travel__container">
 
-                    <div className="travel__leadtext-container">
-                        <p className="travel__leadtext-item">{destination.cityDescription}</p>
-                        <p className="travel__leadtext-population">Average population: {destination.population}</p>
-                        <p className="travel__leadtext-date">Founding date: </p>
-                        <WeatherCard
-                            tempMin={travelFull.weatherTempStatMin}
-                            tempMax={travelFull.weatherTempStatMax}
-                            conditionText={conditionText}
-                            conditionImage={conditionImage}
-                            date={travelFull.date}
-                        />
-                    </div>
+                    <TextArea
+                        cityDescription={destination.cityDescription}
+                        population={destination.population}
+                        foundingDate={destination.foundingDate}
+                        weatherTempMin={travelFull.weatherTempStatMin}
+                        weatherTempMax={travelFull.weatherTempStatMax}
+                        conditionText={conditionText}
+                        conditionImage={conditionImage}
+                        date={travelFull.date}
+                    />
 
                     <ParametersList destination={destination} />
 

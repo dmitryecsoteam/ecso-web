@@ -36,9 +36,7 @@ export default ({ destination }) => {
                 <ParameterHeader />
             </TrackVisibility>
 
-
             <div className="parameters-list__description">{destination[parameter.toLowerCase() + 'Description']}</div>
-
         </div>);
     }
 

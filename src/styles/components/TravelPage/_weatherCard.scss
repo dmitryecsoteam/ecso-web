@@ -10,7 +10,8 @@
 
 .weather-card__icon {
     position: absolute;
-    right: 8rem;
+    //right: 8rem;
+    left: 20rem;
     height: 11rem;
     width: 11rem;
     background-repeat: no-repeat;
@@ -44,31 +45,35 @@
 }
 
 @media (max-width: $desktop-breakpoint) {
-    .weather-card__container {
-        max-width: 20rem;
-    }
-
-    .weather-card__icon {
-        opacity: 0.3;
-        margin: 0;
-        padding: 1rem;
-        height: 100%;
-        width: 100%;
-    }
-
-    .weather-card__condition {
-        margin: 0;
-    }
-
-    .weather-card__text-container {
-        padding-right: $m-size;
-    }
-
-    .weather-card__title {
-        font-size: $xm-size;
-    }
-
-    .weather-card__temperature {
-        font-size: 4.4rem;
-    }
+    
 }
+
+// @media (max-width: $desktop-breakpoint) {
+//     .weather-card__container {
+//         max-width: 20rem;
+//     }
+
+//     .weather-card__icon {
+//         opacity: 0.3;
+//         margin: 0;
+//         padding: 1rem;
+//         height: 100%;
+//         width: 100%;
+//     }
+
+//     .weather-card__condition {
+//         margin: 0;
+//     }
+
+//     .weather-card__text-container {
+//         padding-right: $m-size;
+//     }
+
+//     .weather-card__title {
+//         font-size: $xm-size;
+//     }
+
+//     .weather-card__temperature {
+//         font-size: 4.4rem;
+//     }
+// }
