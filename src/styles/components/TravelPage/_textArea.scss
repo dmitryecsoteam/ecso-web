@@ -1,10 +1,12 @@
 .text-area__leadtext-container {
-    max-width: 80rem;
-    padding: 5rem $s-size;
+    max-width: $content-width;
+    //padding: 5rem $s-size 2.4rem;
+    padding: $l-size $s-size 0 $s-size;
     color: $mid-grey;
 }
 .text-area__leadtext-item {
-    font-size: $l-size;  
+    font-size: $l-size;
+    color: $dark-grey;
 }
 
 .text-area__leadtext-population {
@@ -14,8 +16,7 @@
 @media(max-width: $desktop-breakpoint) {
 
     .text-area__leadtext-container {
-        padding-top: 3.6rem;
-        padding-bottom: 2.4rem;
+        padding-top: $xl-size;
     }
 
     .text-area__leadtext-item {

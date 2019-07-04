@@ -19,6 +19,8 @@ import { client } from '../../clientGraphQL/client';
 
 
 
+const divider = <div className="travel__divider"></div>;
+
 export default ({ match }) => {
     const { _id } = match.params;
 
@@ -66,14 +68,23 @@ export default ({ match }) => {
                         cityDescription={destination.cityDescription}
                         population={destination.population}
                         foundingDate={destination.foundingDate}
-                        weatherTempMin={travelFull.weatherTempStatMin}
-                        weatherTempMax={travelFull.weatherTempStatMax}
+                    />
+
+                    {divider}
+
+                    <WeatherCard
+                        tempMin={travelFull.weatherTempStatMin}
+                        tempMax={travelFull.weatherTempStatMax}
                         conditionText={conditionText}
                         conditionImage={conditionImage}
                         date={travelFull.date}
                     />
 
+                    {divider}
+
                     <ParametersList destination={destination} />
+
+                    {divider}
 
                     <Banner
                         linkTo="#"

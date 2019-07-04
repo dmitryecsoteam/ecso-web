@@ -1,31 +1,18 @@
 .weather-card__container {
-    //border: 0.1rem solid $light-grey;
-    //border-radius: $xs-size;
-    max-width: 40rem;
-    height: 16rem;
     position: relative;
-    // display: flex;
-    // justify-content: space-around;
+    color: $dark-grey;
+    width: 100%;
+    max-width: $content-width;
+    padding: 0 $s-size $s-size $s-size;
 }
 
 .weather-card__icon {
     position: absolute;
-    //right: 8rem;
+    top: 3rem;
     left: 20rem;
     height: 11rem;
     width: 11rem;
     background-repeat: no-repeat;
-    margin-right: $m-size;
-    margin-top: 6rem;
-}
-
-.weather-card__text-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    //color: $light-black;
-    height: 100%;
-    padding-top: 3.2rem;
 }
 
 .weather-card__title {
@@ -36,44 +23,39 @@
 .weather-card__temperature {
     font-size: $xl-size;
     font-weight: 500;
+    display: block;
+    margin-top: $xm-size;
 }
 
 .weather-card__condition {
-    color: #999;
+    color: $mid-grey;
     font-size: $xm-size;
     margin-top: $xs-size;
+    margin-left: .2rem;
+    display: block;
 }
 
 @media (max-width: $desktop-breakpoint) {
-    
+    .weather-card__container {
+        padding-bottom: 0;
+    }
+
+    .weather-card__title {
+        font-size: $xm-size;
+    }
+
+    .weather-card__temperature {
+        font-size: 4.2rem;
+    }
+
+    .weather-card__condition {
+        font-size: $m-size;
+    }
+
+    .weather-card__icon {
+        top: 3rem;
+        left: 18rem;
+        height: 10rem;
+        width: 10rem;
+    }
 }
-
-// @media (max-width: $desktop-breakpoint) {
-//     .weather-card__container {
-//         max-width: 20rem;
-//     }
-
-//     .weather-card__icon {
-//         opacity: 0.3;
-//         margin: 0;
-//         padding: 1rem;
-//         height: 100%;
-//         width: 100%;
-//     }
-
-//     .weather-card__condition {
-//         margin: 0;
-//     }
-
-//     .weather-card__text-container {
-//         padding-right: $m-size;
-//     }
-
-//     .weather-card__title {
-//         font-size: $xm-size;
-//     }
-
-//     .weather-card__temperature {
-//         font-size: 4.4rem;
-//     }
-// }
