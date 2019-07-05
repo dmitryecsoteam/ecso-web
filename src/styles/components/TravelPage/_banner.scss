@@ -9,6 +9,7 @@
     overflow: hidden;
     text-align: center;
     padding-top: $s-size;
+    margin-bottom: $m-size;
     opacity: 0;
     transition: all .5s;
     transform: scale(.5,.5);
@@ -80,7 +81,7 @@
     .banner__container {
         height: 15.4rem;
         padding-top: 0;
-        margin-bottom: $s-size;
+        margin-bottom: $m-size;
     }
 
     .banner__text--main {

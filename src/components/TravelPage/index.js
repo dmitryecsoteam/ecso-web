@@ -1,6 +1,8 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import { TRAVELS_SEARCH_FULL } from '../../queries/queries';
+import minutesToHours from '../../utils/minutesToHours';
+
 import Header from '../Header';
 import ImageSlider from './ImageSlider';
 import ParametersList from './ParametersList';
@@ -14,6 +16,7 @@ import sunCloud from '../../images/icons/sun-cloud.svg';
 import rain from '../../images/icons/rain.svg';
 import airplane from '../../images/banners/airplane.jpg';
 import apartments from '../../images/banners/apartments.jpg';
+import carRoute from '../../images/banners/car-route.jpg';
 
 import { client } from '../../clientGraphQL/client';
 
@@ -51,6 +54,8 @@ export default ({ match }) => {
 
             const apartmentsTextSecondary = travelFull.priceHotel ? `Prices from ${travelFull.priceHotel} $` : '';
             const apartmentsTextButton = travelFull.priceHotel ? 'Book apartments' : 'Get prices';
+
+            const carDuration = minutesToHours(travelFull.carDuration);
 
 
             return <div>
@@ -101,6 +106,16 @@ export default ({ match }) => {
                         textSecondary={apartmentsTextSecondary}
                         textButton={apartmentsTextButton}
                     />
+
+                    <Banner
+                        linkTo="#"
+                        backgroundImage={carRoute}
+                        textMain="Travel by car"
+                        textSecondary={`${travelFull.carDistance} km,\u00A0\u00A0\u00A0\u00A0${carDuration}`}
+                        textButton="Create route"
+                    />
+
+                    {divider}
                 </div>
 
             </div>
