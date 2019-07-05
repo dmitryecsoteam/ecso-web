@@ -1,19 +1,34 @@
-.textarea__container {
-    border: 0.1rem solid $light-grey;
-    border-radius: $xs-size;
-    max-width: 40rem;
-    height: 20rem;
-    padding: $s-size $m-size;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: $light-black;
+.text-area__leadtext-container {
+    max-width: $content-width;
+    //padding: 5rem $s-size 2.4rem;
+    padding: $l-size $s-size 0 $s-size;
+    color: $mid-grey;
+}
+.text-area__leadtext-item {
+    font-size: $l-size;
+    color: $dark-grey;
 }
 
-.textarea__description {
-    font-size: $xm-size;
+.text-area__leadtext-population {
+    margin-top: $m-size;
 }
 
-.textarea__date {
-    margin-top: $xs-size;
+@media(max-width: $desktop-breakpoint) {
+
+    .text-area__leadtext-container {
+        padding-top: $xl-size;
+    }
+
+    .text-area__leadtext-item {
+        font-size: 1.8rem;
+    }
+
+    .text-area__leadtext-population {
+        font-size: 1.4rem;
+        margin-top: $s-size;
+    }
+
+    .text-area__leadtext-date {
+        font-size: 1.4rem;
+    }
 }

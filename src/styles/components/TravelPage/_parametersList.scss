@@ -1,7 +1,5 @@
 .parameters-list__container {
-  border: 0.1rem solid $light-grey;
-  border-radius: $xs-size;
-  max-width: 80rem;
+  max-width: $content-width;
   width: 100%;
   padding-bottom: $s-size;
   overflow: hidden;
@@ -16,7 +14,6 @@
   padding-right: $xs-size;
   margin-top: $m-size;
   margin-right: $m-size;
-  //background-color: lighten($light-grey, 15%);
 }
 
 .parameters-list__item-header::before {
@@ -28,6 +25,9 @@
   width: 100%;
   background-color: lighten($light-grey, 15%);
   z-index: -1;
+}
+
+.parameters-list__item-header--animation::before {
   animation: slide1 1s ease-in-out forwards;
 }
 
@@ -40,30 +40,18 @@
   position: absolute;
   top: 0;
   right: 78.8rem;
-  //border-right: 12px solid transparent;
   border-top: $m-size solid transparent;
   border-bottom: $m-size solid transparent;
   border-left: $s-size solid lighten($light-grey, 15%);
+}
+
+.parameters-list__item-header--animation::after {
   animation: slide2 1s ease-in-out forwards;
 }
 
 @keyframes slide2 {
   100% { right: -$s-size; }
 }
-
-// .parameters-list__parameter:hover::after {
-//     content: attr(data-description);
-//     position: absolute;
-//     left: 8rem;
-
-//     z-index: 1;
-//     background: rgba(255,255,230,0.9);
-//     font-size: $s-size;
-//     padding: $xs-size $s-size;
-//     border: 1px solid #333;
-//     max-width: 40rem;
-//     margin-right: 1rem;
-// }
 
 .parameters-list__label {
   color: black;
@@ -97,4 +85,19 @@
     margin-left: $s-size;
     margin-right: $s-size;
     margin-top: 0.3rem;
+}
+
+@media (max-width: $desktop-breakpoint) {
+  .parameters-list__container {
+    padding-bottom: 0;
+    margin-top: -$m-size;
+  }
+
+  .parameters-list__item-header--animation::before {
+    animation: slide1 .6s ease-out forwards;
+  }
+
+  .parameters-list__item-header--animation::after {
+    animation: slide2 .6s ease-out forwards;
+  }
 }

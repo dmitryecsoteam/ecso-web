@@ -1,6 +1,8 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import { TRAVELS_SEARCH_FULL } from '../../queries/queries';
+import minutesToHours from '../../utils/minutesToHours';
+
 import Header from '../Header';
 import ImageSlider from './ImageSlider';
 import ParametersList from './ParametersList';
@@ -14,10 +16,13 @@ import sunCloud from '../../images/icons/sun-cloud.svg';
 import rain from '../../images/icons/rain.svg';
 import airplane from '../../images/banners/airplane.jpg';
 import apartments from '../../images/banners/apartments.jpg';
+import carRoute from '../../images/banners/car-route.jpg';
 
 import { client } from '../../clientGraphQL/client';
 
 
+
+const divider = <div className="travel__divider"></div>;
 
 export default ({ match }) => {
     const { _id } = match.params;
@@ -50,6 +55,8 @@ export default ({ match }) => {
             const apartmentsTextSecondary = travelFull.priceHotel ? `Prices from ${travelFull.priceHotel} $` : '';
             const apartmentsTextButton = travelFull.priceHotel ? 'Book apartments' : 'Get prices';
 
+            const carDuration = minutesToHours(travelFull.carDuration);
+
 
             return <div>
                 <Header title={`${destination.nameEn}, ${destination.countryEn}`} />
@@ -59,22 +66,30 @@ export default ({ match }) => {
                     name={destination.nameEn}
                     country={destination.countryEn}
                 />
+
                 <div className="travel__container">
 
-                    <div className="travel__leadtext-container">
-                        <p className="travel__leadtext-item">{destination.cityDescription}</p>
-                        <p className="travel__leadtext-population">Average population: {destination.population}</p>
-                        <p className="travel__leadtext-date">Founding date: </p>
-                        <WeatherCard
-                            tempMin={travelFull.weatherTempStatMin}
-                            tempMax={travelFull.weatherTempStatMax}
-                            conditionText={conditionText}
-                            conditionImage={conditionImage}
-                            date={travelFull.date}
-                        />
-                    </div>
+                    <TextArea
+                        cityDescription={destination.cityDescription}
+                        population={destination.population}
+                        foundingDate={destination.foundingDate}
+                    />
+
+                    {divider}
+
+                    <WeatherCard
+                        tempMin={travelFull.weatherTempStatMin}
+                        tempMax={travelFull.weatherTempStatMax}
+                        conditionText={conditionText}
+                        conditionImage={conditionImage}
+                        date={travelFull.date}
+                    />
+
+                    {divider}
 
                     <ParametersList destination={destination} />
+
+                    {divider}
 
                     <Banner
                         linkTo="#"
@@ -91,6 +106,16 @@ export default ({ match }) => {
                         textSecondary={apartmentsTextSecondary}
                         textButton={apartmentsTextButton}
                     />
+
+                    <Banner
+                        linkTo="#"
+                        backgroundImage={carRoute}
+                        textMain="Travel by car"
+                        textSecondary={`${travelFull.carDistance} km,\u00A0\u00A0\u00A0\u00A0${carDuration}`}
+                        textButton="Create route"
+                    />
+
+                    {divider}
                 </div>
 
             </div>

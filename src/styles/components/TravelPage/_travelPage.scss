@@ -4,21 +4,10 @@
     align-items: center;
 }
 
-.travel__leadtext-container {
-    max-width: 80rem;
-    padding: 5rem 0;
-    color: $mid-grey;
+.travel__divider {
+    border-top: 0.1rem solid lighten($light-grey, 15%);
+    width: 100%;
+    max-width: $content-width;
+    margin-top: $l-size;
+    margin-bottom: $l-size;
 }
-.travel__leadtext-item {
-    font-size: $l-size;
-    
-}
-
-.travel__leadtext-population {
-    margin-top: $m-size;
-}
-
-.travel__leadtext-date {
-
-}
-

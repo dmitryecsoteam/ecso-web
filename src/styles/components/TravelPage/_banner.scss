@@ -1,11 +1,23 @@
+.banner {
+    width: 100%;
+    max-width: $content-width;
+}
+
 .banner__container {
     position: relative;
-    //border: 0.1rem solid $light-grey;
-    border-radius: $xs-size;
-    max-width: 80rem;
-    height: 20rem;
+    height: 21.2rem;
     overflow: hidden;
     text-align: center;
+    padding-top: $s-size;
+    margin-bottom: $m-size;
+    opacity: 0;
+    transition: all .5s;
+    transform: scale(.5,.5);
+}
+
+.banner__container--animation {
+    opacity: 1;
+    transform: scale(1,1);
 }
 
 .banner__link {
@@ -68,6 +80,8 @@
 @media (max-width: $desktop-breakpoint) {
     .banner__container {
         height: 15.4rem;
+        padding-top: 0;
+        margin-bottom: $m-size;
     }
 
     .banner__text--main {

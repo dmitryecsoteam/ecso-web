@@ -6,15 +6,11 @@ export default ({ tempMin, tempMax, conditionText, conditionImage, date }) => {
     return (
         <div className="weather-card__container">
             <div className="weather-card__icon">
-                <img src={conditionImage}/>    
+                <img src={conditionImage} />
             </div>
-            <div className="weather-card__text-container">
-                <span className="weather-card__title">Average weather on <b>{moment(date).format('DD MMMM YYYY')}</b></span>
-                <div>
-                    <div className="weather-card__temperature">{tempMin}°...{tempMax}°</div>
-                    <div className="weather-card__condition">{conditionText}</div>
-                </div>
-            </div>
+            <p className="weather-card__title">Average weather on <nobr><b>{moment(date).format('DD MMMM YYYY')}</b></nobr></p>
+            <p className="weather-card__temperature">{tempMin}°...{tempMax}°</p>
+            <p className="weather-card__condition">{conditionText}</p>
         </div>
     )
 }

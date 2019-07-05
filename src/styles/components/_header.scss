@@ -6,9 +6,9 @@
 }
 
 .header__logo-container {
-  margin: $xm-size 0 0 $s-size;
-  height: 5.6rem;
-  width: 7.5rem;
+  margin: $s-size 0 0 $s-size;
+  height: 4.8rem;
+  width: 7rem;
 }
 
 .header__logo {
@@ -62,6 +62,12 @@
 
   .header__menu-item {
     margin: 0 $m-size;
+  }
+
+  .header__logo-container {
+    margin: $xm-size 0 0 $s-size;
+    height: 5.6rem;
+    width: 7.5rem;
   }
 }
 
