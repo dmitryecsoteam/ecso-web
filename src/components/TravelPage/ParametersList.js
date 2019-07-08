@@ -3,10 +3,6 @@ import { defaultState } from '../../store/ReduxStore';
 import classNames from 'classnames';
 import TrackVisibility from 'react-on-screen';
 
-// <div className="parameters-list__item-header parameters-list__item-header--animation" >
-// <span className="parameters-list__label">{parameter}</span>
-// <div className="parameters-list__dots-container">{dots}</div>
-// </div>
 
 export default ({ destination }) => {
 
