@@ -38,7 +38,7 @@ beforeEach(() => {
 
 
 test('should render Signup component', () => {
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find(Signup)).toMatchSnapshot();
 });
 
 test('should signup new user and return token', async () => {

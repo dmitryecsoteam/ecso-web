@@ -7,3 +7,11 @@ mutation signupUser($email: String, $password: String, $name: String){
     }
 }
 `;
+
+export const SIGNIN_USER = gql`
+mutation signinUser($email: String, $password: String){
+    signinUser (email: $email, password: $password) {
+        token
+    }
+}
+`;
