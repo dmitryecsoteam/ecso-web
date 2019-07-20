@@ -64,7 +64,7 @@ export default class Header extends React.Component {
                     <div className="header__close-button-container">
                         <button onClick={this.closeSignup} className="header__close-button">&#10005;</button>
                     </div>
-                    <Signup />
+                    <Signup closeModal={this.closeSignup} />
                 </Modal>
 
                 <Modal
@@ -76,7 +76,7 @@ export default class Header extends React.Component {
                     <div className="header__close-button-container">
                         <button onClick={this.closeSignin} className="header__close-button">&#10005;</button>
                     </div>
-                    <Signin />
+                    <Signin closeModal={this.closeSignin} />
                 </Modal>
 
             </header>

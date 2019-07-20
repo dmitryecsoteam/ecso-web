@@ -83,14 +83,19 @@ export default class Signup extends React.Component {
 
     if (!(emailError || nameError || passwordError || passwordConfirmationError)) {
       try {
+
         const data = await signupUser();
         console.log(data);
+        if (this.props.closeModal) this.props.closeModal();
+
       } catch (e) {
+
         console.log(e)
         this.setState({
           emailError: true,
           emailErrorText: e.message.replace('GraphQL error: ', '')
         });
+        
       }
     }
 

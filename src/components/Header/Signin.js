@@ -54,7 +54,8 @@ export default class Signin extends React.Component {
             try {
 
                 const data = await signinUser();
-                console.log(data)
+                console.log(data);
+                if (this.props.closeModal) this.props.closeModal();
 
             } catch (e) {
 
