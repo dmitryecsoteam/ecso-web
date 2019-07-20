@@ -14,7 +14,7 @@
   flex-direction: column;
 }
 
-.search-form__submit-btn-container {
+.search-form__second-input-container {
   flex: 1;
 }
 
@@ -46,6 +46,7 @@
     position: absolute;
     top: 25%;
     left: 10%;
+    margin-right: $m-size;
   }
 
   .search-form__form {
@@ -54,10 +55,10 @@
 
   .search-form__autoinput-group {
     flex-direction: row;
-    margin-left: -$s-size;
+    //margin-left: -$s-size;
   }
 
-  .search-form__submit-btn-container {
+  .search-form__second-input-container {
     margin-left: $s-size;
   }
 }

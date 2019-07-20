@@ -1,6 +1,7 @@
 @import './base/settings';
 @import './base/base';
-@import './components/header';
+@import './components/Header/header';
+@import './components/Header/signup';
 @import './components/MainPage/mainPage';
 @import './components/MainPage/resultsPanel';
 @import './components/MainPage/searchForm';

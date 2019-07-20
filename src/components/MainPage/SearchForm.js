@@ -407,23 +407,26 @@ export class SearchForm extends React.Component {
                             />
                         </InputWithErrorTooltip>
 
-                        <InputWithErrorTooltip
-                            label="To:"
-                            error={errorDestinationInput}
-                            errorText="Enter destination"
-                            disabled={parametersPanel}
-                        >
-                            <Autosuggest
-                                suggestions={suggestDestinations}
-                                onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
-                                onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
-                                inputProps={destinationInputProps}
-                                focusInputOnSuggestionClick={false}
-                                onSuggestionSelected={this.onDestinationSuggestionSelected}
-                                getSuggestionValue={this.getSuggestionValue}
-                                renderSuggestion={this.renderSuggestion}
-                            />
-                        </InputWithErrorTooltip>
+                        <div className="search-form__second-input-container">
+                            <InputWithErrorTooltip
+                                label="To:"
+                                error={errorDestinationInput}
+                                errorText="Enter destination"
+                                disabled={parametersPanel}
+                            >
+                                <Autosuggest
+                                    suggestions={suggestDestinations}
+                                    onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
+                                    onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
+                                    inputProps={destinationInputProps}
+                                    focusInputOnSuggestionClick={false}
+                                    onSuggestionSelected={this.onDestinationSuggestionSelected}
+                                    getSuggestionValue={this.getSuggestionValue}
+                                    renderSuggestion={this.renderSuggestion}
+                                />
+                            </InputWithErrorTooltip>
+                        </div>
+
                     </div>
                     <div className="search-form__autoinput-group">
                         <InputWithErrorTooltip
@@ -483,7 +486,7 @@ export class SearchForm extends React.Component {
                                 />
                             </MediaQuery>
                         </InputWithErrorTooltip>
-                        <div className="search-form__submit-btn-container">
+                        <div className="search-form__second-input-container">
                             <button className="search-form__submit-btn">Find</button>
                         </div>
                     </div>

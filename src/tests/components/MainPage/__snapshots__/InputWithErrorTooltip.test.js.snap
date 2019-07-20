@@ -33,9 +33,6 @@ exports[`should render InputWithErrorTooltip component with input and default pr
   <div
     className="search-form__label-input"
   >
-    <label
-      className="search-form__label"
-    />
     <input
       type="text"
     />

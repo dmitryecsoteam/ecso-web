@@ -23,7 +23,7 @@ export default ({
     return (
         <div className="search-form__input-container">
             <div className={divClassName}>
-                <label className="search-form__label">{label}</label>
+                {label && <label className="search-form__label">{label}</label>}
                 {children}
             </div>
             <div className={errorClassName}>

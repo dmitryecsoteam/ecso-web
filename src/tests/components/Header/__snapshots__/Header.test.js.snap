@@ -52,16 +52,43 @@ exports[`should render Header with title prop 1`] = `
       <li
         className="header__menu-item"
       >
-        <Link
-          className="header__menu-link"
-          replace={false}
-          to="/signup"
+        <button
+          className="header__menu-button"
+          onClick={[Function]}
         >
           Signup
-        </Link>
+        </button>
       </li>
     </ul>
   </nav>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="header__modal"
+    closeTimeoutMS={0}
+    isOpen={false}
+    onRequestClose={[Function]}
+    overlayClassName="header__modal-overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  >
+    <div
+      className="header__close-button-container"
+    >
+      <button
+        className="header__close-button"
+        onClick={[Function]}
+      >
+        ✕
+      </button>
+    </div>
+    <Signup />
+  </Modal>
 </header>
 `;
 
@@ -112,15 +139,42 @@ exports[`should render Header without title prop 1`] = `
       <li
         className="header__menu-item"
       >
-        <Link
-          className="header__menu-link"
-          replace={false}
-          to="/signup"
+        <button
+          className="header__menu-button"
+          onClick={[Function]}
         >
           Signup
-        </Link>
+        </button>
       </li>
     </ul>
   </nav>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="header__modal"
+    closeTimeoutMS={0}
+    isOpen={false}
+    onRequestClose={[Function]}
+    overlayClassName="header__modal-overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  >
+    <div
+      className="header__close-button-container"
+    >
+      <button
+        className="header__close-button"
+        onClick={[Function]}
+      >
+        ✕
+      </button>
+    </div>
+    <Signup />
+  </Modal>
 </header>
 `;
