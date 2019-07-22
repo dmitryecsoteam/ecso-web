@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mutation } from 'react-apollo';
+import SHA256 from 'crypto-js/sha256';
 
 import InputWithErrorTooltip from '../MainPage/InputWithErrorTooltip';
 import { SIGNUP_USER } from '../../queries/mutations';
@@ -119,11 +120,13 @@ export default class Signup extends React.Component {
       passwordConfirmationErrorText,
     } = this.state;
 
+    const passwordSHA = SHA256(password).toString();
+
     return (
       <div>
         <h2 className="signup__title">Signup with email</h2>
 
-        <Mutation mutation={SIGNUP_USER} variables={{ email, password, name }}>
+        <Mutation mutation={SIGNUP_USER} variables={{ email, password: passwordSHA, name }}>
 
           {(signupUser, { data, loading, error }) => {
 

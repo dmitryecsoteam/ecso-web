@@ -1,8 +1,11 @@
 import React from 'react';
 import { Mutation } from 'react-apollo';
+import SHA256 from 'crypto-js/sha256';
 
 import InputWithErrorTooltip from '../MainPage/InputWithErrorTooltip';
 import { SIGNIN_USER } from '../../queries/mutations';
+
+
 
 
 export default class Signin extends React.Component {
@@ -58,7 +61,8 @@ export default class Signin extends React.Component {
                 if (this.props.closeModal) this.props.closeModal();
 
             } catch (e) {
-
+                
+                // console.log(e)
                 if (e.message.includes('User with email')) {
                     this.setState({
                         emailError: true,
@@ -87,11 +91,13 @@ export default class Signin extends React.Component {
             passwordErrorText
         } = this.state;
 
+        const passwordSHA = SHA256(password).toString();
+
         return (
             <div>
                 <h2 className="signup__title">Signin with email</h2>
 
-                <Mutation mutation={SIGNIN_USER} variables={{ email, password }}>
+                <Mutation mutation={SIGNIN_USER} variables={{ email, password: passwordSHA }}>
 
                     {(signinUser, { data, loading, error }) => {
 
