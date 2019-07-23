@@ -56,8 +56,11 @@ export default class Signin extends React.Component {
         if (!(emailError || passwordError)) {
             try {
 
-                const data = await signinUser();
+                const { data } = await signinUser();
                 console.log(data);
+
+                localStorage.setItem('token', data.signinUser.token);
+
                 if (this.props.closeModal) this.props.closeModal();
 
             } catch (e) {
