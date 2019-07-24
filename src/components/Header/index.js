@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 
+import { SessionContext } from '../../auth/session';
+
 import Signup from './Signup';
 import Signin from './Signin';
 import logo from '../../images/logo/logo2-darkgrey.png';
@@ -64,7 +66,9 @@ export default class Header extends React.Component {
                     <div className="header__close-button-container">
                         <button onClick={this.closeSignup} className="header__close-button">&#10005;</button>
                     </div>
-                    <Signup closeModal={this.closeSignup} />
+                    <SessionContext.Consumer>
+                        {context => <Signup closeModal={this.closeSignup} refetchUser={context.refetchUser}/>}
+                    </SessionContext.Consumer>
                 </Modal>
 
                 <Modal
@@ -76,7 +80,9 @@ export default class Header extends React.Component {
                     <div className="header__close-button-container">
                         <button onClick={this.closeSignin} className="header__close-button">&#10005;</button>
                     </div>
-                    <Signin closeModal={this.closeSignin} />
+                    <SessionContext.Consumer>
+                        {context => <Signin closeModal={this.closeSignin} refetchUser={context.refetchUser}/>}
+                    </SessionContext.Consumer>
                 </Modal>
 
             </header>

@@ -124,3 +124,21 @@ query travelFull(
     }
 }
 `;
+
+// export const GET_CURRENT_USER = gql`
+// query currentUser() {
+//     currentUser {
+//         email
+//         name
+//     }
+// }
+// `;
+
+export const GET_CURRENT_USER = gql`
+query {
+    currentUser {
+        email
+        name
+    }
+}
+`;

@@ -90,6 +90,8 @@ export default class Signup extends React.Component {
 
         localStorage.setItem('token', data.signupUser.token);
 
+        await this.props.refetchUser();
+
         if (this.props.closeModal) this.props.closeModal();
 
       } catch (e) {

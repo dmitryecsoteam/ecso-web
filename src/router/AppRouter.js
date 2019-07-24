@@ -8,7 +8,9 @@ import TravelPage from '../components/TravelPage';
 import NotFoundPage from '../components/NotFoundPage';
 import history from './history';
 
-export default () => (
+import { withSession } from '../auth/session';
+
+const AppRouter = () => (
     <Router history={history}>
         <ScrollToTop>
             <div>
@@ -23,3 +25,5 @@ export default () => (
         </ScrollToTop>
     </Router>
 );
+
+export default withSession(AppRouter);

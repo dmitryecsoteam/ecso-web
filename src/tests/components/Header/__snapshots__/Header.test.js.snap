@@ -86,9 +86,9 @@ exports[`should render Header with title prop 1`] = `
         ✕
       </button>
     </div>
-    <Signup
-      closeModal={[Function]}
-    />
+    <ContextConsumer>
+      <Component />
+    </ContextConsumer>
   </Modal>
   <Modal
     ariaHideApp={true}
@@ -116,9 +116,9 @@ exports[`should render Header with title prop 1`] = `
         ✕
       </button>
     </div>
-    <Signin
-      closeModal={[Function]}
-    />
+    <ContextConsumer>
+      <Component />
+    </ContextConsumer>
   </Modal>
 </header>
 `;
@@ -204,9 +204,9 @@ exports[`should render Header without title prop 1`] = `
         ✕
       </button>
     </div>
-    <Signup
-      closeModal={[Function]}
-    />
+    <ContextConsumer>
+      <Component />
+    </ContextConsumer>
   </Modal>
   <Modal
     ariaHideApp={true}
@@ -234,9 +234,9 @@ exports[`should render Header without title prop 1`] = `
         ✕
       </button>
     </div>
-    <Signin
-      closeModal={[Function]}
-    />
+    <ContextConsumer>
+      <Component />
+    </ContextConsumer>
   </Modal>
 </header>
 `;
