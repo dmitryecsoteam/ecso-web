@@ -6,13 +6,15 @@ const errors = ['User with email', 'Wrong password', 'jwt expired'];
 export const client = new ApolloClient({
   //uri: "http://194.182.70.179:4000/v1",
   uri: "http://localhost:4000/v1",
-  onError: ({ graphQLErrors, networkError }) => {
+  onError: (error) => {
+
+    console.log(error)
+
+    const { graphQLErrors, networkError } = error;
 
     if (networkError) {
       history.push("/error");
-    }
-
-    if (!errors.some(err => graphQLErrors[0].message.includes(err))) {
+    } else if (graphQLErrors && (!errors.some(err => graphQLErrors[0].message.includes(err)))) {
       history.push("/error");
     }
 

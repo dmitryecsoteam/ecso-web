@@ -26,4 +26,5 @@ const AppRouter = () => (
     </Router>
 );
 
-export default withSession(AppRouter);
+//export default withSession(AppRouter);
+export default AppRouter;

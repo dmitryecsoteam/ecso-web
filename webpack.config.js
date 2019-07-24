@@ -11,7 +11,7 @@ module.exports = (env, argv) => {
   const devMode = argv.mode !== 'production';
 
   return ({
-    entry: { main: './src/app.js' },
+    entry: [ '@babel/polyfill', './src/app.js' ],
     output: {
       path: path.resolve(__dirname, 'public'),
       filename: 'bundle.[hash].js',

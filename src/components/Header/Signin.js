@@ -61,8 +61,8 @@ export default class Signin extends React.Component {
 
                 localStorage.setItem('token', data.signinUser.token);
 
-                await this.props.refetchUser();
-
+                this.props.fetchUser();
+                
                 if (this.props.closeModal) this.props.closeModal();
 
             } catch (e) {
