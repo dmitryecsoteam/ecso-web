@@ -1,73 +1,87 @@
 .user-menu__image-container {
-    border: 2px solid $dark-grey;
-    border-radius: 50%;
-    overflow: hidden;
-    max-height: 3.5rem;
-    max-width: 3.5rem;
+  border: 2px solid $dark-grey;
+  border-radius: 50%;
+  overflow: hidden;
+  max-height: 3.5rem;
+  max-width: 3.5rem;
 }
 
 .user-menu__image {
-    height: 100%;
-    width: 100%;
-    position: relative;
-    top: 0.2rem;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  top: 0.2rem;
 }
 
 .user-menu__dropdown-container {
-    position: relative;
-    top: 2.1rem;
+  position: relative;
+  top: 2.1rem;
 }
 
 .user-menu__dropdown {
-    position: absolute;
-    right: 0;
-    background-color: white;
-    padding: $m-size;
-    z-index: 10;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  padding: $m-size;
+  z-index: 10;
+  cursor: default;
+  box-shadow: 0 $xs-size $l-size -$m-size rgba(black, 0.3);
+  animation: dropdown .2s ease-out forwards;
+}
+
+@keyframes dropdown {
+  from {
+    top: -32px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
 
 .user-menu__name {
-    color: $light-black;
-    text-align: right;
-    font-size: $xm-size;
+  color: $light-black;
+  text-align: right;
+  font-size: $xm-size;
 }
 
 .user-menu__email {
-    text-align: right;
-    font-size: $s-size;
-    font-weight: 300;
-    color: $mid-grey;
+  text-align: right;
+  font-size: $s-size;
+  font-weight: 300;
+  color: $mid-grey;
 }
 
 .user-menu__list {
-    list-style: none;
-    margin-top: $s-size;
+  list-style: none;
+  margin-top: $s-size;
 }
 
 .user-menu__item {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 .user-menu__item--top-border {
-    border-top: 0.1rem solid black;
-    padding-top: $xs-size;
+  border-top: 0.1rem solid black;
+  padding-top: $xs-size;
 }
 
 .user-menu__link {
-    text-decoration: none;
-    color: $dark-grey;
-    padding: $xs-size;
-    display: block;
+  text-decoration: none;
+  color: $dark-grey;
+  padding: $xs-size;
+  display: block;
+  cursor: pointer;
 }
 
 .user-menu__link:hover {
-    color: #a11122;
-    text-decoration: underline;
+  color: #a11122;
+  text-decoration: underline;
 }
 
-
 @media (max-width: $desktop-breakpoint) {
-    .user-menu__dropdown-container {
-        top: 1.4rem;
-    }
+  .user-menu__dropdown-container {
+    top: 1.4rem;
+  }
 }
