@@ -10,15 +10,8 @@ const withSession = Component => props => (
     <Query query={GET_CURRENT_USER}>
         {({ data, loading, error, refetch }) => {
 
-            console.log('data', data)
-            //console.log('loading', loading)
-            console.log('error', error)
-
-            return (
-                <SessionContext.Provider value={{ fetchUser: refetch }} >
-                    <Component {...props} />
-                </SessionContext.Provider>
-            )
+            return <Component {...props} user={data.currentUser} fetchUser={refetch} />
+            
         }}
     </Query>
 )

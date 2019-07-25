@@ -9,11 +9,7 @@ import { Session } from '../../auth/session';
 export default () => (
     <div>
         <div className="main-header">
-            <Session>
-                {({ user, fetchUser }) => (
-                    <Header user={user} fetchUser={fetchUser} />
-                )}
-            </Session>
+            <Header />
             <div className="main-header__background">
                 <img className="main-header__background-image" src={background} alt="Background image Mount Fuji" />
             </div>
@@ -24,3 +20,9 @@ export default () => (
         <ResultsPanel />
     </div>
 );
+
+// <Session>
+// {({ user, fetchUser }) => (
+//     <Header user={user} fetchUser={fetchUser} />
+// )}
+// </Session>

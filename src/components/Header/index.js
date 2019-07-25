@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 
-import { SessionContext, Session } from '../../auth/session';
+import { withSession, Session } from '../../auth/session';
 
 import Signup from './Signup';
 import Signin from './Signin';
 import logo from '../../images/logo/logo2-darkgrey.png';
 
-export default class Header extends React.Component {
+export class Header extends React.Component {
     state = {
         signupIsOpen: false,
         signinIsOpen: false
@@ -34,7 +34,7 @@ export default class Header extends React.Component {
 
         const { title, user, fetchUser } = this.props;
 
-
+        console.log('Header user', user)
 
         return (
             <header className="header">
@@ -45,6 +45,8 @@ export default class Header extends React.Component {
             </div>
 
             {title && <h1 className="header__title">{title}</h1>}
+
+            {user && <h2>{user.name}</h2>}
 
             <nav>
                 <ul className="header__menu-container">
@@ -88,4 +90,4 @@ export default class Header extends React.Component {
     }
 }
 
-//overlayClassName="header__modal-overlay"
+export default withSession(Header);
