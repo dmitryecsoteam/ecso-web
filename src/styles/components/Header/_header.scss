@@ -110,6 +110,10 @@
     font-size: $l-size;
     top: 0;
   }
+  
+  .header__menu-container {
+    margin-right: $xs-size;
+  }
 
   .header__menu-item {
     margin: 0 $m-size;
