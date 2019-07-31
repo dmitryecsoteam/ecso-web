@@ -449,7 +449,7 @@ export class SearchForm extends React.Component {
                                     daySize={38}
                                     calendarInfoPosition="bottom"
                                     renderCalendarInfo={this.renderCalendarInfo}
-
+                                    readOnly
                                 />
                             </MediaQuery>
 
@@ -472,7 +472,7 @@ export class SearchForm extends React.Component {
                                     verticalSpacing={0}
                                     calendarInfoPosition="bottom"
                                     renderCalendarInfo={this.renderCalendarInfo}
-
+                                    readOnly
                                 />
                             </MediaQuery>
                         </InputWithErrorTooltip>

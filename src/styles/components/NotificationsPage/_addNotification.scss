@@ -1,0 +1,38 @@
+.add-notification__form-container {
+    padding-top: $s-size;
+}
+
+.add-notification__button-container {
+    padding-top: $s-size;
+    text-align: right;
+}
+
+.add-notification__button {
+  background: $submit-btn;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: $xs-size;
+  font-size: $xm-size;
+  font-weight: 700;
+  //text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: $s-size $m-size;
+  width: 24.4rem;
+}
+
+.add-notification__button:hover {
+  background: darken($submit-btn, 5%);
+}
+
+
+.add-notification__inputs {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 (-$xs-size);
+}
+
+.add-notification__input-item {
+    margin: 0 $xs-size;
+}

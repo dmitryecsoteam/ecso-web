@@ -2,6 +2,10 @@
   width: 100%;
 }
 
+.SingleDatePickerInput {
+  min-width: 15rem;
+}
+
 .DateInput_input {
   color: $mid-grey;
   font-size: $xm-size;

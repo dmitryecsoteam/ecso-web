@@ -37,7 +37,7 @@ export default (props) => {
                             refetchNotifications={refetch}
                         />
                     ))}
-                    <AddNotification />
+                    <AddNotification refetchNotifications={refetch} />
                 </div>
 
 
