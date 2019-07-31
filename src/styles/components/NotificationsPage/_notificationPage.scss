@@ -1,0 +1,15 @@
+.notifications__background-container {
+  position: relative;
+  overflow: hidden;
+  height: 24vh;
+  width: 100%;
+}
+
+.notifications__background-image {
+  position: absolute; 
+  min-height: 100%;
+  min-width: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

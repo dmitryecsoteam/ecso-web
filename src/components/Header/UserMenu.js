@@ -24,7 +24,7 @@ export default ({ user }) => {
         if (isActive && !event.target.className.includes('user-menu__link')) setIsActive(false);
     }
 
-    const Dropdown = <div className="user-menu__dropdown-container">
+    const DropdownMenu = <div className="user-menu__dropdown-container">
         <div className="user-menu__dropdown">
             <h4 className="user-menu__name">{user.name}</h4>
             <p className="user-menu__email">{user.email}</p>
@@ -55,7 +55,7 @@ export default ({ user }) => {
                 <img className="user-menu__image" src={userIcon} />
             </div>
 
-            {isActive && Dropdown}
+            {isActive && DropdownMenu}
 
         </button>
     );

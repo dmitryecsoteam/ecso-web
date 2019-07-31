@@ -5,7 +5,7 @@ export default () => {
     return (
         <div>
             <Header />
-            <div>Error page</div>
+            <div>Unauth page</div>
         </div>
     )
 };

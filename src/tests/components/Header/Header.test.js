@@ -14,6 +14,11 @@ test('should render Header with title prop', () => {
     expect(wrapper).toMatchSnapshot();
 });
 
+test('should render Header with title prop and dark color', () => {
+    const wrapper = shallow(<Header title="Moscow, Russia" titleColorDark />);
+    expect(wrapper).toMatchSnapshot();
+});
+
 test('should render Header with user signed in', () => {
     const wrapper = shallow(<Header user={{ email: 'test@mail.com', name: 'Test' }}/>);
     expect(wrapper).toMatchSnapshot();

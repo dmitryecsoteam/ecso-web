@@ -142,3 +142,20 @@ query {
     }
 }
 `;
+
+export const GET_NOTIFICATIONS = gql`
+query {
+    getNotifications {
+        travelId
+        origin {
+            nameEn
+        }
+        destination {
+            nameEn
+        }
+        date
+        priceHotelLast
+        priceAirplaneLast
+    }
+}
+`;

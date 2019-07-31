@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
+import classNames from 'classnames';
 
 import { withSession, Session } from '../../auth/session';
 
@@ -33,7 +34,7 @@ export class Header extends React.Component {
 
     render() {
 
-        const { title, user, fetchUser } = this.props;
+        const { title, titleColorDark, user, fetchUser } = this.props;
 
         const menuWithoutAuth = <nav>
             <ul className="header__menu-container">
@@ -58,7 +59,11 @@ export class Header extends React.Component {
                     <UserMenu user={user}/>
                 </li>
             </ul>
-        </nav>
+        </nav>;
+
+        const titleClassName = classNames('header__title', {
+            'header__title--dark': titleColorDark
+        });
 
         return (
             <header className="header">
@@ -68,7 +73,7 @@ export class Header extends React.Component {
                     </Link>
                 </div>
 
-                {title && <h1 className="header__title">{title}</h1>}
+                {title && <h1 className={titleClassName}>{title}</h1>}
 
                 {user ? menuWithAuth : menuWithoutAuth}
 

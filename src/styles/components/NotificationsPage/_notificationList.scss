@@ -1,0 +1,30 @@
+.notification-list__container {
+    max-width: $content-width;
+    margin: $l-size auto;
+    padding: 0 $s-size;
+}
+
+.notification-list__header {
+    border: 0.1rem solid $light-grey;
+    background-color: lighten($light-grey, 20%);
+    display: flex;
+    justify-content: space-between;
+    //margin: 0 $s-size;
+    padding: $s-size $s-size $s-size 0;
+    color: $light-black;
+    font-size: $xm-size;
+    //font-weight: bold;
+}
+
+.notification-list__spinner {
+  text-align: center;
+  padding-top: $xl-size;
+}
+
+
+@media (max-width: $desktop-breakpoint) {
+    .notification-list__container {
+      margin: calc( 4vh + #{$l-size} ) auto;
+    }
+  }
+  

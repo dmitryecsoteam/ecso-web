@@ -130,7 +130,9 @@
   .header__title {
     width: 100%;
     text-align: center;
-    left: 50%;
-    transform: translate(-50%, 0);
+  }
+
+  .header__title--dark {
+    color: $light-black;
   }
 }

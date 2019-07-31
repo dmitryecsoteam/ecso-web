@@ -15,3 +15,31 @@ mutation signinUser($email: String, $password: String){
     }
 }
 `;
+
+export const DELETE_NOTIFICATION = gql`
+mutation deleteNotification($id: String){
+    deleteNotification (id: $id) {
+        notifications {
+            origin { nameEn }
+            destination { nameEn }
+            travelId
+            date
+            priceHotelLast
+            priceAirplaneLast
+        }
+    }
+}
+`;
+
+export const ADD_NOTIFICATION = gql`
+mutation addNotification($id: String, $date: String, $origin: Int, $destination: Int) {
+    addNotification (id: $id, date: $date, origin: $origin, destination: $destination) {
+        notifications {
+            travelId
+            date 
+            priceAirplaneLast
+            priceHotelLast
+        }
+    }
+}
+`;

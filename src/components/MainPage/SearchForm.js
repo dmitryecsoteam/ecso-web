@@ -14,7 +14,7 @@ import selectDestinationSuggestions from '../../selectors/destinationInputSelect
 import ParametersPanel from './ParametersPanel';
 import InputWithErrorTooltip from './InputWithErrorTooltip';
 import Autosuggest from 'react-autosuggest';
-import city from '../../images/icons/city.png';
+import SuggestionCity from './SuggestionCity';
 import { SingleDatePicker } from 'react-dates';
 import { isBeforeDay, isInclusivelyAfterDay } from '../../utils/dates';
 import { numberOfNonZeroParams } from '../../utils/parameters';
@@ -238,16 +238,6 @@ export class SearchForm extends React.Component {
 
     getSuggestionValue = (suggestion) => (suggestion.nameEn);
 
-    renderSuggestion = (suggestion) => (
-        <div className="react-autosuggest__suggestion-content">
-            <div className="react-autosuggest__suggestion-icon-container">
-                <img className="react-autosuggest__suggestion-icon" src={city} />
-            </div>
-            <span>
-                {suggestion.nameEn}, {suggestion.countryEn}
-            </span>
-        </div>
-    );
 
 
 
@@ -403,7 +393,7 @@ export class SearchForm extends React.Component {
                                 focusInputOnSuggestionClick={false}
                                 onSuggestionSelected={this.onOriginSuggestionSelected}
                                 getSuggestionValue={this.getSuggestionValue}
-                                renderSuggestion={this.renderSuggestion}
+                                renderSuggestion={SuggestionCity}
                             />
                         </InputWithErrorTooltip>
 
@@ -422,7 +412,7 @@ export class SearchForm extends React.Component {
                                     focusInputOnSuggestionClick={false}
                                     onSuggestionSelected={this.onDestinationSuggestionSelected}
                                     getSuggestionValue={this.getSuggestionValue}
-                                    renderSuggestion={this.renderSuggestion}
+                                    renderSuggestion={SuggestionCity}
                                 />
                             </InputWithErrorTooltip>
                         </div>
