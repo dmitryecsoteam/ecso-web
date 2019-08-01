@@ -60,3 +60,17 @@
   position: relative;
   top: -0.3rem;
 }
+
+@media (max-width: $desktop-breakpoint) {
+  .add-notification__button-container {
+    text-align: left;
+  }
+
+  .add-notification__button {
+    width: 100%;
+  }
+
+  .add-notification__inputs {
+    flex-direction: column;
+  }
+}

@@ -21,10 +21,25 @@
   padding-top: $xl-size;
 }
 
+.notification-list__header-item, .notification-list__header-item--desktop {
+  flex: 1;
+  text-align: center;
+}
+
 
 @media (max-width: $desktop-breakpoint) {
     .notification-list__container {
       margin: calc( 4vh + #{$l-size} ) auto;
+    }
+
+    .notification-list__header {
+      color: black;
+      font-size: $m-size;
+      padding: $xs-size 2.2rem $xs-size 0;
+    }
+
+    .notification-list__header-item--desktop {
+      display: none;
     }
   }
   

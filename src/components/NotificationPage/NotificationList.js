@@ -19,11 +19,11 @@ export default (props) => {
 
                 const list = <div>
                     <div className="notification-list__header">
-                        <div className="notification-item">From</div>
-                        <div className="notification-item">To</div>
-                        <div className="notification-item">Date</div>
-                        <div className="notification-item">Airplane price</div>
-                        <div className="notification-item">Hotel price</div>
+                        <div className="notification-list__header-item">From</div>
+                        <div className="notification-list__header-item">To</div>
+                        <div className="notification-list__header-item">Date</div>
+                        <div className="notification-list__header-item--desktop">Airplane price</div>
+                        <div className="notification-list__header-item--desktop">Hotel price</div>
                     </div>
                     {data.getNotifications && data.getNotifications.map((item, i) => (
                         <NotificationItem

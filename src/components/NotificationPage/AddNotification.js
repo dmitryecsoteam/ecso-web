@@ -271,6 +271,10 @@ export class AddNotification extends React.Component {
             this.setState({
                 ...defaultState
             });
+        } else {
+            this.setState({
+                saving: false
+            });
         }
     }
 
