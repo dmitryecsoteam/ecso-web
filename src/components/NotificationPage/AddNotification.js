@@ -3,6 +3,7 @@ import { Mutation } from 'react-apollo';
 import Autosuggest from 'react-autosuggest';
 import { connect } from 'react-redux';
 import MediaQuery from 'react-responsive';
+import { ClipLoader } from 'halogenium';
 import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
 import { isBeforeDay, isInclusivelyAfterDay } from '../../utils/dates';
@@ -17,6 +18,7 @@ import selectOriginSuggestions from '../../selectors/originInputSelector';
 import selectDestinationSuggestions from '../../selectors/destinationInputSelector';
 
 const defaultState = {
+    saving: false,
     showForm: false,
     originInputValue: '',
     originSelectedId: 0,
@@ -30,6 +32,7 @@ const defaultState = {
     calendarFocused: false,
     errorDateInput: false
 };
+
 
 export class AddNotification extends React.Component {
     state = { ...defaultState }
@@ -224,6 +227,17 @@ export class AddNotification extends React.Component {
     handleSaveNotification = async (e, addNotification) => {
         e.preventDefault();
 
+        // Protection from double-click
+        if (this.state.saving) {
+            console.log('SAVING!!');
+            return;
+        }
+
+        this.setState({
+            saving: true
+        });
+        
+
         let errorOriginInput = false;
         let errorDestinationInput = false;
         let errorDateInput = false;
@@ -263,6 +277,7 @@ export class AddNotification extends React.Component {
     render() {
 
         const {
+            saving,
             originInputValue,
             originSelectedId,
             destinationInputValue,
@@ -275,6 +290,13 @@ export class AddNotification extends React.Component {
             date,
             calendarFocused
         } = this.state;
+
+        const spinner = (
+            <div className="add-notification__spinner-container">
+                <ClipLoader className="add-notification__spinner" color="#fff" size="26px" />
+            </div>
+        );
+
 
         const form = (
             <Mutation mutation={ADD_NOTIFICATION} variables={{ date: date.format('YYYY-MM-DD'), origin: originSelectedId, destination: destinationSelectedId }}>
@@ -402,7 +424,7 @@ export class AddNotification extends React.Component {
                                 </div>
 
                                 <div className="add-notification__button-container">
-                                    <button className="add-notification__button">SAVE</button>
+                                    <button className="add-notification__button" disabled={saving}>{ saving ? spinner : "SAVE" }</button>
                                 </div>
 
                             </form>

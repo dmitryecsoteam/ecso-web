@@ -1,5 +1,15 @@
 .add-notification__form-container {
     padding-top: $s-size;
+    animation: fadein .3s ease-out forwards;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .add-notification__button-container {
@@ -15,7 +25,6 @@
   border-radius: $xs-size;
   font-size: $xm-size;
   font-weight: 700;
-  //text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s;
   padding: $s-size $m-size;
@@ -24,6 +33,11 @@
 
 .add-notification__button:hover {
   background: darken($submit-btn, 5%);
+}
+
+.add-notification__button:disabled {
+  background: $light-grey;
+  cursor: default;
 }
 
 
@@ -35,4 +49,14 @@
 
 .add-notification__input-item {
     margin: 0 $xs-size;
+}
+
+.add-notification__spinner-container {
+  max-height: 2rem;
+  position: relative;
+}
+
+.add-notification__spinner {
+  position: relative;
+  top: -0.3rem;
 }
