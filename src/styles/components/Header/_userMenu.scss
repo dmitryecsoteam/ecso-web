@@ -73,10 +73,11 @@
   padding: $xs-size;
   display: block;
   cursor: pointer;
+  font-weight: normal;
 }
 
 .user-menu__link:hover {
-  color: #a11122;
+  color: $option-choose-menu;
   text-decoration: underline;
 }
 

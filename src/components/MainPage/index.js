@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../Header';
 import SearchForm from './SearchForm';
 import ResultsPanel from './ResultsPanel';
+import BestDeals from './BestDeals';
 
 import background from '../../images/background/background4.jpg';
 import { Session } from '../../auth/session';
@@ -18,6 +19,8 @@ export default () => (
         <SearchForm />
 
         <ResultsPanel />
+
+        <BestDeals />
     </div>
 );
 

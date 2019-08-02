@@ -30,9 +30,9 @@
   /********** Thumb **********/
   
   @mixin rangeThumb {
-    width: $m-size;
-    height: $m-size;
-    margin: -0.7rem 0 0;
+    width: $s-size;
+    height: $s-size;
+    margin: -0.5rem 0 0;
     border-radius: 50%;
     background: $option-choose;
     cursor: pointer;

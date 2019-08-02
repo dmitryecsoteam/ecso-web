@@ -121,11 +121,11 @@ export class ResultsPanel extends React.Component {
         </div>
 
         return (
-
+            // isFetching is TRUE: show loading spinner and remove previous travelsList (and filter)
             <div className="results__list">
                 {isFetching && spinner}
-                {travels.length > 1 ? filterPanel : null}
-                {travelsList}
+                {travels.length > 1 && !isFetching ? filterPanel : null}
+                {!isFetching && travelsList}
             </div>
 
         )

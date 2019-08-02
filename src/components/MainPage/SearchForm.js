@@ -6,7 +6,7 @@ import MediaQuery from 'react-responsive';
 
 import { startSearchOrigins } from '../../actions/originInputActions';
 import { startSearchDestinations } from '../../actions/destinationInputActions';
-import { startSearchTravelsByParameters, startSearchTravelsByDestination } from '../../actions/travelsActions';
+import { startSearchTravelsByParameters, startSearchTravelsByDestination, setTravels } from '../../actions/travelsActions';
 import { setSearchForm } from '../../actions/searchFormActions';
 import selectOriginSuggestions from '../../selectors/originInputSelector';
 import selectDestinationSuggestions from '../../selectors/destinationInputSelector';
@@ -22,6 +22,11 @@ import { numberOfNonZeroParams } from '../../utils/parameters';
 // Minimum and maximum number of parameters user must select
 const PARAMETERS_MIN = 1;
 const PARAMETERS_MAX = 6;
+
+
+const sleep = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 
 export class SearchForm extends React.Component {
@@ -295,8 +300,12 @@ export class SearchForm extends React.Component {
 
     /*************** Form Submit ***************/
 
-    onFormSubmit = (e) => {
+    onFormSubmit = async (e) => {
         e.preventDefault();
+
+        //this.props.resetTravels();
+
+    
 
         // Check that inputs are correct
         let errorOriginInput = false;

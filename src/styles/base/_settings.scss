@@ -5,7 +5,8 @@ $mid-grey: #666;
 $light-grey: #c1c1c1;
 $red-error: #ef5d5d;
 $submit-btn: #00d775;
-$option-choose: #00a699; /* 37adbf */
+$option-choose: #00a699; //#37adbf;  
+$option-choose-menu: #a11122;
 $disabled: rgb(235, 235, 228);
 
 
@@ -18,3 +19,8 @@ $l-size: 3.2rem;
 $xl-size: 4.8rem;
 $desktop-breakpoint: 650px;
 $content-width: 80rem;
+
+
+:export {
+    optionChoose: $option-choose;
+}
