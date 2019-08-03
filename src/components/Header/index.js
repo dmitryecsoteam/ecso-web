@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import classNames from 'classnames';
 
-import { withSession, Session } from '../../auth/session';
+import { withSession } from '../../auth/session';
 
 import Signup from './Signup';
 import Signin from './Signin';

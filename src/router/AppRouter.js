@@ -10,8 +10,6 @@ import NotFoundPage from '../components/NotFoundPage';
 import NotificationPage from '../components/NotificationPage';
 import history from './history';
 
-import { withSession } from '../auth/session';
-
 const AppRouter = () => (
     <Router history={history}>
         <ScrollToTop>
@@ -30,5 +28,4 @@ const AppRouter = () => (
     </Router>
 );
 
-//export default withSession(AppRouter);
 export default AppRouter;

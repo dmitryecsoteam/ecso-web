@@ -24,9 +24,6 @@ const PARAMETERS_MIN = 1;
 const PARAMETERS_MAX = 6;
 
 
-const sleep = (ms) => {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 
 export class SearchForm extends React.Component {

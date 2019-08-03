@@ -17,6 +17,7 @@ export const client = new ApolloClient({
       history.push("/error");
     } else if (graphQLErrors && (unauth.some(err => graphQLErrors[0].message.includes(err)))) {
       // if graphqlError related with jwt, push history to unauth page
+      // CORRECT WHEN TOKEN EXPIRES!!
       history.push("/unauth");
     } else if (graphQLErrors && (!errors.some(err => graphQLErrors[0].message.includes(err)))) {
       // push history to error page except errors in array

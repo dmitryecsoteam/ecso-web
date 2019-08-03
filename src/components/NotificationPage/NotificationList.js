@@ -6,9 +6,10 @@ import { GET_NOTIFICATIONS } from '../../queries/queries';
 import NotificationItem from './NotificationItem';
 import AddNotification from './AddNotification';
 
-export default (props) => {
+
+export default () => {
     return (
-        <Query query={GET_NOTIFICATIONS}>
+        <Query query={GET_NOTIFICATIONS} fetchPolicy="network-only">
 
             {({ data, loading, error, refetch }) => {
 

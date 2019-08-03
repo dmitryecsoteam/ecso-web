@@ -229,7 +229,6 @@ export class AddNotification extends React.Component {
 
         // Protection from double-click
         if (this.state.saving) {
-            console.log('SAVING!!');
             return;
         }
 

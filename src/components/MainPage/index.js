@@ -5,7 +5,7 @@ import ResultsPanel from './ResultsPanel';
 import BestDeals from './BestDeals';
 
 import background from '../../images/background/background4.jpg';
-import { Session } from '../../auth/session';
+
 
 export default () => (
     <div>
@@ -23,9 +23,3 @@ export default () => (
         <BestDeals />
     </div>
 );
-
-// <Session>
-// {({ user, fetchUser }) => (
-//     <Header user={user} fetchUser={fetchUser} />
-// )}
-// </Session>

@@ -6,7 +6,6 @@ import configureStore from './store/ReduxStore';
 import { Provider } from 'react-redux';
 import { ApolloProvider } from "react-apollo";
 
-import { SessionProvider } from './auth/session';
 
 // Imports for react-dates: https://github.com/airbnb/react-dates
 import 'react-dates/initialize';
@@ -29,9 +28,7 @@ const store = configureStore();
 const jsx = (
     <ApolloProvider client={client} >
         <Provider store={store} >
-            <SessionProvider>
                 <Router />
-            </SessionProvider>
         </Provider>
     </ApolloProvider>
 );

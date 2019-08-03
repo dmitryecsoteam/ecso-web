@@ -9,6 +9,7 @@ import ParametersList from './ParametersList';
 import WeatherCard from './WeatherCard';
 import Banner from './Banner';
 import TextArea from './TextArea';
+import NotificationButton from './NotificationButton';
 
 import cloud from '../../images/icons/cloud.svg';
 import sun from '../../images/icons/sun.svg';
@@ -18,7 +19,6 @@ import airplane from '../../images/banners/airplane.jpg';
 import apartments from '../../images/banners/apartments.jpg';
 import carRoute from '../../images/banners/car-route.jpg';
 
-import { client } from '../../clientGraphQL/client';
 
 
 
@@ -90,6 +90,8 @@ export default ({ match }) => {
                     <ParametersList destination={destination} />
 
                     {divider}
+
+                    <NotificationButton travelId={_id}/>
 
                     <Banner
                         linkTo="#"

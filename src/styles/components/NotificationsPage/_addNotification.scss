@@ -31,6 +31,11 @@
   width: 24.4rem;
 }
 
+.add-notification__button--big {
+  width: auto;
+  padding-left: $xl-size;
+}
+
 .add-notification__button:hover {
   background: darken($submit-btn, 5%);
 }

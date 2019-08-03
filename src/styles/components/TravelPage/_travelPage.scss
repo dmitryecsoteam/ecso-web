@@ -11,3 +11,30 @@
     margin-top: $l-size;
     margin-bottom: $l-size;
 }
+
+.travel__notification-button {
+    position: relative;
+    max-width: $content-width;
+    width: 100%;
+    text-align: left;
+    padding-bottom: $s-size;
+    white-space: nowrap;
+}
+
+.travel__notification-icon {
+    position: absolute;
+    left: $m-size;
+    height: 2.2rem;
+    width: auto;
+}
+
+.travel__notification-text {
+    
+}
+
+@media (max-width: $desktop-breakpoint) {
+    .travel__notification-button {
+        padding-right: $s-size;
+        padding-left: $s-size;
+    }
+}
