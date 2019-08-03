@@ -5,6 +5,7 @@ import destinationInputReducer from '../reducers/destinationInputReducer';
 import travelsReducer from '../reducers/travelsReducer';
 import searchFormReducer from '../reducers/searchFormReducer';
 import filterReducer from '../reducers/filterReducer';
+import notificationListReducer from '../reducers/notificationListReducer';
 import moment from 'moment';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -42,6 +43,9 @@ export const defaultState = {
     filter: {
         sortBy: 'relevance',
         desc: true
+    },
+    notificationList: {
+        errorTravelId: ''
     }
 };
 
@@ -52,7 +56,8 @@ export default () => (
             destinationInput: destinationInputReducer,
             travels: travelsReducer,
             searchForm: searchFormReducer,
-            filter: filterReducer
+            filter: filterReducer,
+            notificationList: notificationListReducer
         }),
         defaultState,
         composeEnhancers(applyMiddleware(thunk))

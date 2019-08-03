@@ -12,6 +12,8 @@ import { ADD_NOTIFICATION } from '../../queries/mutations';
 import InputWithErrorTooltip from '../MainPage/InputWithErrorTooltip';
 import SuggestionCity from '../MainPage/SuggestionCity';
 
+import { setErrorId, clearErrorId } from '../../actions/notificationListActions';
+
 import { startSearchOrigins } from '../../actions/originInputActions';
 import { startSearchDestinations } from '../../actions/destinationInputActions';
 import selectOriginSuggestions from '../../selectors/originInputSelector';
@@ -24,18 +26,26 @@ const defaultState = {
     originSelectedId: 0,
     suggestOrigins: [],
     errorOriginInput: false,
+    errorOriginText: '',
     destinationInputValue: '',
     destinationSelectedId: 0,
     suggestDestinations: [],
     errorDestinationInput: false,
+    errorDestinationText: '',
     date: moment(),
     calendarFocused: false,
-    errorDateInput: false
+    errorDateInput: false,
+    errorDateText: ''
 };
 
 
 export class AddNotification extends React.Component {
     state = { ...defaultState }
+
+    componentWillUnmount() {
+        // Clear errorId when navigating out of notification page
+        this.props.clearErrorId();
+    }
 
     handleShowForm = () => {
         this.setState({
@@ -235,41 +245,92 @@ export class AddNotification extends React.Component {
         this.setState({
             saving: true
         });
-        
+
+
+        // Clear errorId if it was highlighted
+        if (this.props.errorTravelId) {
+            this.props.clearErrorId();
+        }
+
 
         let errorOriginInput = false;
+        let errorOriginText = '';
         let errorDestinationInput = false;
+        let errorDestinationText = '';
         let errorDateInput = false;
+        let errorDateText = '';
 
         if (this.state.originInputValue === '') {
             errorOriginInput = true;
+            errorOriginText = 'Enter origin';
         };
 
         if (this.state.destinationInputValue === '') {
             errorDestinationInput = true;
+            errorDestinationText = 'Enter destination';
         };
 
         if (!this.state.date) {
             errorDateInput = true;
+            errorDateText = 'Enter correct date';
         }
 
         this.setState(() => ({
             errorOriginInput,
             errorDestinationInput,
-            errorDateInput
+            errorDateInput,
+            errorOriginText,
+            errorDestinationText,
+            errorDateText
         }));
 
         if (!(errorOriginInput || errorDestinationInput || errorDateInput)) {
-            // add new notification
-            await addNotification();
 
-            // refetch list of notifications and rerender it in NotificationList
-            await this.props.refetchNotifications();
+            try {
 
-            // close and cleanup add notification form
-            this.setState({
-                ...defaultState
-            });
+                // add new notification
+                await addNotification();
+
+                // refetch list of notifications and rerender it in NotificationList
+                await this.props.refetchNotifications();
+
+                // close and cleanup add notification form
+                this.setState({
+                    ...defaultState
+                });
+
+            } catch (e) {
+
+                // If notification is already in database:
+
+
+                if (e.message.includes('Such notification already exists')) {
+
+                    // 1. refetch list of notifications
+                    await this.props.refetchNotifications();
+
+                    // 2. render error message
+                    errorOriginInput = errorDestinationInput = errorDateInput = true;
+                    errorOriginText = errorDateText = '';
+                    errorDestinationText = 'You have this notification';
+                    this.setState(() => ({
+                        errorOriginInput,
+                        errorDestinationInput,
+                        errorDateInput,
+                        errorOriginText,
+                        errorDestinationText,
+                        errorDateText,
+                        saving: false
+                    }));
+
+                    // 3. Send travelId to redux store
+                    this.props.setErrorId(e.message.match(/(?<=TravelId: ).*(?=,)/)[0]);
+                }
+            }
+
+
+
+
         } else {
             this.setState({
                 saving: false
@@ -290,6 +351,9 @@ export class AddNotification extends React.Component {
             errorDestinationInput,
             errorOriginInput,
             errorDateInput,
+            errorOriginText,
+            errorDestinationText,
+            errorDateText,
             date,
             calendarFocused
         } = this.state;
@@ -330,7 +394,7 @@ export class AddNotification extends React.Component {
                                         <InputWithErrorTooltip
                                             label="From:"
                                             error={errorOriginInput}
-                                            errorText="Enter origin"
+                                            errorText={errorOriginText}
                                         >
                                             <Autosuggest
                                                 suggestions={suggestOrigins}
@@ -349,7 +413,7 @@ export class AddNotification extends React.Component {
                                         <InputWithErrorTooltip
                                             label="To:"
                                             error={errorDestinationInput}
-                                            errorText="Enter destination"
+                                            errorText={errorDestinationText}
                                         >
                                             <Autosuggest
                                                 suggestions={suggestDestinations}
@@ -368,7 +432,7 @@ export class AddNotification extends React.Component {
                                         <InputWithErrorTooltip
                                             label="Date:"
                                             error={errorDateInput}
-                                            errorText="Enter correct date"
+                                            errorText={errorDateText}
                                         >
                                             {/* 
                               *   Calendar for small devices as modal.
@@ -427,7 +491,7 @@ export class AddNotification extends React.Component {
                                 </div>
 
                                 <div className="add-notification__button-container">
-                                    <button className="add-notification__button" disabled={saving}>{ saving ? spinner : "SAVE" }</button>
+                                    <button className="add-notification__button" disabled={saving}>{saving ? spinner : "SAVE"}</button>
                                 </div>
 
                             </form>
@@ -454,12 +518,15 @@ const mapStateToProps = (state) => ({
     origins: state.originInput.origins,
     isFetchingOrigins: state.originInput.isFetching,
     destinations: state.destinationInput.destinations,
-    isFetchingDestinations: state.destinationInput.isFetching
+    isFetchingDestinations: state.destinationInput.isFetching,
+    errorTravelId: state.notificationList.errorTravelId
 });
 
 const mapDispatchToProps = (dispatch) => ({
     startSearchOrigins: (text) => dispatch(startSearchOrigins(text)),
-    startSearchDestinations: (text) => dispatch(startSearchDestinations(text))
+    startSearchDestinations: (text) => dispatch(startSearchDestinations(text)),
+    setErrorId: (id) => dispatch(setErrorId(id)),
+    clearErrorId: () => dispatch(clearErrorId())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddNotification);

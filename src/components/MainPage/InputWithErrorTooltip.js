@@ -12,7 +12,7 @@ export default ({
     const divClassName = classNames(
         'search-form__label-input',
         { 'search-form__label-input--error': error },
-        { 'search-form__label-input--disabled': disabled}
+        { 'search-form__label-input--disabled': disabled }
     );
 
     const errorClassName = classNames(
@@ -26,9 +26,12 @@ export default ({
                 {label && <label className="search-form__label">{label}</label>}
                 {children}
             </div>
-            <div className={errorClassName}>
-                <span className="search-form__error-text">{errorText}</span>
-            </div>
+            {errorText &&
+                <div className={errorClassName}>
+                    <span className="search-form__error-text">{errorText}</span>
+                </div>
+            }
+
         </div>
     );
 }

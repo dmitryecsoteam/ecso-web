@@ -1,13 +1,14 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import { PulseLoader } from 'halogenium';
+import { connect } from 'react-redux';
 
 import { GET_NOTIFICATIONS } from '../../queries/queries';
 import NotificationItem from './NotificationItem';
 import AddNotification from './AddNotification';
 
 
-export default () => {
+export const NotificationList = (props) => {
     return (
         <Query query={GET_NOTIFICATIONS} fetchPolicy="network-only">
 
@@ -15,7 +16,7 @@ export default () => {
 
                 const spinner = <div className="notification-list__spinner">
                     <PulseLoader color="#c1c1c1" />
-                    <p className="results__text results__text--medium">Searching</p>
+                    <p className="results__text results__text--medium">Loading...</p>
                 </div>
 
                 const list = <div>
@@ -36,8 +37,10 @@ export default () => {
                             priceAirplaneLast={item.priceAirplaneLast}
                             priceHotelLast={item.priceHotelLast}
                             refetchNotifications={refetch}
+                            highlightRed={item.travelId === props.errorTravelId}
                         />
-                    ))}
+                    )
+                    )}
                     <AddNotification refetchNotifications={refetch} />
                 </div>
 
@@ -53,3 +56,9 @@ export default () => {
 
     );
 }
+
+const mapStateToProps = (state) => ({
+    errorTravelId: state.notificationList.errorTravelId
+});
+
+export default connect(mapStateToProps)(NotificationList);

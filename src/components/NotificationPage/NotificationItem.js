@@ -1,14 +1,20 @@
 import React from 'react';
 import { Mutation } from 'react-apollo';
 import { ClipLoader } from 'halogenium';
+import className from 'classnames';
 
 import { DELETE_NOTIFICATION } from '../../queries/mutations';
 
-export default ({ id, origin, destination, date, priceAirplaneLast, priceHotelLast, refetchNotifications }) => {
+export default ({ id, origin, destination, date, priceAirplaneLast, priceHotelLast, refetchNotifications, highlightRed }) => {
 
+    const containerClassName = className(
+        'notification-item__container',
+        {
+            'notification-item__container--highlight-red': highlightRed
+        });
 
     return (
-        <div className="notification-item__container">
+        <div className={containerClassName}>
             <div className="notification-item__first-row">
                 <div className="notification-item">{origin}</div>
                 <div className="notification-item">{destination}</div>
