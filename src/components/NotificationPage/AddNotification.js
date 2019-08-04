@@ -324,7 +324,7 @@ export class AddNotification extends React.Component {
                     }));
 
                     // 3. Send travelId to redux store
-                    this.props.setErrorId(e.message.match(/(?<=TravelId: ).*(?=,)/)[0]);
+                    this.props.setErrorId(e.message.match(/TravelId: (.*),/)[1]);
                 }
             }
 
