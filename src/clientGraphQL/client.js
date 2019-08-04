@@ -1,7 +1,7 @@
 import ApolloClient from 'apollo-boost';
 import history from '../router/history';
 
-const errors = ['User with email', 'Wrong password', 'Such notification already exists'];
+const errors = ['User with email', 'Wrong password', 'Such notification already exists', 'doesn\'t have notification with id'];
 const unauth = ['Unauthorized', 'jwt expired', 'invalid', 'Unexpected'];
 
 export const client = new ApolloClient({

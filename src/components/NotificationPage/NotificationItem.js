@@ -30,11 +30,18 @@ export default ({ id, origin, destination, date, priceAirplaneLast, priceHotelLa
 
                         // NOT OPTIMISTIC UI!
                         const handleDelete = async () => {
-                            // First, wait for deletion to complete
-                            await deleteNotification();
+
+                            try {
+                                // First, wait for deletion to complete
+                                await deleteNotification();
+
+                            } catch (e) {
+                                // If error "doesn't have notification with id" is caught - just do nothing
+                            }
 
                             // Second, refetch notifications list
                             refetchNotifications();
+
                         }
 
                         return (
