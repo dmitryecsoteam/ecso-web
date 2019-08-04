@@ -1,5 +1,4 @@
 import React from 'react';
-import { ClipLoader } from 'halogenium';
 
 import { withSession } from '../../auth/session';
 import { client } from '../../clientGraphQL/client';
@@ -53,10 +52,15 @@ export class NotificationButton extends React.Component {
                 loadingNotification: true
             });
 
-            await client.mutate({
-                mutation: ADD_NOTIFICATION,
-                variables: { id: this.props.travelId }
-            });
+            try {
+                await client.mutate({
+                    mutation: ADD_NOTIFICATION,
+                    variables: { id: this.props.travelId }
+                });
+            } catch (e) {
+                // If error "Such notification already exists" is caught - just do nothing
+            }
+
 
             this.setState({
                 isNotification: true,
@@ -74,10 +78,15 @@ export class NotificationButton extends React.Component {
                 loadingNotification: true
             });
 
-            await client.mutate({
-                mutation: DELETE_NOTIFICATION,
-                variables: { id: this.props.travelId }
-            });
+            try {
+                await client.mutate({
+                    mutation: DELETE_NOTIFICATION,
+                    variables: { id: this.props.travelId }
+                });
+            } catch (e) {
+                // If error "doesn't have notification with id" is caught - just do nothing
+            }
+
 
             this.setState({
                 isNotification: false,
@@ -89,12 +98,6 @@ export class NotificationButton extends React.Component {
 
     render() {
         const { user, travelId } = this.props;
-
-        const spinnerNotification = (
-            <div className="add-notification__spinner-container">
-                <ClipLoader className="add-notification__spinner" color="#fff" size="26px" />
-            </div>
-        );
 
         const addNotificationButton = (
             <button
