@@ -36,5 +36,11 @@
     .travel__notification-button {
         padding-right: $s-size;
         padding-left: $s-size;
+        font-size: $s-size;
+    }
+
+    .travel__notification-icon {
+        left: 2.4rem;
+        height: 2rem;
     }
 }

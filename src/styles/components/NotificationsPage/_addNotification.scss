@@ -75,6 +75,10 @@
     width: 100%;
   }
 
+  .add-notification__button--big {
+    font-size: $m-size;
+  }
+
   .add-notification__inputs {
     flex-direction: column;
   }
