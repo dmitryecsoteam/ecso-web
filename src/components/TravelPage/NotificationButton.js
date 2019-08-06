@@ -2,6 +2,7 @@ import React from 'react';
 
 import { withSession } from '../../auth/session';
 import { client } from '../../clientGraphQL/client';
+import history from '../../router/history';
 
 import { GET_NOTIFICATIONS } from '../../queries/queries';
 import { ADD_NOTIFICATION, DELETE_NOTIFICATION } from '../../queries/mutations';
@@ -33,13 +34,24 @@ export class NotificationButton extends React.Component {
     updateNotification = async () => {
         // if user is not null get list of notifications
         if (this.props.user) {
-            const { data } = await client.query({
-                query: GET_NOTIFICATIONS
-            });
+            let data;
+            try {
+                data = await client.query({
+                    query: GET_NOTIFICATIONS,
+                    fetchPolicy: "network-only"
+                });
+            } catch (e) {
+                // If error "jwt expired" or "Unauthorized" is caught - refetch current user
+                if (e.message.includes('jwt expired') || e.message.includes('Unauthorized')) {
+                    this.props.fetchUser();
+                    return;
+                }
+            }
+
 
             // Set isNotification to TRUE if travelId is in user notifications array
             this.setState({
-                isNotification: data.getNotifications.some(notification => notification.travelId === this.props.travelId)
+                isNotification: data.data.getNotifications.some(notification => notification.travelId === this.props.travelId)
             });
         }
     }
@@ -59,6 +71,12 @@ export class NotificationButton extends React.Component {
                 });
             } catch (e) {
                 // If error "Such notification already exists" is caught - just do nothing
+                // If error "jwt expired" or "Unauthorized" is caught - redirect to UnauthPage
+                if (e.message.includes('jwt expired') || e.message.includes('Unauthorized')) {
+                    this.props.fetchUser().then(() => history.push('/unauth'));
+                    return;
+                }
+
             }
 
 
@@ -85,6 +103,11 @@ export class NotificationButton extends React.Component {
                 });
             } catch (e) {
                 // If error "doesn't have notification with id" is caught - just do nothing
+                // If error "jwt expired" or "Unauthorized" is caught - redirect to UnauthPage
+                if (e.message.includes('jwt expired') || e.message.includes('Unauthorized')) {
+                    this.props.fetchUser().then(() => history.push('/unauth'));
+                    return;
+                }
             }
 
 

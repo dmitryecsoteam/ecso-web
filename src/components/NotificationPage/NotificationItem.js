@@ -5,7 +5,7 @@ import className from 'classnames';
 
 import { DELETE_NOTIFICATION } from '../../queries/mutations';
 
-export default ({ id, origin, destination, date, priceAirplaneLast, priceHotelLast, refetchNotifications, highlightRed }) => {
+export default ({ id, origin, destination, date, priceAirplaneLast, priceHotelLast, refetchNotifications, fetchUser, highlightRed }) => {
 
     const containerClassName = className(
         'notification-item__container',
@@ -37,6 +37,11 @@ export default ({ id, origin, destination, date, priceAirplaneLast, priceHotelLa
 
                             } catch (e) {
                                 // If error "doesn't have notification with id" is caught - just do nothing
+                                // If error "jwt expired" or "Unauthorized" is caught - refetch current user
+                                if (e.message.includes('jwt expired') || e.message.includes('Unauthorized')) {
+                                    fetchUser();
+                                    return;
+                                }
                             }
 
                             // Second, refetch notifications list

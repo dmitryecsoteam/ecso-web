@@ -2,6 +2,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { PulseLoader } from 'halogenium';
 import { connect } from 'react-redux';
+import history from '../../router/history';
 
 import { GET_NOTIFICATIONS } from '../../queries/queries';
 import NotificationItem from './NotificationItem';
@@ -13,6 +14,12 @@ export const NotificationList = (props) => {
         <Query query={GET_NOTIFICATIONS} fetchPolicy="network-only">
 
             {({ data, loading, error, refetch }) => {
+
+                // If error "jwt expired" or "Unauthorized" is caught - refetch current user and return empty component
+                if (error && (error.message.includes('jwt expired') || error.message.includes('Unauthorized'))) {
+                    props.fetchUser().then(() => history.push("/unauth"));
+                    return <div></div>;
+                }
 
                 const spinner = <div className="notification-list__spinner">
                     <PulseLoader color="#c1c1c1" />
@@ -27,7 +34,7 @@ export const NotificationList = (props) => {
                         <div className="notification-list__header-item--desktop">Airplane price</div>
                         <div className="notification-list__header-item--desktop">Hotel price</div>
                     </div>
-                    {data.getNotifications && data.getNotifications.map((item, i) => (
+                    {data && data.getNotifications && data.getNotifications.map((item, i) => (
                         <NotificationItem
                             key={i}
                             id={item.travelId}
@@ -37,11 +44,12 @@ export const NotificationList = (props) => {
                             priceAirplaneLast={item.priceAirplaneLast}
                             priceHotelLast={item.priceHotelLast}
                             refetchNotifications={refetch}
+                            fetchUser={props.fetchUser}
                             highlightRed={item.travelId === props.errorTravelId}
                         />
                     )
                     )}
-                    <AddNotification refetchNotifications={refetch} />
+                    <AddNotification refetchNotifications={refetch} fetchUser={props.fetchUser} />
                 </div>
 
 

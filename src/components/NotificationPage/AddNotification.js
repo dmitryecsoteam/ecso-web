@@ -302,8 +302,6 @@ export class AddNotification extends React.Component {
             } catch (e) {
 
                 // If notification is already in database:
-
-
                 if (e.message.includes('Such notification already exists')) {
 
                     // 1. refetch list of notifications
@@ -325,6 +323,11 @@ export class AddNotification extends React.Component {
 
                     // 3. Send travelId to redux store
                     this.props.setErrorId(e.message.match(/TravelId: (.*),/)[1]);
+                } 
+
+                //If error "jwt expired" or "Unauthorized" is caught - refetch current user
+                else if (e.message.includes('jwt expired') || e.message.includes('Unauthorized')) {
+                    this.props.fetchUser();
                 }
             }
 
