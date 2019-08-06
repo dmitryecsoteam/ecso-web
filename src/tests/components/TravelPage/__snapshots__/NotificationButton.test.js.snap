@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should not render NotificationButton if user is null 1`] = `<Fragment />`;
+
+exports[`should render NotificationButton for signed user - Delete notification 1`] = `
+<Fragment>
+  <div
+    className="travel__notification-button"
+  >
+    <button
+      className="add-notification__button add-notification__button--big"
+      disabled={false}
+      onClick={[Function]}
+    >
+      <img
+        className="travel__notification-icon"
+        src="test-file-stub"
+      />
+      Delete notification
+    </button>
+  </div>
+</Fragment>
+`;
+
+exports[`should render NotificationButton for signed user - Notify me about price changes 1`] = `
+<Fragment>
+  <div
+    className="travel__notification-button"
+  >
+    <button
+      className="add-notification__button add-notification__button--big"
+      disabled={false}
+      onClick={[Function]}
+    >
+      <img
+        className="travel__notification-icon"
+        src="test-file-stub"
+      />
+      Notify me about price changes
+    </button>
+  </div>
+</Fragment>
+`;
