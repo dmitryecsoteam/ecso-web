@@ -1,10 +1,6 @@
 import { client } from '../clientGraphQL/client';
 import { DESTINATION_SEARCH_BY_PARAMETERS, TRAVELS_SEARCH_EN } from '../queries/queries';
 
-const sleep = (ms) => {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export const setTravels = (travels) => ({
     type: 'SET_TRAVELS',
     travels
@@ -15,7 +11,7 @@ export const startFetchingTravels = () => ({
 });
 
 export const startSearchTravelsByParameters = (origin, parametersValue, date) => {
-    return async (dispatch) => {
+    return (dispatch) => {
         dispatch(startFetchingTravels());
 
         const variables = {
@@ -27,7 +23,6 @@ export const startSearchTravelsByParameters = (origin, parametersValue, date) =>
             nightlifeRating: parametersValue['Nightlife']
         };
         
-        await sleep(5000)
         return client.query({
             query: DESTINATION_SEARCH_BY_PARAMETERS,
             variables

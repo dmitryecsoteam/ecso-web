@@ -932,7 +932,7 @@ exports[`should render SearchForm with default props 1`] = `
               }
             }
             placeholder=""
-            readOnly={false}
+            readOnly={true}
             regular={false}
             renderCalendarInfo={[Function]}
             renderDayContents={null}
@@ -1026,7 +1026,7 @@ exports[`should render SearchForm with default props 1`] = `
               }
             }
             placeholder=""
-            readOnly={false}
+            readOnly={true}
             regular={false}
             renderCalendarInfo={[Function]}
             renderDayContents={null}

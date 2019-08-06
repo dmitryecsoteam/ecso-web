@@ -16,13 +16,6 @@ exports[`should render InputWithErrorTooltip component with input 1`] = `
       type="text"
     />
   </div>
-  <div
-    className="search-form__error"
-  >
-    <span
-      className="search-form__error-text"
-    />
-  </div>
 </div>
 `;
 
@@ -35,13 +28,6 @@ exports[`should render InputWithErrorTooltip component with input and default pr
   >
     <input
       type="text"
-    />
-  </div>
-  <div
-    className="search-form__error"
-  >
-    <span
-      className="search-form__error-text"
     />
   </div>
 </div>
@@ -61,13 +47,6 @@ exports[`should render InputWithErrorTooltip disabled 1`] = `
     </label>
     <input
       type="text"
-    />
-  </div>
-  <div
-    className="search-form__error"
-  >
-    <span
-      className="search-form__error-text"
     />
   </div>
 </div>

@@ -101,7 +101,7 @@ exports[`should display error message 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -187,7 +187,7 @@ exports[`should display error message 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -273,7 +273,7 @@ exports[`should display error message 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -359,7 +359,7 @@ exports[`should display error message 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -445,7 +445,7 @@ exports[`should display error message 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -531,7 +531,7 @@ exports[`should display error message 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -687,7 +687,7 @@ exports[`should render ParametersPanal with default props 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -773,7 +773,7 @@ exports[`should render ParametersPanal with default props 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -859,7 +859,7 @@ exports[`should render ParametersPanal with default props 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -945,7 +945,7 @@ exports[`should render ParametersPanal with default props 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -1031,7 +1031,7 @@ exports[`should render ParametersPanal with default props 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -1117,7 +1117,7 @@ exports[`should render ParametersPanal with default props 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -1273,7 +1273,7 @@ exports[`should render ParametersPanel with opened panel 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -1359,7 +1359,7 @@ exports[`should render ParametersPanel with opened panel 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -1445,7 +1445,7 @@ exports[`should render ParametersPanel with opened panel 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -1531,7 +1531,7 @@ exports[`should render ParametersPanel with opened panel 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -1617,7 +1617,7 @@ exports[`should render ParametersPanel with opened panel 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"
@@ -1703,7 +1703,7 @@ exports[`should render ParametersPanel with opened panel 1`] = `
                 steps={1}
                 style={
                   Object {
-                    "background": "linear-gradient(to right, #37adbf 0%, #b2b2b2 0%)",
+                    "background": "linear-gradient(to right, optionChoose 0%, #b2b2b2 0%)",
                   }
                 }
                 type="range"

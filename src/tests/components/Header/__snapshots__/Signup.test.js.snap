@@ -190,13 +190,6 @@ exports[`should render Signup component 1`] = `
                 value=""
               />
             </div>
-            <div
-              className="search-form__error"
-            >
-              <span
-                className="search-form__error-text"
-              />
-            </div>
           </div>
         </_default>
         <_default
@@ -216,13 +209,6 @@ exports[`should render Signup component 1`] = `
                 placeholder="Name"
                 type="text"
                 value=""
-              />
-            </div>
-            <div
-              className="search-form__error"
-            >
-              <span
-                className="search-form__error-text"
               />
             </div>
           </div>
@@ -246,13 +232,6 @@ exports[`should render Signup component 1`] = `
                 value=""
               />
             </div>
-            <div
-              className="search-form__error"
-            >
-              <span
-                className="search-form__error-text"
-              />
-            </div>
           </div>
         </_default>
         <_default
@@ -272,13 +251,6 @@ exports[`should render Signup component 1`] = `
                 placeholder="Confirm password"
                 type="password"
                 value=""
-              />
-            </div>
-            <div
-              className="search-form__error"
-            >
-              <span
-                className="search-form__error-text"
               />
             </div>
           </div>

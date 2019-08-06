@@ -157,13 +157,6 @@ exports[`should render Signin component 1`] = `
                 value=""
               />
             </div>
-            <div
-              className="search-form__error"
-            >
-              <span
-                className="search-form__error-text"
-              />
-            </div>
           </div>
         </_default>
         <_default
@@ -183,13 +176,6 @@ exports[`should render Signin component 1`] = `
                 placeholder="Password"
                 type="password"
                 value=""
-              />
-            </div>
-            <div
-              className="search-form__error"
-            >
-              <span
-                className="search-form__error-text"
               />
             </div>
           </div>
