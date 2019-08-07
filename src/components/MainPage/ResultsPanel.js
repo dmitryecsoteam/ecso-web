@@ -7,6 +7,8 @@ import { PulseLoader } from 'halogenium';
 import TravelCard from './TravelCard';
 import resultListSelector from '../../selectors/resultListSelector';
 
+const divider = <div className="travel__divider"></div>;
+
 export class ResultsPanel extends React.Component {
 
     shouldComponentUpdate(newProps) {
@@ -126,6 +128,7 @@ export class ResultsPanel extends React.Component {
                 {isFetching && spinner}
                 {travels.length > 1 && !isFetching ? filterPanel : null}
                 {!isFetching && travelsList}
+                {(isFetching || !isInitEmptyResult) && divider}
             </div>
 
         )

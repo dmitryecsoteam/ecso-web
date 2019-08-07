@@ -159,3 +159,21 @@ query {
     }
 }
 `;
+
+export const GET_BEST_DEALS = gql`
+query getBestDeals ($limit: Int, $months: Int) {
+    getBestDeals (limit: $limit, months: $months) {
+        _id
+        date
+        priceAirplane
+        origin {
+            nameEn
+            countryEn
+        }
+        destination {
+            nameEn
+            countryEn
+        }
+    }
+}
+`;
