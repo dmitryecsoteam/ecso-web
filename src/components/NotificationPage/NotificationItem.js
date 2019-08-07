@@ -2,6 +2,7 @@ import React from 'react';
 import { Mutation } from 'react-apollo';
 import { ClipLoader } from 'halogenium';
 import className from 'classnames';
+import { Link } from 'react-router-dom';
 
 import { DELETE_NOTIFICATION } from '../../queries/mutations';
 
@@ -16,12 +17,12 @@ export default ({ id, origin, destination, date, priceAirplaneLast, priceHotelLa
     return (
         <div className={containerClassName}>
             <div className="notification-item__first-row">
-                <div className="notification-item">{origin}</div>
-                <div className="notification-item">{destination}</div>
-                <div className="notification-item">{date}</div>
+                <div className="notification-item"><Link to={`/travel/${id}`} className="notification-item--link">{origin}</Link></div>
+                <div className="notification-item"><Link to={`/travel/${id}`} className="notification-item--link">{destination}</Link></div>
+                <div className="notification-item"><Link to={`/travel/${id}`} className="notification-item--link">{date}</Link></div>
 
-                <div className="notification-item--desktop">{priceAirplaneLast ? `${priceAirplaneLast} $` : '-'}</div>
-                <div className="notification-item--desktop">{priceHotelLast ? `${priceHotelLast} $` : '-'}</div>
+                <div className="notification-item--desktop"><Link to={`/travel/${id}`} className="notification-item--link">{priceAirplaneLast ? `${priceAirplaneLast} $` : '-'}</Link></div>
+                <div className="notification-item--desktop"><Link to={`/travel/${id}`} className="notification-item--link">{priceHotelLast ? `${priceHotelLast} $` : '-'}</Link></div>
 
 
                 <Mutation mutation={DELETE_NOTIFICATION} variables={{ id }}>
@@ -63,8 +64,8 @@ export default ({ id, origin, destination, date, priceAirplaneLast, priceHotelLa
             </div>
 
             <div className="notification-item__second-row">
-                <div className="notification-item--mobile">Airplane: {priceAirplaneLast ? `${priceAirplaneLast} $` : '-'}</div>
-                <div className="notification-item--mobile">Hotel: {priceHotelLast ? `${priceHotelLast} $` : '-'}</div>
+                <div className="notification-item--mobile"><Link to={`/travel/${id}`} className="notification-item--link">Airplane: {priceAirplaneLast ? `${priceAirplaneLast} $` : '-'}</Link></div>
+                <div className="notification-item--mobile"><Link to={`/travel/${id}`} className="notification-item--link">Hotel: {priceHotelLast ? `${priceHotelLast} $` : '-'}</Link></div>
             </div>
 
         </div>

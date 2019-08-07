@@ -29,6 +29,11 @@
 
 }
 
+.notification-item--link {
+    text-decoration: none;
+    color: inherit;
+}
+
 .notification-item__delete-button {
     position: absolute;
     right: 0;
