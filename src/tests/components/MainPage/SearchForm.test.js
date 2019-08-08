@@ -557,6 +557,7 @@ describe('submit', () => {
 
     expect(startSearchTravelsByDestination).not.toHaveBeenCalled();
     expect(startSearchTravelsByParameters).not.toHaveBeenCalled();
+    expect(wrapper.state('errorOriginInput')).toBeTruthy();
   });
 
   test('should not submit form with empty destination', () => {
@@ -571,6 +572,24 @@ describe('submit', () => {
 
     expect(startSearchTravelsByDestination).not.toHaveBeenCalled();
     expect(startSearchTravelsByParameters).not.toHaveBeenCalled();
+    expect(wrapper.state('errorDestinationInput')).toBeTruthy();
+  });
+
+  test('should not submit form if destination equals origin', () => {
+    const wrapper = shallow(<SearchForm {...props} />);
+
+    wrapper.setState({
+      originInputValue: 'orig',
+      originSelectedId: 3,
+      destinationInputValue: 'orig',
+      destinationSelectedId: 3
+    });
+
+    wrapper.find('form').simulate('submit', { preventDefault: () => { } });
+
+    expect(startSearchTravelsByDestination).not.toHaveBeenCalled();
+    expect(startSearchTravelsByParameters).not.toHaveBeenCalled();
+    expect(wrapper.state('errorDestinationInput')).toBeTruthy();
   });
 
   test('should not submit form with wrong date', () => {
@@ -584,6 +603,7 @@ describe('submit', () => {
 
     expect(startSearchTravelsByDestination).not.toHaveBeenCalled();
     expect(startSearchTravelsByParameters).not.toHaveBeenCalled();
+    expect(wrapper.state('errorDateInput')).toBeTruthy();
   });
 
   test('should not submit form with zero parameters chosen', () => {
@@ -599,6 +619,7 @@ describe('submit', () => {
 
     expect(startSearchTravelsByDestination).not.toHaveBeenCalled();
     expect(startSearchTravelsByParameters).not.toHaveBeenCalled();
+    expect(wrapper.state('errorParameters')).toBeTruthy();
   });
 
   test('should start search travels by destination', () => {

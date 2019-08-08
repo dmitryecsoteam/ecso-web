@@ -801,7 +801,7 @@ exports[`should render SearchForm with default props 1`] = `
         <_default
           disabled={false}
           error={false}
-          errorText="Enter destination"
+          errorText=""
           label="To:"
         >
           <Autosuggest

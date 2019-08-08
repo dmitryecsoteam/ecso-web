@@ -83,6 +83,9 @@ exports[`should render list of travels 1`] = `
     }
     priceAirplane={115}
   />
+  <div
+    className="travel__divider"
+  />
 </div>
 `;
 
@@ -163,6 +166,9 @@ exports[`should render list of travels with price descending filter 1`] = `
     }
     priceAirplane={100}
   />
+  <div
+    className="travel__divider"
+  />
 </div>
 `;
 
@@ -180,6 +186,9 @@ exports[`should render single TravelCard without filter 1`] = `
     nameEn="Osaka"
     parameters={Object {}}
     priceAirplane={115}
+  />
+  <div
+    className="travel__divider"
   />
 </div>
 `;
@@ -203,5 +212,8 @@ exports[`should render spinner 1`] = `
       Searching
     </p>
   </div>
+  <div
+    className="travel__divider"
+  />
 </div>
 `;

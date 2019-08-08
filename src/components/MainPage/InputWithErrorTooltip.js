@@ -4,7 +4,7 @@ import classNames from 'classnames';
 export default ({
     children,
     error = false,
-    errorText = '',
+    errorText,
     label = '',
     disabled = false
 } = props) => {
@@ -26,7 +26,7 @@ export default ({
                 {label && <label className="search-form__label">{label}</label>}
                 {children}
             </div>
-            {errorText &&
+            {errorText != null &&
                 <div className={errorClassName}>
                     <span className="search-form__error-text">{errorText}</span>
                 </div>

@@ -3,7 +3,7 @@ import moment from 'moment';
 
 const prevState = {
     originInputValue: 'Tokyo',
-    originsSelectedId: 1,
+    originSelectedId: 1,
     destinationInputValue: '',
     destinationSelectedId: 0,
     date: moment(),
@@ -30,7 +30,7 @@ test('should set search form', () => {
 
     const searchForm = {
         originInputValue: 'Osaka',
-        originsSelectedId: 2,
+        originSelectedId: 2,
         destinationInputValue: 'Nagoya',
         destinationSelectedId: 3,
         date: moment(),

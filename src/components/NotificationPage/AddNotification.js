@@ -263,12 +263,15 @@ export class AddNotification extends React.Component {
         if (this.state.originInputValue === '') {
             errorOriginInput = true;
             errorOriginText = 'Enter origin';
-        };
+        }
 
         if (this.state.destinationInputValue === '') {
             errorDestinationInput = true;
             errorDestinationText = 'Enter destination';
-        };
+        } else if (this.state.originSelectedId === this.state.destinationSelectedId) {
+            errorDestinationInput = true;
+            errorDestinationText = 'Same as origin';
+        }
 
         if (!this.state.date) {
             errorDateInput = true;
@@ -309,7 +312,7 @@ export class AddNotification extends React.Component {
 
                     // 2. render error message
                     errorOriginInput = errorDestinationInput = errorDateInput = true;
-                    errorOriginText = errorDateText = '';
+                    errorOriginText = errorDateText = null;
                     errorDestinationText = 'You have this notification';
                     this.setState(() => ({
                         errorOriginInput,

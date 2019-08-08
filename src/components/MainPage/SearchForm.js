@@ -65,6 +65,7 @@ export class SearchForm extends React.Component {
         calendarFocused: false,
         errorOriginInput: false,
         errorDestinationInput: false,
+        errorDestinationInputText: '',
         errorDateInput: false,
         errorParameters: false,
         parametersPanel: this.props.searchForm.parametersPanel,
@@ -309,14 +310,19 @@ export class SearchForm extends React.Component {
         let errorDestinationInput = false;
         let errorDateInput = false;
         let errorParameters = false;
+        let errorDestinationInputText = '';
 
         if (this.state.originInputValue === '') {
             errorOriginInput = true;
-        };
+        }
 
         if (this.state.destinationInputValue === '' && !this.state.parametersPanel) {
             errorDestinationInput = true;
-        };
+            errorDestinationInputText = 'Enter destination';
+        } else if (this.state.originSelectedId === this.state.destinationSelectedId && !this.state.parametersPanel) {
+            errorDestinationInput = true;
+            errorDestinationInputText = 'Same as origin';
+        }
 
         if (!this.state.date) {
             errorDateInput = true;
@@ -326,13 +332,14 @@ export class SearchForm extends React.Component {
             errorParameters = true;
         } else {
             errorParameters = false;
-        };
+        }
 
         this.setState(() => ({
             errorOriginInput,
             errorDestinationInput,
             errorDateInput,
-            errorParameters
+            errorParameters,
+            errorDestinationInputText
         }));
 
         if (!(errorOriginInput || errorDestinationInput || errorDateInput || errorParameters)) {
@@ -357,6 +364,7 @@ export class SearchForm extends React.Component {
             suggestOrigins,
             suggestDestinations,
             errorDestinationInput,
+            errorDestinationInputText,
             errorOriginInput,
             errorDateInput,
             date,
@@ -407,7 +415,7 @@ export class SearchForm extends React.Component {
                             <InputWithErrorTooltip
                                 label="To:"
                                 error={errorDestinationInput}
-                                errorText="Enter destination"
+                                errorText={errorDestinationInputText}
                                 disabled={parametersPanel}
                             >
                                 <Autosuggest
