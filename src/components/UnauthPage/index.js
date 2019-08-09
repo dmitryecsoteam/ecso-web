@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../Header';
+import MessageCenter from '../MessageCenter';
 import { Redirect } from 'react-router-dom';
 import { withSession } from '../../auth/session';
 
@@ -9,7 +10,7 @@ export const UnauthPage = ({ user }) => {
     return (!user) ? (
         <div>
             <Header />
-            <div>You are not authorized to perform this operation. Please singin.</div>
+            <MessageCenter text="You are not authorized to perform this operation. Please&nbsp;signin" />
         </div>
     ) : (
         <Redirect to="/" />

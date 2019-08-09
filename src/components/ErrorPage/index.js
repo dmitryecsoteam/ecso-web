@@ -1,11 +1,12 @@
 import React from 'react';
 import Header from '../Header';
+import MessageCenter from '../MessageCenter';
 
 export default () => {
     return (
         <div>
             <Header />
-            <div>Error page</div>
+            <MessageCenter text="Something went wrong... Please&nbsp;try&nbsp;again&nbsp;later" />
         </div>
     )
 };
