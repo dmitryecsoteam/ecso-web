@@ -301,10 +301,6 @@ export class SearchForm extends React.Component {
     onFormSubmit = async (e) => {
         e.preventDefault();
 
-        //this.props.resetTravels();
-
-    
-
         // Check that inputs are correct
         let errorOriginInput = false;
         let errorDestinationInput = false;
@@ -343,6 +339,12 @@ export class SearchForm extends React.Component {
         }));
 
         if (!(errorOriginInput || errorDestinationInput || errorDateInput || errorParameters)) {
+
+            // Scroll to ResultsPanel
+            window.scrollTo({
+                top: this.props.resultsPanelRef.current.offsetTop,
+                behavior: 'smooth'
+            });
 
             // Find travels based on parameters
             if (this.state.parametersPanel) {
@@ -518,7 +520,8 @@ const mapStateToProps = (state) => ({
     isFetchingOrigins: state.originInput.isFetching,
     destinations: state.destinationInput.destinations,
     isFetchingDestinations: state.destinationInput.isFetching,
-    searchForm: state.searchForm
+    searchForm: state.searchForm,
+    resultsPanelRef: state.resultsPanelRef.ref
 });
 
 const mapDispatchToProps = (dispatch) => ({

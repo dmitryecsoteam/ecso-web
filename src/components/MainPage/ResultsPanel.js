@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setFilter } from '../../actions/filterActions';
+import { setRef } from '../../actions/resultsPanelRefActions';
 import classNames from 'classnames';
 import { PulseLoader } from 'halogenium';
 
@@ -10,6 +11,12 @@ import resultListSelector from '../../selectors/resultListSelector';
 const divider = <div className="results__divider"></div>;
 
 export class ResultsPanel extends React.Component {
+
+    scrollRef = React.createRef();
+
+    componentDidMount() {
+        this.props.setRef(this.scrollRef);
+    }
 
     shouldComponentUpdate(newProps) {
         // update results only if isFetching changed OR filter changes
@@ -124,7 +131,7 @@ export class ResultsPanel extends React.Component {
 
         return (
             // isFetching is TRUE: show loading spinner and remove previous travelsList (and filter)
-            <div className="results__list">
+            <div className="results__list" ref={this.scrollRef} >
                 {isFetching && spinner}
                 {travels.length > 1 && !isFetching ? filterPanel : null}
                 {!isFetching && travelsList}
@@ -144,4 +151,8 @@ const mapStateToProps = (state) => ({
     filter: state.filter
 });
 
-export default connect(mapStateToProps, { setFilter })(ResultsPanel);
+// const mapDispatchToProps = (dispatch) => ({
+//     setFilter: 
+// });
+
+export default connect(mapStateToProps, { setFilter, setRef })(ResultsPanel);

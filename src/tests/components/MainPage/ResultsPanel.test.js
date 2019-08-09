@@ -3,9 +3,10 @@ import { shallow } from 'enzyme';
 import { ResultsPanel } from '../../../components/MainPage/ResultsPanel';
 import travels from '../../fixtures/travels';
 
-let wrapper, setFilter;
+let wrapper, setFilter, setRef;
 beforeEach(() => {
     setFilter = jest.fn();
+    setRef = jest.fn();
     wrapper = shallow(<ResultsPanel
         travels={[]}
         isFetching={false}
@@ -28,6 +29,7 @@ beforeEach(() => {
             }
         }
         setFilter={setFilter}
+        setRef={setRef}
     />);
 });
 
