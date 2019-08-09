@@ -56,6 +56,14 @@
   font-weight: bold;
 }
 
+.results__divider {
+  border-top: 0.1rem solid lighten($light-grey, 15%);
+  width: 100%;
+  max-width: 120rem;
+  margin-top: $xl-size;
+  //margin-bottom: $l-size;
+}
+
 @media (max-width: $desktop-breakpoint) {
   .results__list {
     padding-top: 0;
@@ -63,5 +71,9 @@
 
   .results__filter-arrow {
     font-size: $m-size;
+  }
+
+  .results__divider {
+    margin-top: $l-size;
   }
 }

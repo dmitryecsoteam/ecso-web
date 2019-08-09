@@ -7,7 +7,7 @@ import { PulseLoader } from 'halogenium';
 import TravelCard from './TravelCard';
 import resultListSelector from '../../selectors/resultListSelector';
 
-const divider = <div className="travel__divider"></div>;
+const divider = <div className="results__divider"></div>;
 
 export class ResultsPanel extends React.Component {
 
