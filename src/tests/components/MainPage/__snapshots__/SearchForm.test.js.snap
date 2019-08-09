@@ -795,55 +795,59 @@ exports[`should render SearchForm with default props 1`] = `
           }
         />
       </_default>
-      <_default
-        disabled={false}
-        error={false}
-        errorText="Enter destination"
-        label="To:"
+      <div
+        className="search-form__second-input-container"
       >
-        <Autosuggest
-          alwaysRenderSuggestions={false}
-          focusInputOnSuggestionClick={false}
-          getSuggestionValue={[Function]}
-          highlightFirstSuggestion={false}
-          id="1"
-          inputProps={
-            Object {
-              "disabled": false,
-              "onBlur": [Function],
-              "onChange": [Function],
-              "placeholder": "City, airport code",
-              "value": "",
+        <_default
+          disabled={false}
+          error={false}
+          errorText=""
+          label="To:"
+        >
+          <Autosuggest
+            alwaysRenderSuggestions={false}
+            focusInputOnSuggestionClick={false}
+            getSuggestionValue={[Function]}
+            highlightFirstSuggestion={false}
+            id="1"
+            inputProps={
+              Object {
+                "disabled": false,
+                "onBlur": [Function],
+                "onChange": [Function],
+                "placeholder": "City, airport code",
+                "value": "",
+              }
             }
-          }
-          multiSection={false}
-          onSuggestionSelected={[Function]}
-          onSuggestionsClearRequested={[Function]}
-          onSuggestionsFetchRequested={[Function]}
-          renderSuggestion={[Function]}
-          renderSuggestionsContainer={[Function]}
-          shouldRenderSuggestions={[Function]}
-          suggestions={Array []}
-          theme={
-            Object {
-              "container": "react-autosuggest__container",
-              "containerOpen": "react-autosuggest__container--open",
-              "input": "react-autosuggest__input",
-              "inputFocused": "react-autosuggest__input--focused",
-              "inputOpen": "react-autosuggest__input--open",
-              "sectionContainer": "react-autosuggest__section-container",
-              "sectionContainerFirst": "react-autosuggest__section-container--first",
-              "sectionTitle": "react-autosuggest__section-title",
-              "suggestion": "react-autosuggest__suggestion",
-              "suggestionFirst": "react-autosuggest__suggestion--first",
-              "suggestionHighlighted": "react-autosuggest__suggestion--highlighted",
-              "suggestionsContainer": "react-autosuggest__suggestions-container",
-              "suggestionsContainerOpen": "react-autosuggest__suggestions-container--open",
-              "suggestionsList": "react-autosuggest__suggestions-list",
+            multiSection={false}
+            onSuggestionSelected={[Function]}
+            onSuggestionsClearRequested={[Function]}
+            onSuggestionsFetchRequested={[Function]}
+            renderSuggestion={[Function]}
+            renderSuggestionsContainer={[Function]}
+            shouldRenderSuggestions={[Function]}
+            suggestions={Array []}
+            theme={
+              Object {
+                "container": "react-autosuggest__container",
+                "containerOpen": "react-autosuggest__container--open",
+                "input": "react-autosuggest__input",
+                "inputFocused": "react-autosuggest__input--focused",
+                "inputOpen": "react-autosuggest__input--open",
+                "sectionContainer": "react-autosuggest__section-container",
+                "sectionContainerFirst": "react-autosuggest__section-container--first",
+                "sectionTitle": "react-autosuggest__section-title",
+                "suggestion": "react-autosuggest__suggestion",
+                "suggestionFirst": "react-autosuggest__suggestion--first",
+                "suggestionHighlighted": "react-autosuggest__suggestion--highlighted",
+                "suggestionsContainer": "react-autosuggest__suggestions-container",
+                "suggestionsContainerOpen": "react-autosuggest__suggestions-container--open",
+                "suggestionsList": "react-autosuggest__suggestions-list",
+              }
             }
-          }
-        />
-      </_default>
+          />
+        </_default>
+      </div>
     </div>
     <div
       className="search-form__autoinput-group"
@@ -928,7 +932,7 @@ exports[`should render SearchForm with default props 1`] = `
               }
             }
             placeholder=""
-            readOnly={false}
+            readOnly={true}
             regular={false}
             renderCalendarInfo={[Function]}
             renderDayContents={null}
@@ -1022,7 +1026,7 @@ exports[`should render SearchForm with default props 1`] = `
               }
             }
             placeholder=""
-            readOnly={false}
+            readOnly={true}
             regular={false}
             renderCalendarInfo={[Function]}
             renderDayContents={null}
@@ -1043,7 +1047,7 @@ exports[`should render SearchForm with default props 1`] = `
         </MediaQuery>
       </_default>
       <div
-        className="search-form__submit-btn-container"
+        className="search-form__second-input-container"
       >
         <button
           className="search-form__submit-btn"

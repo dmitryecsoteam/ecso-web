@@ -1,206 +1,381 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render ParametersList component 1`] = `
-<div
-  className="parameters-list__container"
+<_default
+  destination={
+    Object {
+      "__typename": "Destiantion",
+      "_id": 4,
+      "beachDescription": "One of popular Japan beaches 'Otaru dream beach' can be reached within 30 minutes from Sapporo. ",
+      "beachRating": 2,
+      "cityDescription": "Located in the Hokkaido Prefecture, Sapporo is Japan's major cultural, industrial and educational centre. This is the place where Winter Olympic Games (1972) and 3 Asian Winter Games  (1986, 1990, 2017) were held",
+      "countryEn": "Japan",
+      "foodDescription": "Many restaraunts having more that 2000 reviews  (according to 'Tripadvisor')",
+      "foodRating": 3,
+      "museumDescription": "No museums from the TOP-100 and no UNESCO World Heritage objects",
+      "museumRating": 1,
+      "nameEn": "Sapporo",
+      "natureDescription": "Many parks",
+      "natureRating": 3,
+      "newparameterDescription": "Some information about New Parameter",
+      "newparameterRating": 3,
+      "population": "1.9 mln",
+      "shoppingDescription": "Large city but not known as a shopping destination",
+      "shoppingRating": 3,
+    }
+  }
 >
   <div
-    className="parameters-list__parameter"
-    data-description="One of popular Japan beaches 'Otaru dream beach' can be reached within 30 minutes from Sapporo. "
-    key="Beach"
+    className="parameters-list__container"
   >
-    <span
-      className="parameters-list__label"
+    <div
+      className="parameters-list__item"
+      key="Beach"
     >
-      BEACH
-    </span>
-    <div>
-      <span
-        className="parameters-list__dot parameters-list__dot--active"
-        key="1"
-      />
-      <span
-        className="parameters-list__dot parameters-list__dot--active"
-        key="2"
-      />
-      <span
-        className="parameters-list__dot"
-        key="3"
-      />
-      <span
-        className="parameters-list__dot"
-        key="4"
-      />
-      <span
-        className="parameters-list__dot"
-        key="5"
-      />
+      <TrackVisibility
+        offset={0}
+        once={true}
+        partialVisibility={false}
+        tag="div"
+        throttleInterval={150}
+      >
+        <div>
+          <ParameterHeader
+            isVisible={false}
+            key=".0"
+          >
+            <div
+              className="parameters-list__item-header"
+            >
+              <span
+                className="parameters-list__label"
+              >
+                Beach
+              </span>
+              <div
+                className="parameters-list__dots-container"
+              >
+                <span
+                  className="parameters-list__dot parameters-list__dot--active"
+                  key="1"
+                />
+                <span
+                  className="parameters-list__dot parameters-list__dot--active"
+                  key="2"
+                />
+                <span
+                  className="parameters-list__dot"
+                  key="3"
+                />
+                <span
+                  className="parameters-list__dot"
+                  key="4"
+                />
+                <span
+                  className="parameters-list__dot"
+                  key="5"
+                />
+              </div>
+            </div>
+          </ParameterHeader>
+        </div>
+      </TrackVisibility>
+      <div
+        className="parameters-list__description"
+      >
+        One of popular Japan beaches 'Otaru dream beach' can be reached within 30 minutes from Sapporo. 
+      </div>
+    </div>
+    <div
+      className="parameters-list__item"
+      key="Food"
+    >
+      <TrackVisibility
+        offset={0}
+        once={true}
+        partialVisibility={false}
+        tag="div"
+        throttleInterval={150}
+      >
+        <div>
+          <ParameterHeader
+            isVisible={false}
+            key=".0"
+          >
+            <div
+              className="parameters-list__item-header"
+            >
+              <span
+                className="parameters-list__label"
+              >
+                Food
+              </span>
+              <div
+                className="parameters-list__dots-container"
+              >
+                <span
+                  className="parameters-list__dot parameters-list__dot--active"
+                  key="1"
+                />
+                <span
+                  className="parameters-list__dot parameters-list__dot--active"
+                  key="2"
+                />
+                <span
+                  className="parameters-list__dot parameters-list__dot--active"
+                  key="3"
+                />
+                <span
+                  className="parameters-list__dot"
+                  key="4"
+                />
+                <span
+                  className="parameters-list__dot"
+                  key="5"
+                />
+              </div>
+            </div>
+          </ParameterHeader>
+        </div>
+      </TrackVisibility>
+      <div
+        className="parameters-list__description"
+      >
+        Many restaraunts having more that 2000 reviews  (according to 'Tripadvisor')
+      </div>
+    </div>
+    <div
+      className="parameters-list__item"
+      key="Museum"
+    >
+      <TrackVisibility
+        offset={0}
+        once={true}
+        partialVisibility={false}
+        tag="div"
+        throttleInterval={150}
+      >
+        <div>
+          <ParameterHeader
+            isVisible={false}
+            key=".0"
+          >
+            <div
+              className="parameters-list__item-header"
+            >
+              <span
+                className="parameters-list__label"
+              >
+                Museum
+              </span>
+              <div
+                className="parameters-list__dots-container"
+              >
+                <span
+                  className="parameters-list__dot parameters-list__dot--active"
+                  key="1"
+                />
+                <span
+                  className="parameters-list__dot"
+                  key="2"
+                />
+                <span
+                  className="parameters-list__dot"
+                  key="3"
+                />
+                <span
+                  className="parameters-list__dot"
+                  key="4"
+                />
+                <span
+                  className="parameters-list__dot"
+                  key="5"
+                />
+              </div>
+            </div>
+          </ParameterHeader>
+        </div>
+      </TrackVisibility>
+      <div
+        className="parameters-list__description"
+      >
+        No museums from the TOP-100 and no UNESCO World Heritage objects
+      </div>
+    </div>
+    <div
+      className="parameters-list__item"
+      key="Nature"
+    >
+      <TrackVisibility
+        offset={0}
+        once={true}
+        partialVisibility={false}
+        tag="div"
+        throttleInterval={150}
+      >
+        <div>
+          <ParameterHeader
+            isVisible={false}
+            key=".0"
+          >
+            <div
+              className="parameters-list__item-header"
+            >
+              <span
+                className="parameters-list__label"
+              >
+                Nature
+              </span>
+              <div
+                className="parameters-list__dots-container"
+              >
+                <span
+                  className="parameters-list__dot parameters-list__dot--active"
+                  key="1"
+                />
+                <span
+                  className="parameters-list__dot parameters-list__dot--active"
+                  key="2"
+                />
+                <span
+                  className="parameters-list__dot parameters-list__dot--active"
+                  key="3"
+                />
+                <span
+                  className="parameters-list__dot"
+                  key="4"
+                />
+                <span
+                  className="parameters-list__dot"
+                  key="5"
+                />
+              </div>
+            </div>
+          </ParameterHeader>
+        </div>
+      </TrackVisibility>
+      <div
+        className="parameters-list__description"
+      >
+        Many parks
+      </div>
+    </div>
+    <div
+      className="parameters-list__item"
+      key="Shopping"
+    >
+      <TrackVisibility
+        offset={0}
+        once={true}
+        partialVisibility={false}
+        tag="div"
+        throttleInterval={150}
+      >
+        <div>
+          <ParameterHeader
+            isVisible={false}
+            key=".0"
+          >
+            <div
+              className="parameters-list__item-header"
+            >
+              <span
+                className="parameters-list__label"
+              >
+                Shopping
+              </span>
+              <div
+                className="parameters-list__dots-container"
+              >
+                <span
+                  className="parameters-list__dot parameters-list__dot--active"
+                  key="1"
+                />
+                <span
+                  className="parameters-list__dot parameters-list__dot--active"
+                  key="2"
+                />
+                <span
+                  className="parameters-list__dot parameters-list__dot--active"
+                  key="3"
+                />
+                <span
+                  className="parameters-list__dot"
+                  key="4"
+                />
+                <span
+                  className="parameters-list__dot"
+                  key="5"
+                />
+              </div>
+            </div>
+          </ParameterHeader>
+        </div>
+      </TrackVisibility>
+      <div
+        className="parameters-list__description"
+      >
+        Large city but not known as a shopping destination
+      </div>
+    </div>
+    <div
+      className="parameters-list__item"
+      key="Newparameter"
+    >
+      <TrackVisibility
+        offset={0}
+        once={true}
+        partialVisibility={false}
+        tag="div"
+        throttleInterval={150}
+      >
+        <div>
+          <ParameterHeader
+            isVisible={false}
+            key=".0"
+          >
+            <div
+              className="parameters-list__item-header"
+            >
+              <span
+                className="parameters-list__label"
+              >
+                Newparameter
+              </span>
+              <div
+                className="parameters-list__dots-container"
+              >
+                <span
+                  className="parameters-list__dot parameters-list__dot--active"
+                  key="1"
+                />
+                <span
+                  className="parameters-list__dot parameters-list__dot--active"
+                  key="2"
+                />
+                <span
+                  className="parameters-list__dot parameters-list__dot--active"
+                  key="3"
+                />
+                <span
+                  className="parameters-list__dot"
+                  key="4"
+                />
+                <span
+                  className="parameters-list__dot"
+                  key="5"
+                />
+              </div>
+            </div>
+          </ParameterHeader>
+        </div>
+      </TrackVisibility>
+      <div
+        className="parameters-list__description"
+      >
+        Some information about New Parameter
+      </div>
     </div>
   </div>
-  <div
-    className="parameters-list__parameter"
-    data-description="Many restaraunts having more that 2000 reviews  (according to 'Tripadvisor')"
-    key="Food"
-  >
-    <span
-      className="parameters-list__label"
-    >
-      FOOD
-    </span>
-    <div>
-      <span
-        className="parameters-list__dot parameters-list__dot--active"
-        key="1"
-      />
-      <span
-        className="parameters-list__dot parameters-list__dot--active"
-        key="2"
-      />
-      <span
-        className="parameters-list__dot parameters-list__dot--active"
-        key="3"
-      />
-      <span
-        className="parameters-list__dot"
-        key="4"
-      />
-      <span
-        className="parameters-list__dot"
-        key="5"
-      />
-    </div>
-  </div>
-  <div
-    className="parameters-list__parameter"
-    data-description="No museums from the TOP-100 and no UNESCO World Heritage objects"
-    key="Museum"
-  >
-    <span
-      className="parameters-list__label"
-    >
-      MUSEUM
-    </span>
-    <div>
-      <span
-        className="parameters-list__dot parameters-list__dot--active"
-        key="1"
-      />
-      <span
-        className="parameters-list__dot"
-        key="2"
-      />
-      <span
-        className="parameters-list__dot"
-        key="3"
-      />
-      <span
-        className="parameters-list__dot"
-        key="4"
-      />
-      <span
-        className="parameters-list__dot"
-        key="5"
-      />
-    </div>
-  </div>
-  <div
-    className="parameters-list__parameter"
-    data-description="Many parks"
-    key="Nature"
-  >
-    <span
-      className="parameters-list__label"
-    >
-      NATURE
-    </span>
-    <div>
-      <span
-        className="parameters-list__dot parameters-list__dot--active"
-        key="1"
-      />
-      <span
-        className="parameters-list__dot parameters-list__dot--active"
-        key="2"
-      />
-      <span
-        className="parameters-list__dot parameters-list__dot--active"
-        key="3"
-      />
-      <span
-        className="parameters-list__dot"
-        key="4"
-      />
-      <span
-        className="parameters-list__dot"
-        key="5"
-      />
-    </div>
-  </div>
-  <div
-    className="parameters-list__parameter"
-    data-description="Large city but not known as a shopping destination"
-    key="Shopping"
-  >
-    <span
-      className="parameters-list__label"
-    >
-      SHOPPING
-    </span>
-    <div>
-      <span
-        className="parameters-list__dot parameters-list__dot--active"
-        key="1"
-      />
-      <span
-        className="parameters-list__dot parameters-list__dot--active"
-        key="2"
-      />
-      <span
-        className="parameters-list__dot parameters-list__dot--active"
-        key="3"
-      />
-      <span
-        className="parameters-list__dot"
-        key="4"
-      />
-      <span
-        className="parameters-list__dot"
-        key="5"
-      />
-    </div>
-  </div>
-  <div
-    className="parameters-list__parameter"
-    data-description="Big city with various places for nightlife"
-    key="Nightlife"
-  >
-    <span
-      className="parameters-list__label"
-    >
-      NIGHTLIFE
-    </span>
-    <div>
-      <span
-        className="parameters-list__dot parameters-list__dot--active"
-        key="1"
-      />
-      <span
-        className="parameters-list__dot parameters-list__dot--active"
-        key="2"
-      />
-      <span
-        className="parameters-list__dot parameters-list__dot--active"
-        key="3"
-      />
-      <span
-        className="parameters-list__dot"
-        key="4"
-      />
-      <span
-        className="parameters-list__dot"
-        key="5"
-      />
-    </div>
-  </div>
-</div>
+</_default>
 `;

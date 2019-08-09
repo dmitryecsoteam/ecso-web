@@ -1,6 +1,6 @@
 export const setSearchForm = ({
     originInputValue,
-    originsSelectedId,
+    originSelectedId,
     destinationInputValue,
     destinationSelectedId,
     date,
@@ -9,7 +9,7 @@ export const setSearchForm = ({
 }) => ({
         type: 'SET_SEARCH_FORM',
         originInputValue,
-        originsSelectedId,
+        originSelectedId,
         destinationInputValue,
         destinationSelectedId,
         date,

@@ -13,7 +13,9 @@ export default class TravelCard extends PureComponent {
             countryEn,
             priceAirplane,
             carDistance,
-            parameters
+            parameters,
+            originName,
+            date
         } = this.props;
 
         const parametersList = [];
@@ -34,6 +36,10 @@ export default class TravelCard extends PureComponent {
             </div>);
         }
 
+        const originAndDate = (
+            <p className="travel-card__text--big">From {originName} &emsp; {date}</p>
+        );
+
         return (
             <Link
                 to={`/travel/${_id}`}
@@ -53,7 +59,7 @@ export default class TravelCard extends PureComponent {
                     </h2>
 
                     <div className="travel-card__parameters">
-                        {parametersList}
+                        {originName ? originAndDate : parametersList}
                     </div>
 
                     {priceInfo}

@@ -6,7 +6,7 @@ export const defaultState = {
             Museum: 0,
             Nature: 0,
             Shopping: 0,
-            Nightlife: 0
+            Newparameter: 0
         }
     }
 };

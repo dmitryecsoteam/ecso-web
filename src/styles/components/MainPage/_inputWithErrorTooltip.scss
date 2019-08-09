@@ -43,7 +43,8 @@
 }
 
 .search-form__error--open {
-  max-height: calc(#{$xm-size} + #{$xl-size});
+  //max-height: calc(#{$xm-size} + #{$xl-size});
+  max-height: 50rem;
   padding-top: $s-size;
   box-shadow: 0 $xs-size $l-size -$m-size rgba($red-error, 0.3);
 }
@@ -71,6 +72,6 @@
 
 @media (min-width: $desktop-breakpoint) {
   .search-form__input-container {
-    margin-left: $s-size;
+    //margin-left: $s-size;
   }
 }

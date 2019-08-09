@@ -11,32 +11,28 @@ exports[`should render WeatherCard 1`] = `
       src="cloud"
     />
   </div>
-  <div
-    className="weather-card__text-container"
+  <p
+    className="weather-card__title"
   >
-    <span
-      className="weather-card__title"
-    >
-      Average weather on 
+    Average weather on 
+    <nobr>
       <b>
         01 June 2019
       </b>
-    </span>
-    <div>
-      <div
-        className="weather-card__temperature"
-      >
-        15
-        °...
-        23
-        °
-      </div>
-      <div
-        className="weather-card__condition"
-      >
-        Mostly cloudy
-      </div>
-    </div>
-  </div>
+    </nobr>
+  </p>
+  <p
+    className="weather-card__temperature"
+  >
+    15
+    °...
+    23
+    °
+  </p>
+  <p
+    className="weather-card__condition"
+  >
+    Mostly cloudy
+  </p>
 </div>
 `;

@@ -1,0 +1,18 @@
+.message__container {
+    position: absolute;
+    top: 35%;
+    text-align: center;
+    width: 100%;
+    padding: 0 $s-size;
+}
+
+.message__text {
+    font-size: $l-size;
+    color: $light-black;
+}
+
+@media (max-width: $desktop-breakpoint) {
+    .message__text {
+        font-size: 2.4rem;
+    }
+}

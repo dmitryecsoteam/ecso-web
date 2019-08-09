@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { optionChoose } from '../../styles/base/_settings.scss';
+
 export default class Parameter extends React.Component {
 
     shouldComponentUpdate(nextProps) {
@@ -22,7 +24,7 @@ export default class Parameter extends React.Component {
         const percents = (100 / ((max - min) / steps)) * value;
 
         const style = {
-            background: `linear-gradient(to right, #37adbf ${percents}%, #b2b2b2 ${percents}%)`
+            background: `linear-gradient(to right, ${optionChoose} ${percents}%, #b2b2b2 ${percents}%)`
         };
 
         const labels = [];

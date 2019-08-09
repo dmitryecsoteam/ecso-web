@@ -1,4 +1,4 @@
-import { ORIGIN_INPUT_SEARCH_EN, DESTINATION_INPUT_SEARCH_EN, DESTINATION_SEARCH_BY_PARAMETERS, TRAVELS_SEARCH_EN } from '../../queries/queries';
+import { ORIGIN_INPUT_SEARCH_EN, DESTINATION_INPUT_SEARCH_EN, DESTINATION_SEARCH_BY_PARAMETERS, TRAVELS_SEARCH_EN, GET_NOTIFICATIONS } from '../../queries/queries';
 import travel from '../../tests/fixtures/travel';
 
 export const client = {
@@ -28,7 +28,7 @@ export const client = {
                     }});
                 }
 
-            };
+            }
 
             case (TRAVELS_SEARCH_EN): {
 
@@ -40,6 +40,10 @@ export const client = {
                         travel
                     }});
                 }
+            }
+
+            case (GET_NOTIFICATIONS): {
+                return { data: { getNotifications: [{ travelId: "In notifications"}]}}
             }
         }
         })

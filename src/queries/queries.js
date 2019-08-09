@@ -124,3 +124,56 @@ query travelFull(
     }
 }
 `;
+
+// export const GET_CURRENT_USER = gql`
+// query currentUser() {
+//     currentUser {
+//         email
+//         name
+//     }
+// }
+// `;
+
+export const GET_CURRENT_USER = gql`
+query {
+    currentUser {
+        email
+        name
+    }
+}
+`;
+
+export const GET_NOTIFICATIONS = gql`
+query {
+    getNotifications {
+        travelId
+        origin {
+            nameEn
+        }
+        destination {
+            nameEn
+        }
+        date
+        priceHotelLast
+        priceAirplaneLast
+    }
+}
+`;
+
+export const GET_BEST_DEALS = gql`
+query getBestDeals ($limit: Int, $months: Int) {
+    getBestDeals (limit: $limit, months: $months) {
+        _id
+        date
+        priceAirplane
+        origin {
+            nameEn
+            countryEn
+        }
+        destination {
+            nameEn
+            countryEn
+        }
+    }
+}
+`;

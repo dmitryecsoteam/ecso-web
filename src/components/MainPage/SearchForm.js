@@ -6,7 +6,7 @@ import MediaQuery from 'react-responsive';
 
 import { startSearchOrigins } from '../../actions/originInputActions';
 import { startSearchDestinations } from '../../actions/destinationInputActions';
-import { startSearchTravelsByParameters, startSearchTravelsByDestination } from '../../actions/travelsActions';
+import { startSearchTravelsByParameters, startSearchTravelsByDestination, setTravels } from '../../actions/travelsActions';
 import { setSearchForm } from '../../actions/searchFormActions';
 import selectOriginSuggestions from '../../selectors/originInputSelector';
 import selectDestinationSuggestions from '../../selectors/destinationInputSelector';
@@ -14,7 +14,7 @@ import selectDestinationSuggestions from '../../selectors/destinationInputSelect
 import ParametersPanel from './ParametersPanel';
 import InputWithErrorTooltip from './InputWithErrorTooltip';
 import Autosuggest from 'react-autosuggest';
-import city from '../../images/icons/city.png';
+import SuggestionCity from './SuggestionCity';
 import { SingleDatePicker } from 'react-dates';
 import { isBeforeDay, isInclusivelyAfterDay } from '../../utils/dates';
 import { numberOfNonZeroParams } from '../../utils/parameters';
@@ -22,6 +22,8 @@ import { numberOfNonZeroParams } from '../../utils/parameters';
 // Minimum and maximum number of parameters user must select
 const PARAMETERS_MIN = 1;
 const PARAMETERS_MAX = 6;
+
+
 
 
 export class SearchForm extends React.Component {
@@ -63,6 +65,7 @@ export class SearchForm extends React.Component {
         calendarFocused: false,
         errorOriginInput: false,
         errorDestinationInput: false,
+        errorDestinationInputText: '',
         errorDateInput: false,
         errorParameters: false,
         parametersPanel: this.props.searchForm.parametersPanel,
@@ -238,16 +241,6 @@ export class SearchForm extends React.Component {
 
     getSuggestionValue = (suggestion) => (suggestion.nameEn);
 
-    renderSuggestion = (suggestion) => (
-        <div className="react-autosuggest__suggestion-content">
-            <div className="react-autosuggest__suggestion-icon-container">
-                <img className="react-autosuggest__suggestion-icon" src={city} />
-            </div>
-            <span>
-                {suggestion.nameEn}, {suggestion.countryEn}
-            </span>
-        </div>
-    );
 
 
 
@@ -305,7 +298,7 @@ export class SearchForm extends React.Component {
 
     /*************** Form Submit ***************/
 
-    onFormSubmit = (e) => {
+    onFormSubmit = async (e) => {
         e.preventDefault();
 
         // Check that inputs are correct
@@ -313,14 +306,19 @@ export class SearchForm extends React.Component {
         let errorDestinationInput = false;
         let errorDateInput = false;
         let errorParameters = false;
+        let errorDestinationInputText = '';
 
         if (this.state.originInputValue === '') {
             errorOriginInput = true;
-        };
+        }
 
         if (this.state.destinationInputValue === '' && !this.state.parametersPanel) {
             errorDestinationInput = true;
-        };
+            errorDestinationInputText = 'Enter destination';
+        } else if (this.state.originSelectedId === this.state.destinationSelectedId && !this.state.parametersPanel) {
+            errorDestinationInput = true;
+            errorDestinationInputText = 'Same as origin';
+        }
 
         if (!this.state.date) {
             errorDateInput = true;
@@ -330,16 +328,23 @@ export class SearchForm extends React.Component {
             errorParameters = true;
         } else {
             errorParameters = false;
-        };
+        }
 
         this.setState(() => ({
             errorOriginInput,
             errorDestinationInput,
             errorDateInput,
-            errorParameters
+            errorParameters,
+            errorDestinationInputText
         }));
 
         if (!(errorOriginInput || errorDestinationInput || errorDateInput || errorParameters)) {
+
+            // Scroll to ResultsPanel
+            window.scrollTo({
+                top: this.props.resultsPanelRef.current.offsetTop,
+                behavior: 'smooth'
+            });
 
             // Find travels based on parameters
             if (this.state.parametersPanel) {
@@ -361,6 +366,7 @@ export class SearchForm extends React.Component {
             suggestOrigins,
             suggestDestinations,
             errorDestinationInput,
+            errorDestinationInputText,
             errorOriginInput,
             errorDateInput,
             date,
@@ -403,27 +409,30 @@ export class SearchForm extends React.Component {
                                 focusInputOnSuggestionClick={false}
                                 onSuggestionSelected={this.onOriginSuggestionSelected}
                                 getSuggestionValue={this.getSuggestionValue}
-                                renderSuggestion={this.renderSuggestion}
+                                renderSuggestion={SuggestionCity}
                             />
                         </InputWithErrorTooltip>
 
-                        <InputWithErrorTooltip
-                            label="To:"
-                            error={errorDestinationInput}
-                            errorText="Enter destination"
-                            disabled={parametersPanel}
-                        >
-                            <Autosuggest
-                                suggestions={suggestDestinations}
-                                onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
-                                onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
-                                inputProps={destinationInputProps}
-                                focusInputOnSuggestionClick={false}
-                                onSuggestionSelected={this.onDestinationSuggestionSelected}
-                                getSuggestionValue={this.getSuggestionValue}
-                                renderSuggestion={this.renderSuggestion}
-                            />
-                        </InputWithErrorTooltip>
+                        <div className="search-form__second-input-container">
+                            <InputWithErrorTooltip
+                                label="To:"
+                                error={errorDestinationInput}
+                                errorText={errorDestinationInputText}
+                                disabled={parametersPanel}
+                            >
+                                <Autosuggest
+                                    suggestions={suggestDestinations}
+                                    onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
+                                    onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
+                                    inputProps={destinationInputProps}
+                                    focusInputOnSuggestionClick={false}
+                                    onSuggestionSelected={this.onDestinationSuggestionSelected}
+                                    getSuggestionValue={this.getSuggestionValue}
+                                    renderSuggestion={SuggestionCity}
+                                />
+                            </InputWithErrorTooltip>
+                        </div>
+
                     </div>
                     <div className="search-form__autoinput-group">
                         <InputWithErrorTooltip
@@ -456,7 +465,7 @@ export class SearchForm extends React.Component {
                                     daySize={38}
                                     calendarInfoPosition="bottom"
                                     renderCalendarInfo={this.renderCalendarInfo}
-
+                                    readOnly
                                 />
                             </MediaQuery>
 
@@ -479,11 +488,11 @@ export class SearchForm extends React.Component {
                                     verticalSpacing={0}
                                     calendarInfoPosition="bottom"
                                     renderCalendarInfo={this.renderCalendarInfo}
-
+                                    readOnly
                                 />
                             </MediaQuery>
                         </InputWithErrorTooltip>
-                        <div className="search-form__submit-btn-container">
+                        <div className="search-form__second-input-container">
                             <button className="search-form__submit-btn">Find</button>
                         </div>
                     </div>
@@ -511,7 +520,8 @@ const mapStateToProps = (state) => ({
     isFetchingOrigins: state.originInput.isFetching,
     destinations: state.destinationInput.destinations,
     isFetchingDestinations: state.destinationInput.isFetching,
-    searchForm: state.searchForm
+    searchForm: state.searchForm,
+    resultsPanelRef: state.resultsPanelRef.ref
 });
 
 const mapDispatchToProps = (dispatch) => ({

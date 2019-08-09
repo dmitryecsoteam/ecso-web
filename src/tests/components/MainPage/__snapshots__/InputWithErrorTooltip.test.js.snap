@@ -16,13 +16,6 @@ exports[`should render InputWithErrorTooltip component with input 1`] = `
       type="text"
     />
   </div>
-  <div
-    className="search-form__error"
-  >
-    <span
-      className="search-form__error-text"
-    />
-  </div>
 </div>
 `;
 
@@ -33,18 +26,8 @@ exports[`should render InputWithErrorTooltip component with input and default pr
   <div
     className="search-form__label-input"
   >
-    <label
-      className="search-form__label"
-    />
     <input
       type="text"
-    />
-  </div>
-  <div
-    className="search-form__error"
-  >
-    <span
-      className="search-form__error-text"
     />
   </div>
 </div>
@@ -64,13 +47,6 @@ exports[`should render InputWithErrorTooltip disabled 1`] = `
     </label>
     <input
       type="text"
-    />
-  </div>
-  <div
-    className="search-form__error"
-  >
-    <span
-      className="search-form__error-text"
     />
   </div>
 </div>
@@ -100,6 +76,32 @@ exports[`should render InputWithErrorTooltip with error message 1`] = `
     >
       Please type text
     </span>
+  </div>
+</div>
+`;
+
+exports[`should render InputWithErrorTooltip with error message if it's empty string 1`] = `
+<div
+  className="search-form__input-container"
+>
+  <div
+    className="search-form__label-input search-form__label-input--error search-form__label-input--disabled"
+  >
+    <label
+      className="search-form__label"
+    >
+      Test
+    </label>
+    <input
+      type="text"
+    />
+  </div>
+  <div
+    className="search-form__error search-form__error--open"
+  >
+    <span
+      className="search-form__error-text"
+    />
   </div>
 </div>
 `;

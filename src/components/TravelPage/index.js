@@ -2,6 +2,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { TRAVELS_SEARCH_FULL } from '../../queries/queries';
 import minutesToHours from '../../utils/minutesToHours';
+import { PulseLoader } from 'halogenium';
 
 import Header from '../Header';
 import ImageSlider from './ImageSlider';
@@ -9,6 +10,7 @@ import ParametersList from './ParametersList';
 import WeatherCard from './WeatherCard';
 import Banner from './Banner';
 import TextArea from './TextArea';
+import NotificationButton from './NotificationButton';
 
 import cloud from '../../images/icons/cloud.svg';
 import sun from '../../images/icons/sun.svg';
@@ -18,7 +20,6 @@ import airplane from '../../images/banners/airplane.jpg';
 import apartments from '../../images/banners/apartments.jpg';
 import carRoute from '../../images/banners/car-route.jpg';
 
-import { client } from '../../clientGraphQL/client';
 
 
 
@@ -27,15 +28,18 @@ const divider = <div className="travel__divider"></div>;
 export default ({ match }) => {
     const { _id } = match.params;
 
+    const spinner = <div className="travel__spinner">
+        <PulseLoader color="#c1c1c1" size="32px" />
+        <p className="results__text results__text--big">Loading</p>
+    </div>
+
     return <Query
         query={TRAVELS_SEARCH_FULL}
         variables={{ _id }}
     >
         {({ loading, error, data }) => {
-            if (loading) return <p>Loading</p>;
 
-            console.log(data)
-            console.log(error)
+            if (loading) return <React.Fragment>{spinner}</React.Fragment>;
 
             // Stub for random picking weather condition
             const conditions = [cloud, sun, sunCloud, rain];
@@ -90,6 +94,8 @@ export default ({ match }) => {
                     <ParametersList destination={destination} />
 
                     {divider}
+
+                    <NotificationButton travelId={_id} />
 
                     <Banner
                         linkTo="#"

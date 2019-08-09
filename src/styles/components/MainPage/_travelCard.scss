@@ -41,6 +41,7 @@
   height: 100%;
   color: white;
   padding: $s-size;
+  text-align: start;
 
   display: flex;
   flex-direction: column;
@@ -93,6 +94,7 @@
   .travel-card__info {
     height: 40%;
     top: 60%;
+    text-align: start;
   }
 
   .travel-card__text--h2 {

@@ -1,36 +1,62 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render Banner component 1`] = `
-<div
-  className="banner__container"
+<_default
+  backgroundImage="test image"
+  linkTo="#"
+  textButton="button"
+  textMain="main text here"
+  textSecondary="secondary text here"
 >
-  <a
-    className="banner__link"
-    href="#"
+  <TrackVisibility
+    className="banner"
+    offset={0}
+    once={true}
+    partialVisibility={false}
+    tag="div"
+    throttleInterval={150}
   >
     <div
-      className="banner__image"
-      style={
-        Object {
-          "backgroundImage": "url(test image)",
-        }
-      }
-    />
-    <span
-      className="banner__text banner__text--main"
+      className="banner"
     >
-      main text here
-    </span>
-    <span
-      className="banner__text banner__text--secondary"
-    >
-      secondary text here
-    </span>
-    <div
-      className="banner__button"
-    >
-      button
+      <BannerVisible
+        isVisible={false}
+        key=".0"
+      >
+        <div
+          className="banner__container"
+        >
+          <a
+            className="banner__link"
+            href="#"
+          >
+            <div
+              className="banner__image"
+              style={
+                Object {
+                  "backgroundImage": "url(test image)",
+                }
+              }
+            />
+            <span
+              className="banner__text banner__text--main"
+            >
+              main text here
+            </span>
+            <span
+              className="banner__text banner__text--secondary"
+            >
+              secondary text here
+            </span>
+            <div
+              className="banner__button"
+            >
+              button
+            </div>
+          </a>
+        </div>
+      </BannerVisible>
     </div>
-  </a>
-</div>
+  </TrackVisibility>
+</_default>
 `;

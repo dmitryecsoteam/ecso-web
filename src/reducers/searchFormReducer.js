@@ -1,7 +1,7 @@
 export default (state = {}, {
     type,
     originInputValue,
-    originsSelectedId,
+    originSelectedId,
     destinationInputValue,
     destinationSelectedId,
     date,
@@ -12,7 +12,7 @@ export default (state = {}, {
         case 'SET_SEARCH_FORM':
             return {
                 originInputValue,
-                originsSelectedId,
+                originSelectedId,
                 destinationInputValue,
                 destinationSelectedId,
                 date,

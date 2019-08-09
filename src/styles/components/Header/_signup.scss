@@ -1,0 +1,21 @@
+.signup__input {
+    border: none;
+    color: $light-black;
+    width: 100%;
+}
+
+.signup__input:focus {
+    outline: none;
+}
+
+.signup__title {
+    color: $light-black;
+    text-align: center;
+    padding-bottom: $s-size;
+}
+
+@media(max-width: $desktop-breakpoint) {
+    .signup__title {
+        padding-top: $xs-size;
+    }
+}

@@ -1,6 +1,8 @@
 import { client } from '../clientGraphQL/client';
 import { DESTINATION_SEARCH_BY_PARAMETERS, TRAVELS_SEARCH_EN } from '../queries/queries';
 
+//const sleep = (time) => new Promise(resolve => setTimeout(resolve, time))
+
 export const setTravels = (travels) => ({
     type: 'SET_TRAVELS',
     travels
@@ -22,13 +24,15 @@ export const startSearchTravelsByParameters = (origin, parametersValue, date) =>
             shoppingRating: parametersValue['Shopping'],
             nightlifeRating: parametersValue['Nightlife']
         };
-
+        
         return client.query({
             query: DESTINATION_SEARCH_BY_PARAMETERS,
             variables
         }).then((response) => {
 
             let promises = [];
+
+            
 
             response.data.destinationRating.forEach((destination) => {
                 

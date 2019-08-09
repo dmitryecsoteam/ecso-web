@@ -1,0 +1,92 @@
+.notification-item__container {
+    border: .1rem solid $light-grey;
+    border-top: .1rem solid transparent;
+    padding: $s-size $s-size $s-size 0;
+    color: $light-black;
+}
+
+.notification-item__container--highlight-red {
+    border: .1rem solid $red-error;
+}
+
+.notification-item__first-row {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.notification-item__second-row {
+    display: none;
+}
+
+.notification-item, .notification-item--desktop {
+    flex: 1;
+    text-align: center;
+}
+
+.notification-item--mobile {
+    margin-left: $l-size;
+
+}
+
+.notification-item--link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.notification-item__delete-button {
+    position: absolute;
+    right: 0;
+
+    color: red;
+    font-size: $xm-size;
+    font-weight: 700;
+    margin-right: $s-size;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: none;
+}
+
+.notification-item__delete-spinner {
+    position: absolute;
+    right: 0;
+    margin-right: $s-size;
+}
+
+@media (max-width: $desktop-breakpoint) {
+
+    .notification-item__container {
+        font-size: $s-size;
+        padding: $xs-size 0;
+        color: black;
+    }
+
+    .notification-item__first-row {
+        font-size: 1.4rem;
+        padding-right: 2.2rem;
+    }
+
+    .notification-item__second-row {
+        color: $mid-grey;
+        display: flex;
+        justify-content: flex-start;
+        padding-top: $xs-size;
+        padding-left: $l-size;
+        //padding: 0.3rem 0 0 12vw;
+    }
+
+    .notification-item--desktop {
+        display: none;
+    }
+
+    .notification-item__delete-button {
+        top: 40%;
+        //margin-right: $xs-size;
+    }
+
+    .notification-item__delete-spinner {
+        top: 50%;
+        //margin-right: $xs-size;
+    }
+}

@@ -42,6 +42,11 @@ beforeEach(() => {
         Nightlife: 0
       }
     },
+    resultsPanelRef: {
+      current: {
+        offsetTop: 123
+      }
+    },
     startSearchOrigins,
     startSearchDestinations,
     startSearchTravelsByParameters,
@@ -557,6 +562,7 @@ describe('submit', () => {
 
     expect(startSearchTravelsByDestination).not.toHaveBeenCalled();
     expect(startSearchTravelsByParameters).not.toHaveBeenCalled();
+    expect(wrapper.state('errorOriginInput')).toBeTruthy();
   });
 
   test('should not submit form with empty destination', () => {
@@ -571,6 +577,24 @@ describe('submit', () => {
 
     expect(startSearchTravelsByDestination).not.toHaveBeenCalled();
     expect(startSearchTravelsByParameters).not.toHaveBeenCalled();
+    expect(wrapper.state('errorDestinationInput')).toBeTruthy();
+  });
+
+  test('should not submit form if destination equals origin', () => {
+    const wrapper = shallow(<SearchForm {...props} />);
+
+    wrapper.setState({
+      originInputValue: 'orig',
+      originSelectedId: 3,
+      destinationInputValue: 'orig',
+      destinationSelectedId: 3
+    });
+
+    wrapper.find('form').simulate('submit', { preventDefault: () => { } });
+
+    expect(startSearchTravelsByDestination).not.toHaveBeenCalled();
+    expect(startSearchTravelsByParameters).not.toHaveBeenCalled();
+    expect(wrapper.state('errorDestinationInput')).toBeTruthy();
   });
 
   test('should not submit form with wrong date', () => {
@@ -584,6 +608,7 @@ describe('submit', () => {
 
     expect(startSearchTravelsByDestination).not.toHaveBeenCalled();
     expect(startSearchTravelsByParameters).not.toHaveBeenCalled();
+    expect(wrapper.state('errorDateInput')).toBeTruthy();
   });
 
   test('should not submit form with zero parameters chosen', () => {
@@ -599,9 +624,11 @@ describe('submit', () => {
 
     expect(startSearchTravelsByDestination).not.toHaveBeenCalled();
     expect(startSearchTravelsByParameters).not.toHaveBeenCalled();
+    expect(wrapper.state('errorParameters')).toBeTruthy();
   });
 
   test('should start search travels by destination', () => {
+    global.scrollTo = jest.fn();
     const wrapper = shallow(<SearchForm {...props} />);
 
     wrapper.setState({
@@ -614,9 +641,14 @@ describe('submit', () => {
     wrapper.find('form').simulate('submit', { preventDefault: () => { } });
 
     expect(startSearchTravelsByDestination).toHaveBeenCalledWith(3, 15, wrapper.state('date').format('YYYY-MM-DD'));
+    expect(global.scrollTo).toHaveBeenCalledWith({
+      top: 123,
+      behavior: 'smooth'
+    });
   });
 
   test('should start search travels by parameters', () => {
+    global.scrollTo = jest.fn();
     const wrapper = shallow(<SearchForm {...props} />);
 
     const parametersValue = {
@@ -637,5 +669,9 @@ describe('submit', () => {
 
     wrapper.find('form').simulate('submit', { preventDefault: () => { } });
     expect(startSearchTravelsByParameters).toHaveBeenCalledWith(3, parametersValue, wrapper.state('date').format('YYYY-MM-DD'));
+    expect(global.scrollTo).toHaveBeenCalledWith({
+      top: 123,
+      behavior: 'smooth'
+    });
   });
 });

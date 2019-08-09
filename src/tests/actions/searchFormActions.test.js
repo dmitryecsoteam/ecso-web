@@ -4,7 +4,7 @@ test('should setup search form action object', () => {
 
     const form = {
         originInputValue: 'Tokyo',
-        originsSelectedId: 3,
+        originSelectedId: 3,
         destinationInputValue: 'Osaka',
         destinationSelectedId: 5,
         date: '2019-01-01',

@@ -1,6 +1,7 @@
 @import './base/settings';
 @import './base/base';
-@import './components/header';
+@import './components/Header/header';
+@import './components/Header/signup';
 @import './components/MainPage/mainPage';
 @import './components/MainPage/resultsPanel';
 @import './components/MainPage/searchForm';
@@ -16,3 +17,10 @@
 @import './components/TravelPage/weatherCard';
 @import './components/TravelPage/banner';
 @import './components/TravelPage/textArea';
+@import './components/Header/userMenu';
+@import './components/NotificationsPage/notificationPage';
+@import './components/NotificationsPage/notificationList';
+@import './components/NotificationsPage/notificationItem';
+@import './components/NotificationsPage/addNotification';
+@import './components/MainPage/bestDeals';
+@import './components/MessageCenter/messageCenter';
