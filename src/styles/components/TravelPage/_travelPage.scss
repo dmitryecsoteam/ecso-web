@@ -28,6 +28,14 @@
     width: auto;
 }
 
+.travel__spinner {
+    position: absolute;
+    top: 50%;
+    margin-top: -4rem;
+    left: 50%;
+    margin-left: -5.5rem;
+}
+
 
 @media (max-width: $desktop-breakpoint) {
     .travel__notification-button {

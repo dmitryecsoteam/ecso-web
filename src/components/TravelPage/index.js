@@ -2,6 +2,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { TRAVELS_SEARCH_FULL } from '../../queries/queries';
 import minutesToHours from '../../utils/minutesToHours';
+import { PulseLoader } from 'halogenium';
 
 import Header from '../Header';
 import ImageSlider from './ImageSlider';
@@ -27,15 +28,18 @@ const divider = <div className="travel__divider"></div>;
 export default ({ match }) => {
     const { _id } = match.params;
 
+    const spinner = <div className="travel__spinner">
+        <PulseLoader color="#c1c1c1" size="32px" />
+        <p className="results__text results__text--big">Loading</p>
+    </div>
+
     return <Query
         query={TRAVELS_SEARCH_FULL}
         variables={{ _id }}
     >
         {({ loading, error, data }) => {
-            if (loading) return <p>Loading</p>;
 
-            console.log(data)
-            console.log(error)
+            if (loading) return <React.Fragment>{spinner}</React.Fragment>;
 
             // Stub for random picking weather condition
             const conditions = [cloud, sun, sunCloud, rain];
@@ -91,7 +95,7 @@ export default ({ match }) => {
 
                     {divider}
 
-                    <NotificationButton travelId={_id}/>
+                    <NotificationButton travelId={_id} />
 
                     <Banner
                         linkTo="#"
