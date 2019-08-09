@@ -9,7 +9,8 @@ const jwtErrors = ['invalid', 'Unexpected', 'jwt malformed'];
 
 export const client = new ApolloClient({
   //uri: "http://194.182.70.179:4000/v1",
-  uri: "http://localhost:4000/v1",
+  //uri: "http://localhost:4000/v1",
+  uri: process.env.API_URL,
   onError: (error) => {
 
     console.log(error)

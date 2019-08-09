@@ -1,6 +1,6 @@
 {
   "name": "ecso-web",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "Frontend for ECSO application",
   "main": "index.js",
   "author": "Dmitry",
@@ -29,6 +29,8 @@
     "copy-webpack-plugin": "^5.0.2",
     "crypto-js": "^3.1.9-1",
     "css-loader": "1.0.0",
+    "dotenv": "^8.0.0",
+    "dotenv-webpack": "^1.7.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "enzyme-to-json": "^3.3.5",

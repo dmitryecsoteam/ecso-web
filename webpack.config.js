@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 
 module.exports = (env, argv) => {
@@ -57,7 +58,10 @@ module.exports = (env, argv) => {
         inject: false,
         filename: 'index.html'
       }),
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+      new Dotenv({
+        path: `./.env.${devMode ? "dev" : "prod"}`
+      })
     ],
     devtool: devMode ? 'cheap-module-source-map' : 'cheap-source-map',
     devServer: {
