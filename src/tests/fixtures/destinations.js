@@ -15,7 +15,32 @@ export default [{
     name: ["Tottori", "Тоттори", "鳥取市", "TTJ"],
     nameEn: "Tottori",
     countryEn: "Japan"
-}];
+},
+{
+    _id: 4,
+    name: ["Sapporo", "Саппоро", "札幌市", "SPK", "CTS", "OKD"],
+    nameEn: "Sapporo",
+    countryEn: "Japan"
+},
+{
+    _id: 5,
+    name: ["Naha", "Наха", "那覇市", "OKA"],
+    nameEn: "Naha",
+    countryEn: "Japan"
+},
+{
+    _id: 6,
+    name: ["Okayama", "Окаяма", "岡山市", "OKJ"],
+    nameEn: "Okayama",
+    countryEn: "Japan"
+},
+{
+    _id: 7,
+    name: ["Ok"],
+    nameEn: "Ok",
+    countryEn: "Japan"
+}
+];
 
 export const destinationForParametersList = {
     beachDescription: "One of popular Japan beaches 'Otaru dream beach' can be reached within 30 minutes from Sapporo. ",

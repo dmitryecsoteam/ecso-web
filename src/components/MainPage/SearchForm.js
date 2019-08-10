@@ -8,8 +8,7 @@ import { startSearchOrigins } from '../../actions/originInputActions';
 import { startSearchDestinations } from '../../actions/destinationInputActions';
 import { startSearchTravelsByParameters, startSearchTravelsByDestination, setTravels } from '../../actions/travelsActions';
 import { setSearchForm } from '../../actions/searchFormActions';
-import selectOriginSuggestions from '../../selectors/originInputSelector';
-import selectDestinationSuggestions from '../../selectors/destinationInputSelector';
+import suggestionsListSelector from '../../selectors/suggestionsListSelector';
 
 import ParametersPanel from './ParametersPanel';
 import InputWithErrorTooltip from './InputWithErrorTooltip';
@@ -116,7 +115,7 @@ export class SearchForm extends React.Component {
                 // And then update state to load autosuggest information.
                 this.props.startSearchOrigins(newValue[0].toLowerCase()).then(() => {
                     this.setState((state) => ({
-                        suggestOrigins: selectOriginSuggestions(this.props.origins, state.originInputValue)
+                        suggestOrigins: suggestionsListSelector(this.props.origins, state.originInputValue)
                     }));
                 });
             }
@@ -148,7 +147,7 @@ export class SearchForm extends React.Component {
                 // And then update state to load autosuggest information.
                 this.props.startSearchDestinations(newValue[0].toLowerCase()).then(() => {
                     this.setState((state) => ({
-                        suggestDestinations: selectDestinationSuggestions(this.props.destinations, state.destinationInputValue)
+                        suggestDestinations: suggestionsListSelector(this.props.destinations, state.destinationInputValue)
                     }));
                 });
             }
@@ -217,13 +216,13 @@ export class SearchForm extends React.Component {
 
     onOriginSuggestionsFetchRequested = ({ value }) => {
         this.setState(() => ({
-            suggestOrigins: selectOriginSuggestions(this.props.origins, value)
+            suggestOrigins: suggestionsListSelector(this.props.origins, value)
         }));
     };
 
     onDestinationSuggestionsFetchRequested = ({ value }) => {
         this.setState(() => ({
-            suggestDestinations: selectDestinationSuggestions(this.props.destinations, value)
+            suggestDestinations: suggestionsListSelector(this.props.destinations, value)
         }));
     };
 

@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should return list of suggestions 1`] = `
+Array [
+  Object {
+    "_id": 6,
+    "countryEn": "Japan",
+    "name": Array [
+      "Okayama",
+      "Окаяма",
+      "岡山市",
+      "OKJ",
+    ],
+    "nameEn": "Okayama",
+  },
+  Object {
+    "_id": 7,
+    "countryEn": "Japan",
+    "name": Array [
+      "Ok",
+    ],
+    "nameEn": "Ok",
+  },
+  Object {
+    "_id": 5,
+    "countryEn": "Japan",
+    "name": Array [
+      "Naha",
+      "Наха",
+      "那覇市",
+      "OKA",
+    ],
+    "nameEn": "Naha",
+  },
+  Object {
+    "_id": 4,
+    "countryEn": "Japan",
+    "name": Array [
+      "Sapporo",
+      "Саппоро",
+      "札幌市",
+      "SPK",
+      "CTS",
+      "OKD",
+    ],
+    "nameEn": "Sapporo",
+  },
+]
+`;
