@@ -60,7 +60,7 @@ module.exports = (env, argv) => {
       }),
       new webpack.HotModuleReplacementPlugin(),
       new Dotenv({
-        path: `./.env.${devMode ? "dev" : "prod"}`
+        path: `./env.${devMode ? "dev" : "prod"}`
       })
     ],
     devtool: devMode ? 'cheap-module-source-map' : 'cheap-source-map',
