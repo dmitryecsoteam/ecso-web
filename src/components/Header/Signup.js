@@ -131,7 +131,7 @@ export default class Signup extends React.Component {
       <div>
         <h2 className="signup__title">Signup with email</h2>
 
-        <Mutation mutation={SIGNUP_USER} variables={{ email, password: passwordSHA, name }}>
+        <Mutation mutation={SIGNUP_USER} variables={{ email: email.toLowerCase(), password: passwordSHA, name }}>
 
           {(signupUser, { data, loading, error }) => {
 
