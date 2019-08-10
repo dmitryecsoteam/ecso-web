@@ -1,6 +1,6 @@
 {
   "name": "ecso-web",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Frontend for ECSO application",
   "main": "index.js",
   "author": "Dmitry",
