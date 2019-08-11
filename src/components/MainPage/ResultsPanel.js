@@ -125,9 +125,10 @@ export class ResultsPanel extends React.Component {
         </p>
 
         const spinner = <div className="results__spinner">
-            <PulseLoader color="#c1c1c1" />
-            <p className="results__text results__text--medium">Searching</p>
+            <PulseLoader color="#c1c1c1" size="32px" />
+            <p className="results__text results__text--big">Searching</p>
         </div>
+
 
         return (
             // isFetching is TRUE: show loading spinner and remove previous travelsList (and filter)

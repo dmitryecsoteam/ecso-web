@@ -15,8 +15,8 @@ export default () => {
                 {({ data, loading, error }) => {
 
                     const spinner = <div className="results__spinner">
-                        <PulseLoader color="#c1c1c1" />
-                        <p className="results__text results__text--medium">Loading</p>
+                        <PulseLoader color="#c1c1c1" size="32px" />
+                        <p className="results__text results__text--big">Loading</p>
                     </div>
 
                     let travelsList = [];
