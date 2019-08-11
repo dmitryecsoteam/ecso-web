@@ -22,10 +22,10 @@ beforeEach(() => {
     }, {
         request: {
             query: SIGNIN_USER,
-            variables: { email: 'doesntExist@mail.com', password: 'asdas' }
+            variables: { email: 'doesntexist@mail.com', password: 'asdas' }
         },
         result: {
-            errors: [new GraphQLError('User with email doesntExist@mail.com doesn\'t exist')],
+            errors: [new GraphQLError('User with email doesntexist@mail.com doesn\'t exist')],
         }
     }, {
         request: {
@@ -70,7 +70,7 @@ test('should not signin user if email doesn\'t exist', async () => {
     await waitForAsync();
 
     expect(signin.state('emailError')).toBeTruthy;
-    expect(signin.state('emailErrorText')).toEqual('User with email doesntExist@mail.com doesn\'t exist');
+    expect(signin.state('emailErrorText')).toEqual('User with email doesntexist@mail.com doesn\'t exist');
 });
 
 test('should not signin user if password is wrong', async () => {
