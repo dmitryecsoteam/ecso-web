@@ -115,6 +115,7 @@ query travelFull(
             nightlifeDescription
             cityDescription
             population
+            foundingDate
         }
         origin {
             _id

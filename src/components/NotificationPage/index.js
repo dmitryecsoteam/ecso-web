@@ -2,7 +2,6 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 
 import Header from '../Header';
-import background from '../../images/background/notifications.jpg';
 import NotificationList from './NotificationList';
 import { withSession } from '../../auth/session';
 
@@ -12,7 +11,7 @@ export const NotificationPage = ({ user, fetchUser }) => {
         <div>
             <Header title="My notifications" titleColorDark />
             <div className="notifications__background-container">
-                <img className="notifications__background-image" src={background} />
+                <img className="notifications__background-image" src="/images/background/notifications.jpg" />
             </div>
             <NotificationList fetchUser={fetchUser} />
             {

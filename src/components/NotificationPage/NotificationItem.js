@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Mutation } from 'react-apollo';
 import { ClipLoader } from 'halogenium';
 import className from 'classnames';
@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import { DELETE_NOTIFICATION } from '../../queries/mutations';
 
 export default ({ id, origin, destination, date, priceAirplaneLast, priceHotelLast, refetchNotifications, fetchUser, highlightRed }) => {
+
+    const [isDeleting, setIsdeleting] = useState(false);
 
     const containerClassName = className(
         'notification-item__container',
@@ -27,14 +29,21 @@ export default ({ id, origin, destination, date, priceAirplaneLast, priceHotelLa
 
                 <Mutation mutation={DELETE_NOTIFICATION} variables={{ id }}>
 
-                    {(deleteNotification, { loading }) => {
+                    {(deleteNotification) => {
 
                         // NOT OPTIMISTIC UI!
                         const handleDelete = async () => {
 
                             try {
+                                setIsdeleting(true);
+
                                 // First, wait for deletion to complete
                                 await deleteNotification();
+
+                                // Second, refetch notifications list
+                                refetchNotifications();
+
+                                setIsdeleting(false);
 
                             } catch (e) {
                                 // If error "doesn't have notification with id" is caught - just do nothing
@@ -45,14 +54,13 @@ export default ({ id, origin, destination, date, priceAirplaneLast, priceHotelLa
                                 }
                             }
 
-                            // Second, refetch notifications list
-                            refetchNotifications();
+
 
                         }
 
                         return (
                             <div>
-                                {loading ? (
+                                {isDeleting ? (
                                     <ClipLoader className="notification-item__delete-spinner" color="#c1c1c1" size="18px" />
                                 ) : (
                                         <button className="notification-item__delete-button" onClick={handleDelete} title="Delete" >&#10007;</button>

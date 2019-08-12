@@ -16,11 +16,13 @@ import cloud from '../../images/icons/cloud.svg';
 import sun from '../../images/icons/sun.svg';
 import sunCloud from '../../images/icons/sun-cloud.svg';
 import rain from '../../images/icons/rain.svg';
-import airplane from '../../images/banners/airplane.jpg';
-import apartments from '../../images/banners/apartments.jpg';
-import carRoute from '../../images/banners/car-route.jpg';
+// import airplane from '../../images/banners/airplane.jpg';
+// import apartments from '../../images/banners/apartments.jpg';
+// import carRoute from '../../images/banners/car-route.jpg';
 
-
+const AIRPLANE_IMAGE = '/images/banners/airplane.jpg';
+const APARTMENTS_IMAGE = '/images/banners/apartments.jpg';
+const CARROUTE_IMAGE = '/images/banners/car-route.jpg';
 
 
 const divider = <div className="travel__divider"></div>;
@@ -99,7 +101,7 @@ export default ({ match }) => {
 
                     <Banner
                         linkTo="#"
-                        backgroundImage={airplane}
+                        backgroundImage={AIRPLANE_IMAGE}
                         textMain={`Airplane from ${origin.nameEn}`}
                         textSecondary={airplaneTextSecondary}
                         textButton={airplaneTextButton}
@@ -107,7 +109,7 @@ export default ({ match }) => {
 
                     <Banner
                         linkTo="#"
-                        backgroundImage={apartments}
+                        backgroundImage={APARTMENTS_IMAGE}
                         textMain="Apartments and hotels"
                         textSecondary={apartmentsTextSecondary}
                         textButton={apartmentsTextButton}
@@ -115,7 +117,7 @@ export default ({ match }) => {
 
                     <Banner
                         linkTo="#"
-                        backgroundImage={carRoute}
+                        backgroundImage={CARROUTE_IMAGE}
                         textMain="Travel by car"
                         textSecondary={`${travelFull.carDistance} km,\u00A0\u00A0\u00A0\u00A0${carDuration}`}
                         textButton="Create route"

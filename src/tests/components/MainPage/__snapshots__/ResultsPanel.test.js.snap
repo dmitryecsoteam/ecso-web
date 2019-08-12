@@ -204,10 +204,10 @@ exports[`should render spinner 1`] = `
       color="#c1c1c1"
       loading={true}
       margin="2px"
-      size="15px"
+      size="32px"
     />
     <p
-      className="results__text results__text--medium"
+      className="results__text results__text--big"
     >
       Searching
     </p>
