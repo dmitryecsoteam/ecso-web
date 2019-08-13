@@ -179,6 +179,9 @@ exports[`should render Signup component 1`] = `
             className="search-form__input-container"
           >
             <div
+              className="search-form__hint"
+            />
+            <div
               className="search-form__label-input"
             >
               <input
@@ -206,6 +209,9 @@ exports[`should render Signup component 1`] = `
           <div
             className="search-form__input-container"
           >
+            <div
+              className="search-form__hint"
+            />
             <div
               className="search-form__label-input"
             >
@@ -235,6 +241,9 @@ exports[`should render Signup component 1`] = `
             className="search-form__input-container"
           >
             <div
+              className="search-form__hint"
+            />
+            <div
               className="search-form__label-input"
             >
               <input
@@ -262,6 +271,9 @@ exports[`should render Signup component 1`] = `
           <div
             className="search-form__input-container"
           >
+            <div
+              className="search-form__hint"
+            />
             <div
               className="search-form__label-input"
             >

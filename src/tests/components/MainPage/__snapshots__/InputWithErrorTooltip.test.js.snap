@@ -5,6 +5,9 @@ exports[`should render InputWithErrorTooltip component with input 1`] = `
   className="search-form__input-container"
 >
   <div
+    className="search-form__hint"
+  />
+  <div
     className="search-form__label-input"
   >
     <label
@@ -24,6 +27,9 @@ exports[`should render InputWithErrorTooltip component with input and default pr
   className="search-form__input-container"
 >
   <div
+    className="search-form__hint"
+  />
+  <div
     className="search-form__label-input"
   >
     <input
@@ -37,6 +43,9 @@ exports[`should render InputWithErrorTooltip disabled 1`] = `
 <div
   className="search-form__input-container"
 >
+  <div
+    className="search-form__hint"
+  />
   <div
     className="search-form__label-input search-form__label-input--disabled"
   >
@@ -56,6 +65,9 @@ exports[`should render InputWithErrorTooltip with error message 1`] = `
 <div
   className="search-form__input-container"
 >
+  <div
+    className="search-form__hint"
+  />
   <div
     className="search-form__label-input search-form__label-input--error search-form__label-input--disabled"
   >
@@ -84,6 +96,40 @@ exports[`should render InputWithErrorTooltip with error message if it's empty st
 <div
   className="search-form__input-container"
 >
+  <div
+    className="search-form__hint"
+  />
+  <div
+    className="search-form__label-input search-form__label-input--error search-form__label-input--disabled"
+  >
+    <label
+      className="search-form__label"
+    >
+      Test
+    </label>
+    <input
+      type="text"
+    />
+  </div>
+  <div
+    className="search-form__error search-form__error--open"
+  >
+    <span
+      className="search-form__error-text"
+    />
+  </div>
+</div>
+`;
+
+exports[`should render InputWithErrorTooltip with hint 1`] = `
+<div
+  className="search-form__input-container"
+>
+  <div
+    className="search-form__hint search-form__hint--open"
+  >
+    Test hint text
+  </div>
   <div
     className="search-form__label-input search-form__label-input--error search-form__label-input--disabled"
   >

@@ -56,3 +56,17 @@ test('should render InputWithErrorTooltip with error message if it\'s empty stri
     </InputWithErrorTooltip>);
     expect(wrapper).toMatchSnapshot();
 });
+
+test('should render InputWithErrorTooltip with hint', () => {
+    const wrapper = shallow(<InputWithErrorTooltip
+        error={true}
+        errorText=""
+        label="Test"
+        disabled={true}
+        hint={true}
+        hintText="Test hint text"
+    >
+        <input type="text" />
+    </InputWithErrorTooltip>);
+    expect(wrapper).toMatchSnapshot();
+});

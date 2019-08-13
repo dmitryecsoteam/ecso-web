@@ -52,6 +52,8 @@ export class SearchForm extends React.Component {
      *       Shopping: 0,
      *       Nightlife: 0
      *   }
+     * 
+     *  showOriginHint: show hint that test data is only Tokyo and Osaka for origin
      */
     state = {
         originInputValue: this.props.searchForm.originInputValue,
@@ -68,7 +70,8 @@ export class SearchForm extends React.Component {
         errorDateInput: false,
         errorParameters: false,
         parametersPanel: this.props.searchForm.parametersPanel,
-        parametersValue: this.props.searchForm.parametersValue
+        parametersValue: this.props.searchForm.parametersValue,
+        showOriginHint: false
     };
 
     /*
@@ -156,6 +159,10 @@ export class SearchForm extends React.Component {
 
     onOriginInputBlur = () => {
 
+        this.setState({
+            showOriginHint: false
+        });
+
         if (!this.originSelectedByUser) {
 
             if (this.state.suggestOrigins.length !== 0) {
@@ -214,11 +221,17 @@ export class SearchForm extends React.Component {
         }), () => this.props.setSearchForm(this.state));
     };
 
-    onOriginSuggestionsFetchRequested = ({ value }) => {
+    onOriginSuggestionsFetchRequested = ({ value, reason }) => {
         this.setState(() => ({
             suggestOrigins: suggestionsListSelector(this.props.origins, value)
         }));
     };
+
+    onOriginInputFocus = () => {
+        this.setState(() => ({
+            showOriginHint: true
+        }));
+    }
 
     onDestinationSuggestionsFetchRequested = ({ value }) => {
         this.setState(() => ({
@@ -372,13 +385,15 @@ export class SearchForm extends React.Component {
             calendarFocused,
             parametersPanel,
             errorParameters,
-            parametersValue
+            parametersValue,
+            showOriginHint
         } = this.state;
         const originInputProps = {
             value: originInputValue,
             onChange: this.onOriginInputChange,
             onBlur: this.onOriginInputBlur,
-            placeholder: 'City, airport code'
+            placeholder: 'City, airport code',
+            onFocus: this.onOriginInputFocus
         };
         const destinationInputProps = {
             value: destinationInputValue,
@@ -399,6 +414,8 @@ export class SearchForm extends React.Component {
                             label="From:"
                             error={errorOriginInput}
                             errorText="Enter origin"
+                            hint={showOriginHint}
+                            hintText="Test data: Tokyo, Osaka"
                         >
                             <Autosuggest
                                 suggestions={suggestOrigins}

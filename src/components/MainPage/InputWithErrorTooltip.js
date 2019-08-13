@@ -6,7 +6,9 @@ export default ({
     error = false,
     errorText,
     label = '',
-    disabled = false
+    disabled = false,
+    hint = false,
+    hintText
 } = props) => {
 
     const divClassName = classNames(
@@ -20,8 +22,16 @@ export default ({
         { 'search-form__error--open': error }
     );
 
+    const hintClassName = classNames(
+        'search-form__hint',
+        { 'search-form__hint--open': hint }
+    );
+
     return (
         <div className="search-form__input-container">
+            <div className={hintClassName}>
+                {hintText}
+            </div>
             <div className={divClassName}>
                 {label && <label className="search-form__label">{label}</label>}
                 {children}
