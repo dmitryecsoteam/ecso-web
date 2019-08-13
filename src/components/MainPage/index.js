@@ -3,7 +3,7 @@ import Header from '../Header';
 import SearchForm from './SearchForm';
 import ResultsPanel from './ResultsPanel';
 import BestDeals from './BestDeals';
-
+import InfoPanel from './InfoPannel';
 
 
 export default () => (
@@ -20,5 +20,7 @@ export default () => (
         <ResultsPanel />
 
         <BestDeals />
+
+        <InfoPanel />
     </div>
 );
