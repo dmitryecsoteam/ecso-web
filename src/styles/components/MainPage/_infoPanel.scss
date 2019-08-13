@@ -1,0 +1,28 @@
+.info__container {
+    position: absolute;
+    top: 23vh;
+    left: $m-size;
+
+    padding: 0 $s-size $m-size;
+    border: 0.1rem solid $light-grey;
+    border-radius: $xs-size;
+    background-color: #ffffe6;
+    opacity: 0.85;
+    text-align: end;
+}
+
+.info__button {
+    outline: none;
+    border: none;
+    background-color: #ffffe6;
+    font-size: 2.8rem;
+    cursor: pointer;
+    margin-bottom: $xs-size;
+}
+
+@media (min-width: $desktop-breakpoint) {
+    .info__container {
+        top: 15%;
+        left: 10%;
+    }
+}
