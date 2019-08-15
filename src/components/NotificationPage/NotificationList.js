@@ -34,9 +34,9 @@ export const NotificationList = (props) => {
                         <div className="notification-list__header-item--desktop">Airplane price</div>
                         <div className="notification-list__header-item--desktop">Hotel price</div>
                     </div>
-                    {data && data.getNotifications && data.getNotifications.map((item, i) => (
+                    {data && data.getNotifications && data.getNotifications.map(item => (
                         <NotificationItem
-                            key={i}
+                            key={item.travelId}
                             id={item.travelId}
                             origin={item.origin.nameEn}
                             destination={item.destination.nameEn}
