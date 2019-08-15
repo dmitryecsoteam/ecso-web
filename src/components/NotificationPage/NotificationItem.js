@@ -47,16 +47,16 @@ export default ({ id, origin, destination, date, priceAirplaneLast, priceHotelLa
                                 //setIsdeleting(false);
 
                             } catch (e) {
-                                // If error "doesn't have notification with id" is caught - just do nothing
+
                                 // If error "jwt expired" or "Unauthorized" is caught - refetch current user
                                 if (e.message.includes('jwt expired') || e.message.includes('Unauthorized')) {
                                     fetchUser();
                                     return;
+                                } else {
+                                    // If error "doesn't have notification with id" is caught or any other - try to refetch notifications list
+                                    refetchNotifications();
                                 }
                             }
-
-
-
                         }
 
                         return (
