@@ -7,7 +7,7 @@ export default class ImageSlider extends React.Component {
     // Put first slide in initial state, so it could be displayed as soon as it would be loaded
     // Then load all next slides in componentDidMount
     state = {
-        images: [`/images/${this.props.name}-${this.props.country}/slide1.jpg`],
+        images: [`/images/${this.props.name.replace(/ /g, '_')}-${this.props.country}/slide1.jpg`],
         index: 0
     }
 
@@ -28,12 +28,12 @@ export default class ImageSlider extends React.Component {
         while (loadNextImage) {
 
             // load next image
-            loadNextImage = await loadImage(`/images/${this.props.name}-${this.props.country}/slide${i}.jpg`);
+            loadNextImage = await loadImage(`/images/${this.props.name.replace(/ /g, '_')}-${this.props.country}/slide${i}.jpg`);
 
             // TRUE - image exists and loaded in cache, add this URL to images array and increment counter
             // FALSE - image doesn't exist, leave while loop
             if (loadNextImage) {
-                images.push(`/images/${this.props.name}-${this.props.country}/slide${i}.jpg`);
+                images.push(`/images/${this.props.name.replace(/ /g, '_')}-${this.props.country}/slide${i}.jpg`);
                 i++;
             }
         }

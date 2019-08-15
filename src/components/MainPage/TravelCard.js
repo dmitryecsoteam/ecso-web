@@ -48,7 +48,7 @@ export default class TravelCard extends PureComponent {
 
                 <div
                     className="travel-card__image"
-                    style={{ backgroundImage: `url(/images/${nameEn}-${countryEn}/banner.jpg)` }}
+                    style={{ backgroundImage: `url(/images/${nameEn.replace(/ /g, '_')}-${countryEn}/banner.jpg)` }}
                 >
                 </div>
 
