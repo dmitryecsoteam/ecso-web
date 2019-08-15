@@ -35,6 +35,7 @@ export default ({ id, origin, destination, date, priceAirplaneLast, priceHotelLa
                         const handleDelete = async () => {
 
                             try {
+                                // set isDeleting to TRUE - spinner will show up instead of delete button
                                 setIsdeleting(true);
 
                                 // First, wait for deletion to complete
@@ -43,7 +44,7 @@ export default ({ id, origin, destination, date, priceAirplaneLast, priceHotelLa
                                 // Second, refetch notifications list
                                 refetchNotifications();
 
-                                setIsdeleting(false);
+                                //setIsdeleting(false);
 
                             } catch (e) {
                                 // If error "doesn't have notification with id" is caught - just do nothing
