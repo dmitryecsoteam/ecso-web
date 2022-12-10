@@ -14,7 +14,7 @@
     "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
-    "express": "4.16.4"
+    "express": "4.17.3"
   },
   "devDependencies": {
     "@babel/core": "7.1.2",
